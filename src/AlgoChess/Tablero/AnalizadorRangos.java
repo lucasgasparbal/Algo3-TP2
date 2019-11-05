@@ -1,4 +1,4 @@
-package AlgoChessTablero;
+package AlgoChess.Tablero;
 
 public class AnalizadorRangos {
 
