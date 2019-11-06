@@ -1,4 +1,4 @@
-package AlgoChessTests.TableroTests.AnalizadorRangosTests;
+package AlgoChessTests.TableroTests;
 
 import AlgoChess.Tablero.AnalizadorRangos;
 import org.junit.Test;
