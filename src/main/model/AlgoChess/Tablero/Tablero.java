@@ -2,6 +2,7 @@ package model.AlgoChess.Tablero;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
+import model.AlgoChess.Unidades.Unidad;
 
 public class Tablero {
 
@@ -30,13 +31,41 @@ public class Tablero {
 
     }
 
-    public Casillero conseguirCasillero(int x, int y) throws CoordenadaFueraDeRangoExcepcion{
+    public Casillero conseguirCasillero(int x, int y) throws CoordenadaFueraDeRangoExcepcion {
 
-        if (!(coordenadaEnRango(x,CantFilas)) & !(coordenadaEnRango(y,CantColumnas))){
+        if (!(coordenadaEnRango(x, CantFilas)) & !(coordenadaEnRango(y, CantColumnas))) {
             throw new CoordenadaFueraDeRangoExcepcion();
         }
 
         return casilleros[x][y];
     }
 
+    public int contarCasillerosDeEquipo(Equipo unEquipo){
+        int contador = 0;
+        for(int i = 0; i < CantFilas; i++){
+            for(int j = 0; j < CantColumnas; j++){
+                if (casilleros[i][j].esDeEquipo(unEquipo)){
+                    contador++;
+                }
+            }
+        }
+        return contador;
+    }
+
+    public int contarCasillerosVacios(){
+        int contador = 0;
+        for(int i = 0; i < CantFilas; i++){
+            for(int j = 0; j < CantColumnas; j++){
+                if(casilleros[i][j].estaLibre()){
+                    contador++;
+                }
+            }
+
+        }
+        return contador;
+    }
+
+    public Unidad conseguirUnidadDeCasillero(int x, int y){
+        return casilleros[x][y].getUnidad();
+    }
 }

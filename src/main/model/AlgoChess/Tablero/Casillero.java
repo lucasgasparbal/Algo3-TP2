@@ -11,21 +11,28 @@ public class Casillero{
 
     private interface EstadoCasillero{
         public abstract boolean vacio();
+        public abstract Unidad getUnidadContenida();
     }
 
     private class EstadoVacio implements EstadoCasillero{
 
         public boolean vacio(){ return true;}
+        public Unidad getUnidadContenida(){
+            return null;
+        }
 
     }
 
     private class EstadoOcupado implements EstadoCasillero{
-        Unidad unidadContenida;
+        public Unidad unidadContenida;
 
         public EstadoOcupado(Unidad unidadAContener){
             unidadContenida = unidadAContener;
         }
         public boolean vacio(){ return false;}
+        public Unidad getUnidadContenida(){
+            return unidadContenida;
+        }
 
     }
 
@@ -48,6 +55,10 @@ public class Casillero{
         return estado.vacio();
     }
 
+    public boolean esDeEquipo(Equipo unEquipo){
+        return equipo.esIgualA(unEquipo);
+    }
+
     public void ocuparCasillero(Unidad unidad) throws CasilleroOcupadoExcepcion {
 
         if(!estado.vacio()){
@@ -65,6 +76,9 @@ public class Casillero{
         ocuparCasillero(unidad);
     }
 
+    public Unidad getUnidad(){
+        return estado.getUnidadContenida();
+    }
     public void vaciar(){
         estado = new EstadoVacio();
     }
