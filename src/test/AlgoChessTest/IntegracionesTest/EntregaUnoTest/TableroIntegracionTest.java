@@ -11,7 +11,7 @@ import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Jinete;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class TableroIntegracionTest {
     @Test

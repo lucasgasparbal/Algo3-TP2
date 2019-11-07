@@ -8,8 +8,8 @@ import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Unidad;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
