@@ -1,10 +1,10 @@
-package test;
+package AlgoChessTest.UnidadesTest;
 
+import model.AlgoChess.Unidades.Catapulta;
+import model.AlgoChess.Unidades.Curandero;
+import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
-import model.Curandero;
-import model.Soldado;
-import model.Catapulta;
 
 
 public class CatapultaTest {

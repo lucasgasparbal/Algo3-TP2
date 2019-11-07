@@ -1,9 +1,8 @@
-package test;
+package AlgoChessTest.UbicacionTest;
 
+import model.AlgoChess.Unidades.AtributosDeUnidades.Ubicacion;
 import org.junit.Test;
 import org.junit.Assert;
-
-import model.Ubicacion;
 
 public class UbicacionTest {
 

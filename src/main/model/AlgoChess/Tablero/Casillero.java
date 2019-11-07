@@ -1,8 +1,54 @@
 package model.AlgoChess.Tablero;
 
-public interface Casillero {
+import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
+import model.AlgoChess.Unidades.Unidad;
 
-    public boolean estaLibre();
+public class Casillero{
 
-    public void ocuparCasillero();
+
+    private interface EstadoCasillero{
+        public abstract boolean vacio();
+    }
+
+    private class EstadoVacio implements EstadoCasillero{
+
+        public boolean vacio(){ return true;}
+
+    }
+
+    private class EstadoOcupado implements EstadoCasillero{
+        Unidad unidadContenida;
+
+        public EstadoOcupado(Unidad unidadAContener){
+            unidadContenida = unidadAContener;
+        }
+        public boolean vacio(){ return false;}
+
+    }
+
+
+
+    private EstadoCasillero estado =new EstadoVacio();
+    private int x;
+    private int y;
+    Equipo equipo;
+
+    public Casillero(int xDado, int yDado, Equipo equipoDado){
+        x = xDado;
+        y = yDado;
+        equipo = equipoDado;
+    }
+    public boolean estaLibre(){
+        return estado.vacio();
+    }
+
+    public void ocuparCasillero(Unidad unidad) throws CasilleroOcupadoExcepcion {
+
+        if(!estado.vacio()){
+            throw new CasilleroOcupadoExcepcion();
+        }
+
+        estado = new EstadoOcupado(unidad); 
+    }
 }

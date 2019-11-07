@@ -1,4 +1,7 @@
-package model;
+package model.AlgoChess.Unidades;
+
+import model.AlgoChess.Unidades.Ataques.*;
+import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public class Jinete extends UnidadMovible {
 
@@ -7,7 +10,7 @@ public class Jinete extends UnidadMovible {
 
     public Jinete(int x, int y) {
         super(x, y);
-        vida = new Vida (100);
+        vida = new Vida(100);
         costo = new Costo (3);
     }
 

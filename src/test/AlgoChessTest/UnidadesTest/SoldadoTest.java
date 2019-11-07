@@ -1,6 +1,6 @@
-package test;
+package AlgoChessTest.UnidadesTest;
 
-import model.Soldado;
+import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 

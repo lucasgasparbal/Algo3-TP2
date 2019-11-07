@@ -1,4 +1,4 @@
-package model;
+package model.AlgoChess.Unidades;
 
 public abstract class UnidadMovible extends Unidad {
 

@@ -1,4 +1,6 @@
-package model;
+package model.AlgoChess.Unidades.AtributosDeUnidades;
+
+import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
 
 public class Costo {
 

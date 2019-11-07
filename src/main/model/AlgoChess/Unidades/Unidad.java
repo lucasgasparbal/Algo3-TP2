@@ -1,4 +1,7 @@
-package model;
+package model.AlgoChess.Unidades;
+
+import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public abstract class Unidad {
 

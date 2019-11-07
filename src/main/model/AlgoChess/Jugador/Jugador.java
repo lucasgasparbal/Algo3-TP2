@@ -1,5 +1,6 @@
-package model;
-
+package model.AlgoChess.Jugador;
+import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Unidades.Unidad;
 import java.util.*;
 
 public class Jugador {

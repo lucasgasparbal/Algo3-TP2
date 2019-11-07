@@ -1,8 +1,8 @@
-package test;
+package AlgoChessTest.UnidadesTest;
 
-import model.Curandero;
-import model.Soldado;
-import model.Jinete;
+import model.AlgoChess.Unidades.Curandero;
+import model.AlgoChess.Unidades.Jinete;
+import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 

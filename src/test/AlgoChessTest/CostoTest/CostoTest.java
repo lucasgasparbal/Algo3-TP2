@@ -1,8 +1,6 @@
-package test;
-
-import model.Costo;
-
-import model.NoAlcanzanPuntosExcepcion;
+package AlgoChessTest.CostoTest;
+import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Unidades.AtributosDeUnidades.Costo;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -15,7 +13,7 @@ public class CostoTest {
         try {
             puntos = costo.descontarCosto(puntos);
         }
-        catch (NoAlcanzanPuntosExcepcion e) { }
+        catch (NoAlcanzanPuntosExcepcion ignored) { }
         Assert.assertEquals(puntos,90);
     }
 

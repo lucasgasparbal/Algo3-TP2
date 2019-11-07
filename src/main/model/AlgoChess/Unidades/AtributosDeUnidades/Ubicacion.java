@@ -1,4 +1,4 @@
-package model;
+package model.AlgoChess.Unidades.AtributosDeUnidades;
 
 public class Ubicacion {
 

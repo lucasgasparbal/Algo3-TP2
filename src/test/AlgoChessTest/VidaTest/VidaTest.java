@@ -1,6 +1,6 @@
-package test;
+package AlgoChessTest.VidaTest;
 
-import model.Vida;
+import model.AlgoChess.Unidades.AtributosDeUnidades.Vida;
 import org.junit.Test;
 import org.junit.Assert;
 

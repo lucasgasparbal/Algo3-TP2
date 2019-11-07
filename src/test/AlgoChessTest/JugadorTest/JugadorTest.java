@@ -1,13 +1,13 @@
-package test;
+package AlgoChessTest.JugadorTest;
 
-import model.Jugador;
-import model.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Jugador.Jugador;
+import model.AlgoChess.Unidades.Catapulta;
+import model.AlgoChess.Unidades.Curandero;
+import model.AlgoChess.Unidades.Jinete;
+import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
-import model.Catapulta;
-import model.Jinete;
-import model.Soldado;
-import model.Curandero;
 
 public class JugadorTest {
 
@@ -60,14 +60,14 @@ public class JugadorTest {
         Jugador jugador = new Jugador();
         Catapulta catapulta = new Catapulta (1,2);
         Soldado soldado = new Soldado (1,3);
-        Curandero curandero = new Curandero (1,6);
+        Curandero curandero = new Curandero(1,6);
 
         try {
             jugador.compra(catapulta);
             jugador.compra(soldado);
             jugador.compra(curandero);
         }
-        catch (NoAlcanzanPuntosExcepcion e) {}
+        catch(NoAlcanzanPuntosExcepcion ignored){}
 
         catapulta.sufrirDanio(100);
         soldado.sufrirDanio(99);
