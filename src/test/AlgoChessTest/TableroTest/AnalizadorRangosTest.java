@@ -74,7 +74,7 @@ public class AnalizadorRangosTest {
         assertFalse(test);
     }
 
-    //CoordenadasEnRangoMedianoTest
+    //CoordenadasEnRangoLejanoTest
 
     @Test
     public void test10coordenadasEnRangoLejanoDevuelveTrueSiLasCoordenadasEstanDentroDelRangoLejano(){
@@ -93,7 +93,7 @@ public class AnalizadorRangosTest {
 
 
     @Test
-    public void test12coordenadasEnRangoMedianoDevuelveFalseSiLasCoordenadasEstanEnRangoCercano(){
+    public void test12coordenadasEnRangoLejanoDevuelveFalseSiLasCoordenadasEstanEnRangoCercano(){
         AnalizadorRangos analizadorRangos = new AnalizadorRangos();
         boolean test = analizadorRangos.coordenadasEstanEnRangoLejano(1,3,2,4);
         assertFalse(test);
@@ -103,6 +103,21 @@ public class AnalizadorRangosTest {
     public void test13coordenadasEnRangoLejanoDevuelveFalseSiLasCoordenadasEstanEnElRangoMediano(){
         AnalizadorRangos analizadorRangos = new AnalizadorRangos();
         boolean test = analizadorRangos.coordenadasEstanEnRangoLejano(1,3,4,7);
+        assertFalse(test);
+    }
+
+    //coordenadasEnRangoDeMovimientoTest
+    @Test
+    public void test14coordenadasEnRangoDeMovimientoDevuelveTrueSiLasCoordenadasEstanEnElRangoDeMovimiento(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+        boolean test = analizadorRangos.coordenadasEstanEnRangoDeMovimiento(0,0,1,1);
+        assertTrue(test);
+    }
+
+    @Test
+    public void test15coordenadasEnRangoDeMovimientoDevuelveFalseSiLasCoordenadasNoEstanEnElRangoDeMovimiento(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+        boolean test = analizadorRangos.coordenadasEstanEnRangoDeMovimiento(0,0,3,5);
         assertFalse(test);
     }
 }
