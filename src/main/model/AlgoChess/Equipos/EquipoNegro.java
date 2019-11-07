@@ -15,4 +15,9 @@ public class EquipoNegro implements Equipo{
     public boolean esNegro() {
         return true;
     }
+
+    @Override
+    public boolean esIgualA(Equipo unEquipo) {
+        return unEquipo.esNegro();
+    }
 }

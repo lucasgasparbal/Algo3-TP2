@@ -33,4 +33,8 @@ public class CasilleroTest {
             casillero.ocuparCasillero(unidadMockDos);
         });
     }
+    @Test
+    public void test03CasilleroDeUnEquipoNoAceptaSer(){
+
+    }
 }

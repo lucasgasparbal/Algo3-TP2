@@ -51,4 +51,5 @@ public class Casillero{
 
         estado = new EstadoOcupado(unidad); 
     }
+
 }
