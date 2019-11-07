@@ -1,18 +1,10 @@
 package test;
 
-import model.AlgoChess.Unidad.Soldado;
+import model.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class SoldadoTest {
-
-    @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaSePuede() {
-
-       Soldado soldado = new Soldado(10, 10);
-        Assert.assertTrue(soldado.desplazarHaciaIzquierda());
-
-    }
 
     @Test
     public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaVerificoPosicion() {

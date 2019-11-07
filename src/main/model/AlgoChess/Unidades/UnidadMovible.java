@@ -1,4 +1,4 @@
-package model.AlgoChess.Unidad;
+package model;
 
 public abstract class UnidadMovible extends Unidad {
 
@@ -6,12 +6,12 @@ public abstract class UnidadMovible extends Unidad {
         ubicacion.cambiarA(x,y);
     }
 
-    public boolean desplazarHaciaIzquierda() {
-        return ubicacion.desplazarHaciaIzquierda();
+    public void desplazarHaciaIzquierda() {
+        ubicacion.desplazarHaciaIzquierda();
     }
 
-    public boolean desplazarHaciaDerecha() {
-        return ubicacion.desplazarHaciaDerecha();
+    public void desplazarHaciaDerecha() {
+        ubicacion.desplazarHaciaDerecha();
     }
 
     public void desplazarHaciaArriba() {

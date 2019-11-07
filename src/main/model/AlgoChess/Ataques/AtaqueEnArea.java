@@ -1,10 +1,8 @@
-package model.AlgoChess.Unidad;
-
-import model.AlgoChess.Unidad.Ataque;
+package model;
 
 public class AtaqueEnArea implements Ataque {
 
-        public int dmg;
+        private int dmg;
 
         public AtaqueEnArea (int danio) {
             dmg = danio;

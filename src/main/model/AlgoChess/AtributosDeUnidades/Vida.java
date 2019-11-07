@@ -1,4 +1,4 @@
-package model.AlgoChess.Unidad;
+package model;
 
 public class Vida {
 

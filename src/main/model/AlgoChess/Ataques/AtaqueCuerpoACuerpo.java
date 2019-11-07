@@ -1,10 +1,10 @@
-package model.AlgoChess.Unidad;
+package model;
 
-public class AtaqueADistancia implements Ataque {
+public class AtaqueCuerpoACuerpo implements Ataque {
 
     private int dmg;
 
-    public AtaqueADistancia (int danio) {
+    public AtaqueCuerpoACuerpo (int danio) {
         dmg = danio;
     }
 

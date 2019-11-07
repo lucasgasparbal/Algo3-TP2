@@ -1,15 +1,14 @@
-package model.AlgoChess.Unidad;
-
-import model.AlgoChess.Unidad.AtaqueCuerpoACuerpo;
+package model;
 
 public class Jinete extends UnidadMovible {
 
-    AtaqueCuerpoACuerpo ataque1 = new AtaqueCuerpoACuerpo(5);
-    AtaqueADistancia ataque2 = new AtaqueADistancia(15);
+    private AtaqueCuerpoACuerpo ataque1 = new AtaqueCuerpoACuerpo(5);
+    private AtaqueADistancia ataque2 = new AtaqueADistancia(15);
 
     public Jinete(int x, int y) {
         super(x, y);
         vida = new Vida (100);
+        costo = new Costo (3);
     }
 
     public void atacar (Unidad objetivo) {

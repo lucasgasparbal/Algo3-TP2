@@ -1,10 +1,12 @@
-package model.AlgoChess.Unidad;
+package model;
 
 public abstract class Unidad {
 
     Ubicacion ubicacion = new Ubicacion();
 
     Vida vida;
+
+    Costo costo;
 
     public void recibirCuracion(int curacion) {
         vida.recibiCuracion(curacion);
@@ -17,5 +19,11 @@ public abstract class Unidad {
     public boolean murio() {
         return (vida.acabo());
     }
+
+    public int comprar (int fondos) throws NoAlcanzanPuntosExcepcion {
+        return costo.descontarCosto (fondos);
+    }
+
+    public void atacar(Unidad objetivo) {};
 
 }

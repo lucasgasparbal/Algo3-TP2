@@ -1,10 +1,8 @@
-package model.AlgoChess.Unidad;
-
-import model.AlgoChess.Unidad.Ataque;
+package model;
 
 public class Curacion implements Ataque {
 
-    public int dmg;
+    private int dmg;
 
     public Curacion (int curacion) {
         dmg = curacion;

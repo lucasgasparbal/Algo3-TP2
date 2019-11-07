@@ -1,12 +1,13 @@
-package model.AlgoChess.Unidad;
+package model;
 
 public class Catapulta extends Unidad {
 
-    AtaqueEnArea ataque = new AtaqueEnArea (20);
+    private AtaqueEnArea ataque = new AtaqueEnArea (20);
 
     public Catapulta (int x, int y) {
         // Ubicacion en si tiene que estar en Unidad //
         vida = new Vida (50);
+        costo = new Costo (5);
     }
 
     public void atacar (Unidad objetivo) {
