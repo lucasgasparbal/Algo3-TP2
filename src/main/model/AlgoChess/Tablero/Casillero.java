@@ -1,6 +1,7 @@
 package model.AlgoChess.Tablero;
 
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Unidades.Unidad;
 
@@ -50,6 +51,14 @@ public class Casillero{
         }
 
         estado = new EstadoOcupado(unidad); 
+    }
+
+    public void colocarUnidad(Unidad unidad) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+        if(!unidad.esDelEquipo(equipo)){
+            throw new CasilleroEnemigoExcepcion();
+        }
+
+        ocuparCasillero(unidad);
     }
 
 }

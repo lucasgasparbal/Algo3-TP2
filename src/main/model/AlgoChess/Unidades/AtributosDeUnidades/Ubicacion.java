@@ -1,11 +1,16 @@
 package model.AlgoChess.Unidades.AtributosDeUnidades;
 
+import model.AlgoChess.Tablero.Casillero;
+
 public class Ubicacion {
 
-    private int x = 0;
+    private Casillero casillero;
 
-    private int y = 0;
+    private int x;
+    private int y;
 
+    public void posicionarEn(Casillero unCasillero){
+    }
     public void desplazarHaciaIzquierda() {
         x-=1;
     }

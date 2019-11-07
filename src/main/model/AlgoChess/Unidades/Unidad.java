@@ -1,5 +1,6 @@
 package model.AlgoChess.Unidades;
 
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
@@ -11,6 +12,11 @@ public abstract class Unidad {
 
     Costo costo;
 
+    protected Equipo equipo;
+
+    public boolean esDelEquipo(Equipo unEquipo){
+        return equipo.esIgualA(unEquipo);
+    }
     public void recibirCuracion(int curacion) {
         vida.recibiCuracion(curacion);
     }
