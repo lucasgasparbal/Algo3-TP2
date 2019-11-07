@@ -1,6 +1,6 @@
 package test;
 
-import model.Soldado;
+import model.AlgoChess.Unidad.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 

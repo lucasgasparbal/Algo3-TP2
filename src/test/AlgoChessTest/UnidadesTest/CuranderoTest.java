@@ -2,8 +2,8 @@ package test;
 
 import org.junit.Test;
 import org.junit.Assert;
-import model.Soldado;
-import model.Curandero;
+import model.AlgoChess.Unidad.Soldado;
+import model.AlgoChess.Unidad.Curandero;
 
 public class CuranderoTest {
 

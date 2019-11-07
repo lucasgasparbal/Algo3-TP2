@@ -1,8 +1,8 @@
 package test;
 
-import model.Curandero;
-import model.Soldado;
-import model.Jinete;
+import model.AlgoChess.Unidad.Curandero;
+import model.AlgoChess.Unidad.Soldado;
+import model.AlgoChess.Unidad.Jinete;
 import org.junit.Assert;
 import org.junit.Test;
 

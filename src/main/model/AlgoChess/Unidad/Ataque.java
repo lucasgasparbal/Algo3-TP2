@@ -1,4 +1,4 @@
-package model.AlgoChess.Unidad.Ataques;
+package model.AlgoChess.Unidad;
 import model.AlgoChess.Unidad.*;
 
 public interface Ataque {

@@ -1,4 +1,4 @@
-package AlgoChess.Equipos;
+package model.AlgoChess.Equipos;
 
 public interface Equipo {
     public boolean esBlanco();

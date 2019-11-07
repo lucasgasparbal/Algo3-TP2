@@ -1,4 +1,4 @@
-package model.AlgoChess.Unidad.Ubicacion;
+package model.AlgoChess.Tablero;
 
 public interface Casillero {
 

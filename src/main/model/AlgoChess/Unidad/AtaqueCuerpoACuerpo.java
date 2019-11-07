@@ -1,6 +1,6 @@
-package model;
+package model.AlgoChess.Unidad;
 
-import model.AlgoChess.Unidad.Ataques.Ataque;
+import model.AlgoChess.Unidad.Ataque;
 
 public class AtaqueCuerpoACuerpo implements Ataque {
 

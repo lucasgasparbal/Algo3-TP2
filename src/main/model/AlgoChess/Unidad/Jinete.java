@@ -1,4 +1,6 @@
-package model;
+package model.AlgoChess.Unidad;
+
+import model.AlgoChess.Unidad.AtaqueCuerpoACuerpo;
 
 public class Jinete extends UnidadMovible {
 

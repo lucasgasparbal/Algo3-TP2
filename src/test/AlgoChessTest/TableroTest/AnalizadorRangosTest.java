@@ -1,6 +1,6 @@
-package AlgoChessTests.TableroTests;
+package AlgoChessTest.TableroTest;
 
-import AlgoChess.Tablero.AnalizadorRangos;
+import model.AlgoChess.Tablero.AnalizadorRangos;
 import org.junit.Test;
 
 import static junit.framework.TestCase.*;

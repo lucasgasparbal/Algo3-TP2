@@ -1,4 +1,4 @@
-package model;
+package model.AlgoChess.Unidad;
 
 public class Catapulta extends Unidad {
 

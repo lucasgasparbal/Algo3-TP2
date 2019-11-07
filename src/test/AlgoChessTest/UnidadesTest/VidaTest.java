@@ -1,6 +1,6 @@
 package test;
 
-import model.Vida;
+import model.AlgoChess.Unidad.Vida;
 import org.junit.Test;
 import org.junit.Assert;
 

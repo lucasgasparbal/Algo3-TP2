@@ -8,7 +8,7 @@
     <artifactId>AlgoChess</artifactId>
     <version>1.0</version>
 
-    <name>AlgoChess</name>
+    <name>model.AlgoChess</name>
     <url>https://github.com/lucasgasparbal/Algo3-TP2</url>
 
     <properties>

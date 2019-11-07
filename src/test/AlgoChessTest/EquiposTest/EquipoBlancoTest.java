@@ -1,8 +1,8 @@
-package AlgoChessTests.EquiposTests;
+package AlgoChessTest.EquiposTest;
 
 import org.junit.Test;
 
-import AlgoChess.Equipos.EquipoBlanco;
+import model.AlgoChess.Equipos.EquipoBlanco;
 
 
 import static junit.framework.TestCase.*;
