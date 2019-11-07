@@ -1,19 +1,29 @@
 package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
+import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public abstract class Unidad {
 
-    Ubicacion ubicacion = new Ubicacion();
+    Casillero ubicacion;
 
     Vida vida;
 
     Costo costo;
 
     protected Equipo equipo;
+    public Unidad(Equipo unEquipo){
+        equipo = unEquipo;
+    }
 
+    public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+        unCasillero.colocarUnidad(this);
+        ubicacion = unCasillero;
+    }
     public boolean esDelEquipo(Equipo unEquipo){
         return equipo.esIgualA(unEquipo);
     }

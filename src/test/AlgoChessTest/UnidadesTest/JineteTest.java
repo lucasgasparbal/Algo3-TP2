@@ -1,18 +1,24 @@
 package AlgoChessTest.UnidadesTest;
 
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Jinete;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+
 public class JineteTest {
 
     @Test
     public void atacoCuranderoCatorceVecesMurioDevuelveFalse() {
+        Equipo equipoMock = mock(Equipo.class);
+
         int i = 0;
-        Jinete jinete = new Jinete (3,2);
-        Curandero curandero = new Curandero (4,6);
+
+        Jinete jinete = new Jinete (equipoMock);
+        Curandero curandero = new Curandero (equipoMock);
         while (i<14) {
             jinete.atacar(curandero);
             i++;
@@ -22,9 +28,10 @@ public class JineteTest {
 
     @Test
     public void atacoCuranderoQuinceVecesMurioDevuelveTrue() {
+        Equipo equipoMock = mock(Equipo.class);
         int i = 0;
-        Jinete jinete = new Jinete (3,2);
-        Curandero curandero = new Curandero (4,6);
+        Jinete jinete = new Jinete (equipoMock);
+        Curandero curandero = new Curandero (equipoMock);
         while (i<15) {
             jinete.atacar(curandero);
             i++;
@@ -34,9 +41,10 @@ public class JineteTest {
 
     @Test
     public void atacoSoldadoVeinteVecesMurioDevuelveTrue() {
+        Equipo equipoMock = mock(Equipo.class);
         int i = 0;
-        Jinete jinete = new Jinete (3,2);
-        Soldado soldado = new Soldado (4,6);
+        Jinete jinete = new Jinete (equipoMock);
+        Soldado soldado = new Soldado (equipoMock);
         while (i<20) {
             jinete.atacar(soldado);
             i++;

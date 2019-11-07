@@ -16,10 +16,9 @@ public class CatapultaTest {
     @Test
     public void atacoCincoVecesASoldadoMurioDevuelveTrue() {
         int i = 0;
-        Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
-        Catapulta catapulta = new Catapulta (casilleroMock,equipoMock);
-        Soldado soldado = new Soldado (4,6);
+        Catapulta catapulta = new Catapulta (equipoMock);
+        Soldado soldado = new Soldado (equipoMock);
         while (i<10) {
             catapulta.atacar(soldado);
             i++;
@@ -31,10 +30,9 @@ public class CatapultaTest {
     @Test
     public void atacoTresVecesACuranderoMurioDevuelveFalse() {
         int i = 0;
-        Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
-        Catapulta catapulta = new Catapulta (casilleroMock,equipoMock);
-        Curandero curandero = new Curandero (4,6);
+        Catapulta catapulta = new Catapulta (equipoMock);
+        Curandero curandero = new Curandero (equipoMock);
         while (i<3) {
             catapulta.atacar(curandero);
             i++;
@@ -45,10 +43,9 @@ public class CatapultaTest {
     @Test
     public void atacoCuatroVecesACuranderoMurioDevuelveTrue() {
         int i = 0;
-        Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
-        Catapulta catapulta = new Catapulta (casilleroMock,equipoMock);
-        Curandero curandero = new Curandero (4,6);
+        Catapulta catapulta = new Catapulta (equipoMock);
+        Curandero curandero = new Curandero (equipoMock);
         while (i<4) {
             catapulta.atacar(curandero);
             i++;

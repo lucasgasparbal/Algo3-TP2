@@ -22,11 +22,11 @@ public class JugadorTest {
         Jugador jugador = new Jugador ();
         // Las unidades se crean antes de ver si las puedo costear, arreglar //
         boolean seLanzaExcepcion = false;
-        Catapulta catapulta1 = new Catapulta (casilleroMock,equipoMock);
-        Catapulta catapulta2 = new Catapulta (casilleroMock,equipoMock);
-        Catapulta catapulta3 = new Catapulta (casilleroMock,equipoMock);
-        Catapulta catapulta4 = new Catapulta (casilleroMock,equipoMock);
-        Catapulta catapulta5 = new Catapulta (casilleroMock,equipoMock);
+        Catapulta catapulta1 = new Catapulta (equipoMock);
+        Catapulta catapulta2 = new Catapulta (equipoMock);
+        Catapulta catapulta3 = new Catapulta (equipoMock);
+        Catapulta catapulta4 = new Catapulta (equipoMock);
+        Catapulta catapulta5 = new Catapulta (equipoMock);
         try {
             jugador.compra(catapulta1);
             jugador.compra(catapulta2);
@@ -45,10 +45,10 @@ public class JugadorTest {
         Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
 
-        Catapulta catapulta = new Catapulta (casilleroMock,equipoMock);
+        Catapulta catapulta = new Catapulta (equipoMock);
         Jugador jugador = new Jugador();
-        Soldado soldado = new Soldado (1,3);
-        Jinete jinete = new Jinete (1,5);
+        Soldado soldado = new Soldado (equipoMock);
+        Jinete jinete = new Jinete (equipoMock);
 
         try {
             jugador.compra(catapulta);
@@ -68,10 +68,10 @@ public class JugadorTest {
     public void jugadorTieneUnaSolaPiezaVivaNoPierde () {
         Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
-        Catapulta catapulta = new Catapulta (casilleroMock,equipoMock);
+        Catapulta catapulta = new Catapulta (equipoMock);
         Jugador jugador = new Jugador();
-        Soldado soldado = new Soldado (1,3);
-        Curandero curandero = new Curandero(1,6);
+        Soldado soldado = new Soldado (equipoMock);
+        Curandero curandero = new Curandero(equipoMock);
 
         try {
             jugador.compra(catapulta);

@@ -10,9 +10,8 @@ public class Catapulta extends Unidad {
 
     private AtaqueEnArea ataque = new AtaqueEnArea(20);
 
-    public Catapulta (Casillero casillero, Equipo unEquipo) {
-        ubicacion.posicionarEn(casillero);
-        equipo = unEquipo;
+    public Catapulta (Equipo unEquipo) {
+        super(unEquipo);
         vida = new Vida(50);
         costo = new Costo(5);
     }
