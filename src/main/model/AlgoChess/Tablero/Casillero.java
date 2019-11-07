@@ -1,4 +1,4 @@
-package model;
+package model.AlgoChess.Unidad.Ubicacion;
 
 public interface Casillero {
 

@@ -1,4 +1,6 @@
-package model;
+package model.AlgoChess.Unidad.Ataques;
+
+import model.AlgoChess.Unidad.Ataques.Ataque;
 
 public class Curacion implements Ataque {
 

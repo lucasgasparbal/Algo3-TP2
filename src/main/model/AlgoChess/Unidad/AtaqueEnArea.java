@@ -1,5 +1,7 @@
 package model;
 
+import model.AlgoChess.Unidad.Ataques.Ataque;
+
 public class AtaqueEnArea implements Ataque {
 
         public int dmg;
