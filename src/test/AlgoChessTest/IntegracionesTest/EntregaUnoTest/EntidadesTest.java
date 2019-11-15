@@ -10,8 +10,6 @@ import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.platform.commons.JUnitException;
 
 public class EntidadesTest {
 
@@ -30,7 +28,7 @@ public class EntidadesTest {
 
 
     @Test(expected = CasilleroOcupadoExcepcion.class)
-    public void intentoDesplazarPiezaACasilleroOcupado () throws CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+    public void intentoDesplazarPiezaACasilleroOcupadoLanzaCasilleroOcupadoExcepcion () throws CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
@@ -60,7 +58,7 @@ public class EntidadesTest {
     }
 
     @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaArriba() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
+    public void creoPiezaEnCentroLaDesplazoHaciaArribaSeMueveHaciaArriba() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
@@ -73,7 +71,7 @@ public class EntidadesTest {
     }
 
     @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaAbajo() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
+    public void creoPiezaEnCentroLaDesplazoHaciaAbajoSeMueveHaciaAbajo() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
 
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();

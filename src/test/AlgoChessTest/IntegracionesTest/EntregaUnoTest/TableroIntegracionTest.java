@@ -10,8 +10,8 @@ import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Jinete;
-import org.junit.jupiter.api.Assertions;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class TableroIntegracionTest {
     @Test
@@ -26,56 +26,48 @@ public class TableroIntegracionTest {
         Assertions.assertEquals(200, tablero.contarCasillerosDeEquipo(equipoNegro));
     }
     @Test
-    public void test02TableroSeColocaPiezaAliadaEnSectorAliadoConExito(){
+    public void test02TableroSeColocaPiezaAliadaEnSectorAliadoConExito() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion{
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         EquipoNegro equipoNegro = new EquipoNegro();
         Casillero  casillero;
         Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
         Jinete jinete = new Jinete(equipoBlanco);
 
-        try {
-            casillero = tablero.conseguirCasillero(5,5);
-            jinete.inicializarEnCasillero(casillero);
-            Assertions.assertTrue(casillero.getUnidad() == jinete);
-        } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | CasilleroOcupadoExcepcion ignored) {
-        }
+        casillero = tablero.conseguirCasillero(5,5);
+        jinete.inicializarEnCasillero(casillero);
+
+        Assertions.assertTrue(casillero.getUnidad() == jinete);
     }
 
     @Test
-        public void test03TableroSeIntentaColocarPiezaAliadaEnSectorEnemigoYSeFalla(){
+        public void test03TableroSeIntentaColocarPiezaAliadaEnSectorEnemigoYSeFalla() throws CoordenadaFueraDeRangoExcepcion{
             EquipoBlanco equipoBlanco = new EquipoBlanco();
             EquipoNegro equipoNegro = new EquipoNegro();
             Casillero  casillero;
             Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
             Catapulta catapulta = new Catapulta(equipoNegro);
 
-            try {
-                casillero = tablero.conseguirCasillero(5,5);
-                Assertions.assertThrows(CasilleroEnemigoExcepcion.class, ()->{
+            casillero = tablero.conseguirCasillero(5,5);
+
+            Assertions.assertThrows(CasilleroEnemigoExcepcion.class, ()->{
                     catapulta.inicializarEnCasillero(casillero);
                 });
-
-            } catch (CoordenadaFueraDeRangoExcepcion ignored) {
-            }
     }
 
     @Test
-    public void test04TableroSeIntentaColocarPiezaAliadaEnCasillaAliadaOcupadaYSeFalla(){
+    public void test04TableroSeIntentaColocarPiezaAliadaEnCasillaAliadaOcupadaYSeFalla() throws CoordenadaFueraDeRangoExcepcion{
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         EquipoNegro equipoNegro = new EquipoNegro();
         Casillero  casillero;
         Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
         Catapulta catapulta = new Catapulta(equipoBlanco);
         Curandero curandero = new Curandero(equipoBlanco);
+        casillero = tablero.conseguirCasillero(5,5);
 
-        try {
-            casillero = tablero.conseguirCasillero(5,5);
+
             Assertions.assertThrows(CasilleroOcupadoExcepcion.class, ()->{
                 catapulta.inicializarEnCasillero(casillero);
                 curandero.inicializarEnCasillero(casillero);
             });
-
-        } catch (CoordenadaFueraDeRangoExcepcion ignored) {
-        }
     }
 }
