@@ -9,36 +9,10 @@ import model.AlgoChess.Unidades.Unidad;
 public class Casillero{
 
 
-    private interface EstadoCasillero{
-        public abstract boolean vacio();
-        public abstract Unidad getUnidadContenida();
-    }
-
-    private class EstadoVacio implements EstadoCasillero{
-
-        public boolean vacio(){ return true;}
-        public Unidad getUnidadContenida(){
-            return null;
-        }
-
-    }
-
-    private class EstadoOcupado implements EstadoCasillero{
-        public Unidad unidadContenida;
-
-        public EstadoOcupado(Unidad unidadAContener){
-            unidadContenida = unidadAContener;
-        }
-        public boolean vacio(){ return false;}
-        public Unidad getUnidadContenida(){
-            return unidadContenida;
-        }
-
-    }
 
 
 
-    private EstadoCasillero estado =new EstadoVacio();
+    private boolean estaVacio = true;
     private int x;
     private int y;
     private Equipo equipo;
@@ -52,20 +26,20 @@ public class Casillero{
         tablero = tableroDado;
     }
     public boolean estaLibre(){
-        return estado.vacio();
+        return estaVacio;
     }
 
     public boolean esDeEquipo(Equipo unEquipo){
         return equipo.esIgualA(unEquipo);
     }
 
-    public void ocuparCasillero(Unidad unidad) throws CasilleroOcupadoExcepcion {
+    public void ocuparCasillero() throws CasilleroOcupadoExcepcion {
 
-        if(!estado.vacio()){
+        if(!estaVacio){
             throw new CasilleroOcupadoExcepcion();
         }
 
-        estado = new EstadoOcupado(unidad); 
+        estaVacio = false;
     }
 
     public void colocarUnidad(Unidad unidad) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
@@ -73,14 +47,11 @@ public class Casillero{
             throw new CasilleroEnemigoExcepcion();
         }
 
-        ocuparCasillero(unidad);
+        ocuparCasillero();
     }
 
-    public Unidad getUnidad(){
-        return estado.getUnidadContenida();
-    }
     public void vaciar(){
-        estado = new EstadoVacio();
+        estaVacio = true;
     }
 
     public int[] coordenadas(){

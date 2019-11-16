@@ -65,7 +65,4 @@ public class Tablero {
         return contador;
     }
 
-    public Unidad conseguirUnidadDeCasillero(int x, int y){
-        return casilleros[x][y].getUnidad();
-    }
 }

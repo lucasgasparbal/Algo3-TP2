@@ -13,14 +13,14 @@ public abstract class UnidadMovible extends Unidad {
     }
 
     public void ocuparCasillero(Casillero unCasillero) throws CasilleroOcupadoExcepcion {
-        unCasillero.ocuparCasillero(this);
+        unCasillero.ocuparCasillero();
     }
 
 
     public void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroIzquierdo();
-            nuevoCasillero.ocuparCasillero(this);
+            nuevoCasillero.ocuparCasillero();
             ubicacion.vaciar();
             ubicacion = nuevoCasillero;
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
@@ -32,7 +32,7 @@ public abstract class UnidadMovible extends Unidad {
     public void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroDerecho();
-            nuevoCasillero.ocuparCasillero(this);
+            nuevoCasillero.ocuparCasillero();
             ubicacion.vaciar();
             ubicacion = nuevoCasillero;
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
@@ -44,7 +44,7 @@ public abstract class UnidadMovible extends Unidad {
     public void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroSuperior();
-            nuevoCasillero.ocuparCasillero(this);
+            nuevoCasillero.ocuparCasillero();
             ubicacion.vaciar();
             ubicacion = nuevoCasillero;
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
@@ -56,7 +56,7 @@ public abstract class UnidadMovible extends Unidad {
     public void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroInferior();
-            nuevoCasillero.ocuparCasillero(this);
+            nuevoCasillero.ocuparCasillero();
             ubicacion.vaciar();
             ubicacion = nuevoCasillero;
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {

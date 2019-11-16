@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class CasilleroTest {
 
     @Test
-    public void test01CasilleroRecienCreadoEstaVacio(){
+    public void CasilleroRecienCreadoEstaVacio(){
 
         Equipo equipoMock = mock(Equipo.class);
         Tablero tableroMock = mock(Tablero.class);
@@ -26,24 +26,50 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test02CasilleroOcupadoNoPuedeSerOcupadoPorNuevaUnidad(){
+    public void CasilleroOcupadoNoPuedeSerOcupadoSiYaEstaOcupado(){
 
         Equipo equipoMock = mock(Equipo.class);
-        Unidad unidadMockUno = mock(Unidad.class);
-        Unidad unidadMockDos = mock(Unidad.class);
         Tablero tableroMock = mock(Tablero.class);
 
         Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
 
         Assertions.assertThrows(CasilleroOcupadoExcepcion.class, () -> {
-            casillero.ocuparCasillero(unidadMockUno);
-            casillero.ocuparCasillero(unidadMockDos);
+            casillero.ocuparCasillero();
+            casillero.ocuparCasillero();
         });
     }
+
     @Test
-    public void test03CasilleroDeUnEquipoNoAceptaSerColocadoConUnidadEnemiga(){
+    public void OcupoCasilleroRecienCreadoYNoEstaVacio() throws CasilleroOcupadoExcepcion {
+
+        Equipo equipoMock = mock(Equipo.class);
+        Tablero tableroMock = mock(Tablero.class);
+
+        Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
+        casillero.ocuparCasillero();
+
+        Assertions.assertFalse(casillero.estaLibre());
+
+    }
+
+    @Test
+    public void DesocupoCasilleroOcupadoYResultaVacio() throws CasilleroOcupadoExcepcion {
+
+        Equipo equipoMock = mock(Equipo.class);
+        Tablero tableroMock = mock(Tablero.class);
+
+        Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
+        casillero.ocuparCasillero();
+        casillero.vaciar();
+
+        Assertions.assertTrue(casillero.estaLibre());
+
+    }
+    @Test
+    public void CasilleroDeUnEquipoNoAceptaSerColocadoConUnidadEnemiga(){
         Equipo equipoCasilleroMock = mock(Equipo.class);
         Tablero tableroMock = mock(Tablero.class);
+
         Catapulta catapultaMock = mock(Catapulta.class);
         when(catapultaMock.esDelEquipo(equipoCasilleroMock)).thenReturn(false);
 

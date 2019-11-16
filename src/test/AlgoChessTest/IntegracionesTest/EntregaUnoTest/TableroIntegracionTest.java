@@ -36,7 +36,7 @@ public class TableroIntegracionTest {
         casillero = tablero.conseguirCasillero(5,5);
         jinete.inicializarEnCasillero(casillero);
 
-        Assertions.assertTrue(casillero.getUnidad() == jinete);
+        Assertions.assertArrayEquals(jinete.getPosicion(), casillero.coordenadas());
     }
 
     @Test
