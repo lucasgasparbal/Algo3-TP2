@@ -11,11 +11,12 @@ public class Casillero{
     private final int MitadDelTablero = 10;
 
     private abstract class EquipoCasillero{
-        private final int PorcentajeDañoPorEstarEnTerritorioEnemigo = 5;
+        protected final int PorcentajeDañoPorEstarEnTerritorioEnemigo = 5;
 
         public abstract boolean esBlanco();
         public abstract boolean esNegro();
-        public abstract boolean esIgualA(Equipo unEquipo);
+        public abstract int penalizacionAUnidadBlanca();
+        public abstract int penalizacionAUnidadNegra();
     }
 
     private class EquipoBlanco extends EquipoCasillero{
@@ -30,9 +31,15 @@ public class Casillero{
         }
 
         @Override
-        public boolean esIgualA(Equipo unEquipo) {
-            return unEquipo.esBlanco();
+        public int penalizacionAUnidadBlanca() {
+            return 0;
         }
+
+        @Override
+        public int penalizacionAUnidadNegra() {
+            return PorcentajeDañoPorEstarEnTerritorioEnemigo;
+        }
+
     }
 
     private class EquipoNegro extends EquipoCasillero{
@@ -47,8 +54,13 @@ public class Casillero{
         }
 
         @Override
-        public boolean esIgualA(Equipo unEquipo) {
-            return unEquipo.esNegro();
+        public int penalizacionAUnidadBlanca() {
+            return PorcentajeDañoPorEstarEnTerritorioEnemigo;
+        }
+
+        @Override
+        public int penalizacionAUnidadNegra() {
+            return 0;
         }
     }
 
@@ -114,5 +126,13 @@ public class Casillero{
 
     public Casillero obtenerCasilleroDerecho() throws CoordenadaFueraDeRangoExcepcion {
         return tablero.conseguirCasillero(x+1, y);
+    }
+
+    public int aplicarPenalizacionAUnidadBlanca(){
+        return equipo.penalizacionAUnidadBlanca();
+    }
+
+    public int aplicarPenalizacionAUnidadNegra(){
+        return equipo.penalizacionAUnidadNegra();
     }
 }

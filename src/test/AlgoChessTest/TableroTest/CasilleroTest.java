@@ -92,4 +92,36 @@ public class CasilleroTest {
 
         Assertions.assertFalse(casillero.esBlanco());
     }
+
+    @Test
+    public void CasilleroDeEquipoBlancoNoAplicaPorcentajeExtraDeDañoAUnidadBlanca(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(8, 16, tableroMock);
+
+        Assertions.assertEquals(0, casillero.aplicarPenalizacionAUnidadBlanca());
+    }
+
+    @Test
+    public void CasilleroDeEquipoBlancoAplicaPorcentajeExtraDeDañoAUnidadNegra(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(8, 16, tableroMock);
+
+        Assertions.assertEquals(5, casillero.aplicarPenalizacionAUnidadNegra());
+    }
+
+    @Test
+    public void CasilleroDeEquipoNegroAplicaPorcentajeExtraDeDañoAUnidadBlanca(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(18, 16, tableroMock);
+
+        Assertions.assertEquals(5, casillero.aplicarPenalizacionAUnidadBlanca());
+    }
+
+    @Test
+    public void CasilleroDeEquipoNegroNoAplicaPorcentajeExtraDeDañoAUnidadNegra(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(18, 16, tableroMock);
+
+        Assertions.assertEquals(0, casillero.aplicarPenalizacionAUnidadNegra());
+    }
 }
