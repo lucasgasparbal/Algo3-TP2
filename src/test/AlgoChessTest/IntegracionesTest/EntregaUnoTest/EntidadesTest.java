@@ -17,7 +17,7 @@ public class EntidadesTest {
     public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaVerificoPosicion() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion {
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
-        Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
+        Tablero tablero = new Tablero();
         Soldado soldado = new Soldado(equipoNegro);
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldado.desplazarHaciaIzquierda();
@@ -31,7 +31,7 @@ public class EntidadesTest {
     public void intentoDesplazarPiezaACasilleroOcupadoLanzaCasilleroOcupadoExcepcion () throws CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
-        Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
+        Tablero tablero = new Tablero();
         Soldado soldadoUno = new Soldado(equipoNegro);
         Soldado soldadoDos = new Soldado(equipoBlanco);
 
@@ -47,7 +47,7 @@ public class EntidadesTest {
     public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaYDerechaVerificoPosicion() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
-        Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
+        Tablero tablero = new Tablero();
         Soldado unidadMovible = new Soldado(equipoNegro);
 
         unidadMovible.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
@@ -61,7 +61,7 @@ public class EntidadesTest {
     public void creoPiezaEnCentroLaDesplazoHaciaArribaSeMueveHaciaArriba() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
-        Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
+        Tablero tablero = new Tablero();
         Soldado soldado = new Soldado(equipoNegro);
 
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
@@ -75,7 +75,7 @@ public class EntidadesTest {
 
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
-        Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
+        Tablero tablero = new Tablero();
         Soldado soldado = new Soldado(equipoNegro);
 
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
@@ -88,7 +88,7 @@ public class EntidadesTest {
     public void desplazoPiezaEnLasCuatroDirecciones() throws CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion{
         EquipoNegro equipoNegro = new EquipoNegro();
         EquipoBlanco equipoBlanco = new EquipoBlanco();
-        Tablero tablero = new Tablero(equipoBlanco, equipoNegro);
+        Tablero tablero = new Tablero();
         Soldado soldado = new Soldado(equipoBlanco);
 
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(4,5));

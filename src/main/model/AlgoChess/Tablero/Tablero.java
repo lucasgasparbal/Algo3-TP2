@@ -14,14 +14,17 @@ public class Tablero {
     private void inicializarTableroParaEquipo(Equipo unEquipo, int inicioFila, int finalFila){
         for(int i = inicioFila; i < finalFila; i++){
             for(int j = 0; j < CantColumnas; j++){
-                casilleros[i][j] = new Casillero(i,j,unEquipo, this);
+                casilleros[i][j] = new Casillero(i,j, this);
             }
         }
     }
 
-    public Tablero(Equipo unEquipo,Equipo otroEquipo){
-        inicializarTableroParaEquipo(unEquipo, 0, CantFilas/2);
-        inicializarTableroParaEquipo(otroEquipo, CantFilas/2, CantFilas);
+    public Tablero(){
+        for(int i = 0; i < CantFilas; i++){
+            for(int j = 0; j < CantColumnas; j++){
+                casilleros[i][j] = new Casillero(i,j, this);
+            }
+        }
 
     }
 
@@ -40,11 +43,22 @@ public class Tablero {
         return casilleros[x][y];
     }
 
-    public int contarCasillerosDeEquipo(Equipo unEquipo){
+    public int contarCasillerosDeEquipoBlanco(){
         int contador = 0;
         for(int i = 0; i < CantFilas; i++){
             for(int j = 0; j < CantColumnas; j++){
-                if (casilleros[i][j].esDeEquipo(unEquipo)){
+                if (casilleros[i][j].esBlanco()){
+                    contador++;
+                }
+            }
+        }
+        return contador;
+    }
+    public int contarCasillerosDeEquipoNegro(){
+        int contador = 0;
+        for(int i = 0; i < CantFilas; i++){
+            for(int j = 0; j < CantColumnas; j++){
+                if (casilleros[i][j].esNegro()){
                     contador++;
                 }
             }

@@ -8,31 +8,81 @@ import model.AlgoChess.Unidades.Unidad;
 
 public class Casillero{
 
+    private final int MitadDelTablero = 10;
 
+    private abstract class EquipoCasillero{
+        private final int PorcentajeDañoPorEstarEnTerritorioEnemigo = 5;
 
+        public abstract boolean esBlanco();
+        public abstract boolean esNegro();
+        public abstract boolean esIgualA(Equipo unEquipo);
+    }
+
+    private class EquipoBlanco extends EquipoCasillero{
+        @Override
+        public boolean esBlanco() {
+            return true;
+        }
+
+        @Override
+        public boolean esNegro() {
+            return false;
+        }
+
+        @Override
+        public boolean esIgualA(Equipo unEquipo) {
+            return unEquipo.esBlanco();
+        }
+    }
+
+    private class EquipoNegro extends EquipoCasillero{
+        @Override
+        public boolean esBlanco() {
+            return false;
+        }
+
+        @Override
+        public boolean esNegro() {
+            return true;
+        }
+
+        @Override
+        public boolean esIgualA(Equipo unEquipo) {
+            return unEquipo.esNegro();
+        }
+    }
 
 
     private boolean estaVacio = true;
     private int x;
     private int y;
-    private Equipo equipo;
+    private EquipoCasillero equipo;
     private Tablero tablero;
 
 
-    public Casillero(int xDado, int yDado, Equipo equipoDado, Tablero tableroDado){
+    public Casillero(int xDado, int yDado, Tablero tableroDado){
         x = xDado;
         y = yDado;
-        equipo = equipoDado;
+        if (x < MitadDelTablero){
+            equipo = new EquipoBlanco();
+        }else{
+            equipo = new EquipoNegro();
+        }
+
         tablero = tableroDado;
     }
+
     public boolean estaLibre(){
         return estaVacio;
     }
 
-    public boolean esDeEquipo(Equipo unEquipo){
-        return equipo.esIgualA(unEquipo);
+    public boolean esBlanco(){
+        return equipo.esBlanco();
     }
 
+    public boolean esNegro(){
+        return equipo.esNegro();
+    }
     public void ocuparCasillero() throws CasilleroOcupadoExcepcion {
 
         if(!estaVacio){
@@ -40,14 +90,6 @@ public class Casillero{
         }
 
         estaVacio = false;
-    }
-
-    public void colocarUnidad(Unidad unidad) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        if(!unidad.esDelEquipo(equipo)){
-            throw new CasilleroEnemigoExcepcion();
-        }
-
-        ocuparCasillero();
     }
 
     public void vaciar(){
@@ -73,5 +115,4 @@ public class Casillero{
     public Casillero obtenerCasilleroDerecho() throws CoordenadaFueraDeRangoExcepcion {
         return tablero.conseguirCasillero(x+1, y);
     }
-
 }

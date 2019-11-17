@@ -19,19 +19,17 @@ public class CasilleroTest {
     @Test
     public void CasilleroRecienCreadoEstaVacio(){
 
-        Equipo equipoMock = mock(Equipo.class);
         Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
+        Casillero casillero = new Casillero(0,0,tableroMock);
         assert casillero.estaLibre();
     }
 
     @Test
     public void CasilleroOcupadoNoPuedeSerOcupadoSiYaEstaOcupado(){
 
-        Equipo equipoMock = mock(Equipo.class);
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
+        Casillero casillero = new Casillero(0,0,tableroMock);
 
         Assertions.assertThrows(CasilleroOcupadoExcepcion.class, () -> {
             casillero.ocuparCasillero();
@@ -42,10 +40,9 @@ public class CasilleroTest {
     @Test
     public void OcupoCasilleroRecienCreadoYNoEstaVacio() throws CasilleroOcupadoExcepcion {
 
-        Equipo equipoMock = mock(Equipo.class);
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
+        Casillero casillero = new Casillero(0,0,tableroMock);
         casillero.ocuparCasillero();
 
         Assertions.assertFalse(casillero.estaLibre());
@@ -55,10 +52,9 @@ public class CasilleroTest {
     @Test
     public void DesocupoCasilleroOcupadoYResultaVacio() throws CasilleroOcupadoExcepcion {
 
-        Equipo equipoMock = mock(Equipo.class);
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0,0,equipoMock,tableroMock);
+        Casillero casillero = new Casillero(0,0,tableroMock);
         casillero.ocuparCasillero();
         casillero.vaciar();
 
@@ -66,16 +62,34 @@ public class CasilleroTest {
 
     }
     @Test
-    public void CasilleroDeUnEquipoNoAceptaSerColocadoConUnidadEnemiga(){
-        Equipo equipoCasilleroMock = mock(Equipo.class);
+    public void CasilleroCreadoEnMitadInferiorTableroEsDeEquipoBlanco(){
         Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(0, 16, tableroMock);
 
-        Catapulta catapultaMock = mock(Catapulta.class);
-        when(catapultaMock.esDelEquipo(equipoCasilleroMock)).thenReturn(false);
+        Assertions.assertTrue(casillero.esBlanco());
+    }
 
-        Casillero casillero = new Casillero(0,0,equipoCasilleroMock,tableroMock);
-        Assertions.assertThrows(CasilleroEnemigoExcepcion.class, () ->{
-            casillero.colocarUnidad(catapultaMock);
-        });
+    @Test
+    public void CasilleroCreadoEnMitadInferiorTableroNoEsDeEquipoNegro(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(0, 16, tableroMock);
+
+        Assertions.assertFalse(casillero.esNegro());
+    }
+
+    @Test
+    public void CasilleroCreadoEnMitadSuperiorTableroEsDeEquipoNegro(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(10, 16, tableroMock);
+
+        Assertions.assertTrue(casillero.esNegro());
+    }
+
+    @Test
+    public void CasilleroCreadoEnMitadSuperiorTableroNoEsDeEquipoBlanco(){
+        Tablero tableroMock = mock(Tablero.class);
+        Casillero casillero = new Casillero(10, 16, tableroMock);
+
+        Assertions.assertFalse(casillero.esBlanco());
     }
 }

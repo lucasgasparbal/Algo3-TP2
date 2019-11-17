@@ -21,7 +21,12 @@ public abstract class Unidad {
     }
 
     public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        unCasillero.colocarUnidad(this);
+
+        if(equipo.esEnemigoDeCasillero(unCasillero)){
+            throw new CasilleroEnemigoExcepcion();
+        }
+
+        unCasillero.ocuparCasillero();
         ubicacion = unCasillero;
     }
     public boolean esDelEquipo(Equipo unEquipo){

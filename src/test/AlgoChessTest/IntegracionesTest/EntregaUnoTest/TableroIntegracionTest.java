@@ -19,18 +19,18 @@ public class TableroIntegracionTest {
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         EquipoNegro equipoNegro = new EquipoNegro();
 
-        Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
+        Tablero tablero = new Tablero();
 
         Assertions.assertEquals(400, tablero.contarCasillerosVacios());
-        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipo(equipoBlanco));
-        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipo(equipoNegro));
+        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoBlanco());
+        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoNegro());
     }
     @Test
     public void test02TableroSeColocaPiezaAliadaEnSectorAliadoConExito() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion{
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         EquipoNegro equipoNegro = new EquipoNegro();
         Casillero  casillero;
-        Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
+        Tablero tablero = new Tablero();
         Jinete jinete = new Jinete(equipoBlanco);
 
         casillero = tablero.conseguirCasillero(5,5);
@@ -44,7 +44,7 @@ public class TableroIntegracionTest {
             EquipoBlanco equipoBlanco = new EquipoBlanco();
             EquipoNegro equipoNegro = new EquipoNegro();
             Casillero  casillero;
-            Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
+            Tablero tablero = new Tablero();
             Catapulta catapulta = new Catapulta(equipoNegro);
 
             casillero = tablero.conseguirCasillero(5,5);
@@ -59,7 +59,7 @@ public class TableroIntegracionTest {
         EquipoBlanco equipoBlanco = new EquipoBlanco();
         EquipoNegro equipoNegro = new EquipoNegro();
         Casillero  casillero;
-        Tablero tablero = new Tablero(equipoBlanco,equipoNegro);
+        Tablero tablero = new Tablero();
         Catapulta catapulta = new Catapulta(equipoBlanco);
         Curandero curandero = new Curandero(equipoBlanco);
         casillero = tablero.conseguirCasillero(5,5);

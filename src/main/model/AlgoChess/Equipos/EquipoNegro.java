@@ -1,6 +1,8 @@
 package model.AlgoChess.Equipos;
 
-public class EquipoNegro implements Equipo{
+import model.AlgoChess.Tablero.Casillero;
+
+public class EquipoNegro extends Equipo{
 
     @Override
     //pre:ninguna
@@ -19,5 +21,10 @@ public class EquipoNegro implements Equipo{
     @Override
     public boolean esIgualA(Equipo unEquipo) {
         return unEquipo.esNegro();
+    }
+
+    @Override
+    public boolean esEnemigoDeCasillero(Casillero unCasillero){
+        return !unCasillero.esNegro();
     }
 }

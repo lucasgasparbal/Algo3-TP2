@@ -11,7 +11,7 @@ public class AnalizadorRangos {
     final private int RangoLejanoCotaMinima = 6;
     final private int RangoLejanoCotaMaxima = Integer.MAX_VALUE; //para representar infinito positivo
 
-    final private int DistanciaDeMovimiento = 1;
+    final private int DistanciaAdyacencia = 1;
 
 
     private boolean numeroEnRango(int numero, int rangoCotaMinima, int rangoCotaMaxima){
@@ -50,11 +50,11 @@ public class AnalizadorRangos {
         return (coordenadaXEnRango  | coordenadaYEnRango);
     }
 
-    public boolean coordenadasEstanEnRangoDeMovimiento(int xUno, int yUno, int xDos, int yDos){
+    public boolean coordenadasSonAdyacentes(int xUno, int yUno, int xDos, int yDos){
         int restaAbsolutaCoordenadaX = Math.abs(xUno-xDos);
         int restaAbsolutaCoordenadaY = Math.abs(yUno-yDos);
-        boolean coordenadaXEnRango = (restaAbsolutaCoordenadaX == DistanciaDeMovimiento);
-        boolean coordenadaYEnRango = (restaAbsolutaCoordenadaY == DistanciaDeMovimiento);
+        boolean coordenadaXEnRango = (restaAbsolutaCoordenadaX == DistanciaAdyacencia);
+        boolean coordenadaYEnRango = (restaAbsolutaCoordenadaY == DistanciaAdyacencia);
         return (coordenadaXEnRango  | coordenadaYEnRango);
     }
 }

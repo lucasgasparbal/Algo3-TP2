@@ -1,7 +1,12 @@
 package model.AlgoChess.Equipos;
 
-public interface Equipo {
-    public boolean esBlanco();
-    public boolean esNegro();
-    public boolean esIgualA(Equipo unEquipo);
+import model.AlgoChess.Tablero.Casillero;
+
+public abstract class Equipo {
+
+    public abstract boolean esBlanco();
+    public abstract boolean esNegro();
+    public abstract boolean esIgualA(Equipo unEquipo);
+
+    public abstract boolean esEnemigoDeCasillero(Casillero unCasillero);
 }
