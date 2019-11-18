@@ -11,6 +11,7 @@ public class Tablero {
 
     private Casillero[][] casilleros = new Casillero[CantFilas][CantColumnas];
 
+    private AnalizadorRangos analizadorRangos = new AnalizadorRangos();
     private void inicializarTableroParaEquipo(Equipo unEquipo, int inicioFila, int finalFila){
         for(int i = inicioFila; i < finalFila; i++){
             for(int j = 0; j < CantColumnas; j++){

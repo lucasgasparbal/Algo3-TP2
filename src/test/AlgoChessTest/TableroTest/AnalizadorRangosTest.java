@@ -108,14 +108,14 @@ public class AnalizadorRangosTest {
 
     //coordenadasEnRangoDeMovimientoTest
     @Test
-    public void test14coordenadasSonAdyacentesDevuelveTrueSiLasCoordenadasEstanEnElRangoDeMovimiento(){
+    public void test14coordenadasSonAdyacentesDevuelveTrueSiLasCoordenadasEstanEnElRangoAdyacente(){
         AnalizadorRangos analizadorRangos = new AnalizadorRangos();
         boolean test = analizadorRangos.coordenadasSonAdyacentes(0,0,1,1);
         assertTrue(test);
     }
 
     @Test
-    public void test15coordenadasSonAdyacentesDevuelveFalseSiLasCoordenadasNoEstanEnElRangoDeMovimiento(){
+    public void test15coordenadasSonAdyacentesDevuelveFalseSiLasCoordenadasNoEstanEnElRangoAdyacente(){
         AnalizadorRangos analizadorRangos = new AnalizadorRangos();
         boolean test = analizadorRangos.coordenadasSonAdyacentes(0,0,3,5);
         assertFalse(test);

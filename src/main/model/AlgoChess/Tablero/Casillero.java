@@ -11,7 +11,7 @@ public class Casillero{
     private final int MitadDelTablero = 10;
 
     private abstract class EquipoCasillero{
-        protected final int PorcentajeDañoPorEstarEnTerritorioEnemigo = 5;
+        protected final int PorcentajeDanioPorEstarEnTerritorioEnemigo = 5;
 
         public abstract boolean esBlanco();
         public abstract boolean esNegro();
@@ -37,7 +37,7 @@ public class Casillero{
 
         @Override
         public int penalizacionAUnidadNegra() {
-            return PorcentajeDañoPorEstarEnTerritorioEnemigo;
+            return PorcentajeDanioPorEstarEnTerritorioEnemigo;
         }
 
     }
@@ -55,7 +55,7 @@ public class Casillero{
 
         @Override
         public int penalizacionAUnidadBlanca() {
-            return PorcentajeDañoPorEstarEnTerritorioEnemigo;
+            return PorcentajeDanioPorEstarEnTerritorioEnemigo;
         }
 
         @Override
@@ -135,4 +135,6 @@ public class Casillero{
     public int aplicarPenalizacionAUnidadNegra(){
         return equipo.penalizacionAUnidadNegra();
     }
+
+
 }
