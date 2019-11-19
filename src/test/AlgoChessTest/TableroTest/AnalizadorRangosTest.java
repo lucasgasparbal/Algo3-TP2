@@ -120,4 +120,32 @@ public class AnalizadorRangosTest {
         boolean test = analizadorRangos.coordenadasSonAdyacentes(0,0,3,5);
         assertFalse(test);
     }
+
+    @Test
+    public void coordenadasSonAdyacentesDevuelveFalseSiLasCoordenadasSonIguales(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+        boolean test = analizadorRangos.coordenadasSonAdyacentes(0,0,0,0);
+        assertFalse(test);
+    }
+
+    @Test
+    public void coordenadasEstanEnRangoCercanoDevuelveFalseSiLasCoordenadasSonIguales(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+        boolean test = analizadorRangos.coordenadasEstanEnRangoCercano(0,0,0,0);
+        assertFalse(test);
+    }
+
+    @Test
+    public void coordenadasEstanEnRangoMedianoDevuelveFalseSiLasCoordenadasSonIguales(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+        boolean test = analizadorRangos.coordenadasEstanEnRangoMediano(0,0,0,0);
+        assertFalse(test);
+    }
+
+    @Test
+    public void coordenadasEstanEnRangoLejanoDevuelveFalseSiLasCoordenadasSonIguales(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+        boolean test = analizadorRangos.coordenadasEstanEnRangoLejano(0,0,0,0);
+        assertFalse(test);
+    }
 }

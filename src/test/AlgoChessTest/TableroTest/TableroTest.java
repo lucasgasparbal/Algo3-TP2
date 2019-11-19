@@ -13,7 +13,6 @@ import static org.mockito.Mockito.mock;
 public class TableroTest {
     @Test
     public void test01ConseguirCasilleroLanzaExcepcionEnCoordenadasInvalidas(){
-        Equipo equipoMock = mock(Equipo.class);
         Tablero tablero = new Tablero();
         Assertions.assertThrows(CoordenadaFueraDeRangoExcepcion.class, ()->tablero.conseguirCasillero(-1,-1));
     }

@@ -35,9 +35,15 @@ public class Tablero {
 
     }
 
+    private boolean coordenadasSonValidas(int x, int y){
+
+        return (coordenadaEnRango(x,CantFilas) & coordenadaEnRango(y,CantColumnas));
+
+    }
+
     public Casillero conseguirCasillero(int x, int y) throws CoordenadaFueraDeRangoExcepcion {
 
-        if (!(coordenadaEnRango(x, CantFilas)) & !(coordenadaEnRango(y, CantColumnas))) {
+        if (!coordenadasSonValidas(x,y)) {
             throw new CoordenadaFueraDeRangoExcepcion();
         }
 
@@ -78,6 +84,42 @@ public class Tablero {
 
         }
         return contador;
+    }
+
+    private boolean parDeCoordenadasSonInvalidas(int[] coordenadaUno, int[] coordenadaDos){
+        return (!coordenadasSonValidas(coordenadaUno[0], coordenadaUno[1]) | !coordenadasSonValidas(coordenadaDos[0],coordenadaDos[1]));
+    }
+
+    public boolean coordenadasEstanEnRangoCercano(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
+        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
+            throw new CoordenadaFueraDeRangoExcepcion();
+        }
+
+        return analizadorRangos.coordenadasEstanEnRangoCercano(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
+    }
+
+    public boolean coordenadasEstanEnRangoMediano(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
+        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
+            throw new CoordenadaFueraDeRangoExcepcion();
+        }
+
+        return analizadorRangos.coordenadasEstanEnRangoMediano(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
+    }
+
+    public boolean coordenadasEstanEnRangoLejano(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
+        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
+            throw new CoordenadaFueraDeRangoExcepcion();
+        }
+
+        return analizadorRangos.coordenadasEstanEnRangoLejano(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
+    }
+
+    public boolean coordenadasSonAdyacentes(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
+        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
+            throw new CoordenadaFueraDeRangoExcepcion();
+        }
+
+        return analizadorRangos.coordenadasSonAdyacentes(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
     }
 
 }

@@ -3,6 +3,7 @@ package model.AlgoChess.Unidades;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
+import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
@@ -49,5 +50,21 @@ public abstract class Unidad {
     }
 
     public void atacar(Unidad objetivo) {};
+
+    public boolean esAdyacenteA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.esAdyacenteA(unCasillero);
+    }
+
+    public boolean estaEnRangoCercanoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.estaEnRangoCercanoDe(unCasillero);
+    }
+
+    public boolean estaEnRangoMedianoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.estaEnRangoMedianoDe(unCasillero);
+    }
+
+    public boolean estaEnRangoLejanoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.estaEnRangoLejanoDe(unCasillero);
+    }
 
 }

@@ -136,5 +136,20 @@ public class Casillero{
         return equipo.penalizacionAUnidadNegra();
     }
 
+    public boolean esAdyacenteA(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return tablero.coordenadasSonAdyacentes(this.coordenadas(),otroCasillero.coordenadas());
+    }
+
+    public boolean estaEnRangoCercanoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return tablero.coordenadasEstanEnRangoCercano(this.coordenadas(), otroCasillero.coordenadas());
+    }
+
+    public boolean estaEnRangoMedianoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return tablero.coordenadasEstanEnRangoMediano(this.coordenadas(), otroCasillero.coordenadas());
+    }
+
+    public boolean estaEnRangoLejanoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        return tablero.coordenadasEstanEnRangoMediano(this.coordenadas(), otroCasillero.coordenadas());
+    }
 
 }
