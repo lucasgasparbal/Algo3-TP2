@@ -17,19 +17,19 @@ import static org.mockito.Mockito.when;
 public class CasilleroTest {
 
     @Test
-    public void CasilleroRecienCreadoEstaVacio(){
+    public void CasilleroRecienCreadoEstaVacio() {
 
         Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(0,0,tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock);
         assert casillero.estaLibre();
     }
 
     @Test
-    public void CasilleroOcupadoNoPuedeSerOcupadoSiYaEstaOcupado(){
+    public void CasilleroOcupadoNoPuedeSerOcupadoSiYaEstaOcupado() {
 
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0,0,tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock);
 
         Assertions.assertThrows(CasilleroOcupadoExcepcion.class, () -> {
             casillero.ocuparCasillero();
@@ -42,7 +42,7 @@ public class CasilleroTest {
 
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0,0,tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock);
         casillero.ocuparCasillero();
 
         Assertions.assertFalse(casillero.estaLibre());
@@ -54,15 +54,16 @@ public class CasilleroTest {
 
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0,0,tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock);
         casillero.ocuparCasillero();
         casillero.vaciar();
 
         Assertions.assertTrue(casillero.estaLibre());
 
     }
+
     @Test
-    public void CasilleroCreadoEnMitadInferiorTableroEsDeEquipoBlanco(){
+    public void CasilleroCreadoEnMitadInferiorTableroEsDeEquipoBlanco() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(0, 16, tableroMock);
 
@@ -70,7 +71,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroCreadoEnMitadInferiorTableroNoEsDeEquipoNegro(){
+    public void CasilleroCreadoEnMitadInferiorTableroNoEsDeEquipoNegro() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(0, 16, tableroMock);
 
@@ -78,7 +79,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroCreadoEnMitadSuperiorTableroEsDeEquipoNegro(){
+    public void CasilleroCreadoEnMitadSuperiorTableroEsDeEquipoNegro() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(10, 16, tableroMock);
 
@@ -86,7 +87,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroCreadoEnMitadSuperiorTableroNoEsDeEquipoBlanco(){
+    public void CasilleroCreadoEnMitadSuperiorTableroNoEsDeEquipoBlanco() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(10, 16, tableroMock);
 
@@ -94,7 +95,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroDeEquipoBlancoNoAplicaPorcentajeExtraDeDañoAUnidadBlanca(){
+    public void CasilleroDeEquipoBlancoNoAplicaPorcentajeExtraDeDañoAUnidadBlanca() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(8, 16, tableroMock);
 
@@ -102,7 +103,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroDeEquipoBlancoAplicaPorcentajeExtraDeDañoAUnidadNegra(){
+    public void CasilleroDeEquipoBlancoAplicaPorcentajeExtraDeDañoAUnidadNegra() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(8, 16, tableroMock);
 
@@ -110,7 +111,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroDeEquipoNegroAplicaPorcentajeExtraDeDañoAUnidadBlanca(){
+    public void CasilleroDeEquipoNegroAplicaPorcentajeExtraDeDañoAUnidadBlanca() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(18, 16, tableroMock);
 
@@ -118,10 +119,11 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroDeEquipoNegroNoAplicaPorcentajeExtraDeDañoAUnidadNegra(){
+    public void CasilleroDeEquipoNegroNoAplicaPorcentajeExtraDeDañoAUnidadNegra() {
         Tablero tableroMock = mock(Tablero.class);
         Casillero casillero = new Casillero(18, 16, tableroMock);
 
         Assertions.assertEquals(0, casillero.aplicarPenalizacionAUnidadNegra());
     }
+
 }
