@@ -1,6 +1,8 @@
 package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
+import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Ataques.AtaqueEnArea;
 import model.AlgoChess.Unidades.AtributosDeUnidades.Costo;
@@ -16,7 +18,7 @@ public class Catapulta extends Unidad {
         costo = new Costo(5);
     }
 
-    public void atacar (Unidad objetivo) {
-        ataque.atacar(objetivo);
+    public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+        ataque.atacar(objetivo,ubicacion);
     }
 }

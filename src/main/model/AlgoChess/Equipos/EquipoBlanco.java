@@ -2,7 +2,7 @@ package model.AlgoChess.Equipos;
 
 import model.AlgoChess.Tablero.Casillero;
 
-public class EquipoBlanco extends Equipo{
+public class EquipoBlanco extends Equipo {
 
     @Override
     //pre: ninguna
@@ -24,7 +24,8 @@ public class EquipoBlanco extends Equipo{
     }
 
     @Override
-    public boolean esEnemigoDeCasillero(Casillero unCasillero){
+    public boolean esEnemigoDeCasillero(Casillero unCasillero) {
         return !unCasillero.esBlanco();
     }
 }
+

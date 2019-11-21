@@ -14,7 +14,6 @@ public class Jugador {
     }
 
     public boolean perdio() {
-        // faltaria que las piezas se borren al llegar su vida a 0//
         for (Unidad pieza : piezasEnJuego) {
             if (!pieza.murio()) {
                 return false;

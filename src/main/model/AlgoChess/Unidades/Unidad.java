@@ -1,10 +1,7 @@
 package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
@@ -49,7 +46,7 @@ public abstract class Unidad {
         return costo.descontarCosto (fondos);
     }
 
-    public void atacar(Unidad objetivo) {};
+    public void atacar(Unidad objetivo, Casillero ubicacion) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {};
 
     public boolean esAdyacenteA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
         return ubicacion.esAdyacenteA(unCasillero);
@@ -65,6 +62,10 @@ public abstract class Unidad {
 
     public boolean estaEnRangoLejanoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
         return ubicacion.estaEnRangoLejanoDe(unCasillero);
+    }
+
+    public int[] getPosicion() {
+        return ubicacion.coordenadas();
     }
 
 }

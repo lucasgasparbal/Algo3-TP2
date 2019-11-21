@@ -65,8 +65,4 @@ public abstract class UnidadMovible extends Unidad {
 
     }
 
-    public int[] getPosicion() {
-        return ubicacion.coordenadas();
-    }
-
 }

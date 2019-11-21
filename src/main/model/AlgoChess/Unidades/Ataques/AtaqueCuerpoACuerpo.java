@@ -1,5 +1,8 @@
 package model.AlgoChess.Unidades.Ataques;
 
+import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
+import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
+import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Unidad;
 
 public class AtaqueCuerpoACuerpo implements Ataque {
@@ -11,8 +14,10 @@ public class AtaqueCuerpoACuerpo implements Ataque {
     }
 
     @Override
-    public void atacar(Unidad objetivo) {
-        //aca se verifica que efectivamente se pueda atacar y como//
-        objetivo.sufrirDanio (dmg);
+    public void atacar(Unidad objetivo, Casillero posicionAtacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+        if (objetivo.estaEnRangoCercanoDe(posicionAtacante)) {
+            objetivo.sufrirDanio(dmg);
+        }
+        else throw new NoSePudoAtacarExcepcion();
     }
 }

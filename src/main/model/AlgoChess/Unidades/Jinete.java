@@ -1,6 +1,8 @@
 package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
+import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Unidades.Ataques.*;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
@@ -15,9 +17,10 @@ public class Jinete extends UnidadMovible {
         costo = new Costo (3);
     }
 
-    public void atacar (Unidad objetivo) {
-        // aca falta la logica que le hace atacar de una u otra forma //
-        ataque1.atacar(objetivo);
-
+    public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+        if (equipo.hayUnidadesEnemigasCercanas(ubicacion) || equipo.hayUnidadesAliadasCercanas(ubicacion)) {
+            ataque2.atacar(objetivo,ubicacion);
+        }
+        else ataque1.atacar(objetivo,ubicacion);
     }
 }
