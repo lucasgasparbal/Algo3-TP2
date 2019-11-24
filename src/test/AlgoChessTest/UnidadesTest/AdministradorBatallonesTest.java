@@ -1,5 +1,6 @@
 package AlgoChessTest.UnidadesTest;
-import model.AlgoChess.Equipos.EquipoBlanco;
+import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import org.junit.Test;
 import org.junit.Assert;
@@ -21,10 +22,10 @@ public class AdministradorBatallonesTest {
     @Test
     public void test02colocoDosSoldadosActualizoBatallonesAdministradorDeBatallonesSigueVacio () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(2,2));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(2,3));
@@ -40,11 +41,11 @@ public class AdministradorBatallonesTest {
     @Test
     public void test03colocoTresSoldadosPeroNoEnLineaActualizoBatallonesAdministradorDeBatallonesSigueVacio () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Soldado soldado3 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
+        Soldado soldado3 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(2,2));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(2,3));
@@ -62,11 +63,11 @@ public class AdministradorBatallonesTest {
     @Test
     public void test04colocoTresSoldadosEnFilaHorizontalAdministradorDeBatallonesContieneBatallon () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Soldado soldado3 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
+        Soldado soldado3 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(2, 2));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(3, 2));
@@ -84,11 +85,11 @@ public class AdministradorBatallonesTest {
     @Test
     public void test05colocoTresSoldadosEnFilaVerticalAdministradorDeBatallonesContieneBatallon () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Soldado soldado3 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
+        Soldado soldado3 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(2, 4));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(2, 5));
@@ -106,11 +107,11 @@ public class AdministradorBatallonesTest {
     @Test
     public void test06colocoTresSoldadosEnFilaVerticalAdministradorDeBatallonesContieneBatallon () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Soldado soldado3 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
+        Soldado soldado3 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(9, 3));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 4));
@@ -126,11 +127,11 @@ public class AdministradorBatallonesTest {
     @Test
     public void test07BatallonVerticalDejaDeExistirAlRomperseLaFormacion () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Soldado soldado3 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
+        Soldado soldado3 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(9, 3));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 4));
@@ -154,12 +155,12 @@ public class AdministradorBatallonesTest {
     @Test
     public void test08 () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoBlanco);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Soldado soldado3 = new Soldado(equipoBlanco);
-        Soldado soldado4 = new Soldado(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipo);
+        Soldado soldado2 = new Soldado(equipo);
+        Soldado soldado3 = new Soldado(equipo);
+        Soldado soldado4 = new Soldado(equipo);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(6, 4));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(7, 4));

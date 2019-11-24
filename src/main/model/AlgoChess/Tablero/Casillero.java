@@ -1,86 +1,24 @@
 package model.AlgoChess.Tablero;
 
-import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Unidades.Unidad;
 
 public class Casillero{
 
-    private final int MitadDelTablero = 10;
+    private int numeroEquipo;
 
-    private abstract class EquipoCasillero{
-        protected final int PorcentajeDanioPorEstarEnTerritorioEnemigo = 5;
-
-        public abstract boolean esBlanco();
-        public abstract boolean esNegro();
-        public abstract int penalizacionAUnidadBlanca();
-        public abstract int penalizacionAUnidadNegra();
-    }
-
-    private class EquipoBlanco extends EquipoCasillero{
-        @Override
-        public boolean esBlanco() {
-            return true;
-        }
-
-        @Override
-        public boolean esNegro() {
-            return false;
-        }
-
-        @Override
-        public int penalizacionAUnidadBlanca() {
-            return 0;
-        }
-
-        @Override
-        public int penalizacionAUnidadNegra() {
-            return PorcentajeDanioPorEstarEnTerritorioEnemigo;
-        }
-
-    }
-
-    private class EquipoNegro extends EquipoCasillero{
-        @Override
-        public boolean esBlanco() {
-            return false;
-        }
-
-        @Override
-        public boolean esNegro() {
-            return true;
-        }
-
-        @Override
-        public int penalizacionAUnidadBlanca() {
-            return PorcentajeDanioPorEstarEnTerritorioEnemigo;
-        }
-
-        @Override
-        public int penalizacionAUnidadNegra() {
-            return 0;
-        }
-    }
-
+    private final double MultiplicadorDanioPorTerritorioEnemigo = 1.05;
 
     private boolean estaVacio = true;
     private int x;
     private int y;
-    private EquipoCasillero equipo;
     private Tablero tablero;
 
 
-    public Casillero(int xDado, int yDado, Tablero tableroDado){
+    public Casillero(int xDado, int yDado, Tablero tableroDado, int identificadorEquipo){
         x = xDado;
         y = yDado;
-        if (x < MitadDelTablero){
-            equipo = new EquipoBlanco();
-        }else{
-            equipo = new EquipoNegro();
-        }
-
+        numeroEquipo = identificadorEquipo;
         tablero = tableroDado;
     }
 
@@ -88,13 +26,6 @@ public class Casillero{
         return estaVacio;
     }
 
-    public boolean esBlanco(){
-        return equipo.esBlanco();
-    }
-
-    public boolean esNegro(){
-        return equipo.esNegro();
-    }
     public void ocuparCasillero() throws CasilleroOcupadoExcepcion {
 
         if(!estaVacio){
@@ -128,12 +59,17 @@ public class Casillero{
         return tablero.conseguirCasillero(x+1, y);
     }
 
-    public int aplicarPenalizacionAUnidadBlanca(){
-        return equipo.penalizacionAUnidadBlanca();
+    public boolean perteneceAEquipo(int numeroIdentificadorEquipo){
+        return numeroIdentificadorEquipo == numeroEquipo;
     }
 
-    public int aplicarPenalizacionAUnidadNegra(){
-        return equipo.penalizacionAUnidadNegra();
+    public double aplicarMultiplicadorDanioAUnidadDeEquipo(int numeroIdentificadorEquipo){
+
+        if (numeroIdentificadorEquipo == numeroEquipo){
+            return 1;
+        }
+
+        return MultiplicadorDanioPorTerritorioEnemigo;
     }
 
     public boolean esAdyacenteA(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {

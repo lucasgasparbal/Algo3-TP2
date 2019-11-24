@@ -1,16 +1,15 @@
 package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Equipos.EquipoBlanco;
-import model.AlgoChess.Equipos.EquipoNegro;
 import model.AlgoChess.Excepciones.*;
+import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SoldadoTest {
 
@@ -34,12 +33,19 @@ public class SoldadoTest {
 
     @Test
     public void soldadoAtacaAOtroUnaVezMurioDevuelveFalse () throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
-        Equipo equipoMock = mock(Equipo.class);
-        Soldado soldado1 = new Soldado (equipoMock);
-        Soldado soldado2 = new Soldado (equipoMock);
-        Tablero tablero = new Tablero ();
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+
+        int i=0;
+        Soldado soldado1 = new Soldado (equipoUnoMock );
+        Soldado soldado2 = new Soldado (equipoDosMock );
+        soldado1.inicializarEnCasillero(casilleroMockUno);
+        soldado2.inicializarEnCasillero(casilleroMockDos);
        try {
            soldado1.atacar(soldado2);
        }
@@ -49,13 +55,19 @@ public class SoldadoTest {
 
     @Test
     public void soldadoAtacaAOtroDiezVecesMurioDevuelveTrue () throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        Equipo equipoMock = mock(Equipo.class);
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+
         int i=0;
-        Soldado soldado1 = new Soldado (equipoMock);
-        Soldado soldado2 = new Soldado (equipoMock);
-        Tablero tablero = new Tablero ();
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
+        Soldado soldado1 = new Soldado (equipoUnoMock );
+        Soldado soldado2 = new Soldado (equipoDosMock );
+        soldado1.inicializarEnCasillero(casilleroMockUno);
+        soldado2.inicializarEnCasillero(casilleroMockDos);
         while (i<10) {
             try {
                 soldado1.atacar(soldado2);

@@ -8,8 +8,8 @@ import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public class Jinete extends UnidadMovible {
 
-    private AtaqueCuerpoACuerpo ataque1 = new AtaqueCuerpoACuerpo(5);
-    private AtaqueADistancia ataque2 = new AtaqueADistancia(15);
+    private AtaqueCuerpoACuerpo ataqueEspada = new AtaqueCuerpoACuerpo(5);
+    private AtaqueADistancia ataqueArco = new AtaqueADistancia(15);
 
     public Jinete(Equipo unEquipo) {
         super(unEquipo);
@@ -18,9 +18,9 @@ public class Jinete extends UnidadMovible {
     }
 
     public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-        if (equipo.hayUnidadesEnemigasCercanas(ubicacion) || equipo.hayUnidadesAliadasCercanas(ubicacion)) {
-            ataque2.atacar(objetivo,ubicacion);
+        if (equipo.hayUnidadesEnemigasCercanas(this) || equipo.hayUnidadesAliadasCercanas(this)) {
+            ataqueArco.atacar(objetivo,this);
         }
-        else ataque1.atacar(objetivo,ubicacion);
+        else ataqueEspada.atacar(objetivo,this);
     }
 }

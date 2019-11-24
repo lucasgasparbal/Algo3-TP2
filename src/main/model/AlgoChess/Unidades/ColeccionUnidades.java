@@ -1,7 +1,6 @@
 package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Tablero.Casillero;
 
 import java.util.ArrayList;
 
@@ -16,16 +15,16 @@ public class ColeccionUnidades {
         unidades.add(unidad);
     }
 
-    public boolean hayUnidadesAdyacentesA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+    public boolean hayUnidadesAdyacentesA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
         for(int i = 0; i < unidades.size(); i++){
-            if(unidades.get(i).esAdyacenteA(unCasillero)){ return true;}
+            if(unidades.get(i).esAdyacenteA(unaUnidad)){ return true;}
         }
         return false;
     }
 
-    public boolean hayUnidadesCercanasA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+    public boolean hayUnidadesCercanasA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
         for(int i = 0; i < unidades.size(); i++){
-            if(unidades.get(i).estaEnRangoCercanoDe(unCasillero)){ return true;}
+            if(unidades.get(i).estaEnRangoCercanoDe(unaUnidad)){ return true;}
         }
         return false;
     }

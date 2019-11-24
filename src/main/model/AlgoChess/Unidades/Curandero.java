@@ -11,7 +11,7 @@ public class Curandero extends UnidadMovible {
     private Curacion ataque = new Curacion(15);
 
     public void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-        ataque.atacar(objetivo,ubicacion);
+        ataque.atacar(objetivo,this);
     }
 
     public Curandero(Equipo unEquipo) {

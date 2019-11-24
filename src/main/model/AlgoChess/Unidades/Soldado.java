@@ -25,7 +25,7 @@ public class Soldado extends UnidadMovible {
     }
 
     public void atacar(Unidad objetivo) throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion {
-        ataque.atacar(objetivo,ubicacion);
+        ataque.atacar(objetivo,this);
     }
 
     public void asignarBatallon(Batallon batallonAsignado) {

@@ -20,7 +20,7 @@ public class CasilleroTest {
     public void CasilleroRecienCreadoEstaVacio() {
 
         Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(0, 0, tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock, 1);
         assert casillero.estaLibre();
     }
 
@@ -29,7 +29,7 @@ public class CasilleroTest {
 
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0, 0, tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock, 1);
 
         Assertions.assertThrows(CasilleroOcupadoExcepcion.class, () -> {
             casillero.ocuparCasillero();
@@ -42,7 +42,7 @@ public class CasilleroTest {
 
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0, 0, tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock, 1);
         casillero.ocuparCasillero();
 
         Assertions.assertFalse(casillero.estaLibre());
@@ -54,7 +54,7 @@ public class CasilleroTest {
 
         Tablero tableroMock = mock(Tablero.class);
 
-        Casillero casillero = new Casillero(0, 0, tableroMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock, 1);
         casillero.ocuparCasillero();
         casillero.vaciar();
 
@@ -63,67 +63,19 @@ public class CasilleroTest {
     }
 
     @Test
-    public void CasilleroCreadoEnMitadInferiorTableroEsDeEquipoBlanco() {
+    public void CasilleroDevuelveMultiplicadorDeDanioIgualAUnoAUnidadDeEquipoUno() {
         Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(0, 16, tableroMock);
+        Casillero casillero = new Casillero(8, 16, tableroMock, 1);
 
-        Assertions.assertTrue(casillero.esBlanco());
+        Assertions.assertEquals(1, casillero.aplicarMultiplicadorDanioAUnidadDeEquipo(1));
     }
 
     @Test
-    public void CasilleroCreadoEnMitadInferiorTableroNoEsDeEquipoNegro() {
+    public void CasilleroDevuelveMultiplicadorDeDanioAumentadoParaUnidadEnemiga() {
         Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(0, 16, tableroMock);
+        Casillero casillero = new Casillero(8, 16, tableroMock, 1);
 
-        Assertions.assertFalse(casillero.esNegro());
-    }
-
-    @Test
-    public void CasilleroCreadoEnMitadSuperiorTableroEsDeEquipoNegro() {
-        Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(10, 16, tableroMock);
-
-        Assertions.assertTrue(casillero.esNegro());
-    }
-
-    @Test
-    public void CasilleroCreadoEnMitadSuperiorTableroNoEsDeEquipoBlanco() {
-        Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(10, 16, tableroMock);
-
-        Assertions.assertFalse(casillero.esBlanco());
-    }
-
-    @Test
-    public void CasilleroDeEquipoBlancoNoAplicaPorcentajeExtraDeDañoAUnidadBlanca() {
-        Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(8, 16, tableroMock);
-
-        Assertions.assertEquals(0, casillero.aplicarPenalizacionAUnidadBlanca());
-    }
-
-    @Test
-    public void CasilleroDeEquipoBlancoAplicaPorcentajeExtraDeDañoAUnidadNegra() {
-        Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(8, 16, tableroMock);
-
-        Assertions.assertEquals(5, casillero.aplicarPenalizacionAUnidadNegra());
-    }
-
-    @Test
-    public void CasilleroDeEquipoNegroAplicaPorcentajeExtraDeDañoAUnidadBlanca() {
-        Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(18, 16, tableroMock);
-
-        Assertions.assertEquals(5, casillero.aplicarPenalizacionAUnidadBlanca());
-    }
-
-    @Test
-    public void CasilleroDeEquipoNegroNoAplicaPorcentajeExtraDeDañoAUnidadNegra() {
-        Tablero tableroMock = mock(Tablero.class);
-        Casillero casillero = new Casillero(18, 16, tableroMock);
-
-        Assertions.assertEquals(0, casillero.aplicarPenalizacionAUnidadNegra());
+        Assertions.assertEquals(1.05, casillero.aplicarMultiplicadorDanioAUnidadDeEquipo(2));
     }
 
 }

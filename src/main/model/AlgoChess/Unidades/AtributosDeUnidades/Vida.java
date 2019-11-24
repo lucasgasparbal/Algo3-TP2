@@ -2,21 +2,31 @@ package model.AlgoChess.Unidades.AtributosDeUnidades;
 
 public class Vida {
 
-    private int valor;
+    private int valorMaximo;
+    private int valorActual;
 
     public Vida (int valorDeVida){
-       valor = valorDeVida;
+       valorActual = valorDeVida;
+       valorMaximo = valorDeVida;
     }
 
     public void tomaDanio(int danio) {
-        valor -= danio;
+        valorActual -= danio;
     }
 
     public boolean acabo() {
-        return valor<=0;
+        return valorActual<=0;
     }
 
     public void recibiCuracion(int curacion) {
-        valor += curacion;
+        valorActual += curacion;
+
+        if(valorActual > valorMaximo){
+            valorActual = valorMaximo;
+        }
+    }
+
+    public int getValor() {
+        return valorActual;
     }
 }

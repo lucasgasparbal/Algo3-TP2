@@ -14,21 +14,23 @@ public abstract class Unidad {
     Costo costo;
 
     protected Equipo equipo;
+
     public Unidad(Equipo unEquipo){
         equipo = unEquipo;
     }
 
+    public Casillero getUbicacion() {
+        return ubicacion;
+    }
+
     public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
-        if(equipo.esEnemigoDeCasillero(unCasillero)){
+        if(!unCasillero.perteneceAEquipo(equipo.getNumeroEquipo())){
             throw new CasilleroEnemigoExcepcion();
         }
 
         unCasillero.ocuparCasillero();
         ubicacion = unCasillero;
-    }
-    public boolean esDelEquipo(Equipo unEquipo){
-        return equipo.esIgualA(unEquipo);
     }
     public void recibirCuracion(int curacion) {
         vida.recibiCuracion(curacion);
@@ -46,26 +48,27 @@ public abstract class Unidad {
         return costo.descontarCosto (fondos);
     }
 
-    public void atacar(Unidad objetivo, Casillero ubicacion) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {};
-
-    public boolean esAdyacenteA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return ubicacion.esAdyacenteA(unCasillero);
+    public boolean esAdyacenteA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.esAdyacenteA(unaUnidad.getUbicacion());
     }
 
-    public boolean estaEnRangoCercanoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return ubicacion.estaEnRangoCercanoDe(unCasillero);
+    public boolean estaEnRangoCercanoDe(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.estaEnRangoCercanoDe(unaUnidad.getUbicacion());
     }
 
-    public boolean estaEnRangoMedianoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return ubicacion.estaEnRangoMedianoDe(unCasillero);
+    public boolean estaEnRangoMedianoDe(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.estaEnRangoMedianoDe(unaUnidad.getUbicacion());
     }
 
-    public boolean estaEnRangoLejanoDe(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return ubicacion.estaEnRangoLejanoDe(unCasillero);
+    public boolean estaEnRangoLejanoDe(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
+        return ubicacion.estaEnRangoLejanoDe(unaUnidad.getUbicacion());
     }
 
     public int[] getPosicion() {
         return ubicacion.coordenadas();
     }
 
+    public int getVida() {
+        return vida.getValor();
+    }
 }

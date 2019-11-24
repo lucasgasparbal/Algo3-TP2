@@ -12,21 +12,18 @@ public class Tablero {
     private Casillero[][] casilleros = new Casillero[CantFilas][CantColumnas];
 
     private AnalizadorRangos analizadorRangos = new AnalizadorRangos();
-    private void inicializarTableroParaEquipo(Equipo unEquipo, int inicioFila, int finalFila){
+    
+    private void inicializarTableroParaEquipo(int numeroEquipo, int inicioFila, int finalFila){
         for(int i = inicioFila; i < finalFila; i++){
             for(int j = 0; j < CantColumnas; j++){
-                casilleros[i][j] = new Casillero(i,j, this);
+                casilleros[i][j] = new Casillero(i,j, this, numeroEquipo);
             }
         }
     }
 
     public Tablero(){
-        for(int i = 0; i < CantFilas; i++){
-            for(int j = 0; j < CantColumnas; j++){
-                casilleros[i][j] = new Casillero(i,j, this);
-            }
-        }
-
+        inicializarTableroParaEquipo(1,0,CantFilas/2);
+        inicializarTableroParaEquipo(2,CantFilas/2,CantFilas);
     }
 
     private boolean coordenadaEnRango(int coordenada, int limiteSuperior){
@@ -50,22 +47,22 @@ public class Tablero {
         return casilleros[x][y];
     }
 
-    public int contarCasillerosDeEquipoBlanco(){
+    public int contarCasillerosDeEquipoUno(){
         int contador = 0;
         for(int i = 0; i < CantFilas; i++){
             for(int j = 0; j < CantColumnas; j++){
-                if (casilleros[i][j].esBlanco()){
+                if (casilleros[i][j].perteneceAEquipo(1)){
                     contador++;
                 }
             }
         }
         return contador;
     }
-    public int contarCasillerosDeEquipoNegro(){
+    public int contarCasillerosDeEquipoDos(){
         int contador = 0;
         for(int i = 0; i < CantFilas; i++){
             for(int j = 0; j < CantColumnas; j++){
-                if (casilleros[i][j].esNegro()){
+                if (casilleros[i][j].perteneceAEquipo(2)){
                     contador++;
                 }
             }

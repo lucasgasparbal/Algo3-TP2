@@ -1,8 +1,6 @@
 package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Equipos.EquipoBlanco;
-import model.AlgoChess.Equipos.EquipoNegro;
 import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Tablero.Casillero;
@@ -16,20 +14,24 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class JineteTest {
 
     @Test
     public void atacoCuranderoCatorceVecesMurioDevuelveFalse() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
-        Equipo equipoMock = mock(Equipo.class);
-
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
         int i = 0;
 
-        Jinete jinete = new Jinete (equipoMock);
-        Curandero curandero = new Curandero (equipoMock);
-        Tablero tablero = new Tablero ();
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        curandero.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
+        Jinete jinete = new Jinete (equipoUnoMock);
+        Curandero curandero = new Curandero (equipoDosMock);
+        jinete.inicializarEnCasillero(casilleroMockUno);
+        curandero.inicializarEnCasillero(casilleroMockDos);
         while (i<14) {
             try {
                 jinete.atacar(curandero);
@@ -42,13 +44,19 @@ public class JineteTest {
 
     @Test
     public void atacoCuranderoQuinceVecesMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
-        Equipo equipoMock = mock(Equipo.class);
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
         int i = 0;
-        Jinete jinete = new Jinete (equipoMock);
-        Curandero curandero = new Curandero (equipoMock);
-        Tablero tablero = new Tablero ();
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        curandero.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
+
+        Jinete jinete = new Jinete (equipoUnoMock);
+        Curandero curandero = new Curandero (equipoDosMock);
+        jinete.inicializarEnCasillero(casilleroMockUno);
+        curandero.inicializarEnCasillero(casilleroMockDos);
         while (i<15) {
             try {
                 jinete.atacar(curandero);
@@ -61,10 +69,13 @@ public class JineteTest {
 
     @Test
     public void atacoSoldadoVeinteVecesMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
-        Equipo equipoMock = mock(Equipo.class);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        equipoUno.establecerEquipoEnemigo(equipoDos);
+        equipoDos.establecerEquipoEnemigo(equipoUno);
         int i = 0;
-        Jinete jinete = new Jinete (equipoMock);
-        Soldado soldado = new Soldado (equipoMock);
+        Jinete jinete = new Jinete (equipoUno);
+        Soldado soldado = new Soldado (equipoDos);
         Tablero tablero = new Tablero ();
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
@@ -80,14 +91,14 @@ public class JineteTest {
 
     @Test
     public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
-        equipoNegro.establecerEquipoEnemigo(equipoBlanco);
-        equipoBlanco.establecerEquipoEnemigo(equipoNegro);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        equipoDos.establecerEquipoEnemigo(equipoUno);
+        equipoUno.establecerEquipoEnemigo(equipoDos);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoNegro);
-        Soldado soldado2 = new Soldado(equipoNegro);
-        Jinete jinete = new Jinete (equipoBlanco);
+        Soldado soldado1 = new Soldado(equipoDos);
+        Soldado soldado2 = new Soldado(equipoDos);
+        Jinete jinete = new Jinete (equipoUno);
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(10,11));
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,10));
@@ -106,14 +117,14 @@ public class JineteTest {
 
     @Test
     public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
-        equipoNegro.establecerEquipoEnemigo(equipoBlanco);
-        equipoBlanco.establecerEquipoEnemigo(equipoNegro);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        equipoDos.establecerEquipoEnemigo(equipoUno);
+        equipoUno.establecerEquipoEnemigo(equipoDos);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoNegro);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Jinete jinete = new Jinete(equipoBlanco);
+        Soldado soldado1 = new Soldado(equipoDos);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Jinete jinete = new Jinete (equipoUno);
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10, 10));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 11));
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(9, 10));
@@ -132,14 +143,15 @@ public class JineteTest {
 
     @Test
     public void JineteTieneAliadoCercaYEnemigoADistanciaMediaNoPuedeAtacarExcepcion() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
-        equipoNegro.establecerEquipoEnemigo(equipoBlanco);
-        equipoBlanco.establecerEquipoEnemigo(equipoNegro);
+
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        equipoDos.establecerEquipoEnemigo(equipoUno);
+        equipoUno.establecerEquipoEnemigo(equipoDos);
         Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipoNegro);
-        Soldado soldado2 = new Soldado(equipoBlanco);
-        Jinete jinete = new Jinete (equipoBlanco);
+        Soldado soldado1 = new Soldado(equipoDos);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Jinete jinete = new Jinete (equipoUno);
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,10));

@@ -34,6 +34,6 @@ public class ColeccionUnidadesTest {
     public void ColeccionUnidadesHayUnidadesAdyacentesDevuelveFalseEnUnaColeccionSinUnidades() throws CoordenadaFueraDeRangoExcepcion {
         ColeccionUnidades coleccion = new ColeccionUnidades();
 
-        Assertions.assertFalse(coleccion.hayUnidadesAdyacentesA(casillero));
+        Assertions.assertFalse(coleccion.hayUnidadesAdyacentesA(soldado));
     }
 }

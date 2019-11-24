@@ -1,7 +1,6 @@
 package AlgoChessTest.IntegracionesTest.EntregaUnoTest;
 
-import model.AlgoChess.Equipos.EquipoBlanco;
-import model.AlgoChess.Equipos.EquipoNegro;
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
@@ -16,22 +15,18 @@ import org.junit.jupiter.api.Assertions;
 public class TableroIntegracionTest {
     @Test
      public void test01TableroSeInicializaCorrectamente(){
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
-        EquipoNegro equipoNegro = new EquipoNegro();
-
         Tablero tablero = new Tablero();
 
         Assertions.assertEquals(400, tablero.contarCasillerosVacios());
-        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoBlanco());
-        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoNegro());
+        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoUno());
+        Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoDos());
     }
     @Test
     public void test02TableroSeColocaPiezaAliadaEnSectorAliadoConExito() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion{
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
-        EquipoNegro equipoNegro = new EquipoNegro();
+        Equipo equipo = new Equipo(1);
         Casillero  casillero;
         Tablero tablero = new Tablero();
-        Jinete jinete = new Jinete(equipoBlanco);
+        Jinete jinete = new Jinete(equipo);
 
         casillero = tablero.conseguirCasillero(5,5);
         jinete.inicializarEnCasillero(casillero);
@@ -41,11 +36,10 @@ public class TableroIntegracionTest {
 
     @Test
         public void test03TableroSeIntentaColocarPiezaAliadaEnSectorEnemigoYSeFalla() throws CoordenadaFueraDeRangoExcepcion{
-            EquipoBlanco equipoBlanco = new EquipoBlanco();
-            EquipoNegro equipoNegro = new EquipoNegro();
+            Equipo equipoDos = new Equipo(2);
             Casillero  casillero;
             Tablero tablero = new Tablero();
-            Catapulta catapulta = new Catapulta(equipoNegro);
+            Catapulta catapulta = new Catapulta(equipoDos);
 
             casillero = tablero.conseguirCasillero(5,5);
 
@@ -56,12 +50,11 @@ public class TableroIntegracionTest {
 
     @Test
     public void test04TableroSeIntentaColocarPiezaAliadaEnCasillaAliadaOcupadaYSeFalla() throws CoordenadaFueraDeRangoExcepcion{
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
-        EquipoNegro equipoNegro = new EquipoNegro();
+        Equipo equipo = new Equipo(1);
         Casillero  casillero;
         Tablero tablero = new Tablero();
-        Catapulta catapulta = new Catapulta(equipoBlanco);
-        Curandero curandero = new Curandero(equipoBlanco);
+        Catapulta catapulta = new Catapulta(equipo);
+        Curandero curandero = new Curandero(equipo);
         casillero = tablero.conseguirCasillero(5,5);
 
 

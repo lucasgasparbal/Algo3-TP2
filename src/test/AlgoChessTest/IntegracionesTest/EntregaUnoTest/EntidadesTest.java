@@ -1,11 +1,11 @@
 package AlgoChessTest.IntegracionesTest.EntregaUnoTest;
 
-import model.AlgoChess.Equipos.EquipoBlanco;
-import model.AlgoChess.Equipos.EquipoNegro;
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
+import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
@@ -15,10 +15,9 @@ public class EntidadesTest {
 
     @Test
     public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaVerificoPosicion() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(2);
         Tablero tablero = new Tablero();
-        Soldado soldado = new Soldado(equipoNegro);
+        Soldado soldado = new Soldado(equipo);
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldado.desplazarHaciaIzquierda();
         Assert.assertArrayEquals(new int[] {9,10}, soldado.getPosicion());
@@ -29,11 +28,11 @@ public class EntidadesTest {
 
     @Test(expected = CasilleroOcupadoExcepcion.class)
     public void intentoDesplazarPiezaACasilleroOcupadoLanzaCasilleroOcupadoExcepcion () throws CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipoUno = new Equipo(2);
+        Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero();
-        Soldado soldadoUno = new Soldado(equipoNegro);
-        Soldado soldadoDos = new Soldado(equipoBlanco);
+        Soldado soldadoUno = new Soldado(equipoUno);
+        Soldado soldadoDos = new Soldado(equipoDos);
 
         soldadoUno.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldadoDos.inicializarEnCasillero(tablero.conseguirCasillero(9,10));
@@ -45,10 +44,9 @@ public class EntidadesTest {
 
     @Test
     public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaYDerechaVerificoPosicion() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(2);
         Tablero tablero = new Tablero();
-        Soldado unidadMovible = new Soldado(equipoNegro);
+        Soldado unidadMovible = new Soldado(equipo);
 
         unidadMovible.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         unidadMovible.desplazarHaciaIzquierda();
@@ -59,10 +57,9 @@ public class EntidadesTest {
 
     @Test
     public void creoPiezaEnCentroLaDesplazoHaciaArribaSeMueveHaciaArriba() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(2);
         Tablero tablero = new Tablero();
-        Soldado soldado = new Soldado(equipoNegro);
+        Soldado soldado = new Soldado(equipo);
 
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldado.desplazarHaciaArriba();
@@ -73,10 +70,10 @@ public class EntidadesTest {
     @Test
     public void creoPiezaEnCentroLaDesplazoHaciaAbajoSeMueveHaciaAbajo() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
 
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(2);
+
         Tablero tablero = new Tablero();
-        Soldado soldado = new Soldado(equipoNegro);
+        Soldado soldado = new Soldado(equipo);
 
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         soldado.desplazarHaciaAbajo();
@@ -86,10 +83,10 @@ public class EntidadesTest {
 
     @Test
     public void desplazoPiezaEnLasCuatroDirecciones() throws CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion{
-        EquipoNegro equipoNegro = new EquipoNegro();
-        EquipoBlanco equipoBlanco = new EquipoBlanco();
+        Equipo equipo = new Equipo(1);
+
         Tablero tablero = new Tablero();
-        Soldado soldado = new Soldado(equipoBlanco);
+        Soldado soldado = new Soldado(equipo);
 
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(4,5));
         soldado.desplazarHaciaArriba();

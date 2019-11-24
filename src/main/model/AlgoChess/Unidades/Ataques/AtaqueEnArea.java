@@ -14,7 +14,7 @@ public class AtaqueEnArea implements Ataque {
         }
 
         @Override
-        public void atacar(Unidad objetivo, Casillero posicionAtacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+        public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
             //aca se verifica que efectivamente se pueda atacar y como//
             objetivo.sufrirDanio (dmg);
         }

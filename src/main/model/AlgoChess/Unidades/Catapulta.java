@@ -19,6 +19,6 @@ public class Catapulta extends Unidad {
     }
 
     public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-        ataque.atacar(objetivo,ubicacion);
+        ataque.atacar(objetivo,this);
     }
 }
