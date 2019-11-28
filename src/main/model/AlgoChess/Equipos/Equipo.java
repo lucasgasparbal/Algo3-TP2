@@ -34,4 +34,16 @@ public  class Equipo {
         return unidades.hayUnidadesCercanasA(unaUnidad);
     }
 
+    public void removerUnidad(Unidad unidad){
+        unidades.removerUnidad(unidad);
+    }
+
+    public void agregarUnidad(Unidad unidad){
+        unidades.agregarUnidad(unidad);
+    }
+
+    public boolean noTieneUnidades(){
+        return unidades.estaVacia();
+    }
+
 }

@@ -19,6 +19,10 @@ public abstract class Unidad {
         equipo = unEquipo;
     }
 
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
     public Casillero getUbicacion() {
         return ubicacion;
     }
@@ -38,6 +42,10 @@ public abstract class Unidad {
 
     public void sufrirDanio (int dmg) {
         vida.tomaDanio(dmg);
+
+        if(vida.acabo()){
+            equipo.removerUnidad(this);
+        }
     }
 
     public boolean murio() {

@@ -25,12 +25,12 @@ public class Jugador {
 
     public void compra(Unidad pieza) throws NoAlcanzanPuntosExcepcion {
         puntos = pieza.comprar (puntos);
-        unidades.agregarUnidad(pieza);
+        equipo.agregarUnidad(pieza);
         pieza.setEquipo(equipo);
     }
 
     public boolean perdio() {
-        return unidades.estaVacia();
+        return equipo.noTieneUnidades();
     }
 
     public void prepararTurno(){
