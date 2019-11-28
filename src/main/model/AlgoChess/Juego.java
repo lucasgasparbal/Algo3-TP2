@@ -17,4 +17,10 @@ public class Juego {
 
         jugadorActual = organizadorTurnos.proximoJugador();
     }
+
+    public void nuevoTurno(){
+        jugadorActual.terminarTurno();
+        jugadorActual = organizadorTurnos.proximoJugador();
+        jugadorActual.prepararTurno();
+    }
 }

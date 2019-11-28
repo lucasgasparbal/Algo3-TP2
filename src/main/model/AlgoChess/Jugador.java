@@ -1,5 +1,7 @@
 package model.AlgoChess;
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Unidades.ColeccionUnidades;
 import model.AlgoChess.Unidades.Unidad;
 import java.util.*;
 
@@ -11,25 +13,24 @@ public class Jugador {
     private boolean estaEnTurno;
     public int identificador;
     private int puntos = 20;
-    private LinkedList <Unidad> inventarioPiezas = new LinkedList<>();
+    private ColeccionUnidades unidades = new ColeccionUnidades();
+
+    private Equipo equipo;
 
     public Jugador(){
         identificador = numeroJugadores;
         numeroJugadores++;
+        equipo = new Equipo(identificador);
     }
 
     public void compra(Unidad pieza) throws NoAlcanzanPuntosExcepcion {
         puntos = pieza.comprar (puntos);
-        inventarioPiezas.add(pieza);
+        unidades.agregarUnidad(pieza);
+        pieza.setEquipo(equipo);
     }
 
     public boolean perdio() {
-        for (Unidad pieza : inventarioPiezas) {
-            if (!pieza.murio()) {
-                return false;
-            }
-        }
-        return true;
+        return unidades.estaVacia();
     }
 
     public void prepararTurno(){

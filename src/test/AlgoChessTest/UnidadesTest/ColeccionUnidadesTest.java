@@ -12,6 +12,7 @@ public class ColeccionUnidadesTest {
 
     Casillero casillero = mock(Casillero.class);
     Soldado soldado = mock(Soldado.class);
+    Curandero curandero = mock(Curandero.class);
 
     @Test
     public void ColeccionUnidadesSeIniciaVacia(){
@@ -34,6 +35,21 @@ public class ColeccionUnidadesTest {
     public void ColeccionUnidadesHayUnidadesAdyacentesDevuelveFalseEnUnaColeccionSinUnidades() throws CoordenadaFueraDeRangoExcepcion {
         ColeccionUnidades coleccion = new ColeccionUnidades();
 
+        Assertions.assertFalse(coleccion.hayUnidadesAdyacentesA(soldado));
+    }
+
+    @Test
+    public void ColeccionUnidadesHayUnidadesAdyacentesDevuelveFalseEnColeccionConUnaUnidadSiPreguntoPorLaUnidadContenida() throws CoordenadaFueraDeRangoExcepcion {
+        ColeccionUnidades coleccion = new ColeccionUnidades();
+        coleccion.agregarUnidad(soldado);
+        Assertions.assertFalse(coleccion.hayUnidadesAdyacentesA(soldado));
+    }
+
+    @Test
+    public void ColeccionUnidadesHayUnidadesAdyacentesDevuelveTrueSiHayUnaUnidadAdyacenteALaSolicitada() throws CoordenadaFueraDeRangoExcepcion {
+        ColeccionUnidades coleccion = new ColeccionUnidades();
+        coleccion.agregarUnidad(soldado);
+        coleccion.agregarUnidad(curandero);
         Assertions.assertFalse(coleccion.hayUnidadesAdyacentesA(soldado));
     }
 }

@@ -22,11 +22,11 @@ public class JugadorTest {
         Jugador jugador = new Jugador ();
         // Las unidades se crean antes de ver si las puedo costear, arreglar //
         boolean seLanzaExcepcion = false;
-        Catapulta catapulta1 = new Catapulta (equipoMock);
-        Catapulta catapulta2 = new Catapulta (equipoMock);
-        Catapulta catapulta3 = new Catapulta (equipoMock);
-        Catapulta catapulta4 = new Catapulta (equipoMock);
-        Catapulta catapulta5 = new Catapulta (equipoMock);
+        Catapulta catapulta1 = new Catapulta ();
+        Catapulta catapulta2 = new Catapulta ();
+        Catapulta catapulta3 = new Catapulta ();
+        Catapulta catapulta4 = new Catapulta ();
+        Catapulta catapulta5 = new Catapulta ();
         try {
             jugador.compra(catapulta1);
             jugador.compra(catapulta2);
@@ -45,10 +45,10 @@ public class JugadorTest {
         Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
 
-        Catapulta catapulta = new Catapulta (equipoMock);
+        Catapulta catapulta = new Catapulta ();
         Jugador jugador = new Jugador();
-        Soldado soldado = new Soldado (equipoMock);
-        Jinete jinete = new Jinete (equipoMock);
+        Soldado soldado = new Soldado ();
+        Jinete jinete = new Jinete ();
 
         try {
             jugador.compra(catapulta);
@@ -68,10 +68,10 @@ public class JugadorTest {
     public void jugadorTieneUnaSolaPiezaVivaNoPierde () {
         Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
-        Catapulta catapulta = new Catapulta (equipoMock);
+        Catapulta catapulta = new Catapulta ();
         Jugador jugador = new Jugador();
-        Soldado soldado = new Soldado (equipoMock);
-        Curandero curandero = new Curandero(equipoMock);
+        Soldado soldado = new Soldado ();
+        Curandero curandero = new Curandero();
 
         try {
             jugador.compra(catapulta);
@@ -85,6 +85,33 @@ public class JugadorTest {
         curandero.sufrirDanio(100);
 
         Assert.assertFalse (jugador.perdio());
+    }
+
+    @Test
+    public void JugadorInstanciasDistintasTienenNumerosIdentificadoresDistintos() {
+        Jugador jugadorUno = new Jugador();
+        Jugador jugadorDos = new Jugador();
+
+        Assert.assertNotEquals(jugadorUno.identificador, jugadorDos.identificador);
+
+    }
+
+    @Test
+    public void JugadorEstaEnTurnoSiJugadorPreparoTurnoPreviamente() {
+        Jugador jugadorUno = new Jugador();
+
+        jugadorUno.prepararTurno();
+
+        Assert.assertTrue(jugadorUno.estaEnTurno());
+    }
+
+    @Test
+    public void JugadorNoEstaEnTurnoSiJugadorTerminoTurnoPreviamente() {
+        Jugador jugadorUno = new Jugador();
+
+        jugadorUno.terminarTurno();
+
+        Assert.assertFalse(jugadorUno.estaEnTurno());
     }
 }
 
