@@ -4,23 +4,23 @@ public class Juego {
     Jugador jugadorUno;
     Jugador jugadorDos;
     Jugador jugadorActual;
-    OrganizadorTurnos organizadorTurnos;
+    OrganizadorOrdenJugadores organizadorOrdenJugadores;
 
     public Juego(){
         jugadorUno = new Jugador();
         jugadorDos = new Jugador();
-        organizadorTurnos = new OrganizadorTurnos();
+        organizadorOrdenJugadores = new OrganizadorOrdenJugadores();
 
-        organizadorTurnos.agregarJugador(jugadorUno);
-        organizadorTurnos.agregarJugador(jugadorDos);
-        organizadorTurnos.sortearOrden();
+        organizadorOrdenJugadores.agregarJugador(jugadorUno);
+        organizadorOrdenJugadores.agregarJugador(jugadorDos);
+        organizadorOrdenJugadores.sortearOrden();
 
-        jugadorActual = organizadorTurnos.proximoJugador();
+        jugadorActual = organizadorOrdenJugadores.proximoJugador();
     }
 
     public void nuevoTurno(){
         jugadorActual.terminarTurno();
-        jugadorActual = organizadorTurnos.proximoJugador();
+        jugadorActual = organizadorOrdenJugadores.proximoJugador();
         jugadorActual.prepararTurno();
     }
 }

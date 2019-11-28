@@ -13,6 +13,8 @@ public abstract class Unidad {
 
     Costo costo;
 
+    protected boolean puedeAtacar = true;
+
     protected Equipo equipo;
 
     public Unidad(Equipo unEquipo){

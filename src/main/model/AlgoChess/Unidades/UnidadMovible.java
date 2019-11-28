@@ -8,6 +8,8 @@ import model.AlgoChess.Tablero.Casillero;
 
 public abstract class UnidadMovible extends Unidad {
 
+    protected boolean puedeMoverse = true;
+
     public UnidadMovible(Equipo unEquipo) {
         super(unEquipo);
     }

@@ -22,9 +22,9 @@ public  class Equipo {
         return identificador;
     }
 
-    public boolean esBlanco(){return false;}
-    public boolean esNegro(){return false;}
-    public boolean esIgualA(Equipo unEquipo){return false;}
+    public boolean esIgualA(Equipo unEquipo){
+        return this.identificador == unEquipo.identificador;
+    }
 
     public boolean hayUnidadesEnemigasCercanas(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
         return (equipoEnemigo.hayUnidadesAliadasCercanas(unaUnidad));

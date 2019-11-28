@@ -21,6 +21,11 @@ public class Tablero {
         }
     }
 
+
+    /*public Tablero(Equipo equipoUno, Equipo equipoDos){
+        inicializarTableroParaEquipo(equipoUno, 0, CantFilas/2);
+        inicializarTableroParaEquipo(equipoDos, CantFilas/2, CantFilas);
+    }*/
     public Tablero(){
         inicializarTableroParaEquipo(1,0,CantFilas/2);
         inicializarTableroParaEquipo(2,CantFilas/2,CantFilas);
