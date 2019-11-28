@@ -3,7 +3,6 @@ package AlgoChessTest.UnidadesTest;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
-import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,8 +36,8 @@ public class SoldadoTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
 
         int i=0;
@@ -59,8 +58,8 @@ public class SoldadoTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
 
         int i=0;

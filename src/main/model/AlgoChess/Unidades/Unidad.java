@@ -25,7 +25,7 @@ public abstract class Unidad {
 
     public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
-        if(!unCasillero.perteneceAEquipo(equipo.getNumeroEquipo())){
+        if(!unCasillero.perteneceAEquipo(equipo.getIdentificador())){
             throw new CasilleroEnemigoExcepcion();
         }
 

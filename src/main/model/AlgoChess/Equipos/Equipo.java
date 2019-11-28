@@ -7,19 +7,19 @@ import model.AlgoChess.Unidades.Unidad;
 public  class Equipo {
 
     private ColeccionUnidades unidades = new ColeccionUnidades ();
-    private int numeroEquipo;
+    private int identificador;
     private Equipo equipoEnemigo;
 
     public Equipo(int numeroIdentificador){
-        numeroEquipo = numeroIdentificador;
+        identificador = numeroIdentificador;
     }
 
     public void establecerEquipoEnemigo (Equipo rival) {
         equipoEnemigo = rival;
     }
 
-    public int getNumeroEquipo() {
-        return numeroEquipo;
+    public int getIdentificador() {
+        return identificador;
     }
 
     public boolean esBlanco(){return false;}

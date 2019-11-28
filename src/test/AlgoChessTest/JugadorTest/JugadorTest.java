@@ -2,7 +2,7 @@ package AlgoChessTest.JugadorTest;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
-import model.AlgoChess.Jugador.Jugador;
+import model.AlgoChess.Jugador;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Curandero;

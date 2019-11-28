@@ -24,8 +24,8 @@ public class JineteTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
         int i = 0;
 
         Jinete jinete = new Jinete (equipoUnoMock);
@@ -48,8 +48,8 @@ public class JineteTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
         int i = 0;
 

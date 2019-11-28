@@ -6,7 +6,6 @@ import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Tablero.Casillero;
-import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
@@ -25,8 +24,8 @@ public class CuranderoTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getNumeroEquipo())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getNumeroEquipo())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
 
         int i=0;
