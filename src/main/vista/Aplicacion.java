@@ -3,6 +3,7 @@ package vista;
 import controller.HandlerCambiarLayout;
 import controller.HandlerCrearTableroFinal;
 import controller.HandlerActualizarImagen;
+import controller.HandlerNombreUsuarioNegro;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,11 +29,15 @@ public class Aplicacion extends Application {
     @Override
     public void start (Stage stage) throws Exception {
 
+        String directorio_resources = "file:/home/facundo/IdeaProjects/TP2/src/resources/";
+
+        GeneradorDeBotones generadorDeBotones = new GeneradorDeBotones(directorio_resources+"fonts/Adventurer.ttf");
+
+        GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas(directorio_resources+"fonts/Adventurer.ttf");
+
         stage.setTitle("AlgoChess");
 
         //1er Layout - Menu Inicial//
-
-        GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas("Verdana");
 
         TextField texto = new TextField();
         texto.setPromptText("Ingrese el nombre deseado");
@@ -40,12 +45,14 @@ public class Aplicacion extends Application {
         Button botonEnviar = new Button();
         botonEnviar.setText("Aceptar");
 
+        Button botonEmpezar = new Button();
+        botonEmpezar.setText("Empezar Juego");
+
         Label etiquetaJugadorBlanco = generadorDeEtiquetas.generarEtiquetaNegrita("Ingresar nombre del jugador blanco",18);
-        Label etiquetaJugadorNegro = generadorDeEtiquetas.generarEtiquetaNegrita("Ingresar nombre del jugador negro",18);
 
-        ImageView imagenFondo = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fondo.jpg");
+        ImageView imagenFondo = new ImageView(directorio_resources+"fondo.jpg");
 
-        ImageView imagenFondoMenu = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/menufondo.png");
+        ImageView imagenFondoMenu = new ImageView(directorio_resources+"menufondo.png");
 
         StackPane menuInicial = new StackPane ();
         menuInicial.getChildren().add(imagenFondo);
@@ -70,9 +77,7 @@ public class Aplicacion extends Application {
         Button botonContinuar = new Button();
         botonContinuar.setText ("Continuar");
 
-        GeneradorDeBotones generadorDeBotones = new GeneradorDeBotones();
-
-        ImageView fondo_compra_piezas = new ImageView ("file:/home/facundo/IdeaProjects/TP2/src/resources/fondoCompraFichas.png");
+        ImageView fondo_compra_piezas = new ImageView (directorio_resources+"fondoCompraFichas.png");
 
         Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
         Button botonComprarJinete = generadorDeBotones.nuevoBoton("Comprar Jinete");
@@ -82,8 +87,9 @@ public class Aplicacion extends Application {
         HBox contenedorDeFichas = new HBox();
 
         HBox contenedorDeBotones = new HBox();
-        contenedorDeBotones.setSpacing(350);
+        contenedorDeBotones.setSpacing(275);
         contenedorDeBotones.getChildren().addAll (botonComprarJinete,botonComprarSoldado, botonComprarCatapulta, botonComprarCurandero);
+        contenedorDeBotones.setAlignment(Pos.CENTER);
         Group grupoBotones = new Group(contenedorDeBotones);
 
         Label etiquetaOroRestante = generadorDeEtiquetas.generarEtiquetaNegrita("ORO RESTANTE: ",30);
@@ -97,12 +103,12 @@ public class Aplicacion extends Application {
         stackOro.setMaxHeight(100);
 
         Label etiquetaPlaceholder = generadorDeEtiquetas.generarEtiquetaNegrita("PLACEHOLDER DESCRIPCIONES",40);
-        etiquetaPlaceholder.setTextFill(Color.web("#8b0000"));
+        etiquetaPlaceholder.setTextFill(Color.web("#ffd700"));
 
-        ImageView imagenJinete = new ImageView(("file:/home/facundo/IdeaProjects/TP2/src/resources/jinete.jpg"));
-        ImageView imagenSoldado = new ImageView(("file:/home/facundo/IdeaProjects/TP2/src/resources/soldado.png"));
-        ImageView imagenCatapulta = new ImageView(("file:/home/facundo/IdeaProjects/TP2/src/resources/catapulta.png"));
-        ImageView imagenCurandero = new ImageView(("file:/home/facundo/IdeaProjects/TP2/src/resources/curandero.png"));
+        ImageView imagenJinete = new ImageView((directorio_resources+"jinete.jpg"));
+        ImageView imagenSoldado = new ImageView((directorio_resources+"soldado.png"));
+        ImageView imagenCatapulta = new ImageView((directorio_resources+"catapulta.png"));
+        ImageView imagenCurandero = new ImageView((directorio_resources+"curandero.png"));
 
         VBox contenedorDescripcionesYBotones = new VBox ();
         contenedorDescripcionesYBotones.setSpacing(300);
@@ -123,7 +129,7 @@ public class Aplicacion extends Application {
 
         Label distribuirPiezasBlancas = generadorDeEtiquetas.generarEtiquetaNegrita("JUGADOR BLANCO DISTRIBUYA SUS PIEZAS: ",30);
 
-        ImageView fondo_tablero1 = new ImageView ("file:/home/facundo/IdeaProjects/TP2/src/resources/fondo_tablero.png");
+        ImageView fondo_tablero1 = new ImageView (directorio_resources+"fondo_tablero.png");
 
         Button botonFinalizarColocadoPiezasBlancas = generadorDeBotones.nuevoBoton("Finalizar");
 
@@ -133,18 +139,18 @@ public class Aplicacion extends Application {
         colocadoPiezasBlancas.setMaxHeight(100);
 
         ImageViewPiezaEnJuego ultimaPiezaSeleccionada = new ImageViewPiezaEnJuego();
-        ImageView imagenFichaCatapulta = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaCatapulta.png");
-        imagenFichaCatapulta.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/catapultaEnCasilleroBlanco.png"));
-        ImageView imagenFichaSoldado = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaSoldado.png");
-        imagenFichaSoldado.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/soldadoEnCasilleroBlanco.png"));
-        ImageView imagenFichaJinete = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaJinete.png");
-        imagenFichaJinete.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/jineteEnCasilleroBlanco.png"));
-        ImageView imagenFichaCurandero = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaCurandero.png");
-        imagenFichaCurandero.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/curanderoEnCasilleroBlanco.png"));
+        ImageView imagenFichaCatapulta = new ImageView(directorio_resources+"fichaCatapulta.png");
+        imagenFichaCatapulta.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"catapultaEnCasilleroBlanco.png"));
+        ImageView imagenFichaSoldado = new ImageView(directorio_resources+"fichaSoldado.png");
+        imagenFichaSoldado.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"soldadoEnCasilleroBlanco.png"));
+        ImageView imagenFichaJinete = new ImageView(directorio_resources+"fichaJinete.png");
+        imagenFichaJinete.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"jineteEnCasilleroBlanco.png"));
+        ImageView imagenFichaCurandero = new ImageView(directorio_resources+"fichaCurandero.png");
+        imagenFichaCurandero.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"curanderoEnCasilleroBlanco.png"));
 
         GeneradorDeTablero generadorDeTablero = new GeneradorDeTablero ();
 
-        GridPane tableroBlanco = generadorDeTablero.generarTablero("file:/home/facundo/IdeaProjects/TP2/src/resources/escaqueBlanco40.png",ultimaPiezaSeleccionada);
+        GridPane tableroBlanco = generadorDeTablero.generarTablero(directorio_resources+"escaqueBlanco40.png",ultimaPiezaSeleccionada);
         Group grupoTableroBlanco = new Group (tableroBlanco);
 
         HBox contenedorFichasBlancasEnJuego = new HBox ();
@@ -164,7 +170,7 @@ public class Aplicacion extends Application {
 
         Button botonFinalizarColocadoPiezasNegras = generadorDeBotones.nuevoBoton("Finalizar");
 
-        ImageView fondo_tablero2 = new ImageView ("file:/home/facundo/IdeaProjects/TP2/src/resources/fondo_tablero.png");
+        ImageView fondo_tablero2 = new ImageView (directorio_resources+"fondo_tablero.png");
 
         HBox colocadoPiezasNegras = new HBox(distribuirPiezasNegras,botonFinalizarColocadoPiezasNegras);
         colocadoPiezasNegras.setSpacing(600);
@@ -174,14 +180,14 @@ public class Aplicacion extends Application {
         GridPane tableroNegro = generadorDeTablero.generarTablero("file:/home/facundo/IdeaProjects/TP2/src/resources/escaqueNegro40.png",ultimaPiezaSeleccionada);
         Group grupoTableroNegro = new Group (tableroNegro);
 
-        ImageView imagenFichaCatapultaNegra = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaCatapultaNegra.png");
-        imagenFichaCatapultaNegra.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/catapultaEnCasilleroNegro.png"));
-        ImageView imagenFichaSoldadoNegro = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaSoldadoNegro.png");
-        imagenFichaSoldadoNegro.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/soldadoEnCasilleroNegro.png"));
-        ImageView imagenFichaJineteNegro = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaJineteNegro.png");
-        imagenFichaJineteNegro.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/jineteEnCasilleroNegro.png"));
-        ImageView imagenFichaCuranderoNegro = new ImageView("file:/home/facundo/IdeaProjects/TP2/src/resources/fichaCuranderoNegro.png");
-        imagenFichaCuranderoNegro.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,"file:/home/facundo/IdeaProjects/TP2/src/resources/curanderoEnCasilleroNegro.png"));
+        ImageView imagenFichaCatapultaNegra = new ImageView(directorio_resources+"fichaCatapultaNegra.png");
+        imagenFichaCatapultaNegra.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"catapultaEnCasilleroNegro.png"));
+        ImageView imagenFichaSoldadoNegro = new ImageView(directorio_resources+"fichaSoldadoNegro.png");
+        imagenFichaSoldadoNegro.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"soldadoEnCasilleroNegro.png"));
+        ImageView imagenFichaJineteNegro = new ImageView(directorio_resources+"fichaJineteNegro.png");
+        imagenFichaJineteNegro.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"jineteEnCasilleroNegro.png"));
+        ImageView imagenFichaCuranderoNegro = new ImageView(directorio_resources+"fichaCuranderoNegro.png");
+        imagenFichaCuranderoNegro.setOnMouseClicked(new HandlerActualizarImagen(ultimaPiezaSeleccionada,directorio_resources+"curanderoEnCasilleroNegro.png"));
 
         HBox contenedorFichasNegrasEnJuego = new HBox ();
         contenedorFichasNegrasEnJuego.getChildren().addAll(imagenFichaCatapultaNegra,imagenFichaSoldadoNegro,imagenFichaJineteNegro,imagenFichaCuranderoNegro);
@@ -195,13 +201,20 @@ public class Aplicacion extends Application {
         stackPane3.getChildren().addAll(fondo_tablero2,menuJugadorNegro);
 
         // 5to Layout - Creacion tablero final //
-        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro));
+
+        GeneradorDeCajaAtaqueMovimiento generadorDeCajaAtaqueMovimiento = new GeneradorDeCajaAtaqueMovimiento(directorio_resources);
+        BorderPane campoJuegoFinal = generadorDeCajaAtaqueMovimiento.generarCajaAtaqueMovimiento();
+
+        //Botones Ataque/Movimiento //
+
+        // 5to Layout - Creacion tablero final //
+        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro,campoJuegoFinal));
 
         // Botones //
 
-        botonEnviar.setOnAction(new HandlerCambiarLayout(stackPane1,scene));
+        botonEnviar.setOnAction(new HandlerNombreUsuarioNegro(menuNombreJugador,contenedorPrincipal,botonEmpezar,generadorDeEtiquetas));
 
-        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro));
+        botonEmpezar.setOnAction(new HandlerCambiarLayout(stackPane1,scene));
 
         botonContinuar.setOnAction(new HandlerCambiarLayout(stackPane2,scene));
 
