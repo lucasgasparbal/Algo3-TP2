@@ -2,6 +2,7 @@ package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
+import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
@@ -76,7 +77,151 @@ public class SoldadoTest {
         }
         Assert.assertTrue (soldado2.murio());
     }
+
+    @Test
+    public void soldadoSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(1,1);
+        Soldado soldado = new Soldado (equipoUno);
+        soldado.inicializarEnCasillero(casillero);
+        int[] posicionInicial = soldado.getPosicion();
+        soldado.desplazarHaciaArriba();
+        int[] posicionFinal = soldado.getPosicion();
+        posicionInicial[1]= posicionInicial[1]+1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void soldadoIntentaMoverseParaArribaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(19,19);
+        Soldado soldado = new Soldado (equipoDos);
+        soldado.inicializarEnCasillero(casillero);
+        try {
+            soldado.desplazarHaciaArriba();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void soldadoSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(2,2);
+        Soldado soldado = new Soldado (equipoUno);
+        soldado.inicializarEnCasillero(casillero);
+        int[] posicionInicial = soldado.getPosicion();
+        soldado.desplazarHaciaAbajo();
+        int[] posicionFinal = soldado.getPosicion();
+        posicionInicial[1]= posicionInicial[1]-1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void soldadoIntentaMoverseParaAbajoPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(0,0);
+        Soldado soldado = new Soldado (equipoUno);
+        soldado.inicializarEnCasillero(casillero);
+        try {
+            soldado.desplazarHaciaAbajo();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void soldadoSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(2,2);
+        Soldado soldado = new Soldado (equipoUno);
+        soldado.inicializarEnCasillero(casillero);
+        int[] posicionInicial = soldado.getPosicion();
+        soldado.desplazarHaciaDerecha();
+        int[] posicionFinal = soldado.getPosicion();
+        posicionInicial[0]= posicionInicial[0]+1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void soldadoIntentaMoverseParaLaDerechaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(19,0);
+        Soldado soldado = new Soldado (equipoDos);
+        soldado.inicializarEnCasillero(casillero);
+        try {
+            soldado.desplazarHaciaDerecha();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void soldadoSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(2,2);
+        Soldado soldado = new Soldado (equipoUno);
+        soldado.inicializarEnCasillero(casillero);
+        int[] posicionInicial = soldado.getPosicion();
+        soldado.desplazarHaciaIzquierda();
+        int[] posicionFinal = soldado.getPosicion();
+        posicionInicial[0]= posicionInicial[0]-1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void soldadoIntentaMoverseParaLaIzquierdaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(0,19);
+        Soldado soldado = new Soldado (equipoUno);
+        soldado.inicializarEnCasillero(casillero);
+        try {
+            soldado.desplazarHaciaIzquierda();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
 }
+
+
+
 
 
 
