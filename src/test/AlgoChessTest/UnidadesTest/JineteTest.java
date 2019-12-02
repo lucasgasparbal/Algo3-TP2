@@ -1,15 +1,12 @@
 package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Jinete;
 import model.AlgoChess.Unidades.Soldado;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -162,6 +159,234 @@ public class JineteTest {
         catch (NoSePudoAtacarExcepcion e) {
             seLanzaExcepcion = true;
         }
+    }
+
+    @Test
+    public void jineteSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(1,1);
+        Jinete jinete = new Jinete (equipoUno);
+        jinete.inicializarEnCasillero(casillero);
+        int[] posicionInicial = jinete.getPosicion();
+        jinete.desplazarHaciaArriba();
+        int[] posicionFinal = jinete.getPosicion();
+        posicionInicial[1]= posicionInicial[1]+1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaArribaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(19,19);
+        Jinete jinete = new Jinete (equipoDos);
+        jinete.inicializarEnCasillero(casillero);
+        try {
+            jinete.desplazarHaciaArriba();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaArribaPeroEstabaOcupadoElCasillero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casilleroUno = tablero.conseguirCasillero(19,18);
+        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        Jinete jineteUno = new Jinete (equipoDos);
+        Jinete jineteDos = new Jinete (equipoDos);
+        jineteUno.inicializarEnCasillero(casilleroUno);
+        jineteDos.inicializarEnCasillero(casilleroDos);
+        try {
+            jineteUno.desplazarHaciaArriba();
+        }
+        catch (CasilleroOcupadoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(2,2);
+        Jinete jinete = new Jinete (equipoUno);
+        jinete.inicializarEnCasillero(casillero);
+        int[] posicionInicial = jinete.getPosicion();
+        jinete.desplazarHaciaAbajo();
+        int[] posicionFinal = jinete.getPosicion();
+        posicionInicial[1]= posicionInicial[1]-1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaAbajoPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(0,0);
+        Jinete jinete = new Jinete (equipoUno);
+        jinete.inicializarEnCasillero(casillero);
+        try {
+            jinete.desplazarHaciaAbajo();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaAbajoPeroEstabaOcupadoElCasillero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
+        Casillero casilleroDos = tablero.conseguirCasillero(19,18);
+        Jinete jineteUno = new Jinete (equipoDos);
+        Jinete jineteDos = new Jinete (equipoDos);
+        jineteUno.inicializarEnCasillero(casilleroUno);
+        jineteDos.inicializarEnCasillero(casilleroDos);
+        try {
+            jineteUno.desplazarHaciaAbajo();
+        }
+        catch (CasilleroOcupadoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(2,2);
+        Jinete jinete = new Jinete (equipoUno);
+        jinete.inicializarEnCasillero(casillero);
+        int[] posicionInicial = jinete.getPosicion();
+        jinete.desplazarHaciaDerecha();
+        int[] posicionFinal = jinete.getPosicion();
+        posicionInicial[0]= posicionInicial[0]+1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaLaDerechaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(19,0);
+        Jinete jinete = new Jinete (equipoDos);
+        jinete.inicializarEnCasillero(casillero);
+        try {
+            jinete.desplazarHaciaDerecha();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaLaDerechaPeroEstabaOcupadoElCasillero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casilleroUno = tablero.conseguirCasillero(18,19);
+        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        Jinete jineteUno = new Jinete (equipoDos);
+        Jinete jineteDos = new Jinete (equipoDos);
+        jineteUno.inicializarEnCasillero(casilleroUno);
+        jineteDos.inicializarEnCasillero(casilleroDos);
+        try {
+            jineteUno.desplazarHaciaDerecha();
+        }
+        catch (CasilleroOcupadoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(2,2);
+        Jinete jinete = new Jinete (equipoUno);
+        jinete.inicializarEnCasillero(casillero);
+        int[] posicionInicial = jinete.getPosicion();
+        jinete.desplazarHaciaIzquierda();
+        int[] posicionFinal = jinete.getPosicion();
+        posicionInicial[0]= posicionInicial[0]-1;
+
+        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaLaIzquierdaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casillero = tablero.conseguirCasillero(0,19);
+        Jinete jinete = new Jinete (equipoUno);
+        jinete.inicializarEnCasillero(casillero);
+        try {
+            jinete.desplazarHaciaIzquierda();
+        }
+        catch (MovimientoInvalidoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void jineteIntentaMoverseParaLaIzquierdaPeroEstabaOcupadoElCasillero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
+        Casillero casilleroDos = tablero.conseguirCasillero(18,19);
+        Jinete jineteUno = new Jinete (equipoDos);
+        Jinete jineteDos = new Jinete (equipoDos);
+        jineteUno.inicializarEnCasillero(casilleroUno);
+        jineteDos.inicializarEnCasillero(casilleroDos);
+        try {
+            jineteUno.desplazarHaciaIzquierda();
+        }
+        catch (CasilleroOcupadoExcepcion e) {
+            seLanzoExcepcion = true;
+        }
+
+        Assert.assertTrue(seLanzoExcepcion);
     }
 
 }

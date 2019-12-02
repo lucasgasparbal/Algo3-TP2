@@ -15,10 +15,9 @@ public class AtaqueEnArea implements Ataque {
 
         @Override
         public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-            if (objetivo.estaEnRangoLejanoDe(atacante)) {
+
                 objetivo.sufrirDanio(dmg);
-            }
-            else throw new NoSePudoAtacarExcepcion();
+
         }
 }
 
