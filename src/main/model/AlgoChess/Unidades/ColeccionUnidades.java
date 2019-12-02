@@ -2,7 +2,6 @@ package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class ColeccionUnidades {
@@ -33,4 +32,6 @@ public class ColeccionUnidades {
     public void removerUnidad(Unidad unidad){
         unidades.remove(unidad);
     }
+
+
 }

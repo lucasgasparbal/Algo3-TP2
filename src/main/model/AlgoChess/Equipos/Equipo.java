@@ -4,6 +4,7 @@ import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Unidades.ColeccionUnidades;
 import model.AlgoChess.Unidades.Unidad;
 
+
 public  class Equipo {
 
     private ColeccionUnidades unidades = new ColeccionUnidades ();
