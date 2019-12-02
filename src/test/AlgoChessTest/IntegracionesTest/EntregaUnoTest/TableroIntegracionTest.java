@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Assertions;
 public class TableroIntegracionTest {
     @Test
      public void test01TableroSeInicializaCorrectamente(){
-        Tablero tablero = new Tablero();
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
 
         Assertions.assertEquals(400, tablero.contarCasillerosVacios());
         Assertions.assertEquals(200, tablero.contarCasillerosDeEquipoUno());
@@ -23,10 +25,11 @@ public class TableroIntegracionTest {
     }
     @Test
     public void test02TableroSeColocaPiezaAliadaEnSectorAliadoConExito() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion{
-        Equipo equipo = new Equipo(1);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
         Casillero  casillero;
-        Tablero tablero = new Tablero();
-        Jinete jinete = new Jinete(equipo);
+        Jinete jinete = new Jinete(equipoUno);
 
         casillero = tablero.conseguirCasillero(5,5);
         jinete.inicializarEnCasillero(casillero);
@@ -36,9 +39,10 @@ public class TableroIntegracionTest {
 
     @Test
         public void test03TableroSeIntentaColocarPiezaAliadaEnSectorEnemigoYSeFalla() throws CoordenadaFueraDeRangoExcepcion{
+            Equipo equipoUno = new Equipo(1);
             Equipo equipoDos = new Equipo(2);
+            Tablero tablero = new Tablero(equipoUno,equipoDos);
             Casillero  casillero;
-            Tablero tablero = new Tablero();
             Catapulta catapulta = new Catapulta(equipoDos);
 
             casillero = tablero.conseguirCasillero(5,5);
@@ -50,11 +54,12 @@ public class TableroIntegracionTest {
 
     @Test
     public void test04TableroSeIntentaColocarPiezaAliadaEnCasillaAliadaOcupadaYSeFalla() throws CoordenadaFueraDeRangoExcepcion{
-        Equipo equipo = new Equipo(1);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
         Casillero  casillero;
-        Tablero tablero = new Tablero();
-        Catapulta catapulta = new Catapulta(equipo);
-        Curandero curandero = new Curandero(equipo);
+        Catapulta catapulta = new Catapulta(equipoUno);
+        Curandero curandero = new Curandero(equipoUno);
         casillero = tablero.conseguirCasillero(5,5);
 
 

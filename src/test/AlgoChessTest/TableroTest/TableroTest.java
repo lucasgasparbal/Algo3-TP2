@@ -1,5 +1,6 @@
 package AlgoChessTest.TableroTest;
 
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Tablero.Tablero;
 import org.junit.Test;
@@ -7,8 +8,9 @@ import org.junit.jupiter.api.Assertions;
 
 
 public class TableroTest {
-
-    private Tablero tablero = new Tablero();
+    Equipo equipoUno = new Equipo(1);
+    Equipo equipoDos = new Equipo(2);
+    Tablero tablero = new Tablero(equipoUno,equipoDos);
 
     private int[] coordenadaA = {0,0};
     private int[] coordenadaB = {1,1};

@@ -1,11 +1,10 @@
 package model.AlgoChess.Tablero;
 
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 
 public class Casillero{
-
-    private int numeroEquipo;
 
     private final double MultiplicadorDanioPorTerritorioEnemigo = 1.05;
 
@@ -13,13 +12,14 @@ public class Casillero{
     private int x;
     private int y;
     private Tablero tablero;
+    private Equipo equipo;
 
 
-    public Casillero(int xDado, int yDado, Tablero tableroDado, int identificadorEquipo){
+    public Casillero(int xDado, int yDado, Tablero tableroDado, Equipo unEquipo){
         x = xDado;
         y = yDado;
-        numeroEquipo = identificadorEquipo;
         tablero = tableroDado;
+        equipo = unEquipo;
     }
 
     public boolean estaLibre(){
@@ -59,13 +59,9 @@ public class Casillero{
         return tablero.conseguirCasillero(x+1, y);
     }
 
-    public boolean perteneceAEquipo(int numeroIdentificadorEquipo){
-        return numeroIdentificadorEquipo == numeroEquipo;
-    }
+    public double aplicarMultiplicadorDanioAUnidadDeEquipo(Equipo unEquipo){
 
-    public double aplicarMultiplicadorDanioAUnidadDeEquipo(int numeroIdentificadorEquipo){
-
-        if (numeroIdentificadorEquipo == numeroEquipo){
+        if(equipo.esIgualA(unEquipo)){
             return 1;
         }
 
@@ -88,4 +84,7 @@ public class Casillero{
         return tablero.coordenadasEstanEnRangoMediano(this.coordenadas(), otroCasillero.coordenadas());
     }
 
+    public boolean perteneceAEquipo(Equipo unEquipo){
+        return equipo.esIgualA(unEquipo);
+    }
 }

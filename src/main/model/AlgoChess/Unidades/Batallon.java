@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Batallon {
 
-    public ArrayList<Soldado> integrantes = new ArrayList<>();
+    private ArrayList<Soldado> integrantes = new ArrayList<>();
 
     //refactorizar esto, es un asco//
     public void agregarSoldado(Soldado integrante) {

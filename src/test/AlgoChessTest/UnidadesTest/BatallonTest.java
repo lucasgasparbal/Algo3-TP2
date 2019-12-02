@@ -16,11 +16,12 @@ public class BatallonTest {
     @Test
     public void test01CreoBatallonVerticalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(9, 3));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 4));
@@ -42,11 +43,12 @@ public class BatallonTest {
     @Test
     public void test02CreoBatallonHorizontalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(4, 3));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(6, 3));
@@ -68,11 +70,12 @@ public class BatallonTest {
     @Test
     public void test03CreoBatallonVerticalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(5, 3));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(5, 4));
@@ -94,11 +97,12 @@ public class BatallonTest {
     @Test
     public void test04CreoBatallonHorizontalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
@@ -120,11 +124,12 @@ public class BatallonTest {
     @Test
     public void test05CreoBatallonHorizontalLoDesplazoDosVecesEnDosDireccionesVerificoPosiciones() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
@@ -149,12 +154,13 @@ public class BatallonTest {
     @Test
     public void test06AvanzoBatallonPeroDejoAtrasUnaPieza() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
-        Soldado soldado4 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
+        Soldado soldado4 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
@@ -179,12 +185,13 @@ public class BatallonTest {
     @Test
     public void test07AvanzoBatallonPeroDejoAtrasUnaPiezaBatallonNoEsValido() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
 
-        Equipo equipo = new Equipo(1);
-        Tablero tablero = new Tablero();
-        Soldado soldado1 = new Soldado(equipo);
-        Soldado soldado2 = new Soldado(equipo);
-        Soldado soldado3 = new Soldado(equipo);
-        Soldado soldado4 = new Soldado(equipo);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoUno);
+        Soldado soldado2 = new Soldado(equipoUno);
+        Soldado soldado3 = new Soldado(equipoUno);
+        Soldado soldado4 = new Soldado(equipoUno);
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));

@@ -2,33 +2,30 @@ package model.AlgoChess.Tablero;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Unidades.Unidad;
 
 public class Tablero {
 
     final private int CantFilas = 20;
     final private int CantColumnas = 20;
 
+    private Equipo equipoBlanco;
+    private Equipo equipoNegro;
     private Casillero[][] casilleros = new Casillero[CantFilas][CantColumnas];
 
     private AnalizadorRangos analizadorRangos = new AnalizadorRangos();
     
-    private void inicializarTableroParaEquipo(int numeroEquipo, int inicioFila, int finalFila){
+    private void inicializarTableroParaEquipo(Equipo unEquipo, int inicioFila, int finalFila){
         for(int i = inicioFila; i < finalFila; i++){
             for(int j = 0; j < CantColumnas; j++){
-                casilleros[i][j] = new Casillero(i,j, this, numeroEquipo);
+                casilleros[i][j] = new Casillero(i,j, this, unEquipo);
             }
         }
     }
-
-
-    /*public Tablero(Equipo equipoUno, Equipo equipoDos){
+    public Tablero(Equipo equipoUno, Equipo equipoDos){
+        equipoBlanco = equipoUno;
+        equipoNegro = equipoDos;
         inicializarTableroParaEquipo(equipoUno, 0, CantFilas/2);
         inicializarTableroParaEquipo(equipoDos, CantFilas/2, CantFilas);
-    }*/
-    public Tablero(){
-        inicializarTableroParaEquipo(1,0,CantFilas/2);
-        inicializarTableroParaEquipo(2,CantFilas/2,CantFilas);
     }
 
     private boolean coordenadaEnRango(int coordenada, int limiteSuperior){
@@ -56,7 +53,7 @@ public class Tablero {
         int contador = 0;
         for(int i = 0; i < CantFilas; i++){
             for(int j = 0; j < CantColumnas; j++){
-                if (casilleros[i][j].perteneceAEquipo(1)){
+                if (casilleros[i][j].perteneceAEquipo(equipoBlanco)){
                     contador++;
                 }
             }
@@ -67,7 +64,7 @@ public class Tablero {
         int contador = 0;
         for(int i = 0; i < CantFilas; i++){
             for(int j = 0; j < CantColumnas; j++){
-                if (casilleros[i][j].perteneceAEquipo(2)){
+                if (casilleros[i][j].perteneceAEquipo(equipoNegro)){
                     contador++;
                 }
             }

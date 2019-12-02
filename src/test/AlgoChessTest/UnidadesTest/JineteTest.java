@@ -24,8 +24,8 @@ public class JineteTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         int i = 0;
 
         Jinete jinete = new Jinete (equipoUnoMock);
@@ -48,8 +48,8 @@ public class JineteTest {
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock.getIdentificador())).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock.getIdentificador())).thenReturn(true);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
         int i = 0;
 
@@ -76,7 +76,7 @@ public class JineteTest {
         int i = 0;
         Jinete jinete = new Jinete (equipoUno);
         Soldado soldado = new Soldado (equipoDos);
-        Tablero tablero = new Tablero ();
+        Tablero tablero = new Tablero (equipoUno,equipoDos);
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
         while (i<20) {
@@ -95,7 +95,7 @@ public class JineteTest {
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
         equipoUno.establecerEquipoEnemigo(equipoDos);
-        Tablero tablero = new Tablero();
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoDos);
         Jinete jinete = new Jinete (equipoUno);
@@ -121,7 +121,7 @@ public class JineteTest {
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
         equipoUno.establecerEquipoEnemigo(equipoDos);
-        Tablero tablero = new Tablero();
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoUno);
         Jinete jinete = new Jinete (equipoUno);
@@ -148,7 +148,7 @@ public class JineteTest {
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
         equipoUno.establecerEquipoEnemigo(equipoDos);
-        Tablero tablero = new Tablero();
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoUno);
         Jinete jinete = new Jinete (equipoUno);
