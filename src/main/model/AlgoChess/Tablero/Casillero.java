@@ -81,7 +81,7 @@ public class Casillero{
     }
 
     public boolean estaEnRangoLejanoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.coordenadasEstanEnRangoMediano(this.coordenadas(), otroCasillero.coordenadas());
+        return tablero.coordenadasEstanEnRangoLejano(this.coordenadas(), otroCasillero.coordenadas());
     }
 
     public boolean perteneceAEquipo(Equipo unEquipo){
