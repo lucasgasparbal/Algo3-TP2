@@ -68,6 +68,7 @@ public class SoldadoTest {
         Soldado soldado2 = new Soldado (equipoDosMock );
         soldado1.inicializarEnCasillero(casilleroMockUno);
         soldado2.inicializarEnCasillero(casilleroMockDos);
+        when(soldado1.esEnemigoDe(soldado2)).thenReturn(true);
         while (i<10) {
             try {
                 soldado1.atacar(soldado2);
