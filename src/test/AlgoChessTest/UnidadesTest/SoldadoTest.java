@@ -68,6 +68,7 @@ public class SoldadoTest {
         Soldado soldado2 = new Soldado (equipoDosMock );
         soldado1.inicializarEnCasillero(casilleroMockUno);
         soldado2.inicializarEnCasillero(casilleroMockDos);
+        when(soldado1.esEnemigoDe(soldado2)).thenReturn(true);
         while (i<10) {
             try {
                 soldado1.atacar(soldado2);
@@ -304,6 +305,44 @@ public class SoldadoTest {
         }
 
         Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void SoldadoComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Soldado soldado = new Soldado(equipo);
+
+        Assert.assertEquals(19,soldado.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void SoldadoComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Soldado soldado = new Soldado(equipo);
+
+        soldado.comprarConPuntos(0);
+    }
+
+    @Test
+    public void SoldadoEsEnemigoDeDevuelveTrueConUnaUnidadQueNoPertenezcaASuEquipo(){
+        Equipo equipoUno = mock(Equipo.class);
+        Equipo equipoDos = mock(Equipo.class);
+        when(equipoUno.esIgualA(equipoDos)).thenReturn(false);
+        Soldado soldadoUno = new Soldado(equipoUno);
+        Soldado soldadoDos = new Soldado(equipoDos);
+
+        Assert.assertFalse(soldadoUno.esEnemigoDe(soldadoDos));
+    }
+
+    @Test
+    public void SoldadoEsEnemigoDeDevuelveFalseConUnaUnidadPertenecienteASuEquipo(){
+        Equipo equipoUno = mock(Equipo.class);
+        Equipo equipoDos = mock(Equipo.class);
+        when(equipoUno.esIgualA(equipoUno)).thenReturn(true);
+        Soldado soldadoUno = new Soldado(equipoUno);
+        Soldado soldadoDos = new Soldado(equipoUno);
+
+        Assert.assertTrue(soldadoUno.esEnemigoDe(soldadoDos));
     }
 
 }

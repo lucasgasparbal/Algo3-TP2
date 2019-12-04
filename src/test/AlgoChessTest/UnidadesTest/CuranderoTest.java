@@ -5,7 +5,6 @@ import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Curandero;
-import model.AlgoChess.Unidades.Jinete;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
@@ -15,10 +14,24 @@ import static org.mockito.Mockito.when;
 
 public class CuranderoTest {
 
-    //Tambien deberia ser imposible revivir a piezas, una vez que mueren son eliminadas//
+    @Test
+    public void CuranderoNoPuedeCurarAUnaPiesaEnemiga() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+        boolean seLanzoExcepcion = false;
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+
+        Soldado soldado = new Soldado (equipoUnoMock );
+        Curandero curandero = new Curandero (equipoDosMock );
+        when(curandero.esEnemigoDe(soldado)).thenReturn(true);
+        try{
+            curandero.atacar(soldado);
+        }catch (NoSePudoAtacarExcepcion e){seLanzoExcepcion = true;}
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
     @Test
     public void CuranderoCuraASoldadoHeridoSanaQuincePuntosDeVida() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
-
+        int i=0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
@@ -27,9 +40,11 @@ public class CuranderoTest {
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
 
-        int i=0;
         Soldado soldado1 = new Soldado (equipoUnoMock );
         Soldado soldado2 = new Soldado (equipoDosMock );
+        Curandero curandero = new Curandero (equipoDosMock );
+
+        when(soldado1.esEnemigoDe(soldado2)).thenReturn(true);
 
         soldado1.inicializarEnCasillero(casilleroMockUno);
         soldado2.inicializarEnCasillero(casilleroMockDos);
@@ -42,7 +57,6 @@ public class CuranderoTest {
         }
 
         int vida_actual = soldado2.getVida();
-        Curandero curandero = new Curandero (equipoDosMock );
         curandero.atacar(soldado2);
 
         Assert.assertEquals(vida_actual+15,soldado2.getVida());
@@ -289,6 +303,22 @@ public class CuranderoTest {
         }
 
         Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void CuranderoComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Curandero curandero = new Curandero(equipo);
+
+        Assert.assertEquals(18,curandero.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void CuranderoComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Curandero curandero = new Curandero(equipo);
+
+        curandero.comprarConPuntos(1);
     }
 
 }

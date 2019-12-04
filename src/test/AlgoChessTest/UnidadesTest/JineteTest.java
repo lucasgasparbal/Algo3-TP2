@@ -54,6 +54,7 @@ public class JineteTest {
         Curandero curandero = new Curandero (equipoDosMock);
         jinete.inicializarEnCasillero(casilleroMockUno);
         curandero.inicializarEnCasillero(casilleroMockDos);
+        when(jinete.esEnemigoDe(curandero)).thenReturn(true);
         while (i<15) {
             try {
                 jinete.atacar(curandero);
@@ -66,16 +67,25 @@ public class JineteTest {
 
     @Test
     public void atacoSoldadoVeinteVecesMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
-        Equipo equipoUno = new Equipo(1);
-        Equipo equipoDos = new Equipo(2);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
         int i = 0;
-        Jinete jinete = new Jinete (equipoUno);
-        Soldado soldado = new Soldado (equipoDos);
-        Tablero tablero = new Tablero (equipoUno,equipoDos);
-        soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+
+        Jinete jinete = new Jinete (equipoUnoMock);
+        Soldado soldado = new Soldado(equipoDosMock);
+
+        jinete.inicializarEnCasillero(casilleroMockUno);
+        soldado.inicializarEnCasillero(casilleroMockDos);
+
+        when(jinete.esEnemigoDe(soldado)).thenReturn(true);
+        when(equipoDosMock.hayUnidadesEnemigasCercanas(jinete)).thenReturn(true);
+        when(equipoDosMock.hayUnidadesAliadasCercanas(jinete)).thenReturn(false);
         while (i<20) {
             try {
                 jinete.atacar(soldado);
@@ -88,53 +98,73 @@ public class JineteTest {
 
     @Test
     public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
-        Equipo equipoUno = new Equipo(1);
-        Equipo equipoDos = new Equipo(2);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
-        Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Soldado soldado1 = new Soldado(equipoDos);
-        Soldado soldado2 = new Soldado(equipoDos);
-        Jinete jinete = new Jinete (equipoUno);
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(10,11));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,10));
         int i =0;
-        while (i<19) {
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        Casillero casilleroMockTres = mock(Casillero.class);
+
+        when(casilleroMockUno.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockTres.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockUno.estaEnRangoCercanoDe(casilleroMockTres)).thenReturn(true);
+
+        Soldado soldado1 = new Soldado(equipoDosMock);
+        Soldado soldado2 = new Soldado(equipoDosMock);
+        Jinete jinete = new Jinete (equipoUnoMock);
+        soldado1.inicializarEnCasillero(casilleroMockUno);
+        soldado2.inicializarEnCasillero(casilleroMockDos);
+        jinete.inicializarEnCasillero(casilleroMockTres);
+
+        when(jinete.esEnemigoDe(soldado1)).thenReturn(true);
+        when(jinete.esEnemigoDe(soldado2)).thenReturn(true);
+        when(equipoDosMock.hayUnidadesEnemigasCercanas(jinete)).thenReturn(true);
+        when(equipoDosMock.hayUnidadesAliadasCercanas(jinete)).thenReturn(false);
+
+        while (i<20) {
             try {
                 jinete.atacar(soldado1);
             }
             catch (NoSePudoAtacarExcepcion e) {}
             i++;
         }
-        Assert.assertFalse(soldado1.murio());
-        jinete.atacar(soldado1);
         Assert.assertTrue(soldado1.murio());
     }
 
     @Test
-    public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
-        Equipo equipoUno = new Equipo(1);
-        Equipo equipoDos = new Equipo(2);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
-        Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Soldado soldado1 = new Soldado(equipoDos);
-        Soldado soldado2 = new Soldado(equipoUno);
-        Jinete jinete = new Jinete (equipoUno);
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10, 10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 11));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9, 10));
+    public void JineteAtacaPiezaConAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
         int i = 0;
-        while (i < 19) {
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        Casillero casilleroMockTres = mock(Casillero.class);
+
+        when(casilleroMockUno.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockTres.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockUno.estaEnRangoCercanoDe(casilleroMockTres)).thenReturn(true);
+
+        Soldado soldado1 = new Soldado(equipoDosMock);
+        Soldado soldado2 = new Soldado(equipoUnoMock);
+        Jinete jinete = new Jinete (equipoUnoMock);
+        soldado1.inicializarEnCasillero(casilleroMockUno);
+        soldado2.inicializarEnCasillero(casilleroMockDos);
+        jinete.inicializarEnCasillero(casilleroMockTres);
+
+        when(jinete.esEnemigoDe(soldado1)).thenReturn(true);
+        when(jinete.esEnemigoDe(soldado2)).thenReturn(false);
+        when(equipoDosMock.hayUnidadesEnemigasCercanas(jinete)).thenReturn(true);
+        when(equipoDosMock.hayUnidadesAliadasCercanas(jinete)).thenReturn(false);
+
+        while (i < 20) {
             try {
                 jinete.atacar(soldado1);
             }
             catch (NoSePudoAtacarExcepcion e) {}
             i++;
         }
-        Assert.assertFalse(soldado1.murio());
-        jinete.atacar(soldado1);
         Assert.assertTrue(soldado1.murio());
     }
 
@@ -387,6 +417,22 @@ public class JineteTest {
         }
 
         Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void JineteComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Jinete jinete = new Jinete(equipo);
+
+        Assert.assertEquals(17,jinete.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void JineteComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Jinete jinete = new Jinete(equipo);
+
+        jinete.comprarConPuntos(1);
     }
 
 }

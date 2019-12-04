@@ -1,10 +1,7 @@
 package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Catapulta;
@@ -36,6 +33,7 @@ public class CatapultaTest {
         Soldado soldado = new Soldado (equipoDosMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
         soldado.inicializarEnCasillero(casilleroMockDos);
+        when(catapulta.esEnemigoDe(soldado)).thenReturn(true);
 
         while (i<10) {
             try {
@@ -92,6 +90,7 @@ public class CatapultaTest {
         Curandero curandero = new Curandero (equipoDosMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
         curandero.inicializarEnCasillero(casilleroMockDos);
+        when(catapulta.esEnemigoDe(curandero)).thenReturn(true);
 
         while (i<4) {
             try {
@@ -104,33 +103,74 @@ public class CatapultaTest {
     }
 
     @Test
+    public void catapultaNoPuedeAtacarDirectamenteAUnaPiesaAliada() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+        boolean seLanzoExcepcion = false;
+        Equipo equipoMock = mock(Equipo.class);
+
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+
+        when(casilleroMockUno.perteneceAEquipo(equipoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoMock)).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoLejanoDe(casilleroMockUno)).thenReturn(true);
+
+        Catapulta catapulta = new Catapulta (equipoMock);
+        Curandero curandero = new Curandero (equipoMock);
+        catapulta.inicializarEnCasillero(casilleroMockUno);
+        curandero.inicializarEnCasillero(casilleroMockDos);
+        when(catapulta.esEnemigoDe(curandero)).thenReturn(false);
+
+            try {
+                catapulta.atacar(curandero);
+            }
+            catch (NoSePudoAtacarExcepcion e) {seLanzoExcepcion = true;};
+
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
     public void atacoAUnidadesCercanasACatapultaEnemigaMurioDevuelveTrue() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         int i = 0;
 
-        Equipo equipoUno = new Equipo(1);
-        Equipo equipoDos = new Equipo(2);
-        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
 
-        Casillero casilleroUno = tablero.conseguirCasillero(1,1);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
-        Casillero casilleroTres = tablero.conseguirCasillero(18,19);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
 
-        Catapulta catapultaAliada = new Catapulta(equipoUno);
-        Catapulta catapultaEnemiga = new Catapulta(equipoDos);
-        Soldado soldadoEnemigo = new Soldado (equipoDos);
+        Catapulta catapultaAliada = new Catapulta(equipoUnoMock);
+        Catapulta catapultaEnemiga = new Catapulta(equipoDosMock);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoLejanoDe(casilleroMockUno)).thenReturn(true);
+        when(catapultaAliada.esEnemigoDe(catapultaEnemiga)).thenReturn(true);
 
-        catapultaAliada.inicializarEnCasillero(casilleroUno);
-        catapultaEnemiga.inicializarEnCasillero(casilleroDos);
-        soldadoEnemigo.inicializarEnCasillero(casilleroTres);
+        catapultaAliada.inicializarEnCasillero(casilleroMockUno);
+        catapultaEnemiga.inicializarEnCasillero(casilleroMockDos);
 
-        while(i<6) {
+        while(i<4) {
             try {
-                catapultaAliada.atacar(soldadoEnemigo);
+                catapultaAliada.atacar(catapultaEnemiga);
             }
             catch (NoSePudoAtacarExcepcion e) {}
             i++;
         }
-        Assert.assertTrue(soldadoEnemigo.murio());
+        Assert.assertTrue(catapultaEnemiga.murio());
     }
 
+    @Test
+    public void CatapultaComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        Assert.assertEquals(15,catapulta.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void CatapultaComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        catapulta.comprarConPuntos(1);
+    }
 }
