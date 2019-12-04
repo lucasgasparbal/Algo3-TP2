@@ -8,6 +8,9 @@ import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public class Soldado extends UnidadMovible {
 
+    private static final int Costo = 1;
+    private final int VidaSoldado = 100;
+
     private boolean tieneBatallon=false;
 
     private Batallon batallon ;
@@ -20,8 +23,8 @@ public class Soldado extends UnidadMovible {
 
     public Soldado(Equipo unEquipo) {
         super(unEquipo);
-        vida = new Vida(100);
-        costo = new Costo(1);
+        vida = new Vida(VidaSoldado);
+        costo = Costo;
     }
 
     public void atacar(Unidad objetivo) throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion {
@@ -31,5 +34,9 @@ public class Soldado extends UnidadMovible {
     public void asignarBatallon(Batallon batallonAsignado) {
         tieneBatallon = true;
         batallon = batallonAsignado;
+    }
+
+    public boolean sePuedeComprarConPuntos(int puntos){
+        return puntos >= Costo;
     }
 }

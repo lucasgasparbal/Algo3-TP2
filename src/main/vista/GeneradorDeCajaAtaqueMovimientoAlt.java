@@ -1,33 +1,29 @@
 package vista;
 
 import controller.HandlerCambiarAtaqueMovimiento;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
-public class GeneradorDeCajaAtaqueMovimiento {
+public class GeneradorDeCajaAtaqueMovimientoAlt {
 
     String directorio_resources;
 
-    public GeneradorDeCajaAtaqueMovimiento (String resources) {
-        this.directorio_resources = resources;
-    }
+    OperadorDeDirectorios operadorDeDirectorios = new OperadorDeDirectorios();
 
     public BorderPane generarCajaAtaqueMovimiento() {
 
         BorderPane menuTableroFinal = new BorderPane();
 
-        GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas(directorio_resources+"fonts/Adventurer.ttf");
+        GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fonts/Adventurer.ttf"));
         Label etiquetaAtaque = generadorDeEtiquetas.generarEtiquetaNegrita("MODO ATAQUE",30);
-        ImageView imagenModoAtaque = new ImageView (directorio_resources+"combateON.png");
+        ImageView imagenModoAtaque = new ImageView (operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("combateON.png"));
 
         Label etiquetaMovimiento = generadorDeEtiquetas.generarEtiquetaNegrita("MODO MOVIMIENTO",30);
-        ImageView imagenModoMovimiento = new ImageView (directorio_resources+"movimientoON.png");
+        ImageView imagenModoMovimiento = new ImageView (operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("movimientoON.png"));
 
         HBox cajaAtaque = new HBox (imagenModoAtaque,etiquetaAtaque);
         cajaAtaque.setAlignment(Pos.CENTER);

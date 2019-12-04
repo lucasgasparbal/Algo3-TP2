@@ -23,7 +23,6 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
         ImageView piezaACargar = new ImageView();
         piezaACargar.setImage(piezaSeleccionada.devolverUltimaImagen());
         tablero.add(piezaACargar,coordenadas[0],  coordenadas[1]);
-
     }
 
 }

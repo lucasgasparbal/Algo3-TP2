@@ -8,13 +8,18 @@ import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public class Jinete extends UnidadMovible {
 
-    private AtaqueCuerpoACuerpo ataqueEspada = new AtaqueCuerpoACuerpo(5);
-    private AtaqueADistancia ataqueArco = new AtaqueADistancia(15);
+    private final static int Costo = 3;
+    private final int VidaJinete = 100;
+    private final int DanioCuerpoACuerpo = 5;
+    private final int DanioAtaqueDistancia = 15;
+
+    private AtaqueCuerpoACuerpo ataqueEspada = new AtaqueCuerpoACuerpo(DanioCuerpoACuerpo);
+    private AtaqueADistancia ataqueArco = new AtaqueADistancia(DanioAtaqueDistancia);
 
     public Jinete(Equipo unEquipo) {
         super(unEquipo);
-        vida = new Vida(100);
-        costo = new Costo (3);
+        vida = new Vida(VidaJinete);
+        costo = Costo;
     }
 
     public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {

@@ -1,9 +1,8 @@
 package AlgoChessTest.JugadorTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
 import model.AlgoChess.Jugador;
-import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Jinete;
@@ -17,24 +16,16 @@ public class JugadorTest {
 
     @Test
     public void intentoComprarCincoCatapultasTiraExcepcion () {
-        Casillero casilleroMock = mock(Casillero.class);
-        Equipo equipoMock = mock(Equipo.class);
         Jugador jugador = new Jugador ();
-        // Las unidades se crean antes de ver si las puedo costear, arreglar //
         boolean seLanzaExcepcion = false;
-        Catapulta catapulta1 = new Catapulta (equipoMock);
-        Catapulta catapulta2 = new Catapulta (equipoMock);
-        Catapulta catapulta3 = new Catapulta (equipoMock);
-        Catapulta catapulta4 = new Catapulta (equipoMock);
-        Catapulta catapulta5 = new Catapulta (equipoMock);
         try {
-            jugador.compra(catapulta1);
-            jugador.compra(catapulta2);
-            jugador.compra(catapulta3);
-            jugador.compra(catapulta4);
-            jugador.compra(catapulta5);
+            jugador.comprarCatapulta();
+            jugador.comprarCatapulta();
+            jugador.comprarCatapulta();
+            jugador.comprarCatapulta();
+            jugador.comprarCatapulta();
         }
-        catch (NoAlcanzanPuntosExcepcion e) {
+        catch (NoAlcanzaOroExcepcion e) {
             seLanzaExcepcion = true;
         }
         Assert.assertTrue(seLanzaExcepcion);
@@ -42,7 +33,6 @@ public class JugadorTest {
 
     @Test
     public void jugadorQueSeQuedaSinPiezasPierde () {
-        Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
 
         Catapulta catapulta = new Catapulta (equipoMock);
@@ -50,12 +40,10 @@ public class JugadorTest {
         Soldado soldado = new Soldado (equipoMock);
         Jinete jinete = new Jinete (equipoMock);
 
-        try {
-            jugador.compra(catapulta);
-            jugador.compra(soldado);
-            jugador.compra(jinete);
-        }
-        catch (NoAlcanzanPuntosExcepcion e) {}
+        jugador.agregarUnidad(soldado);
+        jugador.agregarUnidad(jinete);
+        jugador.agregarUnidad(catapulta);
+
 
         catapulta.sufrirDanio(100);
         soldado.sufrirDanio(100);
@@ -66,19 +54,15 @@ public class JugadorTest {
 
     @Test
     public void jugadorTieneUnaSolaPiezaVivaNoPierde () {
-        Casillero casilleroMock = mock(Casillero.class);
         Equipo equipoMock = mock(Equipo.class);
         Catapulta catapulta = new Catapulta (equipoMock);
         Jugador jugador = new Jugador();
         Soldado soldado = new Soldado (equipoMock);
         Curandero curandero = new Curandero(equipoMock);
 
-        try {
-            jugador.compra(catapulta);
-            jugador.compra(soldado);
-            jugador.compra(curandero);
-        }
-        catch(NoAlcanzanPuntosExcepcion ignored){}
+        jugador.agregarUnidad(soldado);
+        jugador.agregarUnidad(curandero);
+        jugador.agregarUnidad(catapulta);
 
         catapulta.sufrirDanio(100);
         soldado.sufrirDanio(99);
@@ -112,6 +96,72 @@ public class JugadorTest {
         jugadorUno.terminarTurno();
 
         Assert.assertFalse(jugadorUno.estaEnTurno());
+    }
+
+    @Test
+
+    public void JugadorSeteoNombreDevuelveElMismoNombre(){
+        Jugador jugador = new Jugador();
+
+        jugador.setNombre("Algoritmos Tres");
+        String nombre = jugador.getNombre();
+
+        Assert.assertEquals("Algoritmos Tres", nombre);
+    }
+
+    @Test
+    public void JugadorComienzaCon20Puntos(){
+        Jugador jugador = new Jugador();
+
+        Assert.assertEquals(20, jugador.oroRestante());
+    }
+
+    @Test
+    public void JugadorCompraUnSoldadoLeRestaElCostoDeSoldadoASuOro() throws NoAlcanzaOroExcepcion {
+        Jugador jugador = new Jugador();
+        jugador.comprarSoldado();
+
+        Assert.assertEquals(19, jugador.oroRestante());
+    }
+
+    @Test
+    public void JugadorCompraUnjineteLeRestaElCostoDeJineteASuOro() throws NoAlcanzaOroExcepcion {
+        Jugador jugador = new Jugador();
+        jugador.comprarJinete();
+
+        Assert.assertEquals(17, jugador.oroRestante());
+    }
+
+    @Test
+    public void JugadorCompraUnCuranderoLeRestaElCostoDeCuranderoASuOro() throws NoAlcanzaOroExcepcion {
+        Jugador jugador = new Jugador();
+        jugador.comprarCurandero();
+
+        Assert.assertEquals(18, jugador.oroRestante());
+    }
+
+    @Test
+    public void JugadorCompraUnaCatapultaLeRestaElCostoDeCatapultaASuOro() throws NoAlcanzaOroExcepcion {
+        Jugador jugador = new Jugador();
+        jugador.comprarCatapulta();
+
+        Assert.assertEquals(15, jugador.oroRestante());
+    }
+
+    @Test
+
+    public void JugadorIntentaComprarDeMasYSuOroNoPasaDeCero(){
+        Jugador jugador = new Jugador();
+
+        for(int i = 0; i < 21; i++){
+            try {
+                jugador.comprarSoldado();
+            } catch (NoAlcanzaOroExcepcion ignored) {
+            }
+        }
+
+        Assert.assertEquals(0,jugador.oroRestante());
+
     }
 }
 

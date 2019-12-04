@@ -6,17 +6,23 @@ import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public abstract class Unidad {
-
     Casillero ubicacion;
 
     Vida vida;
 
-    Costo costo;
+    protected int costo;
 
     protected boolean puedeAtacar = true;
 
     protected Equipo equipo;
 
+    public int comprarConPuntos(int puntos) throws NoAlcanzaOroExcepcion {
+        if (costo > puntos){
+            throw new NoAlcanzaOroExcepcion();
+        }
+
+        return puntos - costo;
+    }
     public Unidad(Equipo unEquipo){
         equipo = unEquipo;
     }
@@ -25,7 +31,7 @@ public abstract class Unidad {
         this.equipo = equipo;
     }
 
-    public Casillero getUbicacion() {
+    private Casillero getUbicacion() {
         return ubicacion;
     }
 
@@ -54,10 +60,6 @@ public abstract class Unidad {
         return (vida.acabo());
     }
 
-    public int comprar (int fondos) throws NoAlcanzanPuntosExcepcion {
-        return costo.descontarCosto (fondos);
-    }
-
     public boolean esAdyacenteA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
         return ubicacion.esAdyacenteA(unaUnidad.getUbicacion());
     }
@@ -82,5 +84,12 @@ public abstract class Unidad {
         return vida.getValor();
     }
 
+    public boolean esEnemigoDe(Unidad unidad){
+        return unidad.perteneceAEquipo(equipo);
+    }
+
+    private boolean perteneceAEquipo(Equipo unEquipo){
+        return equipo.esIgualA(unEquipo);
+    }
 
 }

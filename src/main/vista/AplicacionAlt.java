@@ -2,7 +2,6 @@ package vista;
 
 import controller.HandlerCambiarLayout;
 import controller.HandlerCrearTableroFinal;
-import controller.HandlerActualizarImagen;
 import controller.HandlerNombreUsuarioNegro;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -12,12 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.image.ImageView;
 
-public class Aplicacion extends Application {
+public class AplicacionAlt extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -29,11 +28,13 @@ public class Aplicacion extends Application {
     @Override
     public void start (Stage stage) throws Exception {
 
-        String directorio_resources = "file:/home/facundo/IdeaProjects/TP2/src/resources/";
+        OperadorDeDirectorios operadorDeDirectorios = new OperadorDeDirectorios();
 
-        GeneradorDeBotones generadorDeBotones = new GeneradorDeBotones(directorio_resources+"fonts/Adventurer.ttf");
+        String directorio_resources = "C:/Users/gaspa/Desktop/Algo3/TP2/Algo3-TP2/src/main/resources/";
 
-        GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas(directorio_resources+"fonts/Adventurer.ttf");
+        GeneradorDeBotones generadorDeBotones = new GeneradorDeBotones(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fonts/Adventurer.ttf"));
+
+        GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fonts/Adventurer.ttf"));
 
         stage.setTitle("AlgoChess");
 
@@ -48,9 +49,9 @@ public class Aplicacion extends Application {
 
         Label etiquetaJugadorBlanco = generadorDeEtiquetas.generarEtiquetaNegrita("Ingresar nombre del jugador blanco",18);
 
-        ImageView imagenFondo = new ImageView(directorio_resources+"fondo.jpg");
+        ImageView imagenFondo = new ImageView(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fondo.jpg"));
 
-        ImageView imagenFondoMenu = new ImageView(directorio_resources+"menufondo.png");
+        ImageView imagenFondoMenu = new ImageView(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("menufondo.png"));
 
         StackPane menuInicial = new StackPane ();
         menuInicial.getChildren().add(imagenFondo);
@@ -74,7 +75,7 @@ public class Aplicacion extends Application {
 
         Button botonContinuar = generadorDeBotones.nuevoBoton("Continuar");
 
-        ImageView fondo_compra_piezas = new ImageView (directorio_resources+"fondoCompraFichas.png");
+        ImageView fondo_compra_piezas = new ImageView (operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fondoCompraFichas.png"));
 
         Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
         Button botonComprarJinete = generadorDeBotones.nuevoBoton("Comprar Jinete");
@@ -102,10 +103,10 @@ public class Aplicacion extends Application {
         Label etiquetaPlaceholder = generadorDeEtiquetas.generarEtiquetaNegrita("PLACEHOLDER DESCRIPCIONES",40);
         etiquetaPlaceholder.setTextFill(Color.web("#ffd700"));
 
-        ImageView imagenJinete = new ImageView((directorio_resources+"jinete.png"));
-        ImageView imagenSoldado = new ImageView((directorio_resources+"soldado.png"));
-        ImageView imagenCatapulta = new ImageView((directorio_resources+"catapulta.png"));
-        ImageView imagenCurandero = new ImageView((directorio_resources+"curandero.png"));
+        ImageView imagenJinete = new ImageView(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("jinete.png"));
+        ImageView imagenSoldado = new ImageView((operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("soldado.png")));
+        ImageView imagenCatapulta = new ImageView((operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("catapulta.png")));
+        ImageView imagenCurandero = new ImageView((operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("curandero.png")));
 
         VBox contenedorDescripcionesYBotones = new VBox ();
         contenedorDescripcionesYBotones.setSpacing(300);
@@ -134,7 +135,7 @@ public class Aplicacion extends Application {
 
         Label distribuirPiezasBlancas = generadorDeEtiquetas.generarEtiquetaNegrita("JUGADOR BLANCO DISTRIBUYA SUS PIEZAS: ",30);
 
-        ImageView fondo_tablero1 = new ImageView (directorio_resources+"fondo_tablero.png");
+        ImageView fondo_tablero1 = new ImageView (operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fondo_tablero.png"));
 
         Button botonFinalizarColocadoPiezasBlancas = generadorDeBotones.nuevoBoton("Finalizar");
 
@@ -146,10 +147,10 @@ public class Aplicacion extends Application {
         ImageViewPiezaEnJuego ultimaPiezaSeleccionada = new ImageViewPiezaEnJuego();
 
         GeneradorCajaFichasRestantes generadorCajaFichasRestantes = new GeneradorCajaFichasRestantes();
-        StackPane cajaFichasBlancasRestantes = generadorCajaFichasRestantes.generarCajaFichasRestantes(directorio_resources+"fichasBlancas/",ultimaPiezaSeleccionada, generadorDeEtiquetas,cantidadFichasBlancas);
+        StackPane cajaFichasBlancasRestantes = generadorCajaFichasRestantes.generarCajaFichasRestantes(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fichasBlancas/"),ultimaPiezaSeleccionada, generadorDeEtiquetas,cantidadFichasBlancas);
 
         GeneradorDeTablero generadorDeTablero = new GeneradorDeTablero ();
-        GridPane tableroBlanco = generadorDeTablero.generarTablero(directorio_resources+"escaqueBlanco40.png",ultimaPiezaSeleccionada);
+        GridPane tableroBlanco = generadorDeTablero.generarTablero(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("escaqueBlanco40.png"),ultimaPiezaSeleccionada);
         Group grupoTableroBlanco = new Group (tableroBlanco);
 
         BorderPane menuJugadorBlanco = new BorderPane();
@@ -168,16 +169,16 @@ public class Aplicacion extends Application {
 
         Button botonFinalizarColocadoPiezasNegras = generadorDeBotones.nuevoBoton("Finalizar");
 
-        ImageView fondo_tablero2 = new ImageView (directorio_resources+"fondo_tablero.png");
+        ImageView fondo_tablero2 = new ImageView (operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fondo_tablero.png"));
 
-        StackPane cajaFichasNegrasRestantes = generadorCajaFichasRestantes.generarCajaFichasRestantes(directorio_resources+"fichasNegras/",ultimaPiezaSeleccionada,generadorDeEtiquetas,cantidadFichasNegras);
+        StackPane cajaFichasNegrasRestantes = generadorCajaFichasRestantes.generarCajaFichasRestantes(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("fichasNegras/"),ultimaPiezaSeleccionada,generadorDeEtiquetas,cantidadFichasNegras);
 
         HBox colocadoPiezasNegras = new HBox(distribuirPiezasNegras,botonFinalizarColocadoPiezasNegras);
         colocadoPiezasNegras.setSpacing(800);
         colocadoPiezasNegras.setPadding(new Insets(20));
         colocadoPiezasNegras.setMaxHeight(100);
 
-        GridPane tableroNegro = generadorDeTablero.generarTablero("file:/home/facundo/IdeaProjects/TP2/src/resources/escaqueNegro40.png",ultimaPiezaSeleccionada);
+        GridPane tableroNegro = generadorDeTablero.generarTablero(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("escaqueBlanco40.png"),ultimaPiezaSeleccionada);
         Group grupoTableroNegro = new Group (tableroNegro);
 
         BorderPane menuJugadorNegro = new BorderPane();
@@ -190,10 +191,10 @@ public class Aplicacion extends Application {
 
         // 5to Layout - Creacion tablero final //
 
-        GeneradorDeCajaAtaqueMovimiento generadorDeCajaAtaqueMovimiento = new GeneradorDeCajaAtaqueMovimiento(directorio_resources);
+        GeneradorDeCajaAtaqueMovimientoAlt generadorDeCajaAtaqueMovimiento = new GeneradorDeCajaAtaqueMovimientoAlt();
         BorderPane campoJuegoFinal = generadorDeCajaAtaqueMovimiento.generarCajaAtaqueMovimiento();
         StackPane informacionPieza = new StackPane();
-        ImageView fondoDetallesPieza = new ImageView(directorio_resources+"menuDetallesUnidad.png");
+        ImageView fondoDetallesPieza = new ImageView(operadorDeDirectorios.obtenerDirectorioRelativoDeRecurso("menuDetallesUnidad.png"));
         informacionPieza.getChildren().add(fondoDetallesPieza);
         Button terminarTurno = generadorDeBotones.nuevoBoton("TERMINAR TURNO");
         terminarTurno.setMaxSize(200,100);

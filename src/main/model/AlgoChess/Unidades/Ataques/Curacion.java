@@ -3,6 +3,7 @@ package model.AlgoChess.Unidades.Ataques;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Tablero.Casillero;
+import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Unidad;
 
 public class Curacion implements Ataque {
@@ -14,7 +15,10 @@ public class Curacion implements Ataque {
     }
 
     @Override
-    public void atacar(Unidad objetivo, Unidad Atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-        objetivo.recibirCuracion (dmg);
+    public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+        if((atacante.esEnemigoDe(objetivo)) != true){
+           objetivo.recibirCuracion (dmg);
+        }
+        else throw new NoSePudoAtacarExcepcion();
     }
 }
