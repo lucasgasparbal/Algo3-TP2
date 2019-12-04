@@ -1,40 +1,42 @@
 package model.AlgoChess.Unidades;
 
+import java.util.LinkedList;
+
 public class BanquillaUnidades {
-    private int cantidadSoldados = 0;
-    private int cantidadJinetes = 0;
-    private int cantidadCuranderos = 0;
-    private int cantidadCatapultas = 0;
+    private LinkedList<Soldado> soldados = new LinkedList<>();
+    private LinkedList<Jinete> jinetes = new LinkedList<>();
+    private LinkedList<Curandero> curanderos = new LinkedList<>();
+    private LinkedList<Catapulta> catapultas = new LinkedList<>();
 
     public boolean tieneSoldados(){
-        return cantidadSoldados > 0;
+        return !soldados.isEmpty();
     }
 
     public boolean tieneJinetes(){
-        return cantidadJinetes > 0;
+        return !jinetes.isEmpty();
     }
 
     public boolean tieneCuranderos(){
-        return cantidadCuranderos > 0;
+        return !curanderos.isEmpty();
     }
 
     public boolean tieneCatapultas(){
-        return cantidadCatapultas > 0;
+        return !catapultas.isEmpty();
     }
 
-    public void agregarSoldado(){
-        cantidadSoldados++;
+    public void agregarSoldado(Soldado unSoldado){
+        soldados.add(unSoldado);
     }
 
-    public void agregarJinete(){
-        cantidadJinetes++;
+    public void agregarJinete(Jinete unJinete){
+        jinetes.add(unJinete);
     }
 
-    public void agregarCurandero(){
-        cantidadCuranderos++;
+    public void agregarCurandero(Curandero unCurandero){
+        curanderos.add(unCurandero);
     }
 
-    public void agregarCatapulta(){
-        cantidadCatapultas++;
+    public void agregarCatapulta(Catapulta unaCatapulta){
+        catapultas.add(unaCatapulta);
     }
 }

@@ -1,6 +1,6 @@
 package model.AlgoChess.Unidades.AtributosDeUnidades;
 
-import model.AlgoChess.Excepciones.NoAlcanzanPuntosExcepcion;
+import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
 
 public class Costo {
 
@@ -10,8 +10,8 @@ public class Costo {
         costo =  valor;
     }
 
-    public int descontarCosto(int puntos) throws NoAlcanzanPuntosExcepcion {
-        if (puntos < costo) throw new NoAlcanzanPuntosExcepcion();
+    public int descontarCosto(int puntos) throws NoAlcanzaOroExcepcion {
+        if (puntos < costo) throw new NoAlcanzaOroExcepcion();
         puntos -= costo;
         return puntos;
     }

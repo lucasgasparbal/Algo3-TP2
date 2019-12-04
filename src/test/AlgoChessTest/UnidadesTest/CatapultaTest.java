@@ -1,10 +1,7 @@
 package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Catapulta;
@@ -133,4 +130,19 @@ public class CatapultaTest {
         Assert.assertTrue(soldadoEnemigo.murio());
     }
 
+    @Test
+    public void CatapultaComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        Assert.assertEquals(15,catapulta.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void CatapultaComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        catapulta.comprarConPuntos(1);
+    }
 }

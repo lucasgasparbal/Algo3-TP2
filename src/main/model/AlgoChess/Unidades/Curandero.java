@@ -8,7 +8,11 @@ import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public class Curandero extends UnidadMovible {
 
-    private Curacion ataque = new Curacion(15);
+    private final static int Costo = 2;
+    final int VidaCurandero = 75;
+    private final int ValorCuracion = 15;
+
+    private Curacion ataque = new Curacion(ValorCuracion);
 
     public void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
         ataque.atacar(objetivo,this);
@@ -16,7 +20,11 @@ public class Curandero extends UnidadMovible {
 
     public Curandero(Equipo unEquipo) {
         super(unEquipo);
-        vida = new Vida(75);
-        costo = new Costo (2);
+        vida = new Vida(VidaCurandero);
+        costo = Costo;
+    }
+
+    public boolean sePuedeComprarConPuntos(int puntos){
+        return puntos >= Costo;
     }
 }

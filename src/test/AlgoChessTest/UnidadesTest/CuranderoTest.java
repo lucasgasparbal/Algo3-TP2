@@ -5,7 +5,6 @@ import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Curandero;
-import model.AlgoChess.Unidades.Jinete;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
@@ -289,6 +288,22 @@ public class CuranderoTest {
         }
 
         Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void CuranderoComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Curandero curandero = new Curandero(equipo);
+
+        Assert.assertEquals(18,curandero.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void CuranderoComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Curandero curandero = new Curandero(equipo);
+
+        curandero.comprarConPuntos(1);
     }
 
 }

@@ -389,6 +389,22 @@ public class JineteTest {
         Assert.assertTrue(seLanzoExcepcion);
     }
 
+    @Test
+    public void JineteComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Jinete jinete = new Jinete(equipo);
+
+        Assert.assertEquals(17,jinete.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void JineteComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Jinete jinete = new Jinete(equipo);
+
+        jinete.comprarConPuntos(1);
+    }
+
 }
 
 

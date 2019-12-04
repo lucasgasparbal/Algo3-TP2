@@ -1,8 +1,11 @@
 package AlgoChessTest.UnidadesTest;
 
 import model.AlgoChess.Unidades.BanquillaUnidades;
+import model.AlgoChess.Unidades.*;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
 
 public class BanquillaUnidadesTest {
     @Test
@@ -39,37 +42,37 @@ public class BanquillaUnidadesTest {
 
     @Test
     public void BanquillaUnidadeSiAgregoSoldadoLaBanquillaTieneSoldado(){
-
+        Soldado soldado = mock(Soldado.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
-        banquillaUnidades.agregarSoldado();
+        banquillaUnidades.agregarSoldado(soldado);
         Assert.assertTrue(banquillaUnidades.tieneSoldados());
     }
 
     @Test
     public void BanquillaUnidadeSiAgregoJineteLaBanquillaTieneJinete(){
-
+        Jinete jinete = mock(Jinete.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
-        banquillaUnidades.agregarJinete();
+        banquillaUnidades.agregarJinete(jinete);
         Assert.assertTrue(banquillaUnidades.tieneJinetes());
     }
 
     @Test
     public void BanquillaUnidadeSiAgregoCuranderoLaBanquillaTieneCuranderos(){
-
+        Curandero curandero = mock(Curandero.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
-        banquillaUnidades.agregarCurandero();
+        banquillaUnidades.agregarCurandero(curandero);
         Assert.assertTrue(banquillaUnidades.tieneCuranderos());
     }
 
     @Test
     public void BanquillaUnidadeSiAgregoCatapultaLaBanquillaTieneCatapulta(){
-
+        Catapulta catapulta = mock(Catapulta.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
-        banquillaUnidades.agregarCatapulta();
+        banquillaUnidades.agregarCatapulta(catapulta);
         Assert.assertTrue(banquillaUnidades.tieneCatapultas());
     }
 }

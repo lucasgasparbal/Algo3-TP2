@@ -306,6 +306,22 @@ public class SoldadoTest {
         Assert.assertTrue(seLanzoExcepcion);
     }
 
+    @Test
+    public void SoldadoComprarDevuelveLosPuntosRestadosSiLosPuntosSonMayoresASuCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Soldado soldado = new Soldado(equipo);
+
+        Assert.assertEquals(19,soldado.comprarConPuntos(20));
+    }
+
+    @Test (expected = NoAlcanzaOroExcepcion.class)
+    public void SoldadoComprarLanzaExcepcionSiLosPuntosDadosSonMenoresAlCosto() throws NoAlcanzaOroExcepcion {
+        Equipo equipo = mock(Equipo.class);
+        Soldado soldado = new Soldado(equipo);
+
+        soldado.comprarConPuntos(0);
+    }
+
 }
 
 
