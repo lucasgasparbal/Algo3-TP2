@@ -84,5 +84,12 @@ public abstract class Unidad {
         return vida.getValor();
     }
 
+    public boolean esEnemigoDe(Unidad unidad){
+        return unidad.perteneceAEquipo(equipo);
+    }
+
+    private boolean perteneceAEquipo(Equipo unEquipo){
+        return equipo.esIgualA(unEquipo);
+    }
 
 }

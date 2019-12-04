@@ -56,6 +56,7 @@ public class Juego {
     public String obtenerNombreJugadorEnTurno(){
         return jugadorActual.getNombre();
     }
+
     public void nuevoTurno(){
         jugadorActual.terminarTurno();
         jugadorActual = organizadorOrdenJugadores.proximoJugador();

@@ -322,6 +322,28 @@ public class SoldadoTest {
         soldado.comprarConPuntos(0);
     }
 
+    @Test
+    public void SoldadoEsEnemigoDeDevuelveTrueConUnaUnidadQueNoPertenezcaASuEquipo(){
+        Equipo equipoUno = mock(Equipo.class);
+        Equipo equipoDos = mock(Equipo.class);
+        when(equipoUno.esIgualA(equipoDos)).thenReturn(false);
+        Soldado soldadoUno = new Soldado(equipoUno);
+        Soldado soldadoDos = new Soldado(equipoDos);
+
+        Assert.assertFalse(soldadoUno.esEnemigoDe(soldadoDos));
+    }
+
+    @Test
+    public void SoldadoEsEnemigoDeDevuelveFalseConUnaUnidadPertenecienteASuEquipo(){
+        Equipo equipoUno = mock(Equipo.class);
+        Equipo equipoDos = mock(Equipo.class);
+        when(equipoUno.esIgualA(equipoUno)).thenReturn(true);
+        Soldado soldadoUno = new Soldado(equipoUno);
+        Soldado soldadoDos = new Soldado(equipoUno);
+
+        Assert.assertTrue(soldadoUno.esEnemigoDe(soldadoDos));
+    }
+
 }
 
 
