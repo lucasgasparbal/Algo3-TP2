@@ -15,7 +15,7 @@ public class AtaqueCuerpoACuerpo implements Ataque {
 
     @Override
     public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-        if (objetivo.estaEnRangoCercanoDe(atacante)) {
+        if ((atacante.esEnemigoDe(objetivo)) && (objetivo.estaEnRangoCercanoDe(atacante))) {
             objetivo.sufrirDanio(dmg);
         }
         else throw new NoSePudoAtacarExcepcion();
