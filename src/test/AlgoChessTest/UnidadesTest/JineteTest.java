@@ -179,9 +179,12 @@ public class JineteTest {
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoUno);
         Jinete jinete = new Jinete (equipoUno);
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,10));
+        int[] coordenadasA = {10,10};
+        int[] coordenadasB = {9,11};
+        int[] coordeandasC = {9,10};
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordeandasC));
         boolean seLanzaExcepcion = false;
         try {
             jinete.atacar(soldado1);
@@ -196,7 +199,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(1,1);
+        int[] coordenadas = {1,1};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoUno);
         jinete.inicializarEnCasillero(casillero);
         int[] posicionInicial = jinete.getPosicion();
@@ -213,7 +217,9 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(19,19);
+        int[] coordenadas = {19,19};
+
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoDos);
         jinete.inicializarEnCasillero(casillero);
         try {
@@ -232,8 +238,11 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,18);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        int[] coordenadasA = {19,18};
+        int[] coordenadasB = {19,19};
+
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Jinete jineteUno = new Jinete (equipoDos);
         Jinete jineteDos = new Jinete (equipoDos);
         jineteUno.inicializarEnCasillero(casilleroUno);
@@ -253,7 +262,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoUno);
         jinete.inicializarEnCasillero(casillero);
         int[] posicionInicial = jinete.getPosicion();
@@ -270,7 +280,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(0,0);
+        int[] coordenadas = {0,0};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoUno);
         jinete.inicializarEnCasillero(casillero);
         try {
@@ -289,8 +300,11 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,18);
+        int[] coordenadasA = {19,19};
+        int[] coordenadasB = {19,18};
+
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Jinete jineteUno = new Jinete (equipoDos);
         Jinete jineteDos = new Jinete (equipoDos);
         jineteUno.inicializarEnCasillero(casilleroUno);
@@ -310,7 +324,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoUno);
         jinete.inicializarEnCasillero(casillero);
         int[] posicionInicial = jinete.getPosicion();
@@ -327,7 +342,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(19,0);
+        int[] coordenadas = {19,0};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoDos);
         jinete.inicializarEnCasillero(casillero);
         try {
@@ -346,8 +362,10 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(18,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        int[] coordenadasA = {18,19};
+        int[] coordenadasB ={19,19};
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Jinete jineteUno = new Jinete (equipoDos);
         Jinete jineteDos = new Jinete (equipoDos);
         jineteUno.inicializarEnCasillero(casilleroUno);
@@ -367,7 +385,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoUno);
         jinete.inicializarEnCasillero(casillero);
         int[] posicionInicial = jinete.getPosicion();
@@ -384,7 +403,8 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(0,19);
+        int[] coordenadas = {0,19};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Jinete jinete = new Jinete (equipoUno);
         jinete.inicializarEnCasillero(casillero);
         try {
@@ -403,8 +423,10 @@ public class JineteTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(18,19);
+        int[] coordenadasA = {19,19};
+        int[] coordenadasB ={18,19};
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Jinete jineteUno = new Jinete (equipoDos);
         Jinete jineteDos = new Jinete (equipoDos);
         jineteUno.inicializarEnCasillero(casilleroUno);

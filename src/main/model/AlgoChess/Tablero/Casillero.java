@@ -11,14 +11,14 @@ public class Casillero{
     private boolean estaVacio = true;
     private int x;
     private int y;
-    private Tablero tablero;
+    private MatrizCasilleros matriz;
     private Equipo equipo;
 
 
-    public Casillero(int xDado, int yDado, Tablero tableroDado, Equipo unEquipo){
+    public Casillero(int xDado, int yDado, MatrizCasilleros matrizDado, Equipo unEquipo){
         x = xDado;
         y = yDado;
-        tablero = tableroDado;
+        matriz = matrizDado;
         equipo = unEquipo;
     }
 
@@ -43,20 +43,25 @@ public class Casillero{
         return (new int[]{x, y});
     }
 
+    private Casillero obtenerCasilleroDeCoordenada(int xDeseada, int yDeseada) throws CoordenadaFueraDeRangoExcepcion {
+        int[] coordenadasNuevas = {xDeseada,yDeseada};
+        return matriz.conseguirCasillero(coordenadasNuevas);
+    }
+
     public Casillero obtenerCasilleroSuperior() throws CoordenadaFueraDeRangoExcepcion {
-            return tablero.conseguirCasillero(x, y+1);
+        return obtenerCasilleroDeCoordenada(x,y+1);
     }
 
     public Casillero obtenerCasilleroInferior() throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.conseguirCasillero(x, y-1);
+        return obtenerCasilleroDeCoordenada(x,y-1);
     }
 
     public Casillero obtenerCasilleroIzquierdo() throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.conseguirCasillero(x-1, y);
+        return obtenerCasilleroDeCoordenada(x-1,y);
     }
 
     public Casillero obtenerCasilleroDerecho() throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.conseguirCasillero(x+1, y);
+        return obtenerCasilleroDeCoordenada(x+1,y);
     }
 
     public double aplicarMultiplicadorDanioAUnidadDeEquipo(Equipo unEquipo){
@@ -69,19 +74,19 @@ public class Casillero{
     }
 
     public boolean esAdyacenteA(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.coordenadasSonAdyacentes(this.coordenadas(),otroCasillero.coordenadas());
+        return matriz.coordenadasSonAdyacentes(this.coordenadas(),otroCasillero.coordenadas());
     }
 
     public boolean estaEnRangoCercanoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.coordenadasEstanEnRangoCercano(this.coordenadas(), otroCasillero.coordenadas());
+        return matriz.coordenadasEstanEnRangoCercano(this.coordenadas(), otroCasillero.coordenadas());
     }
 
     public boolean estaEnRangoMedianoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.coordenadasEstanEnRangoMediano(this.coordenadas(), otroCasillero.coordenadas());
+        return matriz.coordenadasEstanEnRangoMediano(this.coordenadas(), otroCasillero.coordenadas());
     }
 
     public boolean estaEnRangoLejanoDe(Casillero otroCasillero) throws CoordenadaFueraDeRangoExcepcion {
-        return tablero.coordenadasEstanEnRangoLejano(this.coordenadas(), otroCasillero.coordenadas());
+        return matriz.coordenadasEstanEnRangoLejano(this.coordenadas(), otroCasillero.coordenadas());
     }
 
     public boolean perteneceAEquipo(Equipo unEquipo){

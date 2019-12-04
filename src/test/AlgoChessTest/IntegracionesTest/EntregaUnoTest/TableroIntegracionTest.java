@@ -30,8 +30,8 @@ public class TableroIntegracionTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         Casillero  casillero;
         Jinete jinete = new Jinete(equipoUno);
-
-        casillero = tablero.conseguirCasillero(5,5);
+        int[] coordenadasA = {5,5};
+        casillero = tablero.conseguirCasillero(coordenadasA);
         jinete.inicializarEnCasillero(casillero);
 
         Assertions.assertArrayEquals(jinete.getPosicion(), casillero.coordenadas());
@@ -44,8 +44,8 @@ public class TableroIntegracionTest {
             Tablero tablero = new Tablero(equipoUno,equipoDos);
             Casillero  casillero;
             Catapulta catapulta = new Catapulta(equipoDos);
-
-            casillero = tablero.conseguirCasillero(5,5);
+            int[] coordenadasA = {5,5};
+            casillero = tablero.conseguirCasillero(coordenadasA);
 
             Assertions.assertThrows(CasilleroEnemigoExcepcion.class, ()->{
                     catapulta.inicializarEnCasillero(casillero);
@@ -60,7 +60,8 @@ public class TableroIntegracionTest {
         Casillero  casillero;
         Catapulta catapulta = new Catapulta(equipoUno);
         Curandero curandero = new Curandero(equipoUno);
-        casillero = tablero.conseguirCasillero(5,5);
+        int[] coordenadasA = {5,5};
+        casillero = tablero.conseguirCasillero(coordenadasA);
 
 
             Assertions.assertThrows(CasilleroOcupadoExcepcion.class, ()->{

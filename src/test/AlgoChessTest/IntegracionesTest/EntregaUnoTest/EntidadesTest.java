@@ -19,7 +19,8 @@ public class EntidadesTest {
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldado = new Soldado(equipoDos);
-        soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
+        int[] coordenadasA = {10 , 10};
+        soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
         soldado.desplazarHaciaIzquierda();
         Assert.assertArrayEquals(new int[] {9,10}, soldado.getPosicion());
 
@@ -34,9 +35,10 @@ public class EntidadesTest {
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldadoUno = new Soldado(equipoDos);
         Soldado soldadoDos = new Soldado(equipoUno);
-
-        soldadoUno.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        soldadoDos.inicializarEnCasillero(tablero.conseguirCasillero(9,10));
+        int[] coordenadasA = {10 , 10};
+        int[] coordenadasB = {9,10};
+        soldadoUno.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldadoDos.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
 
 
         //Exception throw
@@ -49,8 +51,8 @@ public class EntidadesTest {
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado unidadMovible = new Soldado(equipoDos);
-
-        unidadMovible.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
+        int[] coordenadasA = {10 , 10};
+        unidadMovible.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
         unidadMovible.desplazarHaciaIzquierda();
         unidadMovible.desplazarHaciaDerecha();
 
@@ -63,8 +65,8 @@ public class EntidadesTest {
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldado = new Soldado(equipoDos);
-
-        soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
+        int[] coordenadasA = {10 , 10};
+        soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
         soldado.desplazarHaciaArriba();
 
         Assert.assertArrayEquals(new int[] {10,11}, soldado.getPosicion());
@@ -77,8 +79,8 @@ public class EntidadesTest {
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldado = new Soldado(equipoDos);
-
-        soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
+        int[] coordenadasA = {10 , 10};
+        soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
         soldado.desplazarHaciaAbajo();
 
         Assert.assertArrayEquals(new int[] {10,9}, soldado.getPosicion());
@@ -90,8 +92,8 @@ public class EntidadesTest {
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldado = new Soldado(equipoUno);
-
-        soldado.inicializarEnCasillero(tablero.conseguirCasillero(4,5));
+        int[] coordenadasC = {4,5};
+        soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
         soldado.desplazarHaciaArriba();
         soldado.desplazarHaciaArriba();
         soldado.desplazarHaciaDerecha();

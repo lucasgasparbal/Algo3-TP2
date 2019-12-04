@@ -23,9 +23,13 @@ public class BatallonTest {
         Soldado soldado2 = new Soldado(equipoUno);
         Soldado soldado3 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(9, 3));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 4));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(9, 5));
+        int[] coordenadasA = {9,3};
+        int[] coordenadasB = {9,4};
+        int[] coordenadasC = {9,5};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
 
         Batallon batallon = new Batallon ();
 
@@ -50,9 +54,13 @@ public class BatallonTest {
         Soldado soldado2 = new Soldado(equipoUno);
         Soldado soldado3 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(4, 3));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(6, 3));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(5, 3));
+        int[] coordenadasA = {4,3};
+        int[] coordenadasB = {6,3};
+        int[] coordenadasC = {5,3};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
 
         Batallon batallon = new Batallon ();
 
@@ -77,9 +85,13 @@ public class BatallonTest {
         Soldado soldado2 = new Soldado(equipoUno);
         Soldado soldado3 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(5, 3));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(5, 4));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(5, 5));
+        int[] coordenadasA = {5,3};
+        int[] coordenadasB = {5,4};
+        int[] coordenadasC = {5,5};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
 
         Batallon batallon = new Batallon ();
 
@@ -104,10 +116,13 @@ public class BatallonTest {
         Soldado soldado2 = new Soldado(equipoUno);
         Soldado soldado3 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(9, 6));
+        int[] coordenadasA = {7,6};
+        int[] coordenadasB = {8,6};
+        int[] coordenadasC = {9,6};
 
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
         Batallon batallon = new Batallon ();
 
         batallon.agregarSoldado (soldado1);
@@ -131,9 +146,13 @@ public class BatallonTest {
         Soldado soldado2 = new Soldado(equipoUno);
         Soldado soldado3 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(9, 6));
+        int[] coordenadasA = {7,6};
+        int[] coordenadasB = {8,6};
+        int[] coordenadasC = {9,6};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
 
         Batallon batallon = new Batallon ();
 
@@ -162,10 +181,15 @@ public class BatallonTest {
         Soldado soldado3 = new Soldado(equipoUno);
         Soldado soldado4 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(9, 6));
-        soldado4.inicializarEnCasillero(tablero.conseguirCasillero(8, 8));
+        int[] coordenadasA = {7,6};
+        int[] coordenadasB = {8,6};
+        int[] coordenadasC = {9,6};
+        int[] coordenadasD = {8,8};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado4.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasD));
 
         Batallon batallon = new Batallon ();
 
@@ -193,10 +217,15 @@ public class BatallonTest {
         Soldado soldado3 = new Soldado(equipoUno);
         Soldado soldado4 = new Soldado(equipoUno);
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(7, 6));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(8, 6));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(9, 6));
-        soldado4.inicializarEnCasillero(tablero.conseguirCasillero(8, 8));
+        int[] coordenadasA = {7,6};
+        int[] coordenadasB = {8,6};
+        int[] coordenadasC = {9,6};
+        int[] coordenadasD = {8,8};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado4.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasD));
 
         Batallon batallon = new Batallon ();
 

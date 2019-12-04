@@ -84,7 +84,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(1,1);
+        int[] coordenadas = {1,1};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         int[] posicionInicial = soldado.getPosicion();
@@ -101,7 +102,9 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(19,19);
+        int[] coordenadas = {19,19};
+
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoDos);
         soldado.inicializarEnCasillero(casillero);
         try {
@@ -120,8 +123,11 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,18);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        int[] coordenadasA = {19,18};
+        int[] coordenadasB = {19,19};
+
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
         soldadoUno.inicializarEnCasillero(casilleroUno);
@@ -141,7 +147,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         int[] posicionInicial = soldado.getPosicion();
@@ -158,7 +165,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(0,0);
+        int[] coordenadas = {0,0};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         try {
@@ -177,8 +185,11 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,18);
+        int[] coordenadasA = {19,19};
+        int[] coordenadasB = {19,18};
+
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
         soldadoUno.inicializarEnCasillero(casilleroUno);
@@ -198,7 +209,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         int[] posicionInicial = soldado.getPosicion();
@@ -215,7 +227,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(19,0);
+        int[] coordenadas = {19,0};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoDos);
         soldado.inicializarEnCasillero(casillero);
         try {
@@ -234,8 +247,10 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(18,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        int[] coordenadasA = {18,19};
+        int[] coordenadasB ={19,19};
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
         soldadoUno.inicializarEnCasillero(casilleroUno);
@@ -255,7 +270,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         int[] posicionInicial = soldado.getPosicion();
@@ -272,7 +288,8 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(0,19);
+        int[] coordenadas = {0,19};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         try {
@@ -291,8 +308,10 @@ public class SoldadoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(18,19);
+        int[] coordenadasA = {19,19};
+        int[] coordenadasB ={18,19};
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
         soldadoUno.inicializarEnCasillero(casilleroUno);

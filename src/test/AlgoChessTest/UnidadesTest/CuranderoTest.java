@@ -82,7 +82,9 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(1,1);
+
+        int[] coordenadas = {1,1};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
         int[] posicionInicial = curandero.getPosicion();
@@ -99,9 +101,12 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(19,19);
+        int[] coordenadas = {19,19};
+
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoDos);
         curandero.inicializarEnCasillero(casillero);
+
         try {
             curandero.desplazarHaciaArriba();
         }
@@ -118,8 +123,13 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,18);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+
+        int[] coordenadasA = {19,18};
+        int[] coordenadasB = {19,19};
+
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
+
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
         curanderoUno.inicializarEnCasillero(casilleroUno);
@@ -139,15 +149,18 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
+
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
-        int[] posicionInicial = curandero.getPosicion();
+
         curandero.desplazarHaciaAbajo();
         int[] posicionFinal = curandero.getPosicion();
-        posicionInicial[1]= posicionInicial[1]-1;
+        int[] coordenadasEsperadas = {2,1};
 
-        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+        Assert.assertArrayEquals(coordenadasEsperadas, posicionFinal);
     }
 
     @Test
@@ -156,7 +169,8 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(0,0);
+        int[] coordenadas = {0,0};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
         try {
@@ -175,8 +189,12 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,18);
+
+        int[] coordenadasA = {19,19};
+        int[] coordenadasB = {19,18};
+
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
         curanderoUno.inicializarEnCasillero(casilleroUno);
@@ -196,15 +214,16 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
-        int[] posicionInicial = curandero.getPosicion();
+
         curandero.desplazarHaciaDerecha();
         int[] posicionFinal = curandero.getPosicion();
-        posicionInicial[0]= posicionInicial[0]+1;
+        int[] posicionEsperada = {3,2};
 
-        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+        Assert.assertArrayEquals(posicionEsperada, posicionFinal);
     }
 
     @Test
@@ -213,7 +232,8 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(19,0);
+        int[] coordenadas = {19,0};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoDos);
         curandero.inicializarEnCasillero(casillero);
         try {
@@ -232,8 +252,10 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(18,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        int[] coordenadasA = {18,19};
+        int[] coordenadasB ={19,19};
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
         curanderoUno.inicializarEnCasillero(casilleroUno);
@@ -253,15 +275,16 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(2,2);
+        int[] coordenadas = {2,2};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
+
         curandero.inicializarEnCasillero(casillero);
-        int[] posicionInicial = curandero.getPosicion();
         curandero.desplazarHaciaIzquierda();
         int[] posicionFinal = curandero.getPosicion();
-        posicionInicial[0]= posicionInicial[0]-1;
+        int[] posicionEsperada = {1,2};
 
-        Assert.assertArrayEquals(posicionInicial, posicionFinal);
+        Assert.assertArrayEquals(posicionEsperada, posicionFinal);
     }
 
     @Test
@@ -270,7 +293,8 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casillero = tablero.conseguirCasillero(0,19);
+        int[] coordenadas = {0,19};
+        Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
         try {
@@ -289,8 +313,10 @@ public class CuranderoTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero casilleroUno = tablero.conseguirCasillero(19,19);
-        Casillero casilleroDos = tablero.conseguirCasillero(18,19);
+        int[] coordenadasA = {19,19};
+        int[] coordenadasB ={18,19};
+        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
+        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
         curanderoUno.inicializarEnCasillero(casilleroUno);
