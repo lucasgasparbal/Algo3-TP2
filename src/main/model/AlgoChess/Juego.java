@@ -9,6 +9,10 @@ public class Juego {
     public Juego(){
         jugadorUno = new Jugador();
         jugadorDos = new Jugador();
+
+        jugadorUno.setEnemigo(jugadorDos);
+        jugadorDos.setEnemigo(jugadorUno);
+
         organizadorOrdenJugadores = new OrganizadorOrdenJugadores();
 
         organizadorOrdenJugadores.agregarJugador(jugadorUno);

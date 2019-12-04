@@ -10,6 +10,8 @@ public class Jugador {
 
     static int numeroJugadores = 1;
 
+    private Jugador enemigo;
+
     private boolean estaEnTurno;
     public int identificador;
     private int puntos = 20;
@@ -23,6 +25,9 @@ public class Jugador {
         equipo = new Equipo(identificador);
     }
 
+    public void setEnemigo(Jugador unJugador){
+        enemigo = unJugador;
+    }
     public void compra(Unidad pieza) throws NoAlcanzanPuntosExcepcion {
         puntos = pieza.comprar (puntos);
         equipo.agregarUnidad(pieza);
