@@ -62,4 +62,21 @@ public class Juego {
         jugadorActual = organizadorOrdenJugadores.proximoJugador();
         jugadorActual.prepararTurno();
     }
+
+    public int cantidadSoldadosEnBanquilla(){
+        return jugadorActual.cantidadSoldadosEnBanquilla();
+    }
+
+    public int cantidadJinetesEnBanquilla(){
+        return jugadorActual.cantidadJinetesEnBanquilla();
+    }
+
+    public int cantidadCuranderosEnBanquilla(){
+        return jugadorActual.cantidadCuranderosEnBanquilla();
+    }
+
+    public int cantidadCatapultasEnBanquilla(){
+        return jugadorActual.cantidadCatapultasEnBanquilla();
+    }
+
 }

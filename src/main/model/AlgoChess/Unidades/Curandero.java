@@ -23,8 +23,4 @@ public class Curandero extends UnidadMovible {
         vida = new Vida(VidaCurandero);
         costo = Costo;
     }
-
-    public boolean sePuedeComprarConPuntos(int puntos){
-        return puntos >= Costo;
-    }
 }

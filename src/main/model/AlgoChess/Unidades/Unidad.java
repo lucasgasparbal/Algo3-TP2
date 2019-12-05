@@ -31,7 +31,7 @@ public abstract class Unidad {
         this.equipo = equipo;
     }
 
-    private Casillero getUbicacion() {
+    public Casillero getUbicacion() {
         return ubicacion;
     }
 

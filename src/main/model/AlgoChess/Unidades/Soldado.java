@@ -35,8 +35,4 @@ public class Soldado extends UnidadMovible {
         tieneBatallon = true;
         batallon = batallonAsignado;
     }
-
-    public boolean sePuedeComprarConPuntos(int puntos){
-        return puntos >= Costo;
-    }
 }

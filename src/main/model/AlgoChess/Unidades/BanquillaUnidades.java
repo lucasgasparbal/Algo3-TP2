@@ -39,4 +39,20 @@ public class BanquillaUnidades {
     public void agregarCatapulta(Catapulta unaCatapulta){
         catapultas.add(unaCatapulta);
     }
+
+    public int cantidadSoldados(){
+        return soldados.size();
+    }
+
+    public int cantidadJinetes(){
+        return jinetes.size();
+    }
+
+    public int cantidadCuranderos(){
+        return curanderos.size();
+    }
+
+    public int cantidadCatapultas(){
+        return catapultas.size();
+    }
 }

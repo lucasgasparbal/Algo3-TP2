@@ -91,4 +91,20 @@ public class Jugador {
     public String getNombre(){
         return nombre;
     }
+
+    public int cantidadSoldadosEnBanquilla(){
+        return banquillaUnidades.cantidadSoldados();
+    }
+
+    public int cantidadJinetesEnBanquilla(){
+        return banquillaUnidades.cantidadJinetes();
+    }
+
+    public int cantidadCuranderosEnBanquilla(){
+        return banquillaUnidades.cantidadCuranderos();
+    }
+
+    public int cantidadCatapultasEnBanquilla(){
+        return banquillaUnidades.cantidadCatapultas();
+    }
 }

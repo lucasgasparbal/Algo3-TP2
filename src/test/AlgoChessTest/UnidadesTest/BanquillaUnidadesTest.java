@@ -8,8 +8,9 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 
 public class BanquillaUnidadesTest {
+
     @Test
-    public void BanquillaUnidadesRecienCreadaNoPoseeSolados(){
+    public void BanquillaUnidadesRecienCreadaNoPoseeSolados() {
 
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -17,7 +18,7 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadesRecienCreadaNoPoseeJinetes(){
+    public void BanquillaUnidadesRecienCreadaNoPoseeJinetes() {
 
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -25,7 +26,7 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadesRecienCreadaNoPoseeCuranderos(){
+    public void BanquillaUnidadesRecienCreadaNoPoseeCuranderos() {
 
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -33,7 +34,7 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadesRecienCreadaNoPoseeCatapultas(){
+    public void BanquillaUnidadesRecienCreadaNoPoseeCatapultas() {
 
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -41,7 +42,7 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadeSiAgregoSoldadoLaBanquillaTieneSoldado(){
+    public void BanquillaUnidadeSiAgregoSoldadoLaBanquillaTieneSoldado() {
         Soldado soldado = mock(Soldado.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -50,7 +51,7 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadeSiAgregoJineteLaBanquillaTieneJinete(){
+    public void BanquillaUnidadeSiAgregoJineteLaBanquillaTieneJinete() {
         Jinete jinete = mock(Jinete.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -59,7 +60,7 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadeSiAgregoCuranderoLaBanquillaTieneCuranderos(){
+    public void BanquillaUnidadeSiAgregoCuranderoLaBanquillaTieneCuranderos() {
         Curandero curandero = mock(Curandero.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
@@ -68,11 +69,72 @@ public class BanquillaUnidadesTest {
     }
 
     @Test
-    public void BanquillaUnidadeSiAgregoCatapultaLaBanquillaTieneCatapulta(){
+    public void BanquillaUnidadeSiAgregoCatapultaLaBanquillaTieneCatapulta() {
         Catapulta catapulta = mock(Catapulta.class);
         BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
 
         banquillaUnidades.agregarCatapulta(catapulta);
         Assert.assertTrue(banquillaUnidades.tieneCatapultas());
     }
+
+    @Test
+    public void BanquillaUnidadesCantidadSoldadosDevuelveLaCantidadDeSoldadosAgregados() {
+        Soldado soldadoUno = mock(Soldado.class);
+        Soldado soldadoDos = mock(Soldado.class);
+        Soldado soldadoTres = mock(Soldado.class);
+
+        BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
+
+        banquillaUnidades.agregarSoldado(soldadoUno);
+        banquillaUnidades.agregarSoldado(soldadoDos);
+        banquillaUnidades.agregarSoldado(soldadoTres);
+
+        Assert.assertEquals(3, banquillaUnidades.cantidadSoldados());
+    }
+
+    @Test
+    public void BanquillaUnidadesCantidadJinetesDevuelveLaCantidadDeJinetesAgregados(){
+        Jinete jineteUno = mock(Jinete.class);
+        Jinete jineteDos = mock(Jinete.class);
+        Jinete jineteTres = mock(Jinete.class);
+
+        BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
+
+        banquillaUnidades.agregarJinete(jineteUno);
+        banquillaUnidades.agregarJinete(jineteDos);
+        banquillaUnidades.agregarJinete(jineteTres);
+
+        Assert.assertEquals(3,banquillaUnidades.cantidadJinetes());
+    }
+
+    @Test
+    public void BanquillaUnidadesCantidadCuranderosDevuelveLaCantidadDeCuranderosAgregados(){
+        Curandero curanderoUno = mock(Curandero.class);
+        Curandero curanderoDos = mock(Curandero.class);
+        Curandero curanderoTres = mock(Curandero.class);
+
+        BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
+
+        banquillaUnidades.agregarCurandero(curanderoUno);
+        banquillaUnidades.agregarCurandero(curanderoDos);
+        banquillaUnidades.agregarCurandero(curanderoTres);
+
+        Assert.assertEquals(3,banquillaUnidades.cantidadCuranderos());
+    }
+
+    @Test
+    public void BanquillaUnidadesCantidadCatapultasDevuelveLaCantidadDeCatapultasAgregados(){
+        Catapulta catapultaUno = mock(Catapulta.class);
+        Catapulta catapultaDos = mock(Catapulta.class);
+        Catapulta catapultaTres = mock(Catapulta.class);
+
+        BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
+
+        banquillaUnidades.agregarCatapulta(catapultaUno);
+        banquillaUnidades.agregarCatapulta(catapultaDos);
+        banquillaUnidades.agregarCatapulta(catapultaTres);
+
+        Assert.assertEquals(3,banquillaUnidades.cantidadCatapultas());
+    }
+
 }
