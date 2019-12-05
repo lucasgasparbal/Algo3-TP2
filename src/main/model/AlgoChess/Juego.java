@@ -1,11 +1,13 @@
 package model.AlgoChess;
 
-import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
+import model.AlgoChess.Excepciones.*;
+import model.AlgoChess.Tablero.Tablero;
 
 public class Juego {
     Jugador jugadorUno;
     Jugador jugadorDos;
     Jugador jugadorActual;
+    Tablero tablero;
     OrganizadorOrdenJugadores organizadorOrdenJugadores;
 
     public Juego(){
@@ -21,6 +23,7 @@ public class Juego {
         organizadorOrdenJugadores.agregarJugador(jugadorDos);
 
         jugadorActual = organizadorOrdenJugadores.proximoJugador();
+        tablero = new Tablero(jugadorUno.getEquipo(),jugadorDos.getEquipo());
     }
 
 
@@ -77,6 +80,26 @@ public class Juego {
 
     public int cantidadCatapultasEnBanquilla(){
         return jugadorActual.cantidadCatapultasEnBanquilla();
+    }
+
+    public void inicializarSoldadoEnCoordenadas(int[] coordenadas) throws NoHaySoldadosEnBanquillaExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion {
+        tablero.inicializarUnidadEnCasillero(jugadorActual.tomarSoldadoDeBanquilla(),coordenadas);
+        jugadorActual.removerSoldadoDeBanquilla();
+    }
+
+    public void inicializarJineteEnCoordenadas(int[] coordenadas) throws NoHayJinetesEnBanquillaExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion {
+        tablero.inicializarUnidadEnCasillero(jugadorActual.tomarJineteDeBanquilla(),coordenadas);
+        jugadorActual.removerJineteDeBanquilla();
+    }
+
+    public void inicializarCuranderoEnCoordenadas(int[] coordenadas) throws NoHayCuranderosEnBanquillaExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion {
+        tablero.inicializarUnidadEnCasillero(jugadorActual.tomarCuranderoDeBanquilla(), coordenadas);
+        jugadorActual.removerCuranderoDeBanquilla();
+    }
+
+    public void inicializarCatapultaEnCoordenadas(int[] coordenadas) throws NoHayCatapultasEnBanquillaExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion {
+        tablero.inicializarUnidadEnCasillero(jugadorActual.tomarCatapultaDeBanquilla(), coordenadas);
+        jugadorActual.removerCatapultaDeBanquilla();
     }
 
 }

@@ -1,7 +1,10 @@
 package model.AlgoChess.Tablero;
 
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
+import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
+import model.AlgoChess.Unidades.Unidad;
 
 public class Tablero {
 
@@ -12,6 +15,7 @@ public class Tablero {
     private Equipo equipoBlanco;
     private Equipo equipoNegro;
 
+    private DiccionarioCasilleroUnidad diccionarioCasilleroUnidad = new DiccionarioCasilleroUnidad();
 
     public Tablero(Equipo equipoUno, Equipo equipoDos){
         equipoBlanco = equipoUno;
@@ -19,6 +23,12 @@ public class Tablero {
         matrizCasilleros = new MatrizCasilleros(equipoUno,equipoDos);
     }
 
+    public void inicializarUnidadEnCasillero(Unidad unidad, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+
+        Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
+        unidad.inicializarEnCasillero(casillero);
+        diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
+    }
     public Casillero conseguirCasillero(int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion {
         return matrizCasilleros.conseguirCasillero(coordenadas);
     }

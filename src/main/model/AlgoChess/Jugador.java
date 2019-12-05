@@ -1,6 +1,6 @@
 package model.AlgoChess;
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Unidades.BanquillaUnidades;
 import model.AlgoChess.Unidades.ColeccionUnidades;
 import model.AlgoChess.Unidades.*;
@@ -30,7 +30,7 @@ public class Jugador {
     }
 
     public void setEnemigo(Jugador unJugador){
-        enemigo = unJugador;
+        equipo.establecerEquipoEnemigo(unJugador.getEquipo());
     }
 
     public void comprarSoldado() throws NoAlcanzaOroExcepcion {
@@ -106,5 +106,41 @@ public class Jugador {
 
     public int cantidadCatapultasEnBanquilla(){
         return banquillaUnidades.cantidadCatapultas();
+    }
+
+    public Soldado tomarSoldadoDeBanquilla() throws NoHaySoldadosEnBanquillaExcepcion {
+        return banquillaUnidades.tomarSoldado();
+    }
+
+    public Jinete tomarJineteDeBanquilla() throws NoHayJinetesEnBanquillaExcepcion {
+        return banquillaUnidades.tomarJinete();
+    }
+
+    public Curandero tomarCuranderoDeBanquilla() throws NoHayCuranderosEnBanquillaExcepcion {
+        return banquillaUnidades.tomarCurandero();
+    }
+
+    public Catapulta tomarCatapultaDeBanquilla() throws NoHayCatapultasEnBanquillaExcepcion {
+        return banquillaUnidades.tomarCatapulta();
+    }
+
+    public void removerSoldadoDeBanquilla() throws NoHaySoldadosEnBanquillaExcepcion {
+        banquillaUnidades.removerSoldado();
+    }
+
+    public void removerJineteDeBanquilla() throws NoHayJinetesEnBanquillaExcepcion {
+        banquillaUnidades.removerJinete();
+    }
+
+    public void removerCuranderoDeBanquilla() throws NoHayCuranderosEnBanquillaExcepcion {
+        banquillaUnidades.removerCurandero();
+    }
+
+    public void removerCatapultaDeBanquilla() throws NoHayCatapultasEnBanquillaExcepcion {
+        banquillaUnidades.removerCatapulta();
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
     }
 }

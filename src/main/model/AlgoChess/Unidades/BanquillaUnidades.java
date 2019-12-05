@@ -1,5 +1,10 @@
 package model.AlgoChess.Unidades;
 
+import model.AlgoChess.Excepciones.NoHayCatapultasEnBanquillaExcepcion;
+import model.AlgoChess.Excepciones.NoHayCuranderosEnBanquillaExcepcion;
+import model.AlgoChess.Excepciones.NoHayJinetesEnBanquillaExcepcion;
+import model.AlgoChess.Excepciones.NoHaySoldadosEnBanquillaExcepcion;
+
 import java.util.LinkedList;
 
 public class BanquillaUnidades {
@@ -25,19 +30,19 @@ public class BanquillaUnidades {
     }
 
     public void agregarSoldado(Soldado unSoldado){
-        soldados.add(unSoldado);
+        soldados.addLast(unSoldado);
     }
 
     public void agregarJinete(Jinete unJinete){
-        jinetes.add(unJinete);
+        jinetes.addLast(unJinete);
     }
 
     public void agregarCurandero(Curandero unCurandero){
-        curanderos.add(unCurandero);
+        curanderos.addLast(unCurandero);
     }
 
     public void agregarCatapulta(Catapulta unaCatapulta){
-        catapultas.add(unaCatapulta);
+        catapultas.addLast(unaCatapulta);
     }
 
     public int cantidadSoldados(){
@@ -54,5 +59,63 @@ public class BanquillaUnidades {
 
     public int cantidadCatapultas(){
         return catapultas.size();
+    }
+
+
+
+    public Soldado tomarSoldado() throws NoHaySoldadosEnBanquillaExcepcion {
+        if(!tieneSoldados()){
+            throw new NoHaySoldadosEnBanquillaExcepcion();
+        }
+        return soldados.getLast();
+    }
+
+    public void removerSoldado() throws NoHaySoldadosEnBanquillaExcepcion {
+        if(!tieneSoldados()){
+            throw new NoHaySoldadosEnBanquillaExcepcion();
+        }
+        soldados.removeLast();
+    }
+
+    public Jinete tomarJinete() throws NoHayJinetesEnBanquillaExcepcion {
+        if(!tieneJinetes()){
+            throw new NoHayJinetesEnBanquillaExcepcion();
+        }
+        return jinetes.getLast();
+    }
+
+    public void removerJinete() throws NoHayJinetesEnBanquillaExcepcion {
+        if(!tieneJinetes()){
+            throw new NoHayJinetesEnBanquillaExcepcion();
+        }
+        jinetes.removeLast();
+    }
+
+    public Curandero tomarCurandero() throws NoHayCuranderosEnBanquillaExcepcion {
+        if(!tieneCuranderos()){
+            throw new NoHayCuranderosEnBanquillaExcepcion();
+        }
+        return curanderos.getLast();
+    }
+
+    public void removerCurandero() throws NoHayCuranderosEnBanquillaExcepcion {
+        if(!tieneCuranderos()){
+            throw new NoHayCuranderosEnBanquillaExcepcion();
+        }
+        curanderos.removeLast();
+    }
+
+    public Catapulta tomarCatapulta() throws NoHayCatapultasEnBanquillaExcepcion {
+        if(!tieneCatapultas()){
+            throw new NoHayCatapultasEnBanquillaExcepcion();
+        }
+        return catapultas.getLast();
+    }
+
+    public void removerCatapulta() throws NoHayCatapultasEnBanquillaExcepcion {
+        if(!tieneCatapultas()){
+            throw new NoHayCatapultasEnBanquillaExcepcion();
+        }
+        catapultas.removeLast();
     }
 }
