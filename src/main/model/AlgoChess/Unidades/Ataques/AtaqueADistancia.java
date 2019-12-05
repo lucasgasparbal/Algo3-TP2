@@ -1,7 +1,6 @@
 package model.AlgoChess.Unidades.Ataques;
 
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Excepciones.ObjetivoFueraDeRangoExcepcion;
 import model.AlgoChess.Unidades.Unidad;
 

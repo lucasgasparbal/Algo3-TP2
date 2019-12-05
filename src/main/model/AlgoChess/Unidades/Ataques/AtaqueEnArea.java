@@ -1,10 +1,7 @@
 package model.AlgoChess.Unidades.Ataques;
 
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Excepciones.ObjetivoFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.ObjetivoNoEsEnemigoExcepcion;
-import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Unidad;
 
 public class AtaqueEnArea implements Ataque {
@@ -16,7 +13,7 @@ public class AtaqueEnArea implements Ataque {
         }
 
         @Override
-        public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, ObjetivoFueraDeRangoExcepcion {
+        public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, ObjetivoFueraDeRangoExcepcion {
                 if(!objetivo.estaEnRangoLejanoDe(atacante)){
                         throw new ObjetivoFueraDeRangoExcepcion();
                 }

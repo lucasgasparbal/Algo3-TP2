@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class CatapultaTest {
 
     @Test
-    public void atacoCincoVecesASoldadoMurioDevuelveTrue() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacoCincoVecesASoldadoMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -63,14 +63,14 @@ public class CatapultaTest {
             try {
                 catapulta.atacar(curandero);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | NoSePudoAtacarExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
             i++;
         }
         Assert.assertFalse(curandero.murio());
     }
 
     @Test
-    public void atacoCuatroVecesACuranderoMurioDevuelveTrue() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacoCuatroVecesACuranderoMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -95,7 +95,7 @@ public class CatapultaTest {
     }
 
     @Test
-    public void atacoAUnidadesCercanasACatapultaEnemigaMurioDevuelveTrue() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacoAUnidadesCercanasACatapultaEnemigaMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
         int i = 0;
 
         Equipo equipoUno = new Equipo(1);

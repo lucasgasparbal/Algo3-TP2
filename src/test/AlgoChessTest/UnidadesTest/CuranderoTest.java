@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class CuranderoTest {
 
     @Test
-    public void CuranderoCuraASoldadoHeridoSanaQuincePuntosDeVida() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion {
+    public void CuranderoCuraASoldadoHeridoSanaQuincePuntosDeVida() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion {
 
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -49,7 +49,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void CuranderoIntentaCurarACatapultaAliadaSaltaExcepcion() throws NoSePudoAtacarExcepcion {
+    public void CuranderoIntentaCurarACatapultaAliadaSaltaExcepcion() throws ObjetivoEsEnemigoExcepcion , NoSePudoCurarExcepcion {
         boolean seLanzoExcepcion = false;
         Equipo equipoMock = mock(Equipo.class);
         Catapulta catapulta = new Catapulta(equipoMock);
@@ -64,7 +64,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void CuranderoIntentaCurarACatapultaEnemigaSaltaExcepcion() throws NoSePudoCurarExcepcion , ObjetivoEsEnemigoExcepcion , NoSePudoAtacarExcepcion  {
+    public void CuranderoIntentaCurarACatapultaEnemigaSaltaExcepcion() throws NoSePudoCurarExcepcion , ObjetivoEsEnemigoExcepcion  {
         boolean seLanzoExcepcion = false;
         Equipo equipoMock = mock(Equipo.class);
         Catapulta catapulta = new Catapulta(equipoMock);
@@ -72,14 +72,14 @@ public class CuranderoTest {
         when(curandero.esEnemigoDe(catapulta)).thenReturn(true);
         try {
             curandero.atacar(catapulta);
-        }catch (NoSePudoCurarExcepcion | ObjetivoEsEnemigoExcepcion | NoSePudoAtacarExcepcion e){
+        }catch (NoSePudoCurarExcepcion | ObjetivoEsEnemigoExcepcion e){
             seLanzoExcepcion = true;
         }
         Assert.assertTrue(seLanzoExcepcion);
     }
 
     @Test
-    public void CuranderoCuraASoldadoConVidaCompletaNoSanaMasDelMaximo() throws NoSePudoAtacarExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion {
+    public void CuranderoCuraASoldadoConVidaCompletaNoSanaMasDelMaximo() throws ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion {
 
         Equipo equipoDosMock = mock(Equipo.class);
         when(equipoDosMock.esIgualA(equipoDosMock)).thenReturn(true);

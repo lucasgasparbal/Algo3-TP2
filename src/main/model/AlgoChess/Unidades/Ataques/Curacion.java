@@ -1,12 +1,7 @@
 package model.AlgoChess.Unidades.Ataques;
 
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
 import model.AlgoChess.Excepciones.NoSePudoCurarExcepcion;
-import model.AlgoChess.Tablero.Casillero;
-import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Unidad;
-
 public class Curacion implements Ataque {
 
     private int dmg;
@@ -16,7 +11,7 @@ public class Curacion implements Ataque {
     }
 
     @Override
-    public void atacar(Unidad objetivo, Unidad atacante) throws NoSePudoCurarExcepcion, NoSePudoAtacarExcepcion {
+    public void atacar(Unidad objetivo, Unidad atacante) throws NoSePudoCurarExcepcion {
         objetivo.recibirCuracion (dmg);
     }
 }

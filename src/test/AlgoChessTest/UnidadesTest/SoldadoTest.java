@@ -32,7 +32,7 @@ public class SoldadoTest {
     }
 
     @Test
-    public void soldadoAtacaAOtroUnaVezMurioDevuelveFalse () throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void soldadoAtacaAOtroUnaVezMurioDevuelveFalse () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
@@ -54,7 +54,7 @@ public class SoldadoTest {
     }
 
     @Test
-    public void soldadoAtacaAOtroDiezVecesMurioDevuelveTrue () throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+    public void soldadoAtacaAOtroDiezVecesMurioDevuelveTrue () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
