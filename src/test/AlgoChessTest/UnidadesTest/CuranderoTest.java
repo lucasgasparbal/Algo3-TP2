@@ -4,6 +4,7 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
+import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
@@ -46,6 +47,36 @@ public class CuranderoTest {
         curandero.atacar(soldado2);
 
         Assert.assertEquals(vida_actual+15,soldado2.getVida());
+    }
+
+    @Test
+    public void CuranderoIntentaCurarACatapultaAliadaSaltaExcepcion() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+        boolean seLanzoExcepcion = false;
+        Equipo equipoMock = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipoMock);
+        Curandero curandero = new Curandero(equipoMock);
+        when(curandero.esEnemigoDe(catapulta)).thenReturn(false);
+        try {
+            curandero.atacar(catapulta);
+        }catch (NoSePudoAtacarExcepcion e){
+            seLanzoExcepcion = true;
+        }
+        Assert.assertTrue(seLanzoExcepcion);
+    }
+
+    @Test
+    public void CuranderoIntentaCurarACatapultaEnemigaSaltaExcepcion() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+        boolean seLanzoExcepcion = false;
+        Equipo equipoMock = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipoMock);
+        Curandero curandero = new Curandero(equipoMock);
+        when(curandero.esEnemigoDe(catapulta)).thenReturn(true);
+        try {
+            curandero.atacar(catapulta);
+        }catch (NoSePudoAtacarExcepcion e){
+            seLanzoExcepcion = true;
+        }
+        Assert.assertTrue(seLanzoExcepcion);
     }
 
     @Test
