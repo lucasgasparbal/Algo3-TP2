@@ -92,7 +92,7 @@ public abstract class Unidad {
         return equipo.esIgualA(unEquipo);
     }
 
-    public abstract void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion;
+    public abstract void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion, YaAtacoExcepcion;
 
     public abstract void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
     public abstract void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;

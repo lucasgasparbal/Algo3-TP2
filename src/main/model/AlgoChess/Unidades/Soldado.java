@@ -4,6 +4,7 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.ObjetivoFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.ObjetivoNoEsEnemigoExcepcion;
+import model.AlgoChess.Excepciones.YaAtacoExcepcion;
 import model.AlgoChess.Unidades.Ataques.AtaqueCuerpoACuerpo;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
@@ -28,11 +29,15 @@ public class Soldado extends UnidadMovible {
         costo = Costo;
     }
 
-    public void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+    public void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, YaAtacoExcepcion {
+        if(ataco){
+            throw new YaAtacoExcepcion();
+        }
         if(!objetivo.esEnemigoDe(this)){
             throw new ObjetivoNoEsEnemigoExcepcion();
         }
         ataque.atacar(objetivo,this);
+        ataco = true;
     }
 
     public void asignarBatallon(Batallon batallonAsignado) {

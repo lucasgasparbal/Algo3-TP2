@@ -49,7 +49,7 @@ public class SoldadoTest {
        try {
            soldado1.atacar(soldado2);
        }
-       catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
+       catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {}
         Assert.assertFalse (soldado2.murio());
     }
 
@@ -70,9 +70,10 @@ public class SoldadoTest {
         soldado2.inicializarEnCasillero(casilleroMockDos);
         while (i<10) {
             try {
+                soldado1.prepararTurno();
                 soldado1.atacar(soldado2);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {}
             i++;
         }
         Assert.assertTrue (soldado2.murio());

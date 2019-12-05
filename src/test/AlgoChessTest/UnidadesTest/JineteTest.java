@@ -33,7 +33,7 @@ public class JineteTest {
             try {
                 jinete.atacar(curandero);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {};
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {};
             i++;
         }
         Assert.assertFalse(curandero.murio());
@@ -56,9 +56,10 @@ public class JineteTest {
         curandero.inicializarEnCasillero(casilleroMockDos);
         while (i<15) {
             try {
+                jinete.prepararTurno();
                 jinete.atacar(curandero);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {};
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {};
             i++;
         }
         Assert.assertTrue(curandero.murio());
@@ -80,16 +81,17 @@ public class JineteTest {
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
         while (i<20) {
             try {
+                jinete.prepararTurno();
                 jinete.atacar(soldado);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {};
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {};
             i++;
         }
         Assert.assertTrue(soldado.murio());
     }
 
     @Test
-    public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
@@ -107,18 +109,20 @@ public class JineteTest {
         int i =0;
         while (i<19) {
             try {
+                jinete.prepararTurno();
                 jinete.atacar(soldado1);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {}
             i++;
         }
         Assert.assertFalse(soldado1.murio());
+        jinete.prepararTurno();
         jinete.atacar(soldado1);
         Assert.assertTrue(soldado1.murio());
     }
 
     @Test
-    public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
@@ -136,12 +140,14 @@ public class JineteTest {
         int i = 0;
         while (i < 19) {
             try {
+                jinete.prepararTurno();
                 jinete.atacar(soldado1);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {}
             i++;
         }
         Assert.assertFalse(soldado1.murio());
+        jinete.prepararTurno();
         jinete.atacar(soldado1);
         Assert.assertTrue(soldado1.murio());
     }
@@ -167,7 +173,7 @@ public class JineteTest {
         try {
             jinete.atacar(soldado1);
         }
-        catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {
+        catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {
             seLanzaExcepcion = true;
         }
     }
