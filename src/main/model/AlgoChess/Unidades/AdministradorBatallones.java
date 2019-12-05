@@ -1,5 +1,7 @@
 package model.AlgoChess.Unidades;
 
+import model.AlgoChess.Equipos.Equipo;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Arrays;
@@ -78,6 +80,17 @@ public class AdministradorBatallones {
     public void actualizarBatallones () {
         destruirBatallones();
         crearBatallones();
+    }
+
+    public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallonParaEquipo(Equipo equipo){
+        ArrayList<PaqueteCoordenadasBatallon> listaAEntregar = new ArrayList<>();
+        for(Batallon batallon:batallones){
+            if(batallon.esDeEquipo(equipo)){
+                listaAEntregar.add(batallon.obtenerPaqueteCoordenadas());
+            }
+        }
+
+        return listaAEntregar;
     }
 }
 

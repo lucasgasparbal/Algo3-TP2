@@ -2,7 +2,10 @@ package model.AlgoChess;
 
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Tablero;
+import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
 import model.AlgoChess.Unidades.Unidad;
+
+import java.util.ArrayList;
 
 public class Juego {
     Jugador jugadorUno;
@@ -152,5 +155,9 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidad.desplazarHaciaDerecha();
+    }
+
+    public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallones(){
+        return tablero.obtenerPaqueteCoordenadasBatallonParaEquipo(jugadorActual.getEquipo());
     }
 }

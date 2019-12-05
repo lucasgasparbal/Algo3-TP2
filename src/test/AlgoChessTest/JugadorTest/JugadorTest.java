@@ -1,8 +1,11 @@
 package AlgoChessTest.JugadorTest;
 
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
+import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
 import model.AlgoChess.Jugador;
+import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Catapulta;
 import model.AlgoChess.Unidades.Curandero;
 import model.AlgoChess.Unidades.Jinete;
@@ -33,17 +36,23 @@ public class JugadorTest {
     }
 
     @Test
-    public void jugadorQueSeQuedaSinPiezasPierde () {
+    public void jugadorQueSeQuedaSinPiezasPierde () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         Equipo equipoMock = mock(Equipo.class);
-
+        Casillero casilleroMock = mock(Casillero.class);
+        when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
         Catapulta catapulta = new Catapulta (equipoMock);
         Jugador jugador = new Jugador();
         Soldado soldado = new Soldado (equipoMock);
         Jinete jinete = new Jinete (equipoMock);
 
+        soldado.inicializarEnCasillero(casilleroMock);
+        catapulta.inicializarEnCasillero(casilleroMock);
+        jinete.inicializarEnCasillero(casilleroMock);
+
         jugador.agregarUnidad(soldado);
         jugador.agregarUnidad(jinete);
         jugador.agregarUnidad(catapulta);
+
 
 
         catapulta.sufrirDanio(100);
@@ -54,12 +63,19 @@ public class JugadorTest {
     }
 
     @Test
-    public void jugadorTieneUnaSolaPiezaVivaNoPierde () {
+    public void jugadorTieneUnaSolaPiezaVivaNoPierde () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         Equipo equipoMock = mock(Equipo.class);
+        Casillero casilleroMock = mock(Casillero.class);
         Catapulta catapulta = new Catapulta (equipoMock);
         Jugador jugador = new Jugador();
         Soldado soldado = new Soldado (equipoMock);
         Curandero curandero = new Curandero(equipoMock);
+        when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
+
+
+        soldado.inicializarEnCasillero(casilleroMock);
+        catapulta.inicializarEnCasillero(casilleroMock);
+        curandero.inicializarEnCasillero(casilleroMock);
 
         jugador.agregarUnidad(soldado);
         jugador.agregarUnidad(curandero);

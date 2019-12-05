@@ -53,6 +53,7 @@ public abstract class Unidad {
 
         if(vida.acabo()){
             equipo.removerUnidad(this);
+            ubicacion.vaciar();
         }
     }
 

@@ -5,13 +5,19 @@ import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
+import model.AlgoChess.Unidades.AdministradorBatallones;
+import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
+import model.AlgoChess.Unidades.Soldado;
 import model.AlgoChess.Unidades.Unidad;
+
+import java.util.ArrayList;
 
 public class Tablero {
 
     final private int CantFilas = 20;
     final private int CantColumnas = 20;
 
+    private AdministradorBatallones administradorBatallones = new AdministradorBatallones();
     private MatrizCasilleros matrizCasilleros;
     private Equipo equipoBlanco;
     private Equipo equipoNegro;
@@ -29,6 +35,14 @@ public class Tablero {
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
         unidad.inicializarEnCasillero(casillero);
         diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
+    }
+
+    public void inicializarSoldadoEnCasillero(Soldado soldado, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+
+        Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
+        soldado.inicializarEnCasillero(casillero);
+        diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,soldado);
+        administradorBatallones.agregarSoldado(soldado);
     }
     public Casillero conseguirCasillero(int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion {
         return matrizCasilleros.conseguirCasillero(coordenadas);
@@ -58,4 +72,11 @@ public class Tablero {
         diccionarioCasilleroUnidad.removerUnidadDeCasillero(casillero);
     }
 
+    public void prepararTurno(){
+        administradorBatallones.actualizarBatallones();
+    }
+
+    public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallonParaEquipo(Equipo unEquipo){
+        return administradorBatallones.obtenerPaqueteCoordenadasBatallonParaEquipo(unEquipo);
+    }
 }

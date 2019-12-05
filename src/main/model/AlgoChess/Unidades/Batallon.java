@@ -1,4 +1,5 @@
 package model.AlgoChess.Unidades;
+import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
 
@@ -92,4 +93,14 @@ public class Batallon {
         }
         return true;
     }
+
+    public PaqueteCoordenadasBatallon obtenerPaqueteCoordenadas(){
+       PaqueteCoordenadasBatallon paqueteCoordenadasBatallon = new PaqueteCoordenadasBatallon(integrantes.get(0).getPosicion(),integrantes.get(1).getPosicion(),integrantes.get(2).getPosicion());
+       return paqueteCoordenadasBatallon;
+    }
+
+    public boolean esDeEquipo(Equipo unEquipo){
+        return integrantes.get(0).perteneceAEquipo(unEquipo);
+    }
+
 }

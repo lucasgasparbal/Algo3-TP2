@@ -16,9 +16,12 @@ public class SoldadoTest {
 
 
     @Test
-    public void sufreDanioLetalMurioDevuelveTrue () {
+    public void sufreDanioLetalMurioDevuelveTrue () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         Equipo equipoMock = mock(Equipo.class);
+        Casillero casilleroMock = mock(Casillero.class);
+        when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
         Soldado soldado = new Soldado (equipoMock);
+        soldado.inicializarEnCasillero(casilleroMock);
         soldado.sufrirDanio(101);
         Assert.assertTrue(soldado.murio());
     }
