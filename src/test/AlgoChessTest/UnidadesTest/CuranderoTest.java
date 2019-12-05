@@ -15,9 +15,8 @@ import static org.mockito.Mockito.when;
 
 public class CuranderoTest {
 
-    //Tambien deberia ser imposible revivir a piezas, una vez que mueren son eliminadas//
     @Test
-    public void CuranderoCuraASoldadoHeridoSanaQuincePuntosDeVida() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+    public void CuranderoCuraASoldadoHeridoSanaQuincePuntosDeVida() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion {
 
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -37,7 +36,7 @@ public class CuranderoTest {
         try {
             soldado1.atacar(soldado2);
         }
-        catch (NoSePudoAtacarExcepcion e) {}
+        catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
         i++;
         }
 
@@ -50,7 +49,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void CuranderoIntentaCurarACatapultaAliadaSaltaExcepcion() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+    public void CuranderoIntentaCurarACatapultaAliadaSaltaExcepcion() throws NoSePudoAtacarExcepcion {
         boolean seLanzoExcepcion = false;
         Equipo equipoMock = mock(Equipo.class);
         Catapulta catapulta = new Catapulta(equipoMock);
@@ -58,14 +57,14 @@ public class CuranderoTest {
         when(curandero.esEnemigoDe(catapulta)).thenReturn(false);
         try {
             curandero.atacar(catapulta);
-        }catch (NoSePudoAtacarExcepcion e){
+        }catch (ObjetivoEsEnemigoExcepcion | NoSePudoCurarExcepcion e){
             seLanzoExcepcion = true;
         }
         Assert.assertTrue(seLanzoExcepcion);
     }
 
     @Test
-    public void CuranderoIntentaCurarACatapultaEnemigaSaltaExcepcion() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+    public void CuranderoIntentaCurarACatapultaEnemigaSaltaExcepcion() throws NoSePudoCurarExcepcion , ObjetivoEsEnemigoExcepcion , NoSePudoAtacarExcepcion  {
         boolean seLanzoExcepcion = false;
         Equipo equipoMock = mock(Equipo.class);
         Catapulta catapulta = new Catapulta(equipoMock);
@@ -73,14 +72,14 @@ public class CuranderoTest {
         when(curandero.esEnemigoDe(catapulta)).thenReturn(true);
         try {
             curandero.atacar(catapulta);
-        }catch (NoSePudoAtacarExcepcion e){
+        }catch (NoSePudoCurarExcepcion | ObjetivoEsEnemigoExcepcion | NoSePudoAtacarExcepcion e){
             seLanzoExcepcion = true;
         }
         Assert.assertTrue(seLanzoExcepcion);
     }
 
     @Test
-    public void CuranderoCuraASoldadoConVidaCompletaNoSanaMasDelMaximo() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+    public void CuranderoCuraASoldadoConVidaCompletaNoSanaMasDelMaximo() throws NoSePudoAtacarExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion {
 
         Equipo equipoDosMock = mock(Equipo.class);
         when(equipoDosMock.esIgualA(equipoDosMock)).thenReturn(true);
@@ -113,7 +112,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoIntentaMoverseParaArribaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoIntentaMoverseParaArribaPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -181,7 +180,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoIntentaMoverseParaAbajoPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoIntentaMoverseParaAbajoPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -244,7 +243,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoIntentaMoverseParaLaDerechaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoIntentaMoverseParaLaDerechaPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -305,7 +304,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoIntentaMoverseParaLaIzquierdaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoIntentaMoverseParaLaIzquierdaPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);

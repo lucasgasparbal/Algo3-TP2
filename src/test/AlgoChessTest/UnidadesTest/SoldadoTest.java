@@ -49,7 +49,7 @@ public class SoldadoTest {
        try {
            soldado1.atacar(soldado2);
        }
-       catch (NoSePudoAtacarExcepcion e) {}
+       catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
         Assert.assertFalse (soldado2.murio());
     }
 
@@ -72,7 +72,7 @@ public class SoldadoTest {
             try {
                 soldado1.atacar(soldado2);
             }
-            catch (NoSePudoAtacarExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
             i++;
         }
         Assert.assertTrue (soldado2.murio());

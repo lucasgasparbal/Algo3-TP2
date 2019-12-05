@@ -33,7 +33,7 @@ public class JineteTest {
             try {
                 jinete.atacar(curandero);
             }
-            catch (NoSePudoAtacarExcepcion e) {};
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {};
             i++;
         }
         Assert.assertFalse(curandero.murio());
@@ -58,7 +58,7 @@ public class JineteTest {
             try {
                 jinete.atacar(curandero);
             }
-            catch (NoSePudoAtacarExcepcion e) {};
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {};
             i++;
         }
         Assert.assertTrue(curandero.murio());
@@ -82,14 +82,14 @@ public class JineteTest {
             try {
                 jinete.atacar(soldado);
             }
-            catch (NoSePudoAtacarExcepcion e) {};
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {};
             i++;
         }
         Assert.assertTrue(soldado.murio());
     }
 
     @Test
-    public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
+    public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
@@ -109,7 +109,7 @@ public class JineteTest {
             try {
                 jinete.atacar(soldado1);
             }
-            catch (NoSePudoAtacarExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
             i++;
         }
         Assert.assertFalse(soldado1.murio());
@@ -118,7 +118,7 @@ public class JineteTest {
     }
 
     @Test
-    public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion {
+    public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, NoSePudoAtacarExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
@@ -138,7 +138,7 @@ public class JineteTest {
             try {
                 jinete.atacar(soldado1);
             }
-            catch (NoSePudoAtacarExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
             i++;
         }
         Assert.assertFalse(soldado1.murio());
@@ -167,7 +167,7 @@ public class JineteTest {
         try {
             jinete.atacar(soldado1);
         }
-        catch (NoSePudoAtacarExcepcion e) {
+        catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {
             seLanzaExcepcion = true;
         }
     }
@@ -190,7 +190,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteIntentaMoverseParaArribaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteIntentaMoverseParaArribaPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -253,7 +253,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteIntentaMoverseParaAbajoPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteIntentaMoverseParaAbajoPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -315,7 +315,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteIntentaMoverseParaLaDerechaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteIntentaMoverseParaLaDerechaPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -376,7 +376,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteIntentaMoverseParaLaIzquierdaPeroSeSaleDelTablero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteIntentaMoverseParaLaIzquierdaPeroSeSaleDelTablero () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);

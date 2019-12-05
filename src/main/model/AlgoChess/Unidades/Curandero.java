@@ -1,8 +1,7 @@
 package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Unidades.Ataques.Curacion;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
@@ -14,7 +13,10 @@ public class Curandero extends UnidadMovible {
 
     private Curacion ataque = new Curacion(ValorCuracion);
 
-    public void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+    public void atacar(Unidad objetivo) throws ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion, NoSePudoAtacarExcepcion {
+        if(objetivo.esEnemigoDe(this)){
+            throw new ObjetivoEsEnemigoExcepcion();
+        }
         ataque.atacar(objetivo,this);
     }
 

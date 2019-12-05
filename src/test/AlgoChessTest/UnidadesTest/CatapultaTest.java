@@ -42,7 +42,7 @@ public class CatapultaTest {
     }
 
     @Test
-    public void atacoTresVecesACuranderoMurioDevuelveFalse() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+    public void atacoTresVecesACuranderoMurioDevuelveFalse() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -63,7 +63,7 @@ public class CatapultaTest {
             try {
                 catapulta.atacar(curandero);
             }
-            catch (NoSePudoAtacarExcepcion | ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | NoSePudoAtacarExcepcion e) {}
             i++;
         }
         Assert.assertFalse(curandero.murio());

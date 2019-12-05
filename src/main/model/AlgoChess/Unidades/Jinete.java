@@ -3,6 +3,8 @@ package model.AlgoChess.Unidades;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoSePudoAtacarExcepcion;
+import model.AlgoChess.Excepciones.ObjetivoFueraDeRangoExcepcion;
+import model.AlgoChess.Excepciones.ObjetivoNoEsEnemigoExcepcion;
 import model.AlgoChess.Unidades.Ataques.*;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
@@ -22,7 +24,10 @@ public class Jinete extends UnidadMovible {
         costo = Costo;
     }
 
-    public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
+    public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+        if(!objetivo.esEnemigoDe(this)){
+            throw new ObjetivoNoEsEnemigoExcepcion();
+        }
         if (equipo.hayUnidadesEnemigasCercanas(this) || equipo.hayUnidadesAliadasCercanas(this)) {
             ataqueArco.atacar(objetivo,this);
         }
