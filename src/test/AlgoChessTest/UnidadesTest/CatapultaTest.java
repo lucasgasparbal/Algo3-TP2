@@ -33,7 +33,6 @@ public class CatapultaTest {
         Soldado soldado = new Soldado (equipoDosMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
         soldado.inicializarEnCasillero(casilleroMockDos);
-        when(catapulta.esEnemigoDe(soldado)).thenReturn(true);
 
         while (i<10) {
             try {
@@ -90,7 +89,6 @@ public class CatapultaTest {
         Curandero curandero = new Curandero (equipoDosMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
         curandero.inicializarEnCasillero(casilleroMockDos);
-        when(catapulta.esEnemigoDe(curandero)).thenReturn(true);
 
         while (i<4) {
             try {
@@ -103,59 +101,33 @@ public class CatapultaTest {
     }
 
     @Test
-    public void catapultaNoPuedeAtacarDirectamenteAUnaPiesaAliada() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        boolean seLanzoExcepcion = false;
-        Equipo equipoMock = mock(Equipo.class);
-
-        Casillero casilleroMockUno = mock(Casillero.class);
-        Casillero casilleroMockDos = mock(Casillero.class);
-
-        when(casilleroMockUno.perteneceAEquipo(equipoMock)).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoMock)).thenReturn(true);
-        when(casilleroMockDos.estaEnRangoLejanoDe(casilleroMockUno)).thenReturn(true);
-
-        Catapulta catapulta = new Catapulta (equipoMock);
-        Curandero curandero = new Curandero (equipoMock);
-        catapulta.inicializarEnCasillero(casilleroMockUno);
-        curandero.inicializarEnCasillero(casilleroMockDos);
-        when(catapulta.esEnemigoDe(curandero)).thenReturn(false);
-
-            try {
-                catapulta.atacar(curandero);
-            }
-            catch (NoSePudoAtacarExcepcion e) {seLanzoExcepcion = true;};
-
-        Assert.assertTrue(seLanzoExcepcion);
-    }
-
-    @Test
     public void atacoAUnidadesCercanasACatapultaEnemigaMurioDevuelveTrue() throws NoSePudoAtacarExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         int i = 0;
 
-        Equipo equipoUnoMock = mock(Equipo.class);
-        Equipo equipoDosMock = mock(Equipo.class);
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
 
-        Casillero casilleroMockUno = mock(Casillero.class);
-        Casillero casilleroMockDos = mock(Casillero.class);
+        Casillero casilleroUno = tablero.conseguirCasillero(1,1);
+        Casillero casilleroDos = tablero.conseguirCasillero(19,19);
+        Casillero casilleroTres = tablero.conseguirCasillero(18,19);
 
-        Catapulta catapultaAliada = new Catapulta(equipoUnoMock);
-        Catapulta catapultaEnemiga = new Catapulta(equipoDosMock);
-        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
-        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
-        when(casilleroMockDos.estaEnRangoLejanoDe(casilleroMockUno)).thenReturn(true);
-        when(catapultaAliada.esEnemigoDe(catapultaEnemiga)).thenReturn(true);
+        Catapulta catapultaAliada = new Catapulta(equipoUno);
+        Catapulta catapultaEnemiga = new Catapulta(equipoDos);
+        Soldado soldadoEnemigo = new Soldado (equipoDos);
 
-        catapultaAliada.inicializarEnCasillero(casilleroMockUno);
-        catapultaEnemiga.inicializarEnCasillero(casilleroMockDos);
+        catapultaAliada.inicializarEnCasillero(casilleroUno);
+        catapultaEnemiga.inicializarEnCasillero(casilleroDos);
+        soldadoEnemigo.inicializarEnCasillero(casilleroTres);
 
-        while(i<4) {
+        while(i<6) {
             try {
-                catapultaAliada.atacar(catapultaEnemiga);
+                catapultaAliada.atacar(soldadoEnemigo);
             }
             catch (NoSePudoAtacarExcepcion e) {}
             i++;
         }
-        Assert.assertTrue(catapultaEnemiga.murio());
+        Assert.assertTrue(soldadoEnemigo.murio());
     }
 
     @Test
