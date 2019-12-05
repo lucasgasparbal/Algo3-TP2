@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import model.AlgoChess.Juego;
 
 public class GeneradorDeCajaAtaqueMovimiento {
 
@@ -18,7 +19,7 @@ public class GeneradorDeCajaAtaqueMovimiento {
         this.directorio_resources = resources;
     }
 
-    public BorderPane generarCajaAtaqueMovimiento() {
+    public BorderPane generarCajaAtaqueMovimiento(Juego juego, HBox cajaMovimiento, HBox cajaAtaque ) {
 
         BorderPane menuTableroFinal = new BorderPane();
 
@@ -32,17 +33,17 @@ public class GeneradorDeCajaAtaqueMovimiento {
         generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaMovimiento,"MODO MOVIMIENTO",30);
         ImageView imagenModoMovimiento = new ImageView (directorio_resources+"movimientoON.png");
 
-        HBox cajaAtaque = new HBox (imagenModoAtaque,etiquetaAtaque);
+        cajaAtaque.getChildren().addAll(imagenModoAtaque,etiquetaAtaque);
         cajaAtaque.setAlignment(Pos.CENTER);
         cajaAtaque.setSpacing(25);
         cajaAtaque.setPadding(new Insets(20));
-        HBox cajaMovimiento = new HBox (imagenModoMovimiento,etiquetaMovimiento);
+        cajaMovimiento.getChildren().addAll(imagenModoMovimiento,etiquetaMovimiento);
         cajaMovimiento.setAlignment(Pos.CENTER);
         cajaMovimiento.setSpacing(25);
         cajaMovimiento.setPadding(new Insets(20));
 
-        imagenModoAtaque.setOnMouseClicked(new HandlerCambiarAtaqueMovimiento(cajaMovimiento,menuTableroFinal));
-        imagenModoMovimiento.setOnMouseClicked(new HandlerCambiarAtaqueMovimiento(cajaAtaque,menuTableroFinal));
+        imagenModoAtaque.setOnMouseClicked(new HandlerCambiarAtaqueMovimiento(cajaMovimiento,menuTableroFinal,juego,generadorDeEtiquetas));
+        imagenModoMovimiento.setOnMouseClicked(new HandlerCambiarAtaqueMovimiento(cajaAtaque,menuTableroFinal,juego,generadorDeEtiquetas));
 
         menuTableroFinal.setTop(cajaAtaque);
 

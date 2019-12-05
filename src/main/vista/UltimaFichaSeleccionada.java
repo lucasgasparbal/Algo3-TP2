@@ -7,10 +7,12 @@ public class UltimaFichaSeleccionada {
 
     boolean hayFichaSeleccionada = false;
     ImageView imagenSeleccionada;
+    int[] coordenadas;
 
-    public void seleccionarFicha(ImageView imagen) {
+    public void seleccionarFicha(ImageView imagen, int[]coord) {
         hayFichaSeleccionada=true;
         imagenSeleccionada=imagen;
+        coordenadas = coord;
     }
 
     public void limpiarSeleccionFicha() {
@@ -25,4 +27,6 @@ public class UltimaFichaSeleccionada {
     public ImageView obtenerImagenFicha() {
         return imagenSeleccionada;
     }
+
+    public int[] obtenerCoordenadas() {return coordenadas;}
 }

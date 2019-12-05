@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import model.AlgoChess.Juego;
@@ -165,7 +166,7 @@ public class Aplicacion extends Application {
         StackPane cajaFichasBlancasRestantes = null;
 
         GeneradorDeTablero generadorDeTablero = new GeneradorDeTablero ();
-        GridPane tableroBlanco = generadorDeTablero.generarTablero(directorio_resources+"escaqueBlanco40.png",ultimaPiezaSeleccionada);
+        GridPane tableroBlanco = generadorDeTablero.generarTablero(directorio_resources+"escaqueBlanco40.png",ultimaPiezaSeleccionada,juego,false);
         Group grupoTableroBlanco = new Group (tableroBlanco);
 
         BorderPane menuJugadorBlanco = new BorderPane();
@@ -190,9 +191,9 @@ public class Aplicacion extends Application {
         colocadoPiezasNegras.setPadding(new Insets(20));
         colocadoPiezasNegras.setMaxHeight(100);
 
-        GeneradorCajaFichasRestantes generadorCajaFichasNegrasRestantes = new GeneradorCajaFichasRestantes(directorio_resources+"fichasBlancas/",ultimaPiezaSeleccionada, generadorDeEtiquetas);
+        GeneradorCajaFichasRestantes generadorCajaFichasNegrasRestantes = new GeneradorCajaFichasRestantes(directorio_resources+"fichasNegras/",ultimaPiezaSeleccionada, generadorDeEtiquetas);
 
-        GridPane tableroNegro = generadorDeTablero.generarTablero("file:/home/facundo/IdeaProjects/TP2/src/resources/escaqueNegro40.png",ultimaPiezaSeleccionada);
+        GridPane tableroNegro = generadorDeTablero.generarTablero(directorio_resources+"escaqueNegro40.png",ultimaPiezaSeleccionada,juego,true);
         Group grupoTableroNegro = new Group (tableroNegro);
 
         BorderPane menuJugadorNegro = new BorderPane();
@@ -205,16 +206,17 @@ public class Aplicacion extends Application {
 
         // 5to Layout - Creacion tablero final //
 
-        boolean modoCombate = true;
-
         GeneradorDeCajaAtaqueMovimiento generadorDeCajaAtaqueMovimiento = new GeneradorDeCajaAtaqueMovimiento(directorio_resources);
-        BorderPane campoJuegoFinal = generadorDeCajaAtaqueMovimiento.generarCajaAtaqueMovimiento();
+        HBox cajaAtaque = new HBox();
+        HBox cajaMovimiento = new HBox();
+        BorderPane campoJuegoFinal = generadorDeCajaAtaqueMovimiento.generarCajaAtaqueMovimiento(juego,cajaMovimiento,cajaAtaque);
         StackPane informacionPieza = new StackPane();
         ImageView fondoDetallesPieza = new ImageView(directorio_resources+"menuDetallesUnidad.png");
         informacionPieza.getChildren().add(fondoDetallesPieza);
         Button terminarTurno = generadorDeBotones.nuevoBoton("TERMINAR TURNO");
         terminarTurno.setMaxSize(200,100);
         terminarTurno.setStyle("-fx-border-color: #000000; -fx-background-color: #ff0000; -fx-border-width: 2px");
+        terminarTurno.setOnAction(new HandlerPasarTurno(juego,cajaMovimiento,cajaAtaque,generadorDeEtiquetas));
         VBox vidaPieza = new VBox ();
         vidaPieza.setSpacing(100);
         Label vida = new Label();
@@ -232,9 +234,7 @@ public class Aplicacion extends Application {
         informacionPieza.setMargin(terminarTurno,new Insets(630,100,0,0));
 
         // 5to Layout - Creacion tablero final //
-        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro,campoJuegoFinal));
-
-        // Comienza Juego//
+        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro,campoJuegoFinal,vida,generadorDeEtiquetas, juego,cajaAtaque,cajaMovimiento,directorio_resources));
 
         // Botones //
 

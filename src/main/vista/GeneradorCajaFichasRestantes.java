@@ -29,13 +29,13 @@ public class GeneradorCajaFichasRestantes {
         HBox catapultasRestantes = new HBox();
 
         ImageView imagenFichaSoldado = new ImageView(directorioElementos+"fichaSoldado.png");
-        imagenFichaSoldado.setOnMouseClicked(new HandlerActualizarImagen(soldadosRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaSoldado32.png",generadorDeEtiquetas,cantidadFichas[0]));
+        imagenFichaSoldado.setOnMouseClicked(new HandlerActualizarImagen(soldadosRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaSoldado32.png",generadorDeEtiquetas,cantidadFichas[0],"Soldado"));
         ImageView imagenFichaJinete = new ImageView(directorioElementos+"fichaJinete.png");
-        imagenFichaJinete.setOnMouseClicked(new HandlerActualizarImagen(jinetesRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaJinete32.png",generadorDeEtiquetas,cantidadFichas[1]));
+        imagenFichaJinete.setOnMouseClicked(new HandlerActualizarImagen(jinetesRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaJinete32.png",generadorDeEtiquetas,cantidadFichas[1],"Jinete"));
         ImageView imagenFichaCurandero = new ImageView(directorioElementos+"fichaCurandero.png");
-        imagenFichaCurandero.setOnMouseClicked(new HandlerActualizarImagen(curanderosRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaCurandero32.png",generadorDeEtiquetas,cantidadFichas[2]));
+        imagenFichaCurandero.setOnMouseClicked(new HandlerActualizarImagen(curanderosRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaCurandero32.png",generadorDeEtiquetas,cantidadFichas[2],"Curandero"));
         ImageView imagenFichaCatapulta = new ImageView(directorioElementos+"fichaCatapulta.png");
-        imagenFichaCatapulta.setOnMouseClicked(new HandlerActualizarImagen(catapultasRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaCatapulta32.png",generadorDeEtiquetas,cantidadFichas[3]));
+        imagenFichaCatapulta.setOnMouseClicked(new HandlerActualizarImagen(catapultasRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaCatapulta32.png",generadorDeEtiquetas,cantidadFichas[3],"Catapulta"));
 
         StackPane cajaFichasRestantes = new StackPane();
 

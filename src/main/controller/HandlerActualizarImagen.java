@@ -16,13 +16,15 @@ public class HandlerActualizarImagen implements EventHandler<MouseEvent> {
     HBox cantidadRestante;
     GeneradorDeEtiquetas generadorDeEtiquetas;
     int cantidadFichasRestantes;
+    String nombrePieza;
 
-    public HandlerActualizarImagen(HBox cantidadRestanteFicha, ImageViewPiezaEnJuego imageview, String url, GeneradorDeEtiquetas generadorEtiquetas, int cantidadFichas) {
+    public HandlerActualizarImagen(HBox cantidadRestanteFicha, ImageViewPiezaEnJuego imageview, String url, GeneradorDeEtiquetas generadorEtiquetas, int cantidadFichas, String nombre) {
         this.piezaEnJuego = imageview;
         this.directorio = url;
         this.cantidadRestante = cantidadRestanteFicha;
         this.generadorDeEtiquetas = generadorEtiquetas;
         this.cantidadFichasRestantes = cantidadFichas;
+        this.nombrePieza = nombre;
     }
 
     public void handle (MouseEvent event) {
@@ -39,5 +41,23 @@ public class HandlerActualizarImagen implements EventHandler<MouseEvent> {
         cantidadRestante.getChildren().remove(1);
         cantidadRestante.getChildren().add(etiquetaRestantes);
         piezaEnJuego.actualizarImagen(imagenEnCasillero);
+        switch (nombrePieza) {
+            case "Soldado": {
+                piezaEnJuego.esUnSoldado();
+                break;
+            }
+            case "Jinete": {
+                piezaEnJuego.esUnJinete();
+                break;
+            }
+            case "Curandero": {
+                piezaEnJuego.esUnCurandero();
+                break;
+            }
+            case "Catapulta": {
+                piezaEnJuego.esUnaCatapulta();
+                break;
+            }
+        }
     }
 }
