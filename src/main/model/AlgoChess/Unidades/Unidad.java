@@ -12,7 +12,7 @@ public abstract class Unidad {
 
     protected int costo;
 
-    protected boolean puedeAtacar = true;
+    protected boolean ataco = false;
 
     protected Equipo equipo;
 
@@ -93,10 +93,14 @@ public abstract class Unidad {
         return equipo.esIgualA(unEquipo);
     }
 
-    public abstract void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion;
+    public abstract void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion, YaAtacoExcepcion;
 
-    public abstract void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
-    public abstract void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
-    public abstract void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
-    public abstract void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
+    public abstract void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
+    public abstract void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
+    public abstract void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
+    public abstract void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
+
+    public void prepararTurno(){
+        ataco = false;
+    }
 }

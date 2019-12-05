@@ -19,11 +19,15 @@ public class Catapulta extends Unidad {
         costo = Costo;
     }
 
-    public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
+       if(ataco){
+           throw new YaAtacoExcepcion();
+       }
         if(!objetivo.esEnemigoDe(this)){
             throw new ObjetivoNoEsEnemigoExcepcion();
         }
         ataque.atacar(objetivo,this);
+        ataco = true;
     }
     @Override
     public void recibirCuracion(int curacion) throws NoSePudoCurarExcepcion {

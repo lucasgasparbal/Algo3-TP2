@@ -8,12 +8,17 @@ import model.AlgoChess.Tablero.Casillero;
 
 public abstract class UnidadMovible extends Unidad {
 
-    protected boolean puedeMoverse = true;
+    protected boolean movio = false;
 
     public UnidadMovible(Equipo unEquipo) {
         super(unEquipo);
     }
 
+    @Override
+    public void prepararTurno(){
+        ataco = false;
+        movio = false;
+    }
 
     public void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
         try {

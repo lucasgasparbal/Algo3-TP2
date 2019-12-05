@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class CatapultaTest {
 
     @Test
-    public void atacoCincoVecesASoldadoMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacoCincoVecesASoldadoMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -35,6 +35,7 @@ public class CatapultaTest {
         soldado.inicializarEnCasillero(casilleroMockDos);
 
         while (i<10) {
+            catapulta.prepararTurno();
                 catapulta.atacar(soldado);
             i++;
         }
@@ -63,14 +64,14 @@ public class CatapultaTest {
             try {
                 catapulta.atacar(curandero);
             }
-            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion e) {}
+            catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {}
             i++;
         }
         Assert.assertFalse(curandero.murio());
     }
 
     @Test
-    public void atacoCuatroVecesACuranderoMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacoCuatroVecesACuranderoMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
@@ -88,14 +89,15 @@ public class CatapultaTest {
         curandero.inicializarEnCasillero(casilleroMockDos);
 
         while (i<4) {
-                catapulta.atacar(curandero);
+            catapulta.prepararTurno();
+            catapulta.atacar(curandero);
             i++;
         }
         Assert.assertTrue(curandero.murio());
     }
 
     @Test
-    public void atacoAUnidadesCercanasACatapultaEnemigaMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion {
+    public void atacoAUnidadesCercanasACatapultaEnemigaMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         int i = 0;
 
         Equipo equipoUno = new Equipo(1);
@@ -118,6 +120,7 @@ public class CatapultaTest {
         soldadoEnemigo.inicializarEnCasillero(casilleroTres);
 
         while(i<6) {
+            catapultaAliada.prepararTurno();
             catapultaAliada.atacar(soldadoEnemigo);
             i++;
         }
