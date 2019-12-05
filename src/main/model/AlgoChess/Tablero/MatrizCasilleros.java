@@ -1,5 +1,6 @@
 package model.AlgoChess.Tablero;
 
+import javafx.scene.control.Tab;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 
@@ -14,18 +15,18 @@ public class MatrizCasilleros {
 
     private AnalizadorRangos analizadorRangos = new AnalizadorRangos();
     
-    private void inicializarTableroParaEquipo(Equipo unEquipo, int inicioFila, int finalFila){
-        for(int i = inicioFila; i < finalFila; i++){
-            for(int j = 0; j < CantColumnas; j++){
-                casilleros[i][j] = new Casillero(i,j, this, unEquipo);
+    private void inicializarTableroParaEquipo(Tablero tablero, Equipo unEquipo, int inicioColumna, int finalColumna){
+        for(int i = 0; i < CantFilas; i++){
+            for(int j = inicioColumna; j < finalColumna; j++){
+                casilleros[i][j] = new Casillero(i,j, tablero, unEquipo);
             }
         }
     }
-    public MatrizCasilleros(Equipo equipoUno, Equipo equipoDos){
+    public MatrizCasilleros(Equipo equipoUno, Equipo equipoDos, Tablero tablero){
         equipoBlanco = equipoUno;
         equipoNegro = equipoDos;
-        inicializarTableroParaEquipo(equipoUno, 0, CantFilas/2);
-        inicializarTableroParaEquipo(equipoDos, CantFilas/2, CantFilas);
+        inicializarTableroParaEquipo(tablero, equipoUno, 0, CantColumnas/2);
+        inicializarTableroParaEquipo(tablero, equipoDos, CantColumnas/2, CantFilas);
     }
 
     private boolean coordenadaEnRango(int coordenada, int limiteSuperior){

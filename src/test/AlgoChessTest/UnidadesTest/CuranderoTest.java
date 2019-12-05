@@ -250,7 +250,7 @@ public class CuranderoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadas = {19,0};
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
-        Curandero curandero = new Curandero (equipoDos);
+        Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
         try {
             curandero.desplazarHaciaDerecha();
@@ -311,7 +311,7 @@ public class CuranderoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadas = {0,19};
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
-        Curandero curandero = new Curandero (equipoUno);
+        Curandero curandero = new Curandero (equipoDos);
         curandero.inicializarEnCasillero(casillero);
         try {
             curandero.desplazarHaciaIzquierda();

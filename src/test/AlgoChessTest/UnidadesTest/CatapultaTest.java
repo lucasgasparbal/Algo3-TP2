@@ -139,4 +139,36 @@ public class CatapultaTest {
 
         catapulta.comprarConPuntos(1);
     }
+
+    @Test(expected = CatapultaNoSePuedeMoverExcepcion.class)
+    public void CatapultaDesplazarHaciaIzquierdaLanzaExcepcion() throws CatapultaNoSePuedeMoverExcepcion{
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        catapulta.desplazarHaciaIzquierda();
+    }
+
+    @Test(expected = CatapultaNoSePuedeMoverExcepcion.class)
+    public void CatapultaDesplazarHaciaArribaLanzaExcepcion() throws CatapultaNoSePuedeMoverExcepcion{
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        catapulta.desplazarHaciaArriba();
+    }
+
+    @Test(expected = CatapultaNoSePuedeMoverExcepcion.class)
+    public void CatapultaDesplazarHaciaAbajoLanzaExcepcion() throws CatapultaNoSePuedeMoverExcepcion{
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        catapulta.desplazarHaciaAbajo();
+    }
+
+    @Test(expected = CatapultaNoSePuedeMoverExcepcion.class)
+    public void CatapultaDesplazarHaciaDerechaLanzaExcepcion() throws CatapultaNoSePuedeMoverExcepcion{
+        Equipo equipo = mock(Equipo.class);
+        Catapulta catapulta = new Catapulta(equipo);
+
+        catapulta.desplazarHaciaDerecha();
+    }
 }

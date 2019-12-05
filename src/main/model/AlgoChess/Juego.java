@@ -117,4 +117,40 @@ public class Juego {
 
         return unidadObjetivo.murio();
     }
+
+    public void moverPiezaEnCoordenadaHaciaArriba(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion {
+
+        Unidad unidad = tablero.conseguirUnidad(coordenadas);
+        if (!jugadorActual.esDuenioDe(unidad)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        unidad.desplazarHaciaArriba();
+    }
+
+    public void moverPiezaEnCoordenadaHaciaAbajo(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion {
+
+        Unidad unidad = tablero.conseguirUnidad(coordenadas);
+        if (!jugadorActual.esDuenioDe(unidad)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        unidad.desplazarHaciaAbajo();
+    }
+
+    public void moverPiezaEnCoordenadaHaciaIzquierda(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion {
+
+        Unidad unidad = tablero.conseguirUnidad(coordenadas);
+        if (!jugadorActual.esDuenioDe(unidad)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        unidad.desplazarHaciaIzquierda();
+    }
+
+    public void moverPiezaEnCoordenadaHaciaDerecha(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion {
+
+        Unidad unidad = tablero.conseguirUnidad(coordenadas);
+        if (!jugadorActual.esDuenioDe(unidad)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        unidad.desplazarHaciaDerecha();
+    }
 }

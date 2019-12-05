@@ -3,17 +3,16 @@ package AlgoChessTest.TableroTest;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Tablero.Casillero;
-import model.AlgoChess.Tablero.MatrizCasilleros;
 import model.AlgoChess.Tablero.Tablero;
+import model.AlgoChess.Unidades.Unidad;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito.*;
 import static org.mockito.Mockito.*;
 
 public class CasilleroTest {
 
-    MatrizCasilleros matrizMock = mock(MatrizCasilleros.class);
+    Tablero tableroMock = mock(Tablero.class);
     Equipo equipoMock = mock(Equipo.class);
     Equipo equipoEnemigoMock = mock(Equipo.class);
 
@@ -21,26 +20,29 @@ public class CasilleroTest {
     public void CasilleroRecienCreadoEstaVacio() {
 
 
-        Casillero casillero = new Casillero(0, 0, matrizMock, equipoMock);
+        Casillero casillero = new Casillero(0, 0, tableroMock, equipoMock);
         assert casillero.estaLibre();
     }
 
     @Test
     public void CasilleroOcupadoNoPuedeSerOcupadoSiYaEstaOcupado() {
 
-        Casillero casillero = new Casillero(0, 0, matrizMock, equipoMock);
+        Unidad unidadMock = mock(Unidad.class);
+        Casillero casillero = new Casillero(0, 0, tableroMock, equipoMock);
+
 
         Assertions.assertThrows(CasilleroOcupadoExcepcion.class, () -> {
-            casillero.ocuparCasillero();
-            casillero.ocuparCasillero();
+            casillero.ocuparCasillero(unidadMock);
+            casillero.ocuparCasillero(unidadMock);
         });
     }
 
     @Test
     public void OcupoCasilleroRecienCreadoYNoEstaVacio() throws CasilleroOcupadoExcepcion {
 
-        Casillero casillero = new Casillero(0, 0, matrizMock, equipoMock);
-        casillero.ocuparCasillero();
+        Unidad unidadMock = mock(Unidad.class);
+        Casillero casillero = new Casillero(0, 0, tableroMock, equipoMock);
+        casillero.ocuparCasillero(unidadMock);
 
         Assertions.assertFalse(casillero.estaLibre());
 
@@ -48,9 +50,9 @@ public class CasilleroTest {
 
     @Test
     public void DesocupoCasilleroOcupadoYResultaVacio() throws CasilleroOcupadoExcepcion {
-
-        Casillero casillero = new Casillero(0, 0, matrizMock, equipoMock);
-        casillero.ocuparCasillero();
+        Unidad unidadMock = mock(Unidad.class);
+        Casillero casillero = new Casillero(0, 0, tableroMock, equipoMock);
+        casillero.ocuparCasillero(unidadMock);
         casillero.vaciar();
 
         Assertions.assertTrue(casillero.estaLibre());
@@ -60,7 +62,7 @@ public class CasilleroTest {
     @Test
     public void CasilleroPerteneceAEquipoDevuelveTrueConElEquipoAsignadoEnSuConstruccionComoParametro(){
 
-        Casillero casillero = new Casillero(0,0,matrizMock,equipoMock);
+        Casillero casillero = new Casillero(0,0,tableroMock,equipoMock);
         when(equipoMock.esIgualA(equipoMock)).thenReturn(true);
 
         Assert.assertTrue(casillero.perteneceAEquipo(equipoMock));
@@ -70,7 +72,7 @@ public class CasilleroTest {
     @Test
     public void CasilleroPerteneceAEquipoDevuelveFalseConElEquipoDistintoAlQuePertenece(){
 
-        Casillero casillero = new Casillero(0,0,matrizMock,equipoMock);
+        Casillero casillero = new Casillero(0,0,tableroMock,equipoMock);
         when(equipoMock.esIgualA(equipoEnemigoMock)).thenReturn(true);
 
         Assert.assertTrue(casillero.perteneceAEquipo(equipoEnemigoMock));
@@ -80,7 +82,7 @@ public class CasilleroTest {
 
     @Test
     public void CasilleroDevuelveMultiplicadorDeDanioIgualAUnoAUnidadDelMismoEquipo() {
-        Casillero casillero = new Casillero(8, 16, matrizMock, equipoMock);
+        Casillero casillero = new Casillero(8, 16, tableroMock, equipoMock);
         when(equipoMock.esIgualA(equipoMock)).thenReturn(true);
 
         Assertions.assertEquals(1, casillero.aplicarMultiplicadorDanioAUnidadDeEquipo(equipoMock));
@@ -89,7 +91,7 @@ public class CasilleroTest {
 
     @Test
     public void CasilleroDevuelveMultiplicadorDeDanioAumentadoParaUnidadEnemiga() {
-        Casillero casillero = new Casillero(8, 16, matrizMock, equipoMock);
+        Casillero casillero = new Casillero(8, 16, tableroMock, equipoMock);
         when(equipoMock.esIgualA(equipoEnemigoMock)).thenReturn(false);
 
         Assertions.assertEquals(1.05, casillero.aplicarMultiplicadorDanioAUnidadDeEquipo(equipoEnemigoMock));

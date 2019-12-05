@@ -21,7 +21,7 @@ public class Tablero {
     public Tablero(Equipo equipoUno, Equipo equipoDos){
         equipoBlanco = equipoUno;
         equipoNegro = equipoDos;
-        matrizCasilleros = new MatrizCasilleros(equipoUno,equipoDos);
+        matrizCasilleros = new MatrizCasilleros(equipoUno,equipoDos, this);
     }
 
     public void inicializarUnidadEnCasillero(Unidad unidad, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
@@ -48,6 +48,14 @@ public class Tablero {
 
     public int contarCasillerosVacios(){
        return matrizCasilleros.contarCasillerosVacios();
+    }
+
+    public void enCasilleroPonerUnidad(Casillero casillero, Unidad unidad){
+        diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
+    }
+
+    public void vaciarCasillero(Casillero casillero){
+        diccionarioCasilleroUnidad.removerUnidadDeCasillero(casillero);
     }
 
 }

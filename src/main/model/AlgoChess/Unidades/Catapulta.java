@@ -29,4 +29,24 @@ public class Catapulta extends Unidad {
     public void recibirCuracion(int curacion) throws NoSePudoCurarExcepcion {
         throw new NoSePudoCurarExcepcion();
     }
+
+    @Override
+    public void desplazarHaciaAbajo() throws CatapultaNoSePuedeMoverExcepcion {
+        throw new CatapultaNoSePuedeMoverExcepcion();
+    }
+
+    @Override
+    public void desplazarHaciaArriba() throws CatapultaNoSePuedeMoverExcepcion {
+        throw new CatapultaNoSePuedeMoverExcepcion();
+    }
+
+    @Override
+    public void desplazarHaciaDerecha() throws CatapultaNoSePuedeMoverExcepcion {
+        throw new CatapultaNoSePuedeMoverExcepcion();
+    }
+
+    @Override
+    public void desplazarHaciaIzquierda() throws  CatapultaNoSePuedeMoverExcepcion {
+        throw new CatapultaNoSePuedeMoverExcepcion();
+    }
 }

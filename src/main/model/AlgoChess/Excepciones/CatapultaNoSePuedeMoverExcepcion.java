@@ -1,4 +1,4 @@
 package model.AlgoChess.Excepciones;
 
-public class CatapultaNoSePuedeMoverExcepcion {
+public class CatapultaNoSePuedeMoverExcepcion extends Exception {
 }

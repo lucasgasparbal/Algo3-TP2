@@ -41,7 +41,7 @@ public abstract class Unidad {
             throw new CasilleroEnemigoExcepcion();
         }
 
-        unCasillero.ocuparCasillero();
+        unCasillero.ocuparCasillero(this);
         ubicacion = unCasillero;
     }
     public void recibirCuracion(int curacion) throws NoSePudoCurarExcepcion {
@@ -93,4 +93,9 @@ public abstract class Unidad {
     }
 
     public abstract void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion;
+
+    public abstract void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
+    public abstract void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
+    public abstract void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
+    public abstract void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion;
 }

@@ -21,8 +21,7 @@ public class DiccionarioCasilleroUnidad {
         return unidad;
     }
 
-    public void actualizarCasilleroUnidad(Casillero casilleroViejo, Casillero casilleroNuevo) {
-        Unidad unidad = diccionario.remove(casilleroViejo);
-        diccionario.put(casilleroNuevo,unidad);
+    public Unidad removerUnidadDeCasillero(Casillero casillero){
+        return diccionario.remove(casillero);
     }
 }

@@ -36,13 +36,13 @@ public class EntidadesTest {
         Soldado soldadoUno = new Soldado(equipoDos);
         Soldado soldadoDos = new Soldado(equipoUno);
         int[] coordenadasA = {10 , 10};
-        int[] coordenadasB = {9,10};
+        int[] coordenadasB = {10,9};
         soldadoUno.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
         soldadoDos.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
 
 
         //Exception throw
-        soldadoUno.desplazarHaciaIzquierda();
+        soldadoUno.desplazarHaciaAbajo();
     }
 
     @Test

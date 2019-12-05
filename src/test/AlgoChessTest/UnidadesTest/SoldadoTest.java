@@ -228,7 +228,7 @@ public class SoldadoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadas = {19,0};
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
-        Soldado soldado = new Soldado (equipoDos);
+        Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
         try {
             soldado.desplazarHaciaDerecha();
@@ -289,7 +289,7 @@ public class SoldadoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadas = {0,19};
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
-        Soldado soldado = new Soldado (equipoUno);
+        Soldado soldado = new Soldado (equipoDos);
         soldado.inicializarEnCasillero(casillero);
         try {
             soldado.desplazarHaciaIzquierda();
