@@ -25,7 +25,7 @@ public class CuranderoTest {
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
-
+        when(equipoDosMock.esIgualA(equipoDosMock)).thenReturn(true);
         int i=0;
         Soldado soldado1 = new Soldado (equipoUnoMock );
         Soldado soldado2 = new Soldado (equipoDosMock );
@@ -42,6 +42,7 @@ public class CuranderoTest {
 
         int vida_actual = soldado2.getVida();
         Curandero curandero = new Curandero (equipoDosMock );
+
         curandero.atacar(soldado2);
 
         Assert.assertEquals(vida_actual+15,soldado2.getVida());
@@ -51,7 +52,7 @@ public class CuranderoTest {
     public void CuranderoCuraASoldadoConVidaCompletaNoSanaMasDelMaximo() throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
 
         Equipo equipoDosMock = mock(Equipo.class);
-
+        when(equipoDosMock.esIgualA(equipoDosMock)).thenReturn(true);
         int i=0;
         Soldado soldado2 = new Soldado (equipoDosMock );
 

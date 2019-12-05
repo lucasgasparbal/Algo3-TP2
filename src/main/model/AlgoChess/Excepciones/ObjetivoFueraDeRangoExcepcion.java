@@ -1,4 +1,4 @@
 package model.AlgoChess.Excepciones;
 
-public class ObjetivoFueraDeRangoError {
+public class ObjetivoFueraDeRangoExcepcion extends Exception {
 }

@@ -11,9 +11,6 @@ public class Tablero {
     private MatrizCasilleros matrizCasilleros;
     private Equipo equipoBlanco;
     private Equipo equipoNegro;
-    private Casillero[][] casilleros = new Casillero[CantFilas][CantColumnas];
-
-    private AnalizadorRangos analizadorRangos = new AnalizadorRangos();
 
 
     public Tablero(Equipo equipoUno, Equipo equipoDos){

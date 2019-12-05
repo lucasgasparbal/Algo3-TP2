@@ -16,7 +16,7 @@ public class Curacion implements Ataque {
 
     @Override
     public void atacar(Unidad objetivo, Unidad atacante) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
-        if((atacante.esEnemigoDe(objetivo)) != true){
+        if(!(atacante.esEnemigoDe(objetivo))){
            objetivo.recibirCuracion (dmg);
         }
         else throw new NoSePudoAtacarExcepcion();

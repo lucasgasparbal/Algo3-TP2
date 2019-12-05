@@ -74,8 +74,10 @@ public class JineteTest {
         Jinete jinete = new Jinete (equipoUno);
         Soldado soldado = new Soldado (equipoDos);
         Tablero tablero = new Tablero (equipoUno,equipoDos);
-        soldado.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,11));
+        int[] coordenadasA = {10,10};
+        int[] coordenadasB = {9,11};
+        soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
         while (i<20) {
             try {
                 jinete.atacar(soldado);
@@ -92,13 +94,16 @@ public class JineteTest {
         Equipo equipoDos = new Equipo(2);
         equipoDos.establecerEquipoEnemigo(equipoUno);
         equipoUno.establecerEquipoEnemigo(equipoDos);
-        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoDos);
-        Jinete jinete = new Jinete (equipoUno);
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10,10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(10,11));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9,10));
+        Jinete jinete = new Jinete(equipoUno);
+        int[] coordenadasA = {10,10};
+        int[] coordenadasB = {10,11};
+        int[] coordenadasC = {9,10};
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
         int i =0;
         while (i<19) {
             try {
@@ -122,9 +127,12 @@ public class JineteTest {
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoUno);
         Jinete jinete = new Jinete (equipoUno);
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(10, 10));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(9, 11));
-        jinete.inicializarEnCasillero(tablero.conseguirCasillero(9, 10));
+        int[] coordenadasA = {10,10};
+        int[] coordenadasB = {9,11};
+        int[] coordenadasC = {9,10};
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
         int i = 0;
         while (i < 19) {
             try {

@@ -349,18 +349,17 @@ public class SoldadoTest {
         Soldado soldadoUno = new Soldado(equipoUno);
         Soldado soldadoDos = new Soldado(equipoDos);
 
-        Assert.assertFalse(soldadoUno.esEnemigoDe(soldadoDos));
+        Assert.assertTrue(soldadoUno.esEnemigoDe(soldadoDos));
     }
 
     @Test
     public void SoldadoEsEnemigoDeDevuelveFalseConUnaUnidadPertenecienteASuEquipo(){
         Equipo equipoUno = mock(Equipo.class);
-        Equipo equipoDos = mock(Equipo.class);
         when(equipoUno.esIgualA(equipoUno)).thenReturn(true);
         Soldado soldadoUno = new Soldado(equipoUno);
         Soldado soldadoDos = new Soldado(equipoUno);
 
-        Assert.assertTrue(soldadoUno.esEnemigoDe(soldadoDos));
+        Assert.assertFalse(soldadoUno.esEnemigoDe(soldadoDos));
     }
 
 }

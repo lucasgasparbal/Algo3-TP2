@@ -85,7 +85,7 @@ public abstract class Unidad {
     }
 
     public boolean esEnemigoDe(Unidad unidad){
-        return unidad.perteneceAEquipo(equipo);
+        return !unidad.perteneceAEquipo(equipo);
     }
 
     private boolean perteneceAEquipo(Equipo unEquipo){
