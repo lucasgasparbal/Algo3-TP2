@@ -44,7 +44,7 @@ public abstract class Unidad {
         unCasillero.ocuparCasillero();
         ubicacion = unCasillero;
     }
-    public void recibirCuracion(int curacion) throws NoSePudoAtacarExcepcion{
+    public void recibirCuracion(int curacion) {
         vida.recibiCuracion(curacion);
     }
 

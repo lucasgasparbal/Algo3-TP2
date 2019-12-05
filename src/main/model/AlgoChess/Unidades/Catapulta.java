@@ -23,8 +23,4 @@ public class Catapulta extends Unidad {
     public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, NoSePudoAtacarExcepcion {
         ataque.atacar(objetivo,this);
     }
-    @Override
-    public void recibirCuracion(int curacion) throws NoSePudoAtacarExcepcion {
-        throw new NoSePudoAtacarExcepcion();
-    }
 }
