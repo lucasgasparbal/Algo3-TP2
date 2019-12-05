@@ -1,5 +1,5 @@
 package model.AlgoChess.Excepciones;
 
-public class NoHayUnidadAliadaEnCasilleroExcepcion extends Exception{
+public class NoHayUnidadEnCasilleroExcepcion extends Exception{
 
 }

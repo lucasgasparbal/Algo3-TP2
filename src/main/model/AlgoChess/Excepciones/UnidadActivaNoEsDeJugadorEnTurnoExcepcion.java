@@ -1,4 +1,4 @@
 package model.AlgoChess.Excepciones;
 
-public class UnidadActivaNoEsDeJugadorEnTurnoExcepcion {
+public class UnidadActivaNoEsDeJugadorEnTurnoExcepcion extends  Exception{
 }

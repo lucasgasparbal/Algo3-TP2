@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class JugadorTest {
 
@@ -162,6 +163,16 @@ public class JugadorTest {
 
         Assert.assertEquals(0,jugador.oroRestante());
 
+    }
+
+    @Test
+
+    public void JugadorEsDuenioDeUnaUnidadQueEstaEnSuEquipo(){
+        Jugador jugador = new Jugador();
+        Equipo equipo = jugador.getEquipo();
+        Soldado soldado = mock(Soldado.class);
+        when(soldado.perteneceAEquipo(equipo)).thenReturn(true);
+        Assert.assertTrue(jugador.esDuenioDe(soldado));
     }
 }
 

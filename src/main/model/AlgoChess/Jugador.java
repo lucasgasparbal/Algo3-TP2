@@ -143,4 +143,8 @@ public class Jugador {
     public Equipo getEquipo() {
         return equipo;
     }
+
+    public boolean esDuenioDe(Unidad unidad) {
+        return unidad.perteneceAEquipo(equipo);
+    }
 }

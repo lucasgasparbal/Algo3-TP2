@@ -88,8 +88,9 @@ public abstract class Unidad {
         return !unidad.perteneceAEquipo(equipo);
     }
 
-    private boolean perteneceAEquipo(Equipo unEquipo){
+    public boolean perteneceAEquipo(Equipo unEquipo){
         return equipo.esIgualA(unEquipo);
     }
 
+    public abstract void atacar(Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion;
 }

@@ -1,6 +1,6 @@
 package model.AlgoChess.Tablero;
 
-import model.AlgoChess.Excepciones.NoHayUnidadAliadaEnCasilleroExcepcion;
+import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
 import model.AlgoChess.Unidades.Unidad;
 
 import java.util.Hashtable;
@@ -12,10 +12,10 @@ public class DiccionarioCasilleroUnidad {
         diccionario.put(casillero, unidad);
     }
 
-    public Unidad obtenerUnidadEnCasillero(Casillero casillero) throws NoHayUnidadAliadaEnCasilleroExcepcion {
+    public Unidad obtenerUnidadEnCasillero(Casillero casillero) throws NoHayUnidadEnCasilleroExcepcion {
         Unidad unidad = diccionario.get(casillero);
         if(unidad == null){
-            throw new NoHayUnidadAliadaEnCasilleroExcepcion();
+            throw new NoHayUnidadEnCasilleroExcepcion();
         }
 
         return unidad;

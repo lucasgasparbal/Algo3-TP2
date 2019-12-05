@@ -4,6 +4,7 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
+import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
 import model.AlgoChess.Unidades.Unidad;
 
 public class Tablero {
@@ -31,6 +32,11 @@ public class Tablero {
     }
     public Casillero conseguirCasillero(int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion {
         return matrizCasilleros.conseguirCasillero(coordenadas);
+    }
+
+    public Unidad conseguirUnidad(int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion {
+
+        return diccionarioCasilleroUnidad.obtenerUnidadEnCasillero(matrizCasilleros.conseguirCasillero(coordenadas));
     }
 
     public int contarCasillerosDeEquipoUno(){

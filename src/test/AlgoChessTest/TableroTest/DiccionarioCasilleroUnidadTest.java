@@ -1,6 +1,6 @@
 package AlgoChessTest.TableroTest;
 
-import model.AlgoChess.Excepciones.NoHayUnidadAliadaEnCasilleroExcepcion;
+import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.DiccionarioCasilleroUnidad;
 import model.AlgoChess.Unidades.Unidad;
@@ -11,8 +11,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DiccionarioCasilleroUnidadTest {
-    @Test(expected = NoHayUnidadAliadaEnCasilleroExcepcion.class)
-    public void DiccionarioCasilleroUnidadObtenerUnidadEnCasilleroTiraExcepcionSiNoHayUnidadEnElCasillero() throws NoHayUnidadAliadaEnCasilleroExcepcion {
+    @Test(expected = NoHayUnidadEnCasilleroExcepcion.class)
+    public void DiccionarioCasilleroUnidadObtenerUnidadEnCasilleroTiraExcepcionSiNoHayUnidadEnElCasillero() throws NoHayUnidadEnCasilleroExcepcion {
         DiccionarioCasilleroUnidad diccionarioCasilleroUnidad = new DiccionarioCasilleroUnidad();
         Casillero casillero = mock(Casillero.class);
 
@@ -20,7 +20,7 @@ public class DiccionarioCasilleroUnidadTest {
     }
 
     @Test
-    public void DiccionarioCasilleroUnidadObtenerUnidadEnCasilleroDevuelveUnidadSiLaAgregoAntes() throws NoHayUnidadAliadaEnCasilleroExcepcion {
+    public void DiccionarioCasilleroUnidadObtenerUnidadEnCasilleroDevuelveUnidadSiLaAgregoAntes() throws NoHayUnidadEnCasilleroExcepcion {
         DiccionarioCasilleroUnidad diccionarioCasilleroUnidad = new DiccionarioCasilleroUnidad();
         Casillero casillero = mock(Casillero.class);
         Unidad unidad = mock(Unidad.class);
@@ -30,9 +30,9 @@ public class DiccionarioCasilleroUnidadTest {
         Assert.assertEquals(unidad,diccionarioCasilleroUnidad.obtenerUnidadEnCasillero(casillero));
     }
 
-    @Test(expected = NoHayUnidadAliadaEnCasilleroExcepcion.class)
+    @Test(expected = NoHayUnidadEnCasilleroExcepcion.class)
 
-    public void DiccionarioCasilleroUnidadActualizoLaPosicionDeUnaUnidadNoLaPuedoConseguirPorSuCasilleroViejo() throws NoHayUnidadAliadaEnCasilleroExcepcion {
+    public void DiccionarioCasilleroUnidadActualizoLaPosicionDeUnaUnidadNoLaPuedoConseguirPorSuCasilleroViejo() throws NoHayUnidadEnCasilleroExcepcion {
         DiccionarioCasilleroUnidad diccionarioCasilleroUnidad = new DiccionarioCasilleroUnidad();
         Casillero casilleroA = mock(Casillero.class);
         Casillero casilleroB = mock(Casillero.class);
@@ -45,7 +45,7 @@ public class DiccionarioCasilleroUnidadTest {
     }
 
     @Test
-    public void DiccionarioCasilleroUnidadActualizoLaPosicionDeUnaUnidadLaConsigoPorSuCasilleroNuevo() throws NoHayUnidadAliadaEnCasilleroExcepcion {
+    public void DiccionarioCasilleroUnidadActualizoLaPosicionDeUnaUnidadLaConsigoPorSuCasilleroNuevo() throws NoHayUnidadEnCasilleroExcepcion {
         DiccionarioCasilleroUnidad diccionarioCasilleroUnidad = new DiccionarioCasilleroUnidad();
         Casillero casilleroA = mock(Casillero.class);
         Casillero casilleroB = mock(Casillero.class);

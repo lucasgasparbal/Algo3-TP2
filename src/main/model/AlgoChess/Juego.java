@@ -2,6 +2,7 @@ package model.AlgoChess;
 
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Tablero;
+import model.AlgoChess.Unidades.Unidad;
 
 public class Juego {
     Jugador jugadorUno;
@@ -102,4 +103,18 @@ public class Juego {
         jugadorActual.removerCatapultaDeBanquilla();
     }
 
+    public int obtenerVida(int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion {
+        return tablero.conseguirUnidad(coordenadas).getVida();
+    }
+
+    public boolean atacarPieza(int[] coordenadasAtacante, int[] coordenadasObjetivo) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion {
+        Unidad unidadAtacante = tablero.conseguirUnidad(coordenadasAtacante);
+        Unidad unidadObjetivo = tablero.conseguirUnidad(coordenadasObjetivo);
+        if (!jugadorActual.esDuenioDe(unidadAtacante)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        unidadAtacante.atacar(unidadObjetivo);
+
+        return unidadObjetivo.murio();
+    }
 }
