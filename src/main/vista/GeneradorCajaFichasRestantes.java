@@ -11,7 +11,17 @@ import javafx.scene.layout.StackPane;
 
 public class GeneradorCajaFichasRestantes {
 
-    public StackPane generarCajaFichasRestantes(String directorioElementos, ImageViewPiezaEnJuego ultimaPiezaSeleccionada, GeneradorDeEtiquetas generadorDeEtiquetas, int[] cantidadFichas) {
+    String directorioElementos;
+    ImageViewPiezaEnJuego ultimaPiezaSeleccionada;
+    GeneradorDeEtiquetas generadorDeEtiquetas;
+
+    public GeneradorCajaFichasRestantes (String directorio, ImageViewPiezaEnJuego ultimaPieza, GeneradorDeEtiquetas generador) {
+        this.directorioElementos = directorio;
+        this.ultimaPiezaSeleccionada = ultimaPieza;
+        this.generadorDeEtiquetas = generador;
+    }
+
+    public StackPane generarCajaFichasRestantes(int[] cantidadFichas) {
 
         HBox soldadosRestantes = new HBox();
         HBox jinetesRestantes = new HBox();
@@ -19,23 +29,28 @@ public class GeneradorCajaFichasRestantes {
         HBox catapultasRestantes = new HBox();
 
         ImageView imagenFichaSoldado = new ImageView(directorioElementos+"fichaSoldado.png");
-        imagenFichaSoldado.setOnMouseClicked(new HandlerActualizarImagen(soldadosRestantes,ultimaPiezaSeleccionada,directorioElementos+"soldadoEnCasillero.png",generadorDeEtiquetas,cantidadFichas[0]));
+        imagenFichaSoldado.setOnMouseClicked(new HandlerActualizarImagen(soldadosRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaSoldado32.png",generadorDeEtiquetas,cantidadFichas[0]));
         ImageView imagenFichaJinete = new ImageView(directorioElementos+"fichaJinete.png");
-        imagenFichaJinete.setOnMouseClicked(new HandlerActualizarImagen(jinetesRestantes,ultimaPiezaSeleccionada,directorioElementos+"jineteEnCasillero.png",generadorDeEtiquetas,cantidadFichas[1]));
+        imagenFichaJinete.setOnMouseClicked(new HandlerActualizarImagen(jinetesRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaJinete32.png",generadorDeEtiquetas,cantidadFichas[1]));
         ImageView imagenFichaCurandero = new ImageView(directorioElementos+"fichaCurandero.png");
-        imagenFichaCurandero.setOnMouseClicked(new HandlerActualizarImagen(curanderosRestantes,ultimaPiezaSeleccionada,directorioElementos+"curanderoEnCasillero.png",generadorDeEtiquetas,cantidadFichas[2]));
+        imagenFichaCurandero.setOnMouseClicked(new HandlerActualizarImagen(curanderosRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaCurandero32.png",generadorDeEtiquetas,cantidadFichas[2]));
         ImageView imagenFichaCatapulta = new ImageView(directorioElementos+"fichaCatapulta.png");
-        imagenFichaCatapulta.setOnMouseClicked(new HandlerActualizarImagen(catapultasRestantes,ultimaPiezaSeleccionada,directorioElementos+"catapultaEnCasillero.png",generadorDeEtiquetas,cantidadFichas[3]));
+        imagenFichaCatapulta.setOnMouseClicked(new HandlerActualizarImagen(catapultasRestantes,ultimaPiezaSeleccionada,directorioElementos+"fichaCatapulta32.png",generadorDeEtiquetas,cantidadFichas[3]));
 
         StackPane cajaFichasRestantes = new StackPane();
 
-        Label etiquetaSoldadosRestantes = generadorDeEtiquetas.generarEtiquetaNegrita("x"+Integer.toString(cantidadFichas[0]),40);
+        Label etiquetaSoldadosRestantes= new Label();
+        Label etiquetaJinetesRestantes=new Label();
+        Label etiquetaCuranderosRestantes = new Label();
+        Label etiquetaCatapultasRestantes = new Label();
+
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaSoldadosRestantes,"x"+Integer.toString(cantidadFichas[0]),40);
         soldadosRestantes.getChildren().addAll(imagenFichaSoldado,etiquetaSoldadosRestantes);
-        Label etiquetaJinetesRestantes = generadorDeEtiquetas.generarEtiquetaNegrita("x"+Integer.toString(cantidadFichas[1]),40);
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaJinetesRestantes,"x"+Integer.toString(cantidadFichas[1]),40);
         jinetesRestantes.getChildren().addAll(imagenFichaJinete,etiquetaJinetesRestantes);
-        Label etiquetaCuranderosRestantes = generadorDeEtiquetas.generarEtiquetaNegrita("x"+Integer.toString(cantidadFichas[2]),40);
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaCuranderosRestantes,"x"+Integer.toString(cantidadFichas[2]),40);
         curanderosRestantes.getChildren().addAll(imagenFichaCurandero,etiquetaCuranderosRestantes);
-        Label etiquetaCatapultasRestantes = generadorDeEtiquetas.generarEtiquetaNegrita("x"+Integer.toString(cantidadFichas[3]),40);
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaCatapultasRestantes,"x"+Integer.toString(cantidadFichas[3]),40);
         catapultasRestantes.getChildren().addAll(imagenFichaCatapulta,etiquetaCatapultasRestantes);
 
         ImageView imagenCajaFichas = new ImageView(directorioElementos+"cajaFichas.png");

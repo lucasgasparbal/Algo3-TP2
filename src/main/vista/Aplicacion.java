@@ -1,9 +1,6 @@
 package vista;
 
-import controller.HandlerCambiarLayout;
-import controller.HandlerCrearTableroFinal;
-import controller.HandlerActualizarImagen;
-import controller.HandlerNombreUsuarioNegro;
+import controller.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
+import model.AlgoChess.Juego;
 
 public class Aplicacion extends Application {
 
@@ -29,6 +27,8 @@ public class Aplicacion extends Application {
     @Override
     public void start (Stage stage) throws Exception {
 
+        Juego juego = new Juego();
+
         String directorio_resources = "file:/home/facundo/IdeaProjects/TP2/src/resources/";
 
         GeneradorDeBotones generadorDeBotones = new GeneradorDeBotones(directorio_resources+"fonts/Adventurer.ttf");
@@ -37,16 +37,23 @@ public class Aplicacion extends Application {
 
         stage.setTitle("AlgoChess");
 
+        String nombreJugadorBlanco="";
+        String nombreJugadorNegro="";
+
         //1er Layout - Menu Inicial//
 
-        TextField texto = new TextField();
-        texto.setPromptText("Ingrese el nombre deseado");
+        TextField textoJugadorBlanco = new TextField();
+        textoJugadorBlanco.setPromptText("Ingrese el nombre deseado");
+        TextField textoJugadorNegro = new TextField();
+        textoJugadorNegro.setPromptText("Ingrese el nombre deseado");
 
         Button botonEnviar = generadorDeBotones.nuevoBoton("Aceptar");
 
         Button botonEmpezar = generadorDeBotones.nuevoBoton("Empezar juego");
 
-        Label etiquetaJugadorBlanco = generadorDeEtiquetas.generarEtiquetaNegrita("Ingresar nombre del jugador blanco",18);
+        Label etiquetaJugadorBlanco = new Label ();
+
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaJugadorBlanco,"Ingresar nombre del jugador blanco",18);
 
         ImageView imagenFondo = new ImageView(directorio_resources+"fondo.jpg");
 
@@ -57,7 +64,7 @@ public class Aplicacion extends Application {
 
         HBox contenedorHorizontal = new HBox(botonEnviar);
 
-        VBox contenedorPrincipal = new VBox(etiquetaJugadorBlanco, texto, contenedorHorizontal);
+        VBox contenedorPrincipal = new VBox(etiquetaJugadorBlanco, textoJugadorBlanco, contenedorHorizontal);
         contenedorPrincipal.setSpacing(10);
         contenedorPrincipal.setPadding(new Insets(20));
 
@@ -72,14 +79,22 @@ public class Aplicacion extends Application {
 
         // 2do Layout - Compra de Fichas //
 
-        Button botonContinuar = generadorDeBotones.nuevoBoton("Continuar");
+        Button botonComenzarJuego = generadorDeBotones.nuevoBoton("Colocar piezas");
 
         ImageView fondo_compra_piezas = new ImageView (directorio_resources+"fondoCompraFichas.png");
 
+        Label etiquetaOroRestante = new Label();
+
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaOroRestante,"ORO: "+juego.oroRestante(),30);
+
         Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
+        botonComprarSoldado.setOnAction(new HandlerComprarSoldado(juego,etiquetaOroRestante,generadorDeEtiquetas));
         Button botonComprarJinete = generadorDeBotones.nuevoBoton("Comprar Jinete");
+        botonComprarJinete.setOnAction(new HandlerComprarJinete(juego,etiquetaOroRestante,generadorDeEtiquetas));
         Button botonComprarCatapulta = generadorDeBotones.nuevoBoton("Comprar Catapulta");
+        botonComprarCatapulta.setOnAction(new HandlerComprarCatapulta(juego,etiquetaOroRestante,generadorDeEtiquetas));
         Button botonComprarCurandero = generadorDeBotones.nuevoBoton("Comprar Curandero");
+        botonComprarCurandero.setOnAction(new HandlerComprarCurandero(juego,etiquetaOroRestante,generadorDeEtiquetas));
 
         HBox contenedorDeFichas = new HBox();
 
@@ -89,17 +104,21 @@ public class Aplicacion extends Application {
         contenedorDeBotones.setAlignment(Pos.CENTER);
         Group grupoBotones = new Group(contenedorDeBotones);
 
-        Label etiquetaOroRestante = generadorDeEtiquetas.generarEtiquetaNegrita("ORO RESTANTE: ",30);
         etiquetaOroRestante.setTextFill(Color.web("#ffd700"));
 
         Button botonReset = generadorDeBotones.nuevoBoton("Vender todas las piezas");
 
-        HBox stackOro = new HBox(botonReset,etiquetaOroRestante,botonContinuar);
+        Button botonComprarFichasNegras = generadorDeBotones.nuevoBoton("Siguiente");
+
+        HBox stackOro = new HBox(botonReset,etiquetaOroRestante,botonComprarFichasNegras);
         stackOro.setSpacing(500);
         stackOro.setPadding(new Insets(20));
         stackOro.setMaxHeight(100);
 
-        Label etiquetaPlaceholder = generadorDeEtiquetas.generarEtiquetaNegrita("PLACEHOLDER DESCRIPCIONES",40);
+        botonComprarFichasNegras.setOnAction(new HandlerCompraFichasNegras(juego,stackOro,etiquetaOroRestante,botonComenzarJuego,generadorDeEtiquetas));
+
+        Label etiquetaPlaceholder = new Label();
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaPlaceholder,"PLACEHOLDER DESCRIPCIONES",40);
         etiquetaPlaceholder.setTextFill(Color.web("#ffd700"));
 
         ImageView imagenJinete = new ImageView((directorio_resources+"jinete.png"));
@@ -130,9 +149,7 @@ public class Aplicacion extends Application {
 
         // 3er Layout - Creacion tablero blanco //
 
-        int[] cantidadFichasBlancas = {1,1,99,99}; // lo cambio por el getter de Juego
-
-        Label distribuirPiezasBlancas = generadorDeEtiquetas.generarEtiquetaNegrita("JUGADOR BLANCO DISTRIBUYA SUS PIEZAS: ",30);
+        Label distribuirPiezasBlancas = new Label();
 
         ImageView fondo_tablero1 = new ImageView (directorio_resources+"fondo_tablero.png");
 
@@ -144,9 +161,8 @@ public class Aplicacion extends Application {
         colocadoPiezasBlancas.setMaxHeight(100);
 
         ImageViewPiezaEnJuego ultimaPiezaSeleccionada = new ImageViewPiezaEnJuego();
-
-        GeneradorCajaFichasRestantes generadorCajaFichasRestantes = new GeneradorCajaFichasRestantes();
-        StackPane cajaFichasBlancasRestantes = generadorCajaFichasRestantes.generarCajaFichasRestantes(directorio_resources+"fichasBlancas/",ultimaPiezaSeleccionada, generadorDeEtiquetas,cantidadFichasBlancas);
+        GeneradorCajaFichasRestantes generadorCajaFichasBlancasRestantes = new GeneradorCajaFichasRestantes(directorio_resources+"fichasBlancas/",ultimaPiezaSeleccionada, generadorDeEtiquetas);
+        StackPane cajaFichasBlancasRestantes = null;
 
         GeneradorDeTablero generadorDeTablero = new GeneradorDeTablero ();
         GridPane tableroBlanco = generadorDeTablero.generarTablero(directorio_resources+"escaqueBlanco40.png",ultimaPiezaSeleccionada);
@@ -162,20 +178,19 @@ public class Aplicacion extends Application {
 
         // 4to Layout - Creacion tablero negro //
 
-        int[] cantidadFichasNegras = {2,2,99,99};
-
-        Label distribuirPiezasNegras = generadorDeEtiquetas.generarEtiquetaNegrita("JUGADOR NEGRO DISTRIBUYA SUS PIEZAS: ",30);
+        Label distribuirPiezasNegras = new Label();
 
         Button botonFinalizarColocadoPiezasNegras = generadorDeBotones.nuevoBoton("Finalizar");
 
         ImageView fondo_tablero2 = new ImageView (directorio_resources+"fondo_tablero.png");
 
-        StackPane cajaFichasNegrasRestantes = generadorCajaFichasRestantes.generarCajaFichasRestantes(directorio_resources+"fichasNegras/",ultimaPiezaSeleccionada,generadorDeEtiquetas,cantidadFichasNegras);
-
+        StackPane cajaFichasNegrasRestantes = null;
         HBox colocadoPiezasNegras = new HBox(distribuirPiezasNegras,botonFinalizarColocadoPiezasNegras);
         colocadoPiezasNegras.setSpacing(800);
         colocadoPiezasNegras.setPadding(new Insets(20));
         colocadoPiezasNegras.setMaxHeight(100);
+
+        GeneradorCajaFichasRestantes generadorCajaFichasNegrasRestantes = new GeneradorCajaFichasRestantes(directorio_resources+"fichasBlancas/",ultimaPiezaSeleccionada, generadorDeEtiquetas);
 
         GridPane tableroNegro = generadorDeTablero.generarTablero("file:/home/facundo/IdeaProjects/TP2/src/resources/escaqueNegro40.png",ultimaPiezaSeleccionada);
         Group grupoTableroNegro = new Group (tableroNegro);
@@ -190,6 +205,8 @@ public class Aplicacion extends Application {
 
         // 5to Layout - Creacion tablero final //
 
+        boolean modoCombate = true;
+
         GeneradorDeCajaAtaqueMovimiento generadorDeCajaAtaqueMovimiento = new GeneradorDeCajaAtaqueMovimiento(directorio_resources);
         BorderPane campoJuegoFinal = generadorDeCajaAtaqueMovimiento.generarCajaAtaqueMovimiento();
         StackPane informacionPieza = new StackPane();
@@ -200,9 +217,11 @@ public class Aplicacion extends Application {
         terminarTurno.setStyle("-fx-border-color: #000000; -fx-background-color: #ff0000; -fx-border-width: 2px");
         VBox vidaPieza = new VBox ();
         vidaPieza.setSpacing(100);
-        Label vida = generadorDeEtiquetas.generarEtiquetaNegrita("- Vida: ",40);
+        Label vida = new Label();
+        Label ataques = new Label();
+        generadorDeEtiquetas.generarEtiquetaNegrita(vida,"- Vida: ",40);
         vida.setTextFill(Color.web("#FFFFFF"));
-        Label ataques = generadorDeEtiquetas.generarEtiquetaNegrita("- Ataques: ",40);
+        generadorDeEtiquetas.generarEtiquetaNegrita(ataques,"- Ataques: ",40);
         ataques.setTextFill(Color.web("#FFFFFF"));
         vidaPieza.getChildren().addAll(vida,ataques);
         informacionPieza.getChildren().add(vidaPieza);
@@ -212,21 +231,20 @@ public class Aplicacion extends Application {
         informacionPieza.setMargin(fondoDetallesPieza,new Insets(0,100,125,45));
         informacionPieza.setMargin(terminarTurno,new Insets(630,100,0,0));
 
-
-        //Botones Ataque/Movimiento //
-
         // 5to Layout - Creacion tablero final //
         botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro,campoJuegoFinal));
 
+        // Comienza Juego//
+
         // Botones //
 
-        botonEnviar.setOnAction(new HandlerNombreUsuarioNegro(menuNombreJugador,contenedorPrincipal,botonEmpezar,generadorDeEtiquetas));
+        botonEnviar.setOnAction(new HandlerNombreUsuarioNegro(menuNombreJugador,contenedorPrincipal,botonEmpezar,generadorDeEtiquetas, textoJugadorBlanco,textoJugadorNegro));
 
-        botonEmpezar.setOnAction(new HandlerCambiarLayout(stackPane1,scene));
+        botonEmpezar.setOnAction(new HandlerNombreUsuarioBlanco(stackPane1,scene,textoJugadorNegro,textoJugadorBlanco,distribuirPiezasBlancas,distribuirPiezasNegras,directorio_resources,juego));
 
-        botonContinuar.setOnAction(new HandlerCambiarLayout(stackPane2,scene));
+        botonComenzarJuego.setOnAction (new HandlerCrearTableroParcial(stackPane2,scene,juego,menuJugadorBlanco,generadorCajaFichasBlancasRestantes));
 
-        botonFinalizarColocadoPiezasBlancas.setOnAction(new HandlerCambiarLayout(stackPane3,scene));
+        botonFinalizarColocadoPiezasBlancas.setOnAction(new HandlerCrearTableroParcial(stackPane3,scene,juego,menuJugadorNegro,generadorCajaFichasNegrasRestantes));
 
         stage.setScene(scene);
 

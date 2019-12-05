@@ -28,7 +28,11 @@ public class HandlerActualizarImagen implements EventHandler<MouseEvent> {
     public void handle (MouseEvent event) {
         Image imagenEnCasillero = new Image(directorio);
         cantidadFichasRestantes--;
-        Label etiquetaRestantes = generadorDeEtiquetas.generarEtiquetaNegrita("x"+Integer.toString(cantidadFichasRestantes),40);
+        if (cantidadFichasRestantes <0) {
+            return;
+        }
+        Label etiquetaRestantes = new Label();
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaRestantes,"x"+Integer.toString(cantidadFichasRestantes),40);
         if (cantidadFichasRestantes==0) {
             etiquetaRestantes.setTextFill(Color.web("#FF0000"));
         }

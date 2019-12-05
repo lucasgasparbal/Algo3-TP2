@@ -22,11 +22,14 @@ public class GeneradorDeCajaAtaqueMovimiento {
 
         BorderPane menuTableroFinal = new BorderPane();
 
+        Label etiquetaAtaque = new Label();
+        Label etiquetaMovimiento = new Label();
+
         GeneradorDeEtiquetas generadorDeEtiquetas = new GeneradorDeEtiquetas(directorio_resources+"fonts/Adventurer.ttf");
-        Label etiquetaAtaque = generadorDeEtiquetas.generarEtiquetaNegrita("MODO ATAQUE",30);
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaAtaque,"MODO ATAQUE",30);
         ImageView imagenModoAtaque = new ImageView (directorio_resources+"combateON.png");
 
-        Label etiquetaMovimiento = generadorDeEtiquetas.generarEtiquetaNegrita("MODO MOVIMIENTO",30);
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaMovimiento,"MODO MOVIMIENTO",30);
         ImageView imagenModoMovimiento = new ImageView (directorio_resources+"movimientoON.png");
 
         HBox cajaAtaque = new HBox (imagenModoAtaque,etiquetaAtaque);

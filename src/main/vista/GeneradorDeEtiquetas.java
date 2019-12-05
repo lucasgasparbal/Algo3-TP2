@@ -11,11 +11,11 @@ public class GeneradorDeEtiquetas {
         this.directorio = directorioResources;
     }
 
-    public Label generarEtiquetaNegrita (String texto, int tamLetra) {
-        Label etiqueta = new Label();
+    public Label generarEtiquetaNegrita (Label etiqueta, String texto, int tamLetra) {
         etiqueta.setText(texto);
         etiqueta.setFont((Font.loadFont(directorio,tamLetra)));
         etiqueta.setStyle ("-fx-font-weight: bold");
         return etiqueta;
     }
 }
+

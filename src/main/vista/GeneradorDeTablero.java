@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 public class GeneradorDeTablero {
 
@@ -21,12 +22,14 @@ public class GeneradorDeTablero {
         while (x<20) {
             y = 0;
             while (y < 10) {
+                StackPane casilleroNuevo = new StackPane();
                 ImageViewFicha imagenDeCasillero = new ImageViewFicha(x, y, url_escaque_64);
-                nuevoTablero.add(imagenDeCasillero, x, y);
+                casilleroNuevo.getChildren().add(imagenDeCasillero);
+                nuevoTablero.add(casilleroNuevo,x,y);
                 int[] coordenadasCasillero = imagenDeCasillero.obtenerCoordenadas();
                 y++;
-                imagenDeCasillero.setOnMouseEntered(new HandlerMouseEntrandoANodo(coordenadas, coordenadasCasillero[0], coordenadasCasillero[1]));
-                imagenDeCasillero.setOnMouseClicked(new HandlerColocarImagenCasillero(nuevoTablero,ultimaPiezaSeleccionada,coordenadas));
+                casilleroNuevo.setOnMouseEntered(new HandlerMouseEntrandoANodo(coordenadas, coordenadasCasillero[0], coordenadasCasillero[1]));
+                casilleroNuevo.setOnMouseClicked(new HandlerColocarImagenCasillero(nuevoTablero,ultimaPiezaSeleccionada,coordenadas));
             }
             x++;
         }

@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import vista.ImageViewPiezaEnJuego;
 
 public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
@@ -22,7 +23,9 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
         ImageView piezaACargar = new ImageView();
         piezaACargar.setImage(piezaSeleccionada.devolverUltimaImagen());
-        tablero.add(piezaACargar,coordenadas[0],  coordenadas[1]);
+        StackPane casillero = (StackPane)(tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]));
+        casillero.getChildren().add(piezaACargar);
+        piezaSeleccionada.borrarImagen();
     }
 
 }

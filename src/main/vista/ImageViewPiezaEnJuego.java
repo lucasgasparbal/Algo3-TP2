@@ -19,4 +19,8 @@ public class ImageViewPiezaEnJuego extends ImageView {
         return ultimaImagen;
     }
 
+    public void borrarImagen() {
+        ultimaImagen=null;
+    }
+
 }
