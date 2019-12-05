@@ -83,7 +83,7 @@ public class SoldadoTest {
     }
 
     @Test
-    public void soldadoSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void soldadoSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -113,7 +113,7 @@ public class SoldadoTest {
         try {
             soldado.desplazarHaciaArriba();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -138,7 +138,7 @@ public class SoldadoTest {
         try {
             soldadoUno.desplazarHaciaArriba();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -146,7 +146,7 @@ public class SoldadoTest {
     }
 
     @Test
-    public void soldadoSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void soldadoSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -175,7 +175,7 @@ public class SoldadoTest {
         try {
             soldado.desplazarHaciaAbajo();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -200,7 +200,7 @@ public class SoldadoTest {
         try {
             soldadoUno.desplazarHaciaAbajo();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -208,7 +208,7 @@ public class SoldadoTest {
     }
 
     @Test
-    public void soldadoSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void soldadoSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -237,7 +237,7 @@ public class SoldadoTest {
         try {
             soldado.desplazarHaciaDerecha();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -261,7 +261,7 @@ public class SoldadoTest {
         try {
             soldadoUno.desplazarHaciaDerecha();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -269,7 +269,7 @@ public class SoldadoTest {
     }
 
     @Test
-    public void soldadoSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void soldadoSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -298,7 +298,7 @@ public class SoldadoTest {
         try {
             soldado.desplazarHaciaIzquierda();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -322,7 +322,7 @@ public class SoldadoTest {
         try {
             soldadoUno.desplazarHaciaIzquierda();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 

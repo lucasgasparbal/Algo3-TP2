@@ -1,14 +1,11 @@
 package AlgoChessTest.UnidadesTest;
 import model.AlgoChess.Equipos.Equipo;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Tablero;
 import org.junit.Test;
 import org.junit.Assert;
 import model.AlgoChess.Unidades.Soldado;
 import model.AlgoChess.Unidades.AdministradorBatallones;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
 
 public class AdministradorBatallonesTest {
 
@@ -144,7 +141,7 @@ public class AdministradorBatallonesTest {
     }
 
     @Test
-    public void test07BatallonVerticalDejaDeExistirAlRomperseLaFormacion () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test07BatallonVerticalDejaDeExistirAlRomperseLaFormacion () throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
         AdministradorBatallones administradorBatallones = new AdministradorBatallones();
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);

@@ -31,6 +31,7 @@ public class JineteTest {
         curandero.inicializarEnCasillero(casilleroMockDos);
         while (i<14) {
             try {
+                jinete.prepararTurno();
                 jinete.atacar(curandero);
             }
             catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {};
@@ -179,7 +180,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -209,7 +210,7 @@ public class JineteTest {
         try {
             jinete.desplazarHaciaArriba();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -234,7 +235,7 @@ public class JineteTest {
         try {
             jineteUno.desplazarHaciaArriba();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -242,7 +243,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -271,7 +272,7 @@ public class JineteTest {
         try {
             jinete.desplazarHaciaAbajo();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -296,7 +297,7 @@ public class JineteTest {
         try {
             jineteUno.desplazarHaciaAbajo();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -304,7 +305,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -333,7 +334,7 @@ public class JineteTest {
         try {
             jinete.desplazarHaciaDerecha();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -357,7 +358,7 @@ public class JineteTest {
         try {
             jineteUno.desplazarHaciaDerecha();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -365,7 +366,7 @@ public class JineteTest {
     }
 
     @Test
-    public void jineteSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void jineteSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -394,7 +395,7 @@ public class JineteTest {
         try {
             jinete.desplazarHaciaIzquierda();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -418,7 +419,7 @@ public class JineteTest {
         try {
             jineteUno.desplazarHaciaIzquierda();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 

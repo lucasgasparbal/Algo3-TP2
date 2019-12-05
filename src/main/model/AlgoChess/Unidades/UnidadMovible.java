@@ -4,6 +4,7 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
+import model.AlgoChess.Excepciones.YaMovioExcepcion;
 import model.AlgoChess.Tablero.Casillero;
 
 public abstract class UnidadMovible extends Unidad {
@@ -20,7 +21,10 @@ public abstract class UnidadMovible extends Unidad {
         movio = false;
     }
 
-    public void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
+    public void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
+        if(movio){
+            throw new YaMovioExcepcion();
+        }
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroIzquierdo();
             nuevoCasillero.ocuparCasillero(this);
@@ -29,10 +33,13 @@ public abstract class UnidadMovible extends Unidad {
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
             throw new MovimientoInvalidoExcepcion();
         }
-
+        movio = true;
     }
 
-    public void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
+    public void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
+        if(movio){
+            throw new YaMovioExcepcion();
+        }
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroDerecho();
             nuevoCasillero.ocuparCasillero(this);
@@ -41,10 +48,13 @@ public abstract class UnidadMovible extends Unidad {
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
             throw new MovimientoInvalidoExcepcion();
         }
-
+        movio = true;
     }
 
-    public void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
+    public void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
+        if(movio){
+            throw new YaMovioExcepcion();
+        }
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroSuperior();
             nuevoCasillero.ocuparCasillero(this);
@@ -53,10 +63,13 @@ public abstract class UnidadMovible extends Unidad {
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
             throw new MovimientoInvalidoExcepcion();
         }
-
+        movio = true;
     }
 
-    public void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion {
+    public void desplazarHaciaAbajo() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
+        if(movio){
+            throw new YaMovioExcepcion();
+        }
         try {
             Casillero nuevoCasillero = ubicacion.obtenerCasilleroInferior();
             nuevoCasillero.ocuparCasillero(this);
@@ -65,7 +78,7 @@ public abstract class UnidadMovible extends Unidad {
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
             throw new MovimientoInvalidoExcepcion();
         }
-
+        movio = true;
     }
 
 }

@@ -1,9 +1,6 @@
 package AlgoChessTest.UnidadesTest;
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Soldado;
@@ -14,7 +11,7 @@ import org.junit.Test;
 public class BatallonTest {
 
     @Test
-    public void test01CreoBatallonVerticalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test01CreoBatallonVerticalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -45,7 +42,7 @@ public class BatallonTest {
         }
 
     @Test
-    public void test02CreoBatallonHorizontalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test02CreoBatallonHorizontalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -76,7 +73,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test03CreoBatallonVerticalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test03CreoBatallonVerticalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -107,7 +104,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test04CreoBatallonHorizontalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test04CreoBatallonHorizontalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -137,7 +134,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test05CreoBatallonHorizontalLoDesplazoDosVecesEnDosDireccionesVerificoPosiciones() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test05CreoBatallonHorizontalLoDesplazoDosVecesEnDosDireccionesVerificoPosiciones() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -161,8 +158,11 @@ public class BatallonTest {
         batallon.agregarSoldado (soldado3);
 
         batallon.desplazarBatallonHaciaDerecha();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaDerecha();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaArriba();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaArriba();
 
         Assert.assertArrayEquals(new int[] {9,8}, soldado1.getPosicion());
@@ -171,7 +171,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test06AvanzoBatallonPeroDejoAtrasUnaPieza() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test06AvanzoBatallonPeroDejoAtrasUnaPieza() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -198,7 +198,9 @@ public class BatallonTest {
         batallon.agregarSoldado (soldado3);
 
         batallon.desplazarBatallonHaciaArriba();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaArriba();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaArriba();
 
         Assert.assertArrayEquals(new int[] {7,9}, soldado1.getPosicion());
@@ -207,7 +209,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test07AvanzoBatallonPeroDejoAtrasUnaPiezaBatallonNoEsValido() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+    public void test07AvanzoBatallonPeroDejoAtrasUnaPiezaBatallonNoEsValido() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -234,7 +236,9 @@ public class BatallonTest {
         batallon.agregarSoldado (soldado3);
 
         batallon.desplazarBatallonHaciaArriba();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaArriba();
+        batallon.prepararTurno();
         batallon.desplazarBatallonHaciaArriba();
 
         Assert.assertFalse(batallon.esValido());

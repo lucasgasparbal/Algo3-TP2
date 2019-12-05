@@ -2,6 +2,7 @@ package model.AlgoChess.Unidades;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
+import model.AlgoChess.Excepciones.YaMovioExcepcion;
 
 import java.util.Arrays;
 
@@ -33,7 +34,7 @@ public class Batallon {
         }
     }
 
-    public void desplazarBatallonHaciaIzquierda() throws MovimientoInvalidoExcepcion {
+    public void desplazarBatallonHaciaIzquierda() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
         int i = 0;
         while (i < integrantes.size()) {
             try {
@@ -44,7 +45,7 @@ public class Batallon {
         }
     }
 
-    public void desplazarBatallonHaciaDerecha() throws MovimientoInvalidoExcepcion {
+    public void desplazarBatallonHaciaDerecha() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
         int i = 2;
         while (i > -1) {
             try {
@@ -55,7 +56,7 @@ public class Batallon {
         }
     }
 
-    public void desplazarBatallonHaciaArriba() throws MovimientoInvalidoExcepcion {
+    public void desplazarBatallonHaciaArriba() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
         int i = 2;
         while (i > -1) {
             try {
@@ -66,7 +67,7 @@ public class Batallon {
         }
     }
 
-    public void desplazarBatallonHaciaAbajo() throws MovimientoInvalidoExcepcion {
+    public void desplazarBatallonHaciaAbajo() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
         int i = 0;
         while (i < integrantes.size()) {
             try {
@@ -103,4 +104,11 @@ public class Batallon {
         return integrantes.get(0).perteneceAEquipo(unEquipo);
     }
 
+    public void prepararTurno(){
+        int i = 0;
+        while (i < integrantes.size()){
+            integrantes.get(i).prepararTurno();
+            i++;
+        }
+    }
 }

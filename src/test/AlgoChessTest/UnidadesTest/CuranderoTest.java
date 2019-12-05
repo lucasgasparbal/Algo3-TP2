@@ -95,7 +95,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoSeMueveHaciaArriba () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -127,7 +127,7 @@ public class CuranderoTest {
         try {
             curandero.desplazarHaciaArriba();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -154,7 +154,7 @@ public class CuranderoTest {
         try {
             curanderoUno.desplazarHaciaArriba();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -162,7 +162,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoSeMueveHaciaAbajo () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -193,7 +193,7 @@ public class CuranderoTest {
         try {
             curandero.desplazarHaciaAbajo();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -219,7 +219,7 @@ public class CuranderoTest {
         try {
             curanderoUno.desplazarHaciaAbajo();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -227,7 +227,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoSeMueveHaciaLaDerecha () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -256,7 +256,7 @@ public class CuranderoTest {
         try {
             curandero.desplazarHaciaDerecha();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -280,7 +280,7 @@ public class CuranderoTest {
         try {
             curanderoUno.desplazarHaciaDerecha();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -288,7 +288,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoSeMueveHaciaLaIzquierda () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -317,7 +317,7 @@ public class CuranderoTest {
         try {
             curandero.desplazarHaciaIzquierda();
         }
-        catch (MovimientoInvalidoExcepcion e) {
+        catch (MovimientoInvalidoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 
@@ -341,7 +341,7 @@ public class CuranderoTest {
         try {
             curanderoUno.desplazarHaciaIzquierda();
         }
-        catch (CasilleroOcupadoExcepcion e) {
+        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
             seLanzoExcepcion = true;
         }
 

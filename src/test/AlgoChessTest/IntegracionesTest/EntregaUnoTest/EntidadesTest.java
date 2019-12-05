@@ -1,10 +1,7 @@
 package AlgoChessTest.IntegracionesTest.EntregaUnoTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.Soldado;
@@ -14,7 +11,7 @@ import org.junit.Test;
 public class EntidadesTest {
 
     @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaVerificoPosicion() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion {
+    public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaVerificoPosicion() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(2);
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
@@ -29,7 +26,7 @@ public class EntidadesTest {
 
 
     @Test(expected = CasilleroOcupadoExcepcion.class)
-    public void intentoDesplazarPiezaACasilleroOcupadoLanzaCasilleroOcupadoExcepcion () throws CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+    public void intentoDesplazarPiezaACasilleroOcupadoLanzaCasilleroOcupadoExcepcion () throws CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(2);
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
@@ -46,21 +43,23 @@ public class EntidadesTest {
     }
 
     @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaYDerechaVerificoPosicion() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
+    public void creoPiezaEnCentroLaDesplazoHaciaIzquierdaYDerechaVerificoPosicion() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(2);
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado unidadMovible = new Soldado(equipoDos);
         int[] coordenadasA = {10 , 10};
         unidadMovible.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        unidadMovible.prepararTurno();
         unidadMovible.desplazarHaciaIzquierda();
+        unidadMovible.prepararTurno();
         unidadMovible.desplazarHaciaDerecha();
 
         Assert.assertArrayEquals(new int[] {10,10}, unidadMovible.getPosicion());
     }
 
     @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaArribaSeMueveHaciaArriba() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
+    public void creoPiezaEnCentroLaDesplazoHaciaArribaSeMueveHaciaArriba() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(2);
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
@@ -73,7 +72,7 @@ public class EntidadesTest {
     }
 
     @Test
-    public void creoPiezaEnCentroLaDesplazoHaciaAbajoSeMueveHaciaAbajo() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion {
+    public void creoPiezaEnCentroLaDesplazoHaciaAbajoSeMueveHaciaAbajo() throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
 
         Equipo equipoUno = new Equipo(2);
         Equipo equipoDos = new Equipo(1);
@@ -87,7 +86,7 @@ public class EntidadesTest {
     }
 
     @Test
-    public void desplazoPiezaEnLasCuatroDirecciones() throws CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion{
+    public void desplazoPiezaEnLasCuatroDirecciones() throws CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
         Equipo equipoUno = new Equipo(2);
         Equipo equipoDos = new Equipo(1);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
@@ -95,11 +94,17 @@ public class EntidadesTest {
         int[] coordenadasC = {4,5};
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
         soldado.desplazarHaciaArriba();
+        soldado.prepararTurno();
         soldado.desplazarHaciaArriba();
+        soldado.prepararTurno();
         soldado.desplazarHaciaDerecha();
+        soldado.prepararTurno();
         soldado.desplazarHaciaDerecha();
+        soldado.prepararTurno();
         soldado.desplazarHaciaDerecha();
+        soldado.prepararTurno();
         soldado.desplazarHaciaAbajo();
+        soldado.prepararTurno();
         soldado.desplazarHaciaIzquierda();
 
         Assert.assertArrayEquals(new int[] {6,6}, soldado.getPosicion());
