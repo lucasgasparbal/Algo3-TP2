@@ -13,6 +13,8 @@ public class Juego {
     Jugador jugadorActual;
     Tablero tablero;
     OrganizadorOrdenJugadores organizadorOrdenJugadores;
+    boolean modoMovimiento;
+
 
     public Juego(){
         jugadorUno = new Jugador();
@@ -28,6 +30,19 @@ public class Juego {
 
         jugadorActual = organizadorOrdenJugadores.proximoJugador();
         tablero = new Tablero(jugadorUno.getEquipo(),jugadorDos.getEquipo());
+        boolean modoMovimiento = false;
+    }
+
+    public void cambiarModo () {
+        if (!modoMovimiento) {
+            modoMovimiento = true;
+            return;
+        }
+        modoMovimiento = false;
+    }
+
+    public boolean estaEnModoMovimiento () {
+        return modoMovimiento;
     }
 
 
