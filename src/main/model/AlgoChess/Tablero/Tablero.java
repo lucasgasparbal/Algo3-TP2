@@ -9,6 +9,7 @@ import model.AlgoChess.Unidades.AdministradorBatallones;
 import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
 import model.AlgoChess.Unidades.Soldado;
 import model.AlgoChess.Unidades.Unidad;
+import vista.DirectorioRecursos;
 
 import java.util.ArrayList;
 
@@ -78,5 +79,13 @@ public class Tablero {
 
     public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallonParaEquipo(Equipo unEquipo){
         return administradorBatallones.obtenerPaqueteCoordenadasBatallonParaEquipo(unEquipo);
+    }
+
+    public boolean unidadTieneEnemigosCercanos(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {
+        return diccionarioCasilleroUnidad.unidadTieneEnemigosCercanos(unidad);
+    }
+
+    public boolean unidadTieneAliadosCercanos(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {
+        return diccionarioCasilleroUnidad.unidadTieneAliadosCercanos(unidad);
     }
 }

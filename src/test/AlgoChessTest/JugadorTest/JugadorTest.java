@@ -1,9 +1,7 @@
 package AlgoChessTest.JugadorTest;
 
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroEnemigoExcepcion;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Jugador;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Unidades.Catapulta;
@@ -13,6 +11,7 @@ import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -36,24 +35,25 @@ public class JugadorTest {
     }
 
     @Test
-    public void jugadorQueSeQuedaSinPiezasPierde () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        Equipo equipoMock = mock(Equipo.class);
+    public void jugadorPerdioDevuelveTrueSiTodasSusPiezasEnJuegoMurieron () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, NoAlcanzaOroExcepcion, NoHaySoldadosEnBanquillaExcepcion, NoHayCatapultasEnBanquillaExcepcion, NoHayJinetesEnBanquillaExcepcion {
         Casillero casilleroMock = mock(Casillero.class);
-        when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
-        Catapulta catapulta = new Catapulta (equipoMock);
+
         Jugador jugador = new Jugador();
-        Soldado soldado = new Soldado (equipoMock);
-        Jinete jinete = new Jinete (equipoMock);
+        jugador.comprarSoldado();
+        jugador.comprarCatapulta();
+        jugador.comprarJinete();
+        when(casilleroMock.perteneceAEquipo(any(Equipo.class))).thenReturn(true);
+        Soldado soldado = jugador.tomarSoldadoDeBanquilla();
+        Catapulta catapulta = jugador.tomarCatapultaDeBanquilla();
+        Jinete jinete = jugador.tomarJineteDeBanquilla();
 
         soldado.inicializarEnCasillero(casilleroMock);
         catapulta.inicializarEnCasillero(casilleroMock);
         jinete.inicializarEnCasillero(casilleroMock);
 
-        jugador.agregarUnidad(soldado);
-        jugador.agregarUnidad(jinete);
-        jugador.agregarUnidad(catapulta);
-
-
+        jugador.removerCatapultaDeBanquilla();
+        jugador.removerJineteDeBanquilla();
+        jugador.removerSoldadoDeBanquilla();
 
         catapulta.sufrirDanio(100);
         soldado.sufrirDanio(100);
@@ -63,27 +63,29 @@ public class JugadorTest {
     }
 
     @Test
-    public void jugadorTieneUnaSolaPiezaVivaNoPierde () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
-        Equipo equipoMock = mock(Equipo.class);
+    public void jugadorTieneUnaSolaPiezaVivaNoPierde () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, NoAlcanzaOroExcepcion, NoHaySoldadosEnBanquillaExcepcion, NoHayCatapultasEnBanquillaExcepcion, NoHayJinetesEnBanquillaExcepcion {
         Casillero casilleroMock = mock(Casillero.class);
-        Catapulta catapulta = new Catapulta (equipoMock);
-        Jugador jugador = new Jugador();
-        Soldado soldado = new Soldado (equipoMock);
-        Curandero curandero = new Curandero(equipoMock);
-        when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
 
+        Jugador jugador = new Jugador();
+        jugador.comprarSoldado();
+        jugador.comprarCatapulta();
+        jugador.comprarJinete();
+        when(casilleroMock.perteneceAEquipo(any(Equipo.class))).thenReturn(true);
+        Soldado soldado = jugador.tomarSoldadoDeBanquilla();
+        Catapulta catapulta = jugador.tomarCatapultaDeBanquilla();
+        Jinete jinete = jugador.tomarJineteDeBanquilla();
 
         soldado.inicializarEnCasillero(casilleroMock);
         catapulta.inicializarEnCasillero(casilleroMock);
-        curandero.inicializarEnCasillero(casilleroMock);
+        jinete.inicializarEnCasillero(casilleroMock);
 
-        jugador.agregarUnidad(soldado);
-        jugador.agregarUnidad(curandero);
-        jugador.agregarUnidad(catapulta);
+        jugador.removerCatapultaDeBanquilla();
+        jugador.removerJineteDeBanquilla();
+        jugador.removerSoldadoDeBanquilla();
 
         catapulta.sufrirDanio(100);
         soldado.sufrirDanio(99);
-        curandero.sufrirDanio(100);
+        jinete.sufrirDanio(100);
 
         Assert.assertFalse (jugador.perdio());
     }

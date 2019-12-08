@@ -14,4 +14,13 @@ public class EquipoTest {
 
         Assert.assertFalse(equipoUno.esIgualA(equipoDos));
     }
+
+    @Test
+    public void EquipoEsIgualAEquipoDevuelveTrueEnEquiposConIgualesIdentificadores(){
+
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(1);
+
+        Assert.assertTrue(equipoUno.esIgualA(equipoDos));
+    }
 }

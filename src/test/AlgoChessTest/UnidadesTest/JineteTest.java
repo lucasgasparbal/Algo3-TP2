@@ -1,5 +1,6 @@
 package AlgoChessTest.UnidadesTest;
 
+import javafx.scene.control.Tab;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
@@ -19,6 +20,7 @@ public class JineteTest {
     public void atacoCuranderoCatorceVecesMurioDevuelveFalse() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
+        Tablero tableroMock = mock(Tablero.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
@@ -28,7 +30,10 @@ public class JineteTest {
         Jinete jinete = new Jinete (equipoUnoMock);
         Curandero curandero = new Curandero (equipoDosMock);
         jinete.inicializarEnCasillero(casilleroMockUno);
+        jinete.setTablero(tableroMock);
         curandero.inicializarEnCasillero(casilleroMockDos);
+        jinete.setTablero(tableroMock);
+        when(tableroMock.unidadTieneEnemigosCercanos(jinete)).thenReturn(true);
         while (i<14) {
             try {
                 jinete.prepararTurno();
@@ -44,17 +49,23 @@ public class JineteTest {
     public void atacoCuranderoQuinceVecesMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
+        Tablero tableroMock = mock(Tablero.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+
+
         int i = 0;
 
         Jinete jinete = new Jinete (equipoUnoMock);
         Curandero curandero = new Curandero (equipoDosMock);
         jinete.inicializarEnCasillero(casilleroMockUno);
+        jinete.setTablero(tableroMock);
         curandero.inicializarEnCasillero(casilleroMockDos);
+        jinete.setTablero(tableroMock);
+        when(tableroMock.unidadTieneEnemigosCercanos(jinete)).thenReturn(true);
         while (i<15) {
             try {
                 jinete.prepararTurno();
@@ -70,8 +81,6 @@ public class JineteTest {
     public void atacoSoldadoVeinteVecesMurioDevuelveTrue() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
         int i = 0;
         Jinete jinete = new Jinete (equipoUno);
         Soldado soldado = new Soldado (equipoDos);
@@ -79,7 +88,9 @@ public class JineteTest {
         int[] coordenadasA = {10,10};
         int[] coordenadasB = {9,9};
         soldado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado.setTablero(tablero);
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        jinete.setTablero(tablero);
         while (i<20) {
             try {
                 jinete.prepararTurno();
@@ -95,8 +106,6 @@ public class JineteTest {
     public void JineteAtacaPiezaConEnemigoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
         Tablero tablero = new Tablero(equipoUno, equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoDos);
@@ -105,8 +114,11 @@ public class JineteTest {
         int[] coordenadasB = {10,11};
         int[] coordenadasC = {9,9};
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        jinete.setTablero(tablero);
         int i =0;
         while (i<19) {
             try {
@@ -122,12 +134,10 @@ public class JineteTest {
         Assert.assertTrue(soldado1.murio());
     }
 
-    @Test
-    public void JineteAtacaPiezaCoAliadoCercaUsaEspada() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
+    @Test(expected = ObjetivoFueraDeRangoExcepcion.class)
+    public void JineteAtacaPiezaCercanaConAliadoCercanoLanzaExcepcionObjetivoFuerdaDeRango() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, YaAtacoExcepcion {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoUno);
@@ -136,8 +146,11 @@ public class JineteTest {
         int[] coordenadasB = {10,9};
         int[] coordenadasC = {9,9};
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        jinete.setTablero(tablero);
         int i = 0;
         while (i < 19) {
             try {
@@ -153,13 +166,11 @@ public class JineteTest {
         Assert.assertTrue(soldado1.murio());
     }
 
-    @Test
-    public void JineteTieneAliadoCercaYEnemigoADistanciaMediaNoPuedeAtacarExcepcion() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion {
+    @Test(expected = ObjetivoFueraDeRangoExcepcion.class)
+    public void JineteTieneAliadoCercaYEnemigoADistanciaMediaNoPuedeAtacarExcepcion() throws CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
-        equipoDos.establecerEquipoEnemigo(equipoUno);
-        equipoUno.establecerEquipoEnemigo(equipoDos);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         Soldado soldado1 = new Soldado(equipoDos);
         Soldado soldado2 = new Soldado(equipoUno);
@@ -168,15 +179,77 @@ public class JineteTest {
         int[] coordenadasB = {10,9};
         int[] coordeandasC = {9,9};
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordeandasC));
-        boolean seLanzaExcepcion = false;
+        jinete.setTablero(tablero);
         try {
             jinete.atacar(soldado1);
         }
-        catch (ObjetivoFueraDeRangoExcepcion | ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {
-            seLanzaExcepcion = true;
+        catch (ObjetivoNoEsEnemigoExcepcion | YaAtacoExcepcion e) {
         }
+    }
+
+    @Test
+    public void JineteSinUnidadesCercanasPuedeAtacarAUnidadEnemigaEnRangoMedio() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoDos);
+        Jinete jinete = new Jinete (equipoUno);
+        int[] coordenadasA = {14,12};
+        int[] coordeandasC = {9,9};
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
+        jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordeandasC));
+        jinete.setTablero(tablero);
+
+        for(int i = 0; i<6; i++){
+                jinete.prepararTurno();
+                jinete.atacar(soldado1);
+        }
+
+        jinete.prepararTurno();
+        jinete.atacar(soldado1);
+
+        Assert.assertTrue(soldado1.murio());
+    }
+
+    @Test
+    public void JineteConUnidadesCercanasAliadaYEnemgiaPuedeAtacarAUnidadEnemigaEnRangoMedio() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+        Soldado soldado1 = new Soldado(equipoDos);
+        Soldado soldado2 = new Soldado(equipoDos);
+        Jinete jinete = new Jinete (equipoUno);
+        Soldado soldadoAliado = new Soldado(equipoUno);
+        int[] coordenadasA = {14,12};
+        int[] coordenadasB = {10,10};
+        int[] coordeandasC = {9,9};
+        int[] coordenadasD = {8,8};
+
+        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
+        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
+        jinete.inicializarEnCasillero(tablero.conseguirCasillero(coordeandasC));
+        jinete.setTablero(tablero);
+        soldadoAliado.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasD));
+        soldadoAliado.setTablero(tablero);
+
+        for(int i = 0; i<6; i++){
+            jinete.prepararTurno();
+            jinete.atacar(soldado1);
+        }
+
+        jinete.prepararTurno();
+        jinete.atacar(soldado1);
+
+        Assert.assertTrue(soldado1.murio());
     }
 
     @Test

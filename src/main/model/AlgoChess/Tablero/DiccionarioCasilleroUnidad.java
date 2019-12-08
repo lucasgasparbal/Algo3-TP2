@@ -1,5 +1,6 @@
 package model.AlgoChess.Tablero;
 
+import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
 import model.AlgoChess.Unidades.Unidad;
 
@@ -23,5 +24,27 @@ public class DiccionarioCasilleroUnidad {
 
     public Unidad removerUnidadDeCasillero(Casillero casillero){
         return diccionario.remove(casillero);
+    }
+
+    public boolean unidadTieneEnemigosCercanos(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {
+
+        for(Unidad unaUnidad : diccionario.values()){
+            if(unaUnidad.esEnemigoDe(unidad) & unaUnidad.estaEnRangoCercanoDe(unidad)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean unidadTieneAliadosCercanos(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {
+
+        for(Unidad unaUnidad : diccionario.values()){
+            if(!unaUnidad.esEnemigoDe(unidad) & unaUnidad.estaEnRangoCercanoDe(unidad)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

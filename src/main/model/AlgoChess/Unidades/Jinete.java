@@ -31,7 +31,7 @@ public class Jinete extends UnidadMovible {
         if(!objetivo.esEnemigoDe(this)){
             throw new ObjetivoNoEsEnemigoExcepcion();
         }
-        if (equipo.hayUnidadesEnemigasCercanas(this) || equipo.hayUnidadesAliadasCercanas(this)) {
+        if (!tablero.unidadTieneEnemigosCercanos(this) ||  tablero.unidadTieneAliadosCercanos(this)) {
             ataqueArco.atacar(objetivo,this);
         }
         else ataqueEspada.atacar(objetivo,this);

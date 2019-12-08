@@ -34,4 +34,13 @@ public class ColeccionUnidades {
     }
 
 
+    public boolean hayUnidadesVivas() {
+        for(Unidad unidad: unidades){
+            if(!unidad.murio()){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

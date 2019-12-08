@@ -2,12 +2,12 @@ package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
-import model.AlgoChess.Tablero.Casillero;
+import model.AlgoChess.Tablero.*;
 import model.AlgoChess.Unidades.AtributosDeUnidades.*;
 
 public abstract class Unidad {
     Casillero ubicacion;
-
+    Tablero tablero;
     Vida vida;
 
     protected int costo;
@@ -31,6 +31,9 @@ public abstract class Unidad {
         this.equipo = equipo;
     }
 
+    public void setTablero(Tablero tablero){
+        this.tablero = tablero;
+    }
     public Casillero getUbicacion() {
         return ubicacion;
     }
@@ -52,7 +55,6 @@ public abstract class Unidad {
         vida.tomaDanio(dmg);
 
         if(vida.acabo()){
-            equipo.removerUnidad(this);
             ubicacion.vaciar();
         }
     }

@@ -70,11 +70,11 @@ public class BanquillaUnidades {
         return soldados.getLast();
     }
 
-    public void removerSoldado() throws NoHaySoldadosEnBanquillaExcepcion {
+    public Soldado removerSoldado() throws NoHaySoldadosEnBanquillaExcepcion {
         if(!tieneSoldados()){
             throw new NoHaySoldadosEnBanquillaExcepcion();
         }
-        soldados.removeLast();
+        return soldados.removeLast();
     }
 
     public Jinete tomarJinete() throws NoHayJinetesEnBanquillaExcepcion {
@@ -84,11 +84,11 @@ public class BanquillaUnidades {
         return jinetes.getLast();
     }
 
-    public void removerJinete() throws NoHayJinetesEnBanquillaExcepcion {
+    public Jinete removerJinete() throws NoHayJinetesEnBanquillaExcepcion {
         if(!tieneJinetes()){
             throw new NoHayJinetesEnBanquillaExcepcion();
         }
-        jinetes.removeLast();
+        return jinetes.removeLast();
     }
 
     public Curandero tomarCurandero() throws NoHayCuranderosEnBanquillaExcepcion {
@@ -98,11 +98,11 @@ public class BanquillaUnidades {
         return curanderos.getLast();
     }
 
-    public void removerCurandero() throws NoHayCuranderosEnBanquillaExcepcion {
+    public Curandero removerCurandero() throws NoHayCuranderosEnBanquillaExcepcion {
         if(!tieneCuranderos()){
             throw new NoHayCuranderosEnBanquillaExcepcion();
         }
-        curanderos.removeLast();
+       return curanderos.removeLast();
     }
 
     public Catapulta tomarCatapulta() throws NoHayCatapultasEnBanquillaExcepcion {
@@ -112,10 +112,10 @@ public class BanquillaUnidades {
         return catapultas.getLast();
     }
 
-    public void removerCatapulta() throws NoHayCatapultasEnBanquillaExcepcion {
+    public Catapulta removerCatapulta() throws NoHayCatapultasEnBanquillaExcepcion {
         if(!tieneCatapultas()){
             throw new NoHayCatapultasEnBanquillaExcepcion();
         }
-        catapultas.removeLast();
+        return catapultas.removeLast();
     }
 }

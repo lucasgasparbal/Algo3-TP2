@@ -11,15 +11,13 @@ public class Jugador {
 
     static private int numeroJugadores = 1;
 
-    private Jugador enemigo;
-
     private String nombre;
 
     private BanquillaUnidades banquillaUnidades = new BanquillaUnidades();
     private boolean estaEnTurno;
     public int identificador;
     private int oro = MonedasIniciales;
-    private ColeccionUnidades unidades = new ColeccionUnidades();
+    private ColeccionUnidades unidadesEnJuego = new ColeccionUnidades();
 
     private Equipo equipo;
 
@@ -27,10 +25,6 @@ public class Jugador {
         identificador = numeroJugadores;
         numeroJugadores++;
         equipo = new Equipo(identificador);
-    }
-
-    public void setEnemigo(Jugador unJugador){
-        equipo.establecerEquipoEnemigo(unJugador.getEquipo());
     }
 
     public void comprarSoldado() throws NoAlcanzaOroExcepcion {
@@ -61,11 +55,10 @@ public class Jugador {
     }
 
     public void agregarUnidad(Unidad unidad){
-        equipo.agregarUnidad(unidad);
         unidad.setEquipo(equipo);
     }
     public boolean perdio() {
-        return equipo.noTieneUnidades();
+        return !unidadesEnJuego.hayUnidadesVivas();
     }
 
     public void prepararTurno(){
@@ -125,19 +118,24 @@ public class Jugador {
     }
 
     public void removerSoldadoDeBanquilla() throws NoHaySoldadosEnBanquillaExcepcion {
-        banquillaUnidades.removerSoldado();
+        Soldado soldado = banquillaUnidades.removerSoldado();
+        unidadesEnJuego.agregarUnidad(soldado);
+
     }
 
     public void removerJineteDeBanquilla() throws NoHayJinetesEnBanquillaExcepcion {
-        banquillaUnidades.removerJinete();
+       Jinete jinete = banquillaUnidades.removerJinete();
+       unidadesEnJuego.agregarUnidad(jinete);
     }
 
     public void removerCuranderoDeBanquilla() throws NoHayCuranderosEnBanquillaExcepcion {
-        banquillaUnidades.removerCurandero();
+        Curandero curandero = banquillaUnidades.removerCurandero();
+        unidadesEnJuego.agregarUnidad(curandero);
     }
 
     public void removerCatapultaDeBanquilla() throws NoHayCatapultasEnBanquillaExcepcion {
-        banquillaUnidades.removerCatapulta();
+        Catapulta catapulta = banquillaUnidades.removerCatapulta();
+        unidadesEnJuego.agregarUnidad(catapulta);
     }
 
     public Equipo getEquipo() {
