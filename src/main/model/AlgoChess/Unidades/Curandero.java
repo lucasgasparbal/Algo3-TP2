@@ -13,7 +13,7 @@ public class Curandero extends UnidadMovible {
 
     private Curacion ataque = new Curacion(ValorCuracion);
 
-    public void atacar(Unidad objetivo) throws ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion, YaAtacoExcepcion {
+    public void atacar(Unidad objetivo) throws ObjetivoEsEnemigoExcepcion, NoSePudoCurarExcepcion, YaAtacoExcepcion, ObjetivoFueraDeRangoExcepcion, CoordenadaFueraDeRangoExcepcion {
         if(ataco){
             throw new YaAtacoExcepcion();
         }
