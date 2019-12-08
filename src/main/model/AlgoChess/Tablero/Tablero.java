@@ -9,25 +9,17 @@ import model.AlgoChess.Unidades.AdministradorBatallones;
 import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
 import model.AlgoChess.Unidades.Soldado;
 import model.AlgoChess.Unidades.Unidad;
-import vista.DirectorioRecursos;
 
 import java.util.ArrayList;
 
 public class Tablero {
 
-    final private int CantFilas = 20;
-    final private int CantColumnas = 20;
-
     private AdministradorBatallones administradorBatallones = new AdministradorBatallones();
     private MatrizCasilleros matrizCasilleros;
-    private Equipo equipoBlanco;
-    private Equipo equipoNegro;
 
     private DiccionarioCasilleroUnidad diccionarioCasilleroUnidad = new DiccionarioCasilleroUnidad();
 
     public Tablero(Equipo equipoUno, Equipo equipoDos){
-        equipoBlanco = equipoUno;
-        equipoNegro = equipoDos;
         matrizCasilleros = new MatrizCasilleros(equipoUno,equipoDos, this);
     }
 
@@ -45,6 +37,7 @@ public class Tablero {
         diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,soldado);
         administradorBatallones.agregarSoldado(soldado);
     }
+
     public Casillero conseguirCasillero(int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion {
         return matrizCasilleros.conseguirCasillero(coordenadas);
     }
