@@ -88,16 +88,21 @@ public class Aplicacion extends Application {
 
         generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaOroRestante,"ORO: "+juego.oroRestante(),30);
 
-        Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
-        botonComprarSoldado.setOnAction(new HandlerComprarSoldado(juego,etiquetaOroRestante,generadorDeEtiquetas));
-        Button botonComprarJinete = generadorDeBotones.nuevoBoton("Comprar Jinete");
-        botonComprarJinete.setOnAction(new HandlerComprarJinete(juego,etiquetaOroRestante,generadorDeEtiquetas));
-        Button botonComprarCatapulta = generadorDeBotones.nuevoBoton("Comprar Catapulta");
-        botonComprarCatapulta.setOnAction(new HandlerComprarCatapulta(juego,etiquetaOroRestante,generadorDeEtiquetas));
-        Button botonComprarCurandero = generadorDeBotones.nuevoBoton("Comprar Curandero");
-        botonComprarCurandero.setOnAction(new HandlerComprarCurandero(juego,etiquetaOroRestante,generadorDeEtiquetas));
+        HBox etiquetasPiezasRestantes = new HBox();
 
-        HBox contenedorDeFichas = new HBox();
+        int[] cantidadFichas = juego.conseguirCantidadPiezasEnBanquilla();
+
+        GeneradorCajaImagenesConFichasCompradas generadorCajaImagenesConFichasCompradas = new GeneradorCajaImagenesConFichasCompradas(directorio_resources,etiquetasPiezasRestantes,generadorDeEtiquetas);
+        VBox cajaImagenesFichasCompradas = generadorCajaImagenesConFichasCompradas.generar(cantidadFichas);
+
+        Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
+        botonComprarSoldado.setOnAction(new HandlerComprarSoldado(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes));
+        Button botonComprarJinete = generadorDeBotones.nuevoBoton("Comprar Jinete");
+        botonComprarJinete.setOnAction(new HandlerComprarJinete(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes));
+        Button botonComprarCatapulta = generadorDeBotones.nuevoBoton("Comprar Catapulta");
+        botonComprarCatapulta.setOnAction(new HandlerComprarCatapulta(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes));
+        Button botonComprarCurandero = generadorDeBotones.nuevoBoton("Comprar Curandero");
+        botonComprarCurandero.setOnAction(new HandlerComprarCurandero(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes));
 
         HBox contenedorDeBotones = new HBox();
         contenedorDeBotones.setSpacing(275);
@@ -116,32 +121,19 @@ public class Aplicacion extends Application {
         stackOro.setPadding(new Insets(20));
         stackOro.setMaxHeight(100);
 
-        botonComprarFichasNegras.setOnAction(new HandlerCompraFichasNegras(juego,stackOro,etiquetaOroRestante,botonComenzarJuego,generadorDeEtiquetas));
+        botonComprarFichasNegras.setOnAction(new HandlerCompraFichasNegras(juego,stackOro,etiquetaOroRestante,botonComenzarJuego,generadorDeEtiquetas,etiquetasPiezasRestantes));
 
         Label etiquetaPlaceholder = new Label();
         generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaPlaceholder,"PLACEHOLDER DESCRIPCIONES",40);
         etiquetaPlaceholder.setTextFill(Color.web("#ffd700"));
-
-        ImageView imagenJinete = new ImageView((directorio_resources+"jinete.png"));
-        ImageView imagenSoldado = new ImageView((directorio_resources+"soldado.png"));
-        ImageView imagenCatapulta = new ImageView((directorio_resources+"catapulta.png"));
-        ImageView imagenCurandero = new ImageView((directorio_resources+"curandero.png"));
 
         VBox contenedorDescripcionesYBotones = new VBox ();
         contenedorDescripcionesYBotones.setSpacing(300);
         contenedorDescripcionesYBotones.setAlignment(Pos.CENTER);
         contenedorDescripcionesYBotones.getChildren().addAll (etiquetaPlaceholder,grupoBotones);
 
-        contenedorDeFichas.getChildren().addAll(imagenJinete,imagenSoldado,imagenCatapulta,imagenCurandero);
-        contenedorDeFichas.setSpacing(150);
-
-        contenedorDeFichas.setMargin(imagenJinete,new Insets(45,0,0,0));
-        contenedorDeFichas.setMargin(imagenSoldado,new Insets(20,0,0,20));
-        contenedorDeFichas.setMargin(imagenCatapulta,new Insets(30,0,0,0));
-        contenedorDeFichas.setMargin(imagenCurandero,new Insets(0,0,0,0));
-
         BorderPane menuCompraFichas = new BorderPane();
-        menuCompraFichas.setCenter(contenedorDeFichas);
+        menuCompraFichas.setCenter(cajaImagenesFichasCompradas);
         menuCompraFichas.setTop(stackOro);
         menuCompraFichas.setBottom(contenedorDescripcionesYBotones);
 

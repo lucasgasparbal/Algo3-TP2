@@ -198,4 +198,13 @@ public class Juego {
         nuevoTurno();
         return (batallonesJugadorDos);
     }
+
+    public int[] conseguirCantidadPiezasEnBanquilla() {
+        int[] piezasEnBanquilla = new int[4];
+        piezasEnBanquilla[0] = cantidadSoldadosEnBanquilla();
+        piezasEnBanquilla[1] = cantidadJinetesEnBanquilla();
+        piezasEnBanquilla[2] = cantidadCuranderosEnBanquilla();
+        piezasEnBanquilla[3] = cantidadCatapultasEnBanquilla();
+        return piezasEnBanquilla;
+    }
 }
