@@ -120,7 +120,6 @@ public class Jugador {
     public void removerSoldadoDeBanquilla() throws NoHaySoldadosEnBanquillaExcepcion {
         Soldado soldado = banquillaUnidades.removerSoldado();
         unidadesEnJuego.agregarUnidad(soldado);
-
     }
 
     public void removerJineteDeBanquilla() throws NoHayJinetesEnBanquillaExcepcion {
@@ -144,5 +143,9 @@ public class Jugador {
 
     public boolean esDuenioDe(Unidad unidad) {
         return unidad.perteneceAEquipo(equipo);
+    }
+
+    public void resetearUnidades() {
+        unidadesEnJuego.resetearAtaqueMovimiento();
     }
 }

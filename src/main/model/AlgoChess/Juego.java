@@ -80,6 +80,7 @@ public class Juego {
         jugadorActual.terminarTurno();
         jugadorActual = organizadorOrdenJugadores.proximoJugador();
         jugadorActual.prepararTurno();
+        jugadorActual.resetearUnidades();
     }
 
     public int cantidadSoldadosEnBanquilla(){
@@ -99,7 +100,7 @@ public class Juego {
     }
 
     public void inicializarSoldadoEnCoordenadas(int[] coordenadas) throws NoHaySoldadosEnBanquillaExcepcion, CasilleroOcupadoExcepcion, CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion {
-        tablero.inicializarUnidadEnCasillero(jugadorActual.tomarSoldadoDeBanquilla(),coordenadas);
+        tablero.inicializarSoldadoEnCasillero(jugadorActual.tomarSoldadoDeBanquilla(),coordenadas);
         jugadorActual.removerSoldadoDeBanquilla();
     }
 
@@ -132,6 +133,22 @@ public class Juego {
 
         return unidadObjetivo.murio();
     }
+    
+    public void moverBatallonParaArriba (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+        tablero.moverBatallonParaArriba(coordenadasSoldado);
+    }
+
+    public void moverBatallonParaAbajo (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+        tablero.moverBatallonParaAbajo(coordenadasSoldado);
+    }
+
+    public void moverBatallonParaIzquierda (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+        tablero.moverBatallonParaIzquierda(coordenadasSoldado);
+    }
+
+    public void moverBatallonParaDerecha (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+        tablero.moverBatallonParaDerecha(coordenadasSoldado);
+    }
 
     public void moverPiezaEnCoordenadaHaciaArriba(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion {
 
@@ -140,6 +157,7 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidad.desplazarHaciaArriba();
+        tablero.actualizarBatallones();
     }
 
     public void moverPiezaEnCoordenadaHaciaAbajo(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion {
@@ -149,6 +167,7 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidad.desplazarHaciaAbajo();
+        tablero.actualizarBatallones();
     }
 
     public void moverPiezaEnCoordenadaHaciaIzquierda(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion {
@@ -158,6 +177,7 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidad.desplazarHaciaIzquierda();
+        tablero.actualizarBatallones();
     }
 
     public void moverPiezaEnCoordenadaHaciaDerecha(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion {
@@ -167,9 +187,15 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidad.desplazarHaciaDerecha();
+        tablero.actualizarBatallones();
     }
 
     public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallones(){
-        return tablero.obtenerPaqueteCoordenadasBatallonParaEquipo(jugadorActual.getEquipo());
+        ArrayList<PaqueteCoordenadasBatallon> batallonesJugadorUno = tablero.obtenerPaqueteCoordenadasBatallonParaEquipo(jugadorActual.getEquipo());
+        nuevoTurno();
+        ArrayList<PaqueteCoordenadasBatallon> batallonesJugadorDos = tablero.obtenerPaqueteCoordenadasBatallonParaEquipo(jugadorActual.getEquipo());
+        batallonesJugadorDos.addAll(batallonesJugadorUno);
+        nuevoTurno();
+        return (batallonesJugadorDos);
     }
 }

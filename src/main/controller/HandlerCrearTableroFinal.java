@@ -50,20 +50,22 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
         cajaAtaque.getChildren().add(0,etiquetaJugadorActual);
         ImageView marcoRojo = new ImageView (directorio_resources+"marcoRojo.png");
         int x = 0;
+        OrganizadorDeBatallones organizadorDeBatallones = new OrganizadorDeBatallones(juego,tablero1,tablero2,directorio_resources);
         while (x<20) {
             int y = 0;
             while (y < 10) {
                 int[]coordenadas = {x,y};
                 StackPane casilleroSeleccionado1 = (StackPane)(tablero1.getChildren().get(x*10+y));
-                casilleroSeleccionado1.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado1,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego, coordenadas));
+                casilleroSeleccionado1.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado1,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego, coordenadas,tablero1,organizadorDeBatallones));
+                casilleroSeleccionado1.setOnContextMenuRequested(new HandlerBatallon(juego,casilleroSeleccionado1,coordenadas,organizadorDeBatallones));
                 StackPane casilleroSeleccionado2 = (StackPane)(tablero2.getChildren().get(x*10+y));
                 int[]coordenadas1 = {x,y+10};
-                casilleroSeleccionado2.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado2,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego,coordenadas1));
+                casilleroSeleccionado2.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado2,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego,coordenadas1,tablero2,organizadorDeBatallones));
+                casilleroSeleccionado2.setOnContextMenuRequested(new HandlerBatallon(juego,casilleroSeleccionado2,coordenadas1,organizadorDeBatallones));
                 y++;
             }
             x++;
         }
-        OrganizadorDeBatallones organizadorDeBatallones = new OrganizadorDeBatallones(juego,tablero1,tablero2,directorio_resources);
         organizadorDeBatallones.actualizarBatallones();
         escena.setRoot(stackPane);
 

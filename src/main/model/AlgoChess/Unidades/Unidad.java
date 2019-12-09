@@ -102,7 +102,5 @@ public abstract class Unidad {
     public abstract void desplazarHaciaDerecha() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
     public abstract void desplazarHaciaIzquierda() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion;
 
-    public void prepararTurno(){
-        ataco = false;
-    }
+    public abstract void prepararTurno();
 }

@@ -8,6 +8,7 @@ public class UltimaFichaSeleccionada {
     boolean hayFichaSeleccionada = false;
     ImageView imagenSeleccionada;
     int[] coordenadas;
+    boolean estaEnBatallon = false;
 
     public void seleccionarFicha(ImageView imagen, int[]coord) {
         hayFichaSeleccionada=true;

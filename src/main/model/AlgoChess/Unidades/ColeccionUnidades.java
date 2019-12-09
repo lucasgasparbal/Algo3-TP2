@@ -3,12 +3,22 @@ package model.AlgoChess.Unidades;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ColeccionUnidades {
     private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 
     public boolean estaVacia() {
         return unidades.isEmpty();
+    }
+
+    public void resetearAtaqueMovimiento() {
+        Iterator iterador = unidades.iterator();
+        System.out.print(unidades.size());
+        while (iterador.hasNext()) {
+            Unidad unidad = (Unidad) iterador.next();
+            unidad.prepararTurno();
+        }
     }
 
     public void agregarUnidad(Unidad unidad){

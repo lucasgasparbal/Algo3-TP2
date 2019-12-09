@@ -81,16 +81,38 @@ public class Batallon {
     public boolean completo() {
         return (integrantes.size() == 3);
     }
+    
+    public void desarmarBatallon() {
+        int i =0;
+        while (i<3) {
+            integrantes.get(i).quitarBatallon();
+            i++;
+        }
+    }    
 
     public boolean esValido() {
         int[] posicion1 = Arrays.copyOf(integrantes.get(0).getPosicion(), 2);
         int[] posicion2 = Arrays.copyOf(integrantes.get(1).getPosicion(), 2);
         int[] posicion3 = Arrays.copyOf(integrantes.get(2).getPosicion(), 2);
         if (posicion1[0] > posicion2[0] || posicion1[1] > posicion2[1]) {
+            desarmarBatallon();
             return false;
         }
         if (posicion2[0] > posicion3[0] || posicion2[1] > posicion3[1]) {
-        return false;
+            desarmarBatallon();
+            return false;
+        }
+        if (posicion2[0] > posicion3[0] || posicion2[1] > posicion3[1]) {
+            desarmarBatallon();
+            return false;
+        }
+        if (posicion1[1] < posicion2[1]-1 || posicion3[1] > posicion2[1]+1) {
+            desarmarBatallon();
+            return false;
+        }
+        if (posicion1[0] < posicion2[0]-1 || posicion3[0] > posicion2[0]+1) {
+            desarmarBatallon();
+            return false;
         }
         return true;
     }

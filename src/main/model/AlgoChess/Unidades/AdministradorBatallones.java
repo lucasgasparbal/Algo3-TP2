@@ -34,7 +34,6 @@ public class AdministradorBatallones {
         return ((posicionAEvaluar == posicionInicial+1) || (posicionAEvaluar == posicionInicial+2));
     }
 
-    // se puede refactorizar asi queda mas lindo//
     private void crearBatallones () {
         Iterator iterador1 = soldados.iterator();
         Soldado soldado1, soldado2;
@@ -51,7 +50,7 @@ public class AdministradorBatallones {
             int[] posicionInicial = soldado1.getPosicion();
             while (iterador2.hasNext()) {
                 soldado2 = (Soldado) iterador2.next();
-                if (soldado2.tieneBatallon()) {
+                if (soldado2.tieneBatallon() || soldado2.esEnemigoDe(soldado1)) {
                     continue;
                 }
                 int[] posicionSoldado = Arrays.copyOf(soldado2.getPosicion(), 2);

@@ -36,8 +36,6 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
         casillero.getChildren().add(piezaACargar);
         if (piezaSeleccionada.soldado()) {
             try {
-                System.out.println(coordenadas[0]);
-                System.out.println(coordenadas[1]);
                 juego.inicializarSoldadoEnCoordenadas(coordenadas);
             } catch (NoHaySoldadosEnBanquillaExcepcion noHaySoldadosEnBanquillaExcepcion) {
                 noHaySoldadosEnBanquillaExcepcion.printStackTrace();

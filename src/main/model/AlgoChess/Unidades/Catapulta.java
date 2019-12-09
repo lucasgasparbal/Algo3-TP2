@@ -11,6 +11,8 @@ public class Catapulta extends Unidad {
 
     private final int VidaCatapulta = 50;
 
+    private boolean ataco = false;
+
     private AtaqueEnArea ataque = new AtaqueEnArea(20);
 
     public Catapulta (Equipo unEquipo) {
@@ -52,5 +54,10 @@ public class Catapulta extends Unidad {
     @Override
     public void desplazarHaciaIzquierda() throws  CatapultaNoSePuedeMoverExcepcion {
         throw new CatapultaNoSePuedeMoverExcepcion();
+    }
+
+    @Override
+    public void prepararTurno() {
+        ataco = false;
     }
 }
