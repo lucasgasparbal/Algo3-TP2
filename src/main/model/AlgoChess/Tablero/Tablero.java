@@ -27,6 +27,7 @@ public class Tablero {
     public void inicializarUnidadEnCasillero(Unidad unidad, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
+        unidad.setTablero(this);
         unidad.inicializarEnCasillero(casillero);
         diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
     }
@@ -84,12 +85,8 @@ public class Tablero {
        return matrizCasilleros.contarCasillerosVacios();
     }
 
-    public void enCasilleroPonerUnidad(Casillero casillero, Unidad unidad){
+    public void enCasilleroPonerUnidad(Casillero casillero, Unidad unidad) throws CasilleroOcupadoExcepcion {
         diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
-    }
-
-    public void vaciarCasillero(Casillero casillero){
-        diccionarioCasilleroUnidad.removerUnidadDeCasillero(casillero);
     }
 
     public void prepararTurno(){
@@ -106,5 +103,57 @@ public class Tablero {
 
     public boolean unidadTieneAliadosCercanos(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {
         return diccionarioCasilleroUnidad.unidadTieneAliadosCercanos(unidad);
+    }
+
+    public Casillero DesplazarUnidadHaciaArribaDesde(Unidad unidad, Casillero casilleroAntiguo) throws CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Casillero casilleroNuevo = casilleroAntiguo;
+        try {
+            casilleroNuevo = matrizCasilleros.obtenerCasilleroSuperiorA(casilleroAntiguo);
+
+            diccionarioCasilleroUnidad.desplazarUnidadDesdeHasta(unidad, casilleroAntiguo,casilleroNuevo);
+        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
+            throw new MovimientoInvalidoExcepcion();
+        }
+
+        return casilleroNuevo;
+    }
+
+    public Casillero DesplazarUnidadHaciaAbajoDesde(Unidad unidad, Casillero casilleroAntiguo) throws CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Casillero casilleroNuevo = casilleroAntiguo;
+        try {
+            casilleroNuevo = matrizCasilleros.obtenerCasilleroInferiorA(casilleroAntiguo);
+
+            diccionarioCasilleroUnidad.desplazarUnidadDesdeHasta(unidad, casilleroAntiguo,casilleroNuevo);
+        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
+            throw new MovimientoInvalidoExcepcion();
+        }
+
+        return casilleroNuevo;
+    }
+
+    public Casillero DesplazarUnidadHaciaIzquierdaDesde(Unidad unidad, Casillero casilleroAntiguo) throws CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Casillero casilleroNuevo = casilleroAntiguo;
+        try {
+            casilleroNuevo = matrizCasilleros.obtenerCasilleroIzquierdoA(casilleroAntiguo);
+
+            diccionarioCasilleroUnidad.desplazarUnidadDesdeHasta(unidad, casilleroAntiguo,casilleroNuevo);
+        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
+            throw new MovimientoInvalidoExcepcion();
+        }
+
+        return casilleroNuevo;
+    }
+
+    public Casillero DesplazarUnidadHaciaDerechaDesde(Unidad unidad, Casillero casilleroAntiguo) throws CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Casillero casilleroNuevo = casilleroAntiguo;
+        try {
+            casilleroNuevo = matrizCasilleros.obtenerCasilleroDerechoA(casilleroAntiguo);
+
+            diccionarioCasilleroUnidad.desplazarUnidadDesdeHasta(unidad, casilleroAntiguo,casilleroNuevo);
+        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
+            throw new MovimientoInvalidoExcepcion();
+        }
+
+        return casilleroNuevo;
     }
 }

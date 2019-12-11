@@ -2,10 +2,8 @@ package model.AlgoChess.Unidades;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
 import model.AlgoChess.Excepciones.YaMovioExcepcion;
-import model.AlgoChess.Tablero.Casillero;
 
 public abstract class UnidadMovible extends Unidad {
 
@@ -25,14 +23,7 @@ public abstract class UnidadMovible extends Unidad {
         if(movio){
             throw new YaMovioExcepcion();
         }
-        try {
-            Casillero nuevoCasillero = ubicacion.obtenerCasilleroIzquierdo();
-            nuevoCasillero.ocuparCasillero(this);
-            ubicacion.vaciar();
-            ubicacion = nuevoCasillero;
-        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-            throw new MovimientoInvalidoExcepcion();
-        }
+        ubicacion = tablero.DesplazarUnidadHaciaIzquierdaDesde(this,ubicacion);
         movio = true;
     }
 
@@ -40,14 +31,7 @@ public abstract class UnidadMovible extends Unidad {
         if(movio){
             throw new YaMovioExcepcion();
         }
-        try {
-            Casillero nuevoCasillero = ubicacion.obtenerCasilleroDerecho();
-            nuevoCasillero.ocuparCasillero(this);
-            ubicacion.vaciar();
-            ubicacion = nuevoCasillero;
-        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-            throw new MovimientoInvalidoExcepcion();
-        }
+        ubicacion = tablero.DesplazarUnidadHaciaDerechaDesde(this,ubicacion);
         movio = true;
     }
 
@@ -55,14 +39,7 @@ public abstract class UnidadMovible extends Unidad {
         if(movio){
             throw new YaMovioExcepcion();
         }
-        try {
-            Casillero nuevoCasillero = ubicacion.obtenerCasilleroSuperior();
-            nuevoCasillero.ocuparCasillero(this);
-            ubicacion.vaciar();
-            ubicacion = nuevoCasillero;
-        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-            throw new MovimientoInvalidoExcepcion();
-        }
+            ubicacion = tablero.DesplazarUnidadHaciaArribaDesde(this,ubicacion);
         movio = true;
     }
 
@@ -70,14 +47,7 @@ public abstract class UnidadMovible extends Unidad {
         if(movio){
             throw new YaMovioExcepcion();
         }
-        try {
-            Casillero nuevoCasillero = ubicacion.obtenerCasilleroInferior();
-            nuevoCasillero.ocuparCasillero(this);
-            ubicacion.vaciar();
-            ubicacion = nuevoCasillero;
-        } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-            throw new MovimientoInvalidoExcepcion();
-        }
+        ubicacion = tablero.DesplazarUnidadHaciaAbajoDesde(this,ubicacion);
         movio = true;
     }
 

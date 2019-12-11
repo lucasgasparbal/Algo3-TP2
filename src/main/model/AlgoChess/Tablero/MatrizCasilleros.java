@@ -1,6 +1,5 @@
 package model.AlgoChess.Tablero;
 
-import javafx.scene.control.Tab;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 
@@ -18,7 +17,7 @@ public class MatrizCasilleros {
     private void inicializarTableroParaEquipo(Tablero tablero, Equipo unEquipo, int inicioColumna, int finalColumna){
         for(int i = 0; i < CantFilas; i++){
             for(int j = inicioColumna; j < finalColumna; j++){
-                casilleros[i][j] = new Casillero(i,j, tablero, unEquipo);
+                casilleros[i][j] = new Casillero(i,j, unEquipo);
             }
         }
     }
@@ -86,40 +85,35 @@ public class MatrizCasilleros {
         return contador;
     }
 
-    private boolean parDeCoordenadasSonInvalidas(int[] coordenadaUno, int[] coordenadaDos){
-        return (!coordenadasSonValidas(coordenadaUno[0], coordenadaUno[1]) | !coordenadasSonValidas(coordenadaDos[0],coordenadaDos[1]));
+    public Casillero obtenerCasilleroDerechoA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        int[] coordenadasCasilleroDeseado = unCasillero.coordenadas();
+
+        coordenadasCasilleroDeseado[0] += 1;
+
+        return conseguirCasillero(coordenadasCasilleroDeseado);
     }
 
-    public boolean coordenadasEstanEnRangoCercano(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
-        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
-            throw new CoordenadaFueraDeRangoExcepcion();
-        }
+    public Casillero obtenerCasilleroIzquierdoA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        int[] coordenadasCasilleroDeseado = unCasillero.coordenadas();
 
-        return analizadorRangos.coordenadasEstanEnRangoCercano(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
+        coordenadasCasilleroDeseado[0] -= 1;
+
+        return conseguirCasillero(coordenadasCasilleroDeseado);
     }
 
-    public boolean coordenadasEstanEnRangoMediano(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
-        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
-            throw new CoordenadaFueraDeRangoExcepcion();
-        }
+    public Casillero obtenerCasilleroSuperiorA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        int[] coordenadasCasilleroDeseado = unCasillero.coordenadas();
 
-        return analizadorRangos.coordenadasEstanEnRangoMediano(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
+        coordenadasCasilleroDeseado[1] += 1;
+
+        return conseguirCasillero(coordenadasCasilleroDeseado);
     }
 
-    public boolean coordenadasEstanEnRangoLejano(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
-        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
-            throw new CoordenadaFueraDeRangoExcepcion();
-        }
+    public Casillero obtenerCasilleroInferiorA(Casillero unCasillero) throws CoordenadaFueraDeRangoExcepcion {
+        int[] coordenadasCasilleroDeseado = unCasillero.coordenadas();
 
-        return analizadorRangos.coordenadasEstanEnRangoLejano(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
+        coordenadasCasilleroDeseado[1] -= 1;
+
+        return conseguirCasillero(coordenadasCasilleroDeseado);
     }
-
-    public boolean coordenadasSonAdyacentes(int[] coordenadaUno, int[] coordenadaDos) throws  CoordenadaFueraDeRangoExcepcion{
-        if( parDeCoordenadasSonInvalidas(coordenadaUno, coordenadaDos)){
-            throw new CoordenadaFueraDeRangoExcepcion();
-        }
-
-        return analizadorRangos.coordenadasSonAdyacentes(coordenadaUno[0],coordenadaUno[1],coordenadaDos[0],coordenadaDos[1]);
-    }
-
 }

@@ -1,5 +1,6 @@
 package model.AlgoChess.Tablero;
 
+import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
 import model.AlgoChess.Unidades.Unidad;
@@ -9,8 +10,10 @@ import java.util.Hashtable;
 public class DiccionarioCasilleroUnidad {
     Hashtable<Casillero, Unidad> diccionario = new Hashtable<>();
 
-    public void EnCasilleroPonerUnidad(Casillero casillero, Unidad unidad){
+    public void EnCasilleroPonerUnidad(Casillero casillero, Unidad unidad) throws CasilleroOcupadoExcepcion {
+        casillero.ocuparCasillero();
         diccionario.put(casillero, unidad);
+
     }
 
     public Unidad obtenerUnidadEnCasillero(Casillero casillero) throws NoHayUnidadEnCasilleroExcepcion {
@@ -23,6 +26,7 @@ public class DiccionarioCasilleroUnidad {
     }
 
     public Unidad removerUnidadDeCasillero(Casillero casillero){
+        casillero.vaciar();
         return diccionario.remove(casillero);
     }
 
@@ -46,5 +50,10 @@ public class DiccionarioCasilleroUnidad {
         }
 
         return false;
+    }
+
+    public void desplazarUnidadDesdeHasta(Unidad unidad, Casillero origen, Casillero objetivo) throws CasilleroOcupadoExcepcion {
+        EnCasilleroPonerUnidad(objetivo,unidad);
+        removerUnidadDeCasillero(origen);
     }
 }

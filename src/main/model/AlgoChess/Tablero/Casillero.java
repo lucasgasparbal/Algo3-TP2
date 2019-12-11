@@ -3,7 +3,6 @@ package model.AlgoChess.Tablero;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Unidades.Unidad;
 
 public class Casillero{
 
@@ -12,14 +11,12 @@ public class Casillero{
     private boolean estaVacio = true;
     private int x;
     private int y;
-    private Tablero tablero;
     private Equipo equipo;
     private AnalizadorRangos analizadorRangos = new AnalizadorRangos();
 
-    public Casillero(int xDado, int yDado, Tablero tableroDado, Equipo unEquipo){
+    public Casillero(int xDado, int yDado, Equipo unEquipo){
         x = xDado;
         y = yDado;
-        tablero = tableroDado;
         equipo = unEquipo;
     }
 
@@ -27,45 +24,21 @@ public class Casillero{
         return estaVacio;
     }
 
-    public void ocuparCasillero(Unidad unidad) throws CasilleroOcupadoExcepcion {
+    public void ocuparCasillero() throws CasilleroOcupadoExcepcion {
 
         if(!estaVacio){
             throw new CasilleroOcupadoExcepcion();
         }
 
         estaVacio = false;
-
-        tablero.enCasilleroPonerUnidad(this,unidad);
     }
 
     public void vaciar(){
         estaVacio = true;
-        tablero.vaciarCasillero(this);
     }
 
     public int[] coordenadas(){
         return (new int[]{x, y});
-    }
-
-    private Casillero obtenerCasilleroDeCoordenada(int xDeseada, int yDeseada) throws CoordenadaFueraDeRangoExcepcion {
-        int[] coordenadasNuevas = {xDeseada,yDeseada};
-        return tablero.conseguirCasillero(coordenadasNuevas);
-    }
-
-    public Casillero obtenerCasilleroSuperior() throws CoordenadaFueraDeRangoExcepcion {
-        return obtenerCasilleroDeCoordenada(x,y+1);
-    }
-
-    public Casillero obtenerCasilleroInferior() throws CoordenadaFueraDeRangoExcepcion {
-        return obtenerCasilleroDeCoordenada(x,y-1);
-    }
-
-    public Casillero obtenerCasilleroIzquierdo() throws CoordenadaFueraDeRangoExcepcion {
-        return obtenerCasilleroDeCoordenada(x-1,y);
-    }
-
-    public Casillero obtenerCasilleroDerecho() throws CoordenadaFueraDeRangoExcepcion {
-        return obtenerCasilleroDeCoordenada(x+1,y);
     }
 
     public double aplicarMultiplicadorDanioAUnidadDeEquipo(Equipo unEquipo){

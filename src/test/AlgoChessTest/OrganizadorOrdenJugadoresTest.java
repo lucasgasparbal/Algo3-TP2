@@ -7,7 +7,7 @@ import org.junit.Test;
 public class OrganizadorOrdenJugadoresTest {
 
     @Test
-    public void  OrganizadorOrdenDeJugadoresProximoJugadorDevuelveJugadoresDistintosAlSerInvocadoMasDeUnaVezCuandoExisteMasDeUnJugador(){
+    public void OrganizadorOrdenDeJugadoresProximoJugadorDevuelveJugadoresDistintosAlSerInvocadoMasDeUnaVezCuandoExisteMasDeUnJugador() {
         OrganizadorOrdenJugadores organizadorOrdenJugadores = new OrganizadorOrdenJugadores();
         Jugador jugadorUno = new Jugador();
         Jugador jugadorDos = new Jugador();

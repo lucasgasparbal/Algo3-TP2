@@ -54,9 +54,6 @@ public class Jugador {
 
     }
 
-    public void agregarUnidad(Unidad unidad){
-        unidad.setEquipo(equipo);
-    }
     public boolean perdio() {
         return !unidadesEnJuego.hayUnidadesVivas();
     }
