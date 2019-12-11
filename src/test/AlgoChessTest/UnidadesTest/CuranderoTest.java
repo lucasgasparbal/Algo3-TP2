@@ -10,6 +10,7 @@ import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
 
+import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +21,7 @@ public class CuranderoTest {
 
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
+        Tablero tableroMock = mock(Tablero.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
         Casillero casilleroMockTres = mock(Casillero.class);
@@ -33,7 +35,9 @@ public class CuranderoTest {
         Soldado soldado2 = new Soldado (equipoDosMock );
 
         soldado1.inicializarEnCasillero(casilleroMockUno);
+        soldado1.setTablero(tableroMock);
         soldado2.inicializarEnCasillero(casilleroMockDos);
+        soldado2.setTablero(tableroMock);
         while (i<5){
         try {
             soldado1.prepararTurno();
@@ -46,6 +50,7 @@ public class CuranderoTest {
         int vida_actual = soldado2.getVida();
         Curandero curandero = new Curandero (equipoDosMock );
         curandero.inicializarEnCasillero(casilleroMockTres);
+        curandero.setTablero(tableroMock);
 
         when(soldado2.estaEnRangoCercanoDe(curandero)).thenReturn(true);
         curandero.atacar(soldado2);
@@ -117,6 +122,7 @@ public class CuranderoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
         int[] posicionInicial = curandero.getPosicion();
         curandero.desplazarHaciaArriba();
         int[] posicionFinal = curandero.getPosicion();
@@ -136,6 +142,7 @@ public class CuranderoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoDos);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
 
         try {
             curandero.desplazarHaciaArriba();
@@ -157,13 +164,10 @@ public class CuranderoTest {
         int[] coordenadasA = {19,18};
         int[] coordenadasB = {19,19};
 
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
-
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
-        curanderoUno.inicializarEnCasillero(casilleroUno);
-        curanderoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(curanderoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(curanderoDos,coordenadasB);
         try {
             curanderoUno.desplazarHaciaArriba();
         }
@@ -185,6 +189,7 @@ public class CuranderoTest {
 
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
 
         curandero.desplazarHaciaAbajo();
         int[] posicionFinal = curandero.getPosicion();
@@ -203,6 +208,7 @@ public class CuranderoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
         try {
             curandero.desplazarHaciaAbajo();
         }
@@ -223,12 +229,10 @@ public class CuranderoTest {
         int[] coordenadasA = {19,19};
         int[] coordenadasB = {19,18};
 
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
-        curanderoUno.inicializarEnCasillero(casilleroUno);
-        curanderoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(curanderoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(curanderoDos,coordenadasB);
         try {
             curanderoUno.desplazarHaciaAbajo();
         }
@@ -248,6 +252,7 @@ public class CuranderoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
 
         curandero.desplazarHaciaDerecha();
         int[] posicionFinal = curandero.getPosicion();
@@ -266,6 +271,7 @@ public class CuranderoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoUno);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
         try {
             curandero.desplazarHaciaDerecha();
         }
@@ -284,12 +290,10 @@ public class CuranderoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadasA = {18,19};
         int[] coordenadasB ={19,19};
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
-        curanderoUno.inicializarEnCasillero(casilleroUno);
-        curanderoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(curanderoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(curanderoDos,coordenadasB);
         try {
             curanderoUno.desplazarHaciaDerecha();
         }
@@ -310,6 +314,7 @@ public class CuranderoTest {
         Curandero curandero = new Curandero (equipoUno);
 
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
         curandero.desplazarHaciaIzquierda();
         int[] posicionFinal = curandero.getPosicion();
         int[] posicionEsperada = {1,2};
@@ -327,6 +332,7 @@ public class CuranderoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Curandero curandero = new Curandero (equipoDos);
         curandero.inicializarEnCasillero(casillero);
+        curandero.setTablero(tablero);
         try {
             curandero.desplazarHaciaIzquierda();
         }
@@ -338,23 +344,21 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curanderoIntentaMoverseParaLaIzquierdaPeroEstabaOcupadoElCasillero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion{
+    public void curanderoIntentaMoverseParaLaIzquierdaPeroEstabaOcupadoElCasillero () throws MovimientoInvalidoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         boolean seLanzoExcepcion = false;
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadasA = {19,19};
         int[] coordenadasB ={18,19};
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Curandero curanderoUno = new Curandero (equipoDos);
         Curandero curanderoDos = new Curandero (equipoDos);
-        curanderoUno.inicializarEnCasillero(casilleroUno);
-        curanderoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(curanderoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(curanderoDos,coordenadasB);
         try {
             curanderoUno.desplazarHaciaIzquierda();
         }
-        catch (CasilleroOcupadoExcepcion | YaMovioExcepcion e) {
+        catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
             seLanzoExcepcion = true;
         }
 

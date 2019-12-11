@@ -27,9 +27,14 @@ public class Tablero {
     public void inicializarUnidadEnCasillero(Unidad unidad, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
-        unidad.setTablero(this);
-        unidad.inicializarEnCasillero(casillero);
         diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
+        try{
+            unidad.inicializarEnCasillero(casillero);
+        }catch(CasilleroEnemigoExcepcion casilleroEnemigoExcepcion){
+            diccionarioCasilleroUnidad.removerUnidadDeCasillero(casillero);
+            throw casilleroEnemigoExcepcion;
+        }
+        unidad.setTablero(this);
     }
 
     public void inicializarSoldadoEnCasillero(Soldado soldado, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {

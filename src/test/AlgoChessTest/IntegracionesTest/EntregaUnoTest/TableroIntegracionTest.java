@@ -57,16 +57,14 @@ public class TableroIntegracionTest {
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
         Tablero tablero = new Tablero(equipoUno,equipoDos);
-        Casillero  casillero;
         Catapulta catapulta = new Catapulta(equipoUno);
         Curandero curandero = new Curandero(equipoUno);
         int[] coordenadasA = {5,5};
-        casillero = tablero.conseguirCasillero(coordenadasA);
 
 
             Assertions.assertThrows(CasilleroOcupadoExcepcion.class, ()->{
-                catapulta.inicializarEnCasillero(casillero);
-                curandero.inicializarEnCasillero(casillero);
+                tablero.inicializarUnidadEnCasillero(catapulta,coordenadasA);
+                tablero.inicializarUnidadEnCasillero(curandero,coordenadasA);
             });
     }
 }

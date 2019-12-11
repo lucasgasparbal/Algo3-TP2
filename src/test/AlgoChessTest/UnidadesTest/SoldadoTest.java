@@ -91,6 +91,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         int[] posicionInicial = soldado.getPosicion();
         soldado.desplazarHaciaArriba();
         int[] posicionFinal = soldado.getPosicion();
@@ -110,6 +111,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoDos);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         try {
             soldado.desplazarHaciaArriba();
         }
@@ -129,12 +131,10 @@ public class SoldadoTest {
         int[] coordenadasA = {19,18};
         int[] coordenadasB = {19,19};
 
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
-        soldadoUno.inicializarEnCasillero(casilleroUno);
-        soldadoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(soldadoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldadoDos,coordenadasB);
         try {
             soldadoUno.desplazarHaciaArriba();
         }
@@ -154,6 +154,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         int[] posicionInicial = soldado.getPosicion();
         soldado.desplazarHaciaAbajo();
         int[] posicionFinal = soldado.getPosicion();
@@ -172,6 +173,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         try {
             soldado.desplazarHaciaAbajo();
         }
@@ -191,12 +193,10 @@ public class SoldadoTest {
         int[] coordenadasA = {19,19};
         int[] coordenadasB = {19,18};
 
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
-        soldadoUno.inicializarEnCasillero(casilleroUno);
-        soldadoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(soldadoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldadoDos,coordenadasB);
         try {
             soldadoUno.desplazarHaciaAbajo();
         }
@@ -216,6 +216,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         int[] posicionInicial = soldado.getPosicion();
         soldado.desplazarHaciaDerecha();
         int[] posicionFinal = soldado.getPosicion();
@@ -234,6 +235,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         try {
             soldado.desplazarHaciaDerecha();
         }
@@ -252,12 +254,11 @@ public class SoldadoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadasA = {18,19};
         int[] coordenadasB ={19,19};
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
+
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
-        soldadoUno.inicializarEnCasillero(casilleroUno);
-        soldadoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(soldadoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldadoDos,coordenadasB);
         try {
             soldadoUno.desplazarHaciaDerecha();
         }
@@ -277,6 +278,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoUno);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         int[] posicionInicial = soldado.getPosicion();
         soldado.desplazarHaciaIzquierda();
         int[] posicionFinal = soldado.getPosicion();
@@ -295,6 +297,7 @@ public class SoldadoTest {
         Casillero casillero = tablero.conseguirCasillero(coordenadas);
         Soldado soldado = new Soldado (equipoDos);
         soldado.inicializarEnCasillero(casillero);
+        soldado.setTablero(tablero);
         try {
             soldado.desplazarHaciaIzquierda();
         }
@@ -313,12 +316,11 @@ public class SoldadoTest {
         Tablero tablero = new Tablero(equipoUno,equipoDos);
         int[] coordenadasA = {19,19};
         int[] coordenadasB ={18,19};
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
+
         Soldado soldadoUno = new Soldado (equipoDos);
         Soldado soldadoDos = new Soldado (equipoDos);
-        soldadoUno.inicializarEnCasillero(casilleroUno);
-        soldadoDos.inicializarEnCasillero(casilleroDos);
+        tablero.inicializarUnidadEnCasillero(soldadoUno,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldadoDos,coordenadasB);
         try {
             soldadoUno.desplazarHaciaIzquierda();
         }

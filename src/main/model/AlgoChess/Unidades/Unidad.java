@@ -38,13 +38,14 @@ public abstract class Unidad {
         return ubicacion;
     }
 
+    public boolean esEnemigoDeCasillero(Casillero unCasillero){
+        return !unCasillero.perteneceAEquipo(equipo);
+    }
     public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
         if(!unCasillero.perteneceAEquipo(equipo)){
             throw new CasilleroEnemigoExcepcion();
         }
-
-        unCasillero.ocuparCasillero();
         ubicacion = unCasillero;
     }
     public void recibirCuracion(int curacion) throws NoSePudoCurarExcepcion {

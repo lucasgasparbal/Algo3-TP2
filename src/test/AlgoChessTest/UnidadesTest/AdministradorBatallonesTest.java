@@ -155,8 +155,11 @@ public class AdministradorBatallonesTest {
         int[] coordenadasC = {9,5};
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado3.setTablero(tablero);
 
         administradorBatallones.agregarSoldado(soldado1);
         administradorBatallones.agregarSoldado(soldado2);

@@ -25,8 +25,11 @@ public class BatallonTest {
         int[] coordenadasC = {9,5};
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado3.setTablero(tablero);
 
         Batallon batallon = new Batallon ();
 
@@ -56,8 +59,11 @@ public class BatallonTest {
         int[] coordenadasC = {5,3};
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado3.setTablero(tablero);
 
         Batallon batallon = new Batallon ();
 
@@ -87,8 +93,11 @@ public class BatallonTest {
         int[] coordenadasC = {5,5};
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado3.setTablero(tablero);
 
         Batallon batallon = new Batallon ();
 
@@ -118,8 +127,11 @@ public class BatallonTest {
         int[] coordenadasC = {9,6};
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado3.setTablero(tablero);
         Batallon batallon = new Batallon ();
 
         batallon.agregarSoldado (soldado1);
@@ -148,8 +160,11 @@ public class BatallonTest {
         int[] coordenadasC = {9,6};
 
         soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldado1.setTablero(tablero);
         soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldado2.setTablero(tablero);
         soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
+        soldado3.setTablero(tablero);
 
         Batallon batallon = new Batallon ();
 
@@ -186,10 +201,10 @@ public class BatallonTest {
         int[] coordenadasC = {9,6};
         int[] coordenadasD = {8,8};
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
-        soldado4.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasD));
+        tablero.inicializarUnidadEnCasillero(soldado1,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldado2,coordenadasB);
+        tablero.inicializarUnidadEnCasillero(soldado3,coordenadasC);
+        tablero.inicializarUnidadEnCasillero(soldado4,coordenadasD);
 
         Batallon batallon = new Batallon ();
 
@@ -224,10 +239,10 @@ public class BatallonTest {
         int[] coordenadasC = {9,6};
         int[] coordenadasD = {8,8};
 
-        soldado1.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
-        soldado2.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
-        soldado3.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasC));
-        soldado4.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasD));
+        tablero.inicializarUnidadEnCasillero(soldado1,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldado2,coordenadasB);
+        tablero.inicializarUnidadEnCasillero(soldado3,coordenadasC);
+        tablero.inicializarUnidadEnCasillero(soldado4,coordenadasD);
 
         Batallon batallon = new Batallon ();
 
