@@ -10,6 +10,7 @@ import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -29,6 +30,7 @@ public class CuranderoTest {
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockTres.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+        when(casilleroMockDos.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
         when(equipoDosMock.esIgualA(equipoDosMock)).thenReturn(true);
         int i=0;
         Soldado soldado1 = new Soldado (equipoUnoMock );

@@ -1,5 +1,6 @@
 package AlgoChessTest.UnidadesTest;
 
+import javafx.scene.control.Tab;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Tablero;
@@ -8,18 +9,41 @@ import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SoldadoTest {
 
+    @Test
+    public void SoldadoSufreMasDanioSiEstaEnUnCasilleroEnemigo() throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+        int[] coordenadasA = {9,9};
+        int[] coordenadasB = {9,8};
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
 
+        Soldado soldadoUno = new Soldado(equipoUno);
+        soldadoUno.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasA));
+        soldadoUno.setTablero(tablero);
+        Soldado soldadoDos = new Soldado(equipoUno);
+        soldadoDos.inicializarEnCasillero(tablero.conseguirCasillero(coordenadasB));
+        soldadoDos.setTablero(tablero);
+
+        soldadoUno.desplazarHaciaArriba();
+        soldadoUno.sufrirDanio(50);
+        soldadoDos.sufrirDanio(50);
+
+        Assert.assertTrue(soldadoDos.getVida()-soldadoUno.getVida() > 0);
+
+    }
 
     @Test
     public void sufreDanioLetalMurioDevuelveTrue () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         Equipo equipoMock = mock(Equipo.class);
         Casillero casilleroMock = mock(Casillero.class);
         when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
+        when(casilleroMock.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
         Soldado soldado = new Soldado (equipoMock);
         soldado.inicializarEnCasillero(casilleroMock);
         soldado.sufrirDanio(101);
@@ -27,9 +51,13 @@ public class SoldadoTest {
     }
 
     @Test
-    public void sufreDanioNoLetalMurioDevuelveFalse () {
+    public void sufreDanioNoLetalMurioDevuelveFalse () throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
         Equipo equipoMock = mock(Equipo.class);
+        Casillero casilleroMock = mock(Casillero.class);
+        when(casilleroMock.perteneceAEquipo(equipoMock)).thenReturn(true);
+        when(casilleroMock.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
         Soldado soldado = new Soldado (equipoMock);
+        soldado.inicializarEnCasillero(casilleroMock);
         soldado.sufrirDanio(59);
         Assert.assertFalse (soldado.murio());
     }
@@ -65,6 +93,7 @@ public class SoldadoTest {
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+        when(casilleroMockDos.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
 
         int i=0;
         Soldado soldado1 = new Soldado (equipoUnoMock );
@@ -367,6 +396,8 @@ public class SoldadoTest {
 
         Assert.assertFalse(soldadoUno.esEnemigoDe(soldadoDos));
     }
+
+
 
 }
 

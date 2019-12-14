@@ -10,8 +10,8 @@ public class Vida {
        valorMaximo = valorDeVida;
     }
 
-    public void tomaDanio(int danio) {
-        valorActual -= danio;
+    public void tomaDanio(double danio) {
+        valorActual -= Math.ceil(danio);
     }
 
     public boolean acabo() {

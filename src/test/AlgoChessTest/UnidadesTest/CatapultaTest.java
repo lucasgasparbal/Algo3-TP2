@@ -1,5 +1,6 @@
 package AlgoChessTest.UnidadesTest;
 
+import javafx.scene.control.Tab;
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
@@ -10,6 +11,7 @@ import model.AlgoChess.Unidades.Soldado;
 import org.junit.Test;
 import org.junit.Assert;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,16 +23,19 @@ public class CatapultaTest {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
-
+        Tablero tableroMock = mock(Tablero.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
 
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoLejanoDe(casilleroMockUno)).thenReturn(true);
+        when(casilleroMockDos.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
 
         Catapulta catapulta = new Catapulta (equipoUnoMock);
+        catapulta.setTablero(tableroMock);
         Soldado soldado = new Soldado (equipoDosMock);
+        soldado.setTablero(tableroMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
         soldado.inicializarEnCasillero(casilleroMockDos);
 
@@ -82,6 +87,7 @@ public class CatapultaTest {
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoLejanoDe(casilleroMockUno)).thenReturn(true);
+        when(casilleroMockDos.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
 
         Catapulta catapulta = new Catapulta (equipoUnoMock);
         Curandero curandero = new Curandero (equipoDosMock);

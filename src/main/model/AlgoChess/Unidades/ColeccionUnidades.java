@@ -13,34 +13,13 @@ public class ColeccionUnidades {
     }
 
     public void resetearAtaqueMovimiento() {
-        Iterator iterador = unidades.iterator();
-        System.out.print(unidades.size());
-        while (iterador.hasNext()) {
-            Unidad unidad = (Unidad) iterador.next();
+        for(Unidad unidad : unidades){
             unidad.prepararTurno();
         }
     }
 
     public void agregarUnidad(Unidad unidad){
         unidades.add(unidad);
-    }
-
-    public boolean hayUnidadesAdyacentesA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
-        for(Unidad unidad : unidades){
-            if(unidad.esAdyacenteA(unaUnidad)){ return true;}
-        }
-        return false;
-    }
-
-    public boolean hayUnidadesCercanasA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
-        for(Unidad unidad : unidades){
-            if(unidad.estaEnRangoCercanoDe(unaUnidad)){ return true;}
-        }
-        return false;
-    }
-
-    public void removerUnidad(Unidad unidad){
-        unidades.remove(unidad);
     }
 
 

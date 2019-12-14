@@ -38,10 +38,7 @@ public abstract class Unidad {
         return ubicacion;
     }
 
-    public boolean esEnemigoDeCasillero(Casillero unCasillero){
-        return !unCasillero.perteneceAEquipo(equipo);
-    }
-    public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
+    public void inicializarEnCasillero(Casillero unCasillero) throws CasilleroEnemigoExcepcion{
 
         if(!unCasillero.perteneceAEquipo(equipo)){
             throw new CasilleroEnemigoExcepcion();
@@ -53,7 +50,7 @@ public abstract class Unidad {
     }
 
     public void sufrirDanio (int dmg) {
-        vida.tomaDanio(dmg);
+        vida.tomaDanio(dmg*ubicacion.aplicarMultiplicadorDanioAUnidadDeEquipo(equipo));
 
         if(vida.acabo()){
             ubicacion.vaciar();

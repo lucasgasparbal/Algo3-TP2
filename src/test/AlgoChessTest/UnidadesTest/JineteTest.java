@@ -11,6 +11,7 @@ import model.AlgoChess.Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -55,6 +56,7 @@ public class JineteTest {
         when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
         when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
         when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+        when(casilleroMockDos.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
 
 
         int i = 0;

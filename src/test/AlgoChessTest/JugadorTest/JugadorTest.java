@@ -43,6 +43,7 @@ public class JugadorTest {
         jugador.comprarCatapulta();
         jugador.comprarJinete();
         when(casilleroMock.perteneceAEquipo(any(Equipo.class))).thenReturn(true);
+        when(casilleroMock.aplicarMultiplicadorDanioAUnidadDeEquipo(any(Equipo.class))).thenReturn(1.0);
         Soldado soldado = jugador.tomarSoldadoDeBanquilla();
         Catapulta catapulta = jugador.tomarCatapultaDeBanquilla();
         Jinete jinete = jugador.tomarJineteDeBanquilla();
