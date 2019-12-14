@@ -5,9 +5,7 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
-import model.AlgoChess.Unidades.Catapulta;
-import model.AlgoChess.Unidades.Curandero;
-import model.AlgoChess.Unidades.Soldado;
+import model.AlgoChess.Unidades.*;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -23,6 +21,7 @@ public class CatapultaTest {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
+        ColeccionUnidades coleccionUnidadesMock = mock(ColeccionUnidades.class);
         Tablero tableroMock = mock(Tablero.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
@@ -39,6 +38,8 @@ public class CatapultaTest {
         catapulta.inicializarEnCasillero(casilleroMockUno);
         soldado.inicializarEnCasillero(casilleroMockDos);
 
+        when(tableroMock.obtenerUnidadesConexasA(any(Unidad.class))).thenReturn(coleccionUnidadesMock);
+
         while (i<10) {
             catapulta.prepararTurno();
                 catapulta.atacar(soldado);
@@ -52,7 +53,8 @@ public class CatapultaTest {
         int i = 0;
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
-
+        Tablero tableroMock = mock(Tablero.class);
+        ColeccionUnidades coleccionUnidadesMock = mock(ColeccionUnidades.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
 
@@ -63,7 +65,11 @@ public class CatapultaTest {
         Catapulta catapulta = new Catapulta (equipoUnoMock);
         Curandero curandero = new Curandero (equipoDosMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
+        catapulta.setTablero(tableroMock);
         curandero.inicializarEnCasillero(casilleroMockDos);
+        curandero.setTablero(tableroMock);
+
+        when(tableroMock.obtenerUnidadesConexasA(any(Unidad.class))).thenReturn(coleccionUnidadesMock);
 
         while (i<3) {
             try {
@@ -81,6 +87,8 @@ public class CatapultaTest {
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
 
+        Tablero tableroMock = mock(Tablero.class);
+        ColeccionUnidades coleccionUnidadesMock = mock(ColeccionUnidades.class);
         Casillero casilleroMockUno = mock(Casillero.class);
         Casillero casilleroMockDos = mock(Casillero.class);
 
@@ -92,7 +100,11 @@ public class CatapultaTest {
         Catapulta catapulta = new Catapulta (equipoUnoMock);
         Curandero curandero = new Curandero (equipoDosMock);
         catapulta.inicializarEnCasillero(casilleroMockUno);
+        catapulta.setTablero(tableroMock);
         curandero.inicializarEnCasillero(casilleroMockDos);
+        curandero.setTablero(tableroMock);
+
+        when(tableroMock.obtenerUnidadesConexasA(any(Unidad.class))).thenReturn(coleccionUnidadesMock);
 
         while (i<4) {
             catapulta.prepararTurno();
@@ -113,17 +125,14 @@ public class CatapultaTest {
         int[] coordenadasA = {1,1};
         int[] coordenadasB = {19,19};
         int[] coordenadasC = {18,19};
-        Casillero casilleroUno = tablero.conseguirCasillero(coordenadasA);
-        Casillero casilleroDos = tablero.conseguirCasillero(coordenadasB);
-        Casillero casilleroTres = tablero.conseguirCasillero(coordenadasC);
 
         Catapulta catapultaAliada = new Catapulta(equipoUno);
         Catapulta catapultaEnemiga = new Catapulta(equipoDos);
         Soldado soldadoEnemigo = new Soldado (equipoDos);
 
-        catapultaAliada.inicializarEnCasillero(casilleroUno);
-        catapultaEnemiga.inicializarEnCasillero(casilleroDos);
-        soldadoEnemigo.inicializarEnCasillero(casilleroTres);
+        tablero.inicializarUnidadEnCasillero(catapultaAliada,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(catapultaEnemiga,coordenadasB);
+        tablero.inicializarUnidadEnCasillero(soldadoEnemigo,coordenadasC);
 
         while(i<6) {
             catapultaAliada.prepararTurno();

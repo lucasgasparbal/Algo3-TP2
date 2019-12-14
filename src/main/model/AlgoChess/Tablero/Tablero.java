@@ -2,10 +2,7 @@ package model.AlgoChess.Tablero;
 
 import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
-import model.AlgoChess.Unidades.AdministradorBatallones;
-import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
-import model.AlgoChess.Unidades.Soldado;
-import model.AlgoChess.Unidades.Unidad;
+import model.AlgoChess.Unidades.*;
 
 import java.util.ArrayList;
 
@@ -27,7 +24,7 @@ public class Tablero {
     public void inicializarUnidadEnCasillero(Unidad unidad, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
-        diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
+        diccionarioCasilleroUnidad.enCasilleroPonerUnidad(casillero,unidad);
         try{
             unidad.inicializarEnCasillero(casillero);
         }catch(CasilleroEnemigoExcepcion casilleroEnemigoExcepcion){
@@ -41,7 +38,7 @@ public class Tablero {
 
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
         soldado.inicializarEnCasillero(casillero);
-        diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,soldado);
+        diccionarioCasilleroUnidad.enCasilleroPonerUnidad(casillero,soldado);
         administradorBatallones.agregarSoldado(soldado);
         administradorBatallones.actualizarBatallones();
     }
@@ -91,7 +88,7 @@ public class Tablero {
     }
 
     public void enCasilleroPonerUnidad(Casillero casillero, Unidad unidad) throws CasilleroOcupadoExcepcion {
-        diccionarioCasilleroUnidad.EnCasilleroPonerUnidad(casillero,unidad);
+        diccionarioCasilleroUnidad.enCasilleroPonerUnidad(casillero,unidad);
     }
 
     public void prepararTurno(){
@@ -160,5 +157,9 @@ public class Tablero {
         }
 
         return casilleroNuevo;
+    }
+
+    public ColeccionUnidades obtenerUnidadesConexasA(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {
+        return diccionarioCasilleroUnidad.obtenerUnidadesConexasA(unidad);
     }
 }

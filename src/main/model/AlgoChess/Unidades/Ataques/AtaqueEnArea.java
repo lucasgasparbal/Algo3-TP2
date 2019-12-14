@@ -18,6 +18,7 @@ public class AtaqueEnArea implements Ataque {
                         throw new ObjetivoFueraDeRangoExcepcion();
                 }
                         objetivo.sufrirDanio(dmg);
+                        objetivo.obtenerUnidadesConexas().daniarTodasLasUnidades(dmg);
         }
 
 

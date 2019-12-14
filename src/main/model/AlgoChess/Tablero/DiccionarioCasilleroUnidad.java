@@ -3,14 +3,18 @@ package model.AlgoChess.Tablero;
 import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
+import model.AlgoChess.Unidades.ColeccionUnidades;
 import model.AlgoChess.Unidades.Unidad;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class DiccionarioCasilleroUnidad {
     Hashtable<Casillero, Unidad> diccionario = new Hashtable<>();
 
-    public void EnCasilleroPonerUnidad(Casillero casillero, Unidad unidad) throws CasilleroOcupadoExcepcion {
+    public void enCasilleroPonerUnidad(Casillero casillero, Unidad unidad) throws CasilleroOcupadoExcepcion {
         casillero.ocuparCasillero();
         diccionario.put(casillero, unidad);
 
@@ -53,7 +57,34 @@ public class DiccionarioCasilleroUnidad {
     }
 
     public void desplazarUnidadDesdeHasta(Unidad unidad, Casillero origen, Casillero objetivo) throws CasilleroOcupadoExcepcion {
-        EnCasilleroPonerUnidad(objetivo,unidad);
+        enCasilleroPonerUnidad(objetivo,unidad);
         removerUnidadDeCasillero(origen);
+    }
+
+    private ArrayList<Unidad> obtenerUnidadesAdyacentesA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
+        ArrayList<Unidad> lista = new ArrayList<>();
+        for(Unidad unidad: diccionario.values()){
+            if(unidad.esAdyacenteA(unaUnidad)){
+                lista.add(unidad);
+            }
+        }
+        return lista;
+    }
+
+    public ColeccionUnidades obtenerUnidadesConexasA(Unidad unaUnidad) throws CoordenadaFueraDeRangoExcepcion {
+        LinkedList<Unidad> cola = new LinkedList<>();
+        ColeccionUnidades coleccionUnidades = new ColeccionUnidades();
+        cola.addLast(unaUnidad);
+
+        while(!cola.isEmpty()){
+            Unidad unidadActual = cola.pollFirst();
+            for(Unidad unidad: obtenerUnidadesAdyacentesA(unidadActual)){
+                if(unidad != unaUnidad & !coleccionUnidades.contieneUnidad(unidad)){
+                    cola.addLast(unidad);
+                    coleccionUnidades.agregarUnidad(unidad);
+                }
+            }
+        }
+        return coleccionUnidades;
     }
 }

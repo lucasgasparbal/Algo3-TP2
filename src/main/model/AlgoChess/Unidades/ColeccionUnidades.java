@@ -3,10 +3,12 @@ package model.AlgoChess.Unidades;
 import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class ColeccionUnidades {
-    private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
+    private HashSet<Unidad> unidades = new HashSet<Unidad>();
 
     public boolean estaVacia() {
         return unidades.isEmpty();
@@ -19,9 +21,14 @@ public class ColeccionUnidades {
     }
 
     public void agregarUnidad(Unidad unidad){
-        unidades.add(unidad);
+        if(!contieneUnidad(unidad)){
+            unidades.add(unidad);
+        }
     }
 
+    public boolean contieneUnidad(Unidad unidad){
+        return unidades.contains(unidad);
+    }
 
     public boolean hayUnidadesVivas() {
         for(Unidad unidad: unidades){
@@ -31,5 +38,11 @@ public class ColeccionUnidades {
         }
 
         return false;
+    }
+
+    public void daniarTodasLasUnidades(int danio){
+        for(Unidad unidad : unidades){
+            unidad.sufrirDanio(danio);
+        }
     }
 }

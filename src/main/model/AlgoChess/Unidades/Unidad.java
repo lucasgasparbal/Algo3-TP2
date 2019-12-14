@@ -77,6 +77,10 @@ public abstract class Unidad {
         return ubicacion.estaEnRangoLejanoDe(unaUnidad.getUbicacion());
     }
 
+    public ColeccionUnidades obtenerUnidadesConexas() throws CoordenadaFueraDeRangoExcepcion {
+        return tablero.obtenerUnidadesConexasA(this);
+    }
+
     public int[] getPosicion() {
         return ubicacion.coordenadas();
     }
