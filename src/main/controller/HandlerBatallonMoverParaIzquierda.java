@@ -2,8 +2,11 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Juego;
+import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
+import vista.LanzadorExcepciones;
 import vista.OrganizadorDeBatallones;
 
 public class HandlerBatallonMoverParaIzquierda implements EventHandler<ActionEvent> {
@@ -11,16 +14,20 @@ public class HandlerBatallonMoverParaIzquierda implements EventHandler<ActionEve
     Juego juego;
     int[] coordenadas;
     OrganizadorDeBatallones organizadorDeBatallones;
+    Group contenedorErrores;
+    LanzadorExcepciones lanzadorExcepciones;
 
-    public HandlerBatallonMoverParaIzquierda (Juego nuevoJuego, int[]coordenadasCasillero, OrganizadorDeBatallones organizador) {
+    public HandlerBatallonMoverParaIzquierda (Juego nuevoJuego, int[]coordenadasCasillero, OrganizadorDeBatallones organizador, Group contenedor, LanzadorExcepciones lanzador) {
         this.juego = nuevoJuego;
         this.coordenadas = coordenadasCasillero;
         this.organizadorDeBatallones = organizador;
+        this.contenedorErrores = contenedor;
+        this.lanzadorExcepciones = lanzador;
     }
 
     @Override
     public void handle (ActionEvent event) {
-        organizadorDeBatallones.moverBatallonParaIzquierda(coordenadas);
+        PaqueteCoordenadasBatallon batallon = organizadorDeBatallones.encontrarBatallonCorrespondiente(coordenadas);
         try {
             juego.moverBatallonParaIzquierda(coordenadas);
         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
@@ -32,10 +39,13 @@ public class HandlerBatallonMoverParaIzquierda implements EventHandler<ActionEve
         } catch (YaMovioExcepcion yaMovioExcepcion) {
             yaMovioExcepcion.printStackTrace();
         } catch (BatallonYaSeMovioExcepcion batallonYaSeMovioExcepcion) {
-            batallonYaSeMovioExcepcion.printStackTrace();
+            lanzadorExcepciones.lanzarExcepcion("El batallon ya se movio en este turno",contenedorErrores);
+            return;
         } catch (BatallonNoSePuedeMoverExcepcion batallonNoSePuedeMoverExcepcion) {
-            batallonNoSePuedeMoverExcepcion.printStackTrace();
+            lanzadorExcepciones.lanzarExcepcion("El batallon no se puede desplazar en la direccion indicada",contenedorErrores);
+            return;
         }
+        organizadorDeBatallones.moverBatallonParaIzquierda(batallon);
         organizadorDeBatallones.actualizarBatallones();
     }
 }

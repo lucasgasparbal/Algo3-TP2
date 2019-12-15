@@ -94,8 +94,7 @@ public class Soldado extends UnidadMovible {
         if (!seHabiaMovido) {
             movio = false;
         }
-
-
+        seMovioConBatallon = true;
     }
 
 

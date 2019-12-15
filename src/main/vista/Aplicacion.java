@@ -97,9 +97,11 @@ public class Aplicacion extends Application {
 
         HBox etiquetasPiezasRestantes = new HBox();
 
+        VBox contenedorDescripcionesYBotones = new VBox ();
+
         int[] cantidadFichas = juego.conseguirCantidadPiezasEnBanquilla();
 
-        GeneradorCajaImagenesConFichasCompradas generadorCajaImagenesConFichasCompradas = new GeneradorCajaImagenesConFichasCompradas(directorio_resources,etiquetasPiezasRestantes,generadorDeEtiquetas);
+        GeneradorCajaImagenesConFichasCompradas generadorCajaImagenesConFichasCompradas = new GeneradorCajaImagenesConFichasCompradas(directorio_resources,etiquetasPiezasRestantes,generadorDeEtiquetas, contenedorDescripcionesYBotones);
         VBox cajaImagenesFichasCompradas = generadorCajaImagenesConFichasCompradas.generar(cantidadFichas);
 
         Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
@@ -118,7 +120,7 @@ public class Aplicacion extends Application {
         Group grupoBotones = new Group(contenedorDeBotones);
 
         Button botonReset = generadorDeBotones.nuevoBoton("Vender todas las piezas");
-        botonReset.setOnAction(new HandlerVenderTodasLasPiezas(juego));
+        botonReset.setOnAction(new HandlerVenderTodasLasPiezas(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes));
 
         Button botonComprarFichasNegras = generadorDeBotones.nuevoBoton("Siguiente");
 
@@ -132,11 +134,10 @@ public class Aplicacion extends Application {
         botonComprarFichasNegras.setOnAction(new HandlerCompraFichasNegras(juego,stackOro,etiquetaOroRestante,botonComenzarJuego,generadorDeEtiquetas,etiquetasPiezasRestantes));
 
         Label etiquetaPlaceholder = new Label();
-        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaPlaceholder,"PLACEHOLDER DESCRIPCIONES",40);
-        etiquetaPlaceholder.setTextFill(Color.web("#ffd700"));
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaPlaceholder,"Haga click en la unidad para obtener mas informacion",40);
+        etiquetaPlaceholder.setTextFill(Color.WHITE);
 
-        VBox contenedorDescripcionesYBotones = new VBox ();
-        contenedorDescripcionesYBotones.setSpacing(300);
+        contenedorDescripcionesYBotones.setSpacing(200);
         contenedorDescripcionesYBotones.setAlignment(Pos.CENTER);
         contenedorDescripcionesYBotones.getChildren().addAll (etiquetaPlaceholder,grupoBotones);
 

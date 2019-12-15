@@ -96,8 +96,8 @@ public class OrganizadorDeBatallones {
             casilleroOriginal = (StackPane) (tableroBlanco.getChildren().get(coordenadas[0]* 10 + coordenadas[1]));
             casilleroNuevo = (StackPane) (tableroBlanco.getChildren().get((coordenadas[0]+1) * 10 + coordenadas[1]));
         }
+        if (casilleroNuevo.getChildren().size() == 2) {return;}
         casilleroNuevo.getChildren().add(1,casilleroOriginal.getChildren().get(1));
-
     }
 
     private void moverAbajo (int [] coordenadas) {
@@ -105,12 +105,16 @@ public class OrganizadorDeBatallones {
         StackPane casilleroNuevo;
         if (coordenadas[1]>9) {
             casilleroOriginal = (StackPane) (tableroNegro.getChildren().get(coordenadas[0]* 10 + coordenadas[1]-10));
-            casilleroNuevo = (StackPane) (tableroNegro.getChildren().get((coordenadas[0]) * 10 + coordenadas[1]-11));
+            if (coordenadas[1]==10) {
+                casilleroNuevo = (StackPane) (tableroBlanco.getChildren().get((coordenadas[0]) * 10 + coordenadas[1]-1));
+            }
+            else {casilleroNuevo = (StackPane) (tableroNegro.getChildren().get((coordenadas[0]) * 10 + coordenadas[1]-11));}
         }
         else {
             casilleroOriginal = (StackPane) (tableroBlanco.getChildren().get(coordenadas[0]* 10 + coordenadas[1]));
             casilleroNuevo = (StackPane) (tableroBlanco.getChildren().get((coordenadas[0]) * 10 + coordenadas[1]-1));
         }
+        if (casilleroNuevo.getChildren().size() == 2) {return;}
         casilleroNuevo.getChildren().add(1,casilleroOriginal.getChildren().get(1));
 
     }
@@ -125,6 +129,7 @@ public class OrganizadorDeBatallones {
             casilleroOriginal = (StackPane) (tableroBlanco.getChildren().get(coordenadas[0] * 10 + coordenadas[1]));
             casilleroNuevo = (StackPane) (tableroBlanco.getChildren().get((coordenadas[0] - 1) * 10 + coordenadas[1]));
         }
+        if (casilleroNuevo.getChildren().size() ==2) {return;}
         casilleroNuevo.getChildren().add(1,casilleroOriginal.getChildren().get(1));
 
     }
@@ -138,10 +143,13 @@ public class OrganizadorDeBatallones {
         }
         else {
             casilleroOriginal = (StackPane) (tableroBlanco.getChildren().get(coordenadas[0]* 10 + coordenadas[1]));
-            casilleroNuevo = (StackPane) (tableroBlanco.getChildren().get((coordenadas[0]) * 10 + (coordenadas[1]+1)));
+            if (coordenadas[1]==9) {
+                casilleroNuevo = (StackPane) (tableroNegro.getChildren().get((coordenadas[0]) * 10 + (coordenadas[1]-9)));
+            }
+            else {casilleroNuevo = (StackPane) (tableroBlanco.getChildren().get((coordenadas[0]) * 10 + (coordenadas[1]+1)));}
         }
+        if (casilleroNuevo.getChildren().size() == 2) {return;}
         casilleroNuevo.getChildren().add(1,casilleroOriginal.getChildren().get(1));
-
     }
 
     public PaqueteCoordenadasBatallon encontrarBatallonCorrespondiente (int[] coordenadas) {
@@ -166,8 +174,7 @@ public class OrganizadorDeBatallones {
         crearBatallones(batallones);
     }
 
-    public void moverBatallonParaDerecha(int[] coordenadas) {
-        PaqueteCoordenadasBatallon batallon = encontrarBatallonCorrespondiente(coordenadas);
+    public void moverBatallonParaDerecha(PaqueteCoordenadasBatallon batallon) {
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();
@@ -176,8 +183,7 @@ public class OrganizadorDeBatallones {
         moverALaDerecha(soldado1);
     }
 
-    public void moverBatallonParaIzquierda(int[] coordenadas) {
-        PaqueteCoordenadasBatallon batallon = encontrarBatallonCorrespondiente(coordenadas);
+    public void moverBatallonParaIzquierda(PaqueteCoordenadasBatallon batallon) {
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();
@@ -186,8 +192,7 @@ public class OrganizadorDeBatallones {
         moverALaIzquierda(soldado3);
     }
 
-    public void moverBatallonParaArriba(int[] coordenadas) {
-        PaqueteCoordenadasBatallon batallon = encontrarBatallonCorrespondiente(coordenadas);
+    public void moverBatallonParaArriba(PaqueteCoordenadasBatallon batallon) {
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();
@@ -196,8 +201,7 @@ public class OrganizadorDeBatallones {
         moverArriba(soldado1);
     }
 
-    public void moverBatallonParaAbajo(int[] coordenadas) {
-        PaqueteCoordenadasBatallon batallon = encontrarBatallonCorrespondiente(coordenadas);
+    public void moverBatallonParaAbajo(PaqueteCoordenadasBatallon batallon) {
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();

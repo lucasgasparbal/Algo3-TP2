@@ -125,10 +125,6 @@ public class Batallon {
             desarmarBatallon();
             return false;
         }
-        if (posicion2[0] > posicion3[0] || posicion2[1] > posicion3[1]) {
-            desarmarBatallon();
-            return false;
-        }
         if (posicion1[1] < posicion2[1]-1 || posicion3[1] > posicion2[1]+1) {
             desarmarBatallon();
             return false;

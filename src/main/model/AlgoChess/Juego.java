@@ -71,6 +71,10 @@ public class Juego {
         return jugadorActual.getNombre();
     }
 
+    public void venderTodasUnidades () {
+        jugadorActual.venderTodasUnidades();
+    }
+
     public void nuevoTurno(boolean resetearMovimientoAtaque){
         jugadorActual.terminarTurno();
         jugadorActual = organizadorOrdenJugadores.proximoJugador();
@@ -138,18 +142,22 @@ public class Juego {
     
     public void moverBatallonParaArriba (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
         tablero.moverBatallonParaArriba(coordenadasSoldado);
+        tablero.actualizarBatallones();
     }
 
     public void moverBatallonParaAbajo (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
         tablero.moverBatallonParaAbajo(coordenadasSoldado);
+        tablero.actualizarBatallones();
     }
 
     public void moverBatallonParaIzquierda (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
         tablero.moverBatallonParaIzquierda(coordenadasSoldado);
+        tablero.actualizarBatallones();
     }
 
     public void moverBatallonParaDerecha (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
         tablero.moverBatallonParaDerecha(coordenadasSoldado);
+        tablero.actualizarBatallones();
     }
 
     public void moverPiezaEnCoordenadaHaciaArriba(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion {

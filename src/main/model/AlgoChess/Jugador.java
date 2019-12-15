@@ -54,13 +54,17 @@ public class Jugador {
 
     }
 
+    public void venderTodasUnidades() {
+        banquillaUnidades.venderTodasUnidades();
+        oro = MonedasIniciales;
+    }
+
     public boolean perdio() {
         return !unidadesEnJuego.hayUnidadesVivas();
     }
 
     public void prepararTurno(){
         estaEnTurno = true;
-        unidadesEnJuego.prepararTurno();
     }
 
     public void terminarTurno(){

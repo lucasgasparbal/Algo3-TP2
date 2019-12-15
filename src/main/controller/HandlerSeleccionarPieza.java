@@ -2,6 +2,7 @@ package controller;
 
 import javafx.animation.SequentialTransition;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -32,8 +33,9 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
     GridPane tablero;
     OrganizadorDeBatallones organizadorDeBatallones;
     Group contenedorErrores;
+    StackPane pantallaVictoria;
 
-    public HandlerSeleccionarPieza (StackPane casillero, ImageView marcoRojo, UltimaFichaSeleccionada ultimaFicha, Label vida, GeneradorDeEtiquetas generador, Juego nuevoJuego, int[]coord, GridPane tableroActual, OrganizadorDeBatallones organizador, Group grupo) {
+    public HandlerSeleccionarPieza (StackPane casillero, ImageView marcoRojo, UltimaFichaSeleccionada ultimaFicha, Label vida, GeneradorDeEtiquetas generador, Juego nuevoJuego, int[]coord, GridPane tableroActual, OrganizadorDeBatallones organizador, Group grupo, StackPane stackPane) {
         this.casilleroSeleccionado = casillero;
         this.marco = marcoRojo;
         this.ultimaFichaSeleccionada = ultimaFicha;
@@ -44,6 +46,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
         this.tablero = tableroActual;
         this.organizadorDeBatallones = organizador;
         this.contenedorErrores = grupo;
+        this.pantallaVictoria = stackPane;
     }
 
     public void lanzarExcepcion (String textoDelError) {
@@ -209,7 +212,10 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                         StackPane casilleroVictima = (StackPane) tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]);
                         casilleroVictima.getChildren().remove(1);
                         if (juego.rivalPerdio()) {
-                            Scene secondScene = new Scene(new Group(), 400, 400);
+                            Label etiquetaVictoria = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(),juego.obtenerNombreJugadorEnTurno()+ ", BIEN HECHO", 40,"#ffd700");
+                            pantallaVictoria.getChildren().add(etiquetaVictoria);
+                            pantallaVictoria.setAlignment(etiquetaVictoria, Pos.TOP_CENTER);
+                            Scene secondScene = new Scene(pantallaVictoria,512,512);
                             Stage ventanaVictoria = new Stage();
                             ventanaVictoria.setTitle("FELICITACIONES");
                             ventanaVictoria.setScene(secondScene);

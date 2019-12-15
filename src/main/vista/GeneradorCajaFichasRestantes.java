@@ -8,17 +8,20 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class GeneradorCajaFichasRestantes {
 
     String directorioElementos;
     ImageViewPiezaEnJuego ultimaPiezaSeleccionada;
     GeneradorDeEtiquetas generadorDeEtiquetas;
+    VBox contenedorFichasBotones;
 
     public GeneradorCajaFichasRestantes (String directorio, ImageViewPiezaEnJuego ultimaPieza, GeneradorDeEtiquetas generador) {
         this.directorioElementos = directorio;
         this.ultimaPiezaSeleccionada = ultimaPieza;
         this.generadorDeEtiquetas = generador;
+
     }
 
     public StackPane generarCajaFichasRestantes(int[] cantidadFichas) {

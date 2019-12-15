@@ -61,7 +61,12 @@ public class BanquillaUnidades {
         return catapultas.size();
     }
 
-
+    public void venderTodasUnidades () {
+        soldados.clear();
+        jinetes.clear();
+        curanderos.clear();
+        catapultas.clear();
+    }
 
     public Soldado tomarSoldado() throws NoHaySoldadosEnBanquillaExcepcion {
         if(!tieneSoldados()){
