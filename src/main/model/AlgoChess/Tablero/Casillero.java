@@ -69,4 +69,12 @@ public class Casillero{
     public boolean perteneceAEquipo(Equipo unEquipo){
         return equipo.esIgualA(unEquipo);
     }
+
+    public boolean estaALaDerechaDe(Casillero unCasillero){
+        return (unCasillero.x < this.x);
+    }
+
+    public boolean estaArribaDe(Casillero unCasillero){
+        return (unCasillero.y < this.y);
+    }
 }

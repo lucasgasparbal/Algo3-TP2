@@ -8,10 +8,12 @@ import model.AlgoChess.Unidades.Batallon;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.mockito.Mockito.*;
+
 public class BatallonTest {
 
     @Test
-    public void test01CreoBatallonVerticalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test01CreoBatallonVerticalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -45,7 +47,7 @@ public class BatallonTest {
         }
 
     @Test
-    public void test02CreoBatallonHorizontalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test02CreoBatallonHorizontalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -79,7 +81,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test03CreoBatallonVerticalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test03CreoBatallonVerticalLoMuevoVerticalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -113,7 +115,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test04CreoBatallonHorizontalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test04CreoBatallonHorizontalLoMuevoHorizontalmente() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -146,7 +148,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test05CreoBatallonHorizontalLoDesplazoDosVecesEnDosDireccionesVerificoPosiciones() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test05CreoBatallonHorizontalLoDesplazoDosVecesEnDosDireccionesVerificoPosiciones() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -186,7 +188,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test06AvanzoBatallonPeroDejoAtrasUnaPieza() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test06AvanzoBatallonPeroDejoAtrasUnaPieza() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -224,7 +226,7 @@ public class BatallonTest {
     }
 
     @Test
-    public void test07AvanzoBatallonPeroDejoAtrasUnaPiezaBatallonNoEsValido() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void test07AvanzoBatallonPeroDejoAtrasUnaPiezaBatallonNoEsValido() throws CasilleroEnemigoExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
 
         Equipo equipoUno = new Equipo(1);
         Equipo equipoDos = new Equipo(2);
@@ -257,6 +259,74 @@ public class BatallonTest {
         batallon.desplazarBatallonHaciaArriba();
 
         Assert.assertFalse(batallon.esValido());
+    }
+
+    @Test(expected = BatallonNoSePuedeMoverExcepcion.class)
+    public void BatallonDesplazarHaciaDerechaTodosMovimientosDeIntegrantesSonInvalidosLanzaExcepcion() throws MovimientoInvalidoExcepcion, BatallonYaSeMovioExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        Batallon batallon = new Batallon();
+        Soldado soldadoMockUno = mock(Soldado.class);
+        Soldado soldadoMockDos = mock(Soldado.class);
+        Soldado soldadoMockTres= mock(Soldado.class);
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockUno).desplazarConBatallonHaciaDerecha();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockDos).desplazarConBatallonHaciaDerecha();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockTres).desplazarConBatallonHaciaDerecha();
+
+        batallon.agregarSoldado(soldadoMockUno);
+        batallon.agregarSoldado(soldadoMockDos);
+        batallon.agregarSoldado(soldadoMockTres);
+
+        batallon.desplazarBatallonHaciaDerecha();
+    }
+
+    @Test(expected = BatallonNoSePuedeMoverExcepcion.class)
+    public void BatallonDesplazarHaciaIzquierdaTodosMovimientosDeIntegrantesSonInvalidosLanzaExcepcion() throws MovimientoInvalidoExcepcion, BatallonYaSeMovioExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        Batallon batallon = new Batallon();
+        Soldado soldadoMockUno = mock(Soldado.class);
+        Soldado soldadoMockDos = mock(Soldado.class);
+        Soldado soldadoMockTres= mock(Soldado.class);
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockUno).desplazarConBatallonHaciaIzquierda();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockDos).desplazarConBatallonHaciaIzquierda();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockTres).desplazarConBatallonHaciaIzquierda();
+
+        batallon.agregarSoldado(soldadoMockUno);
+        batallon.agregarSoldado(soldadoMockDos);
+        batallon.agregarSoldado(soldadoMockTres);
+
+        batallon.desplazarBatallonHaciaIzquierda();
+    }
+
+    @Test(expected = BatallonNoSePuedeMoverExcepcion.class)
+    public void BatallonDesplazarHaciaArribaTodosMovimientosDeIntegrantesSonInvalidosLanzaExcepcion() throws MovimientoInvalidoExcepcion, BatallonYaSeMovioExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        Batallon batallon = new Batallon();
+        Soldado soldadoMockUno = mock(Soldado.class);
+        Soldado soldadoMockDos = mock(Soldado.class);
+        Soldado soldadoMockTres= mock(Soldado.class);
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockUno).desplazarConBatallonHaciaArriba();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockDos).desplazarConBatallonHaciaArriba();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockTres).desplazarConBatallonHaciaArriba();
+
+        batallon.agregarSoldado(soldadoMockUno);
+        batallon.agregarSoldado(soldadoMockDos);
+        batallon.agregarSoldado(soldadoMockTres);
+
+        batallon.desplazarBatallonHaciaArriba();
+    }
+
+    @Test(expected = BatallonNoSePuedeMoverExcepcion.class)
+    public void BatallonDesplazarHaciaAbajoTodosMovimientosDeIntegrantesSonInvalidosLanzaExcepcion() throws MovimientoInvalidoExcepcion, BatallonYaSeMovioExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        Batallon batallon = new Batallon();
+        Soldado soldadoMockUno = mock(Soldado.class);
+        Soldado soldadoMockDos = mock(Soldado.class);
+        Soldado soldadoMockTres= mock(Soldado.class);
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockUno).desplazarConBatallonHaciaAbajo();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockDos).desplazarConBatallonHaciaAbajo();
+        doThrow(new MovimientoInvalidoExcepcion()).when(soldadoMockTres).desplazarConBatallonHaciaAbajo();
+
+        batallon.agregarSoldado(soldadoMockUno);
+        batallon.agregarSoldado(soldadoMockDos);
+        batallon.agregarSoldado(soldadoMockTres);
+
+        batallon.desplazarBatallonHaciaAbajo();
     }
 }
 

@@ -1,8 +1,6 @@
 package model.AlgoChess.Unidades;
 import model.AlgoChess.Equipos.Equipo;
-import model.AlgoChess.Excepciones.CasilleroOcupadoExcepcion;
-import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
-import model.AlgoChess.Excepciones.YaMovioExcepcion;
+import model.AlgoChess.Excepciones.*;
 
 import java.util.Arrays;
 
@@ -12,68 +10,93 @@ public class Batallon {
 
     private ArrayList<Soldado> integrantes = new ArrayList<>();
 
-    //refactorizar esto, es un asco//
     public void agregarSoldado(Soldado integrante) {
         integrantes.add(integrante);
         if (integrantes.size() == 3) {
-            Soldado temp1 = integrantes.get(1);
-            Soldado temp2 = integrantes.get(2);
-            int[] posicionAdyacente1 = Arrays.copyOf(integrantes.get(1).getPosicion(), 2);
-            int[] posicionAdyacente2 = Arrays.copyOf(integrantes.get(2).getPosicion(), 2);
-            if ((posicionAdyacente1[0] > posicionAdyacente2[0]) || (posicionAdyacente1[1] > posicionAdyacente2[1])) {
-                integrantes.remove(2);
-                integrantes.remove(1);
-                integrantes.add(temp2);
-                integrantes.add(temp1);
-            }
-            int i=0;
-            while (i<3) {
-                integrantes.get(i).asignarBatallon(this);
-                i++;
-            }
+            ordenarBatallon();
         }
     }
 
-    public void desplazarBatallonHaciaIzquierda() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
-        int i = 0;
-        while (i < integrantes.size()) {
-            try {
-                integrantes.get(i).desplazarHaciaIzquierda();
-            }
-            catch (CasilleroOcupadoExcepcion e) {}
+    private void ordenarBatallon(){
+        Soldado soldadoUno = integrantes.get(1);
+        Soldado soldadoDos = integrantes.get(2);
+        if (soldadoUno.estaALaDerechaDe(soldadoDos) || soldadoUno.estaArribaDe(soldadoDos)) {
+            integrantes.remove(2);
+            integrantes.remove(1);
+            integrantes.add(soldadoDos);
+            integrantes.add(soldadoUno);
+        }
+        int i=0;
+        while (i<3) {
+            integrantes.get(i).asignarBatallon(this);
             i++;
         }
     }
 
-    public void desplazarBatallonHaciaDerecha() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
-        int i = 2;
-        while (i > -1) {
-            try {
-                integrantes.get(i).desplazarHaciaDerecha();
-            }
-            catch (CasilleroOcupadoExcepcion e) { }
-            i--;
-        }
-    }
-
-    public void desplazarBatallonHaciaArriba() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
-        int i = 2;
-        while (i > -1) {
-            try {
-                integrantes.get(i).desplazarHaciaArriba();
-            }
-            catch (CasilleroOcupadoExcepcion e) {}
-            i--;
-        }
-    }
-
-    public void desplazarBatallonHaciaAbajo() throws MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void desplazarBatallonHaciaIzquierda() throws YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
         int i = 0;
+        int cantidadMovimientosInvalidos = 0;
         while (i < integrantes.size()) {
             try {
-                integrantes.get(i).desplazarHaciaAbajo();
+                integrantes.get(i).desplazarConBatallonHaciaIzquierda();
             }
-            catch (CasilleroOcupadoExcepcion e) {}
+            catch (CasilleroOcupadoExcepcion | MovimientoInvalidoExcepcion e) {
+                cantidadMovimientosInvalidos ++;
+                if(cantidadMovimientosInvalidos == integrantes.size()){
+                    throw new BatallonNoSePuedeMoverExcepcion();
+                }
+            }
+            i++;
+        }
+    }
+
+    public void desplazarBatallonHaciaDerecha() throws YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        int i = 2;
+        int cantidadMovimientosInvalidos = 0;
+        while (i > -1) {
+            try {
+                integrantes.get(i).desplazarConBatallonHaciaDerecha();
+            }
+            catch (CasilleroOcupadoExcepcion | MovimientoInvalidoExcepcion e) {
+                cantidadMovimientosInvalidos ++;
+                if(cantidadMovimientosInvalidos == integrantes.size()){
+                    throw new BatallonNoSePuedeMoverExcepcion();
+                }
+            }
+            i--;
+        }
+    }
+
+    public void desplazarBatallonHaciaArriba() throws YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        int i = 2;
+        int cantidadMovimientosInvalidos = 0;
+        while (i > -1) {
+            try {
+                integrantes.get(i).desplazarConBatallonHaciaArriba();
+            }
+            catch (CasilleroOcupadoExcepcion | MovimientoInvalidoExcepcion e) {
+                cantidadMovimientosInvalidos ++;
+                if(cantidadMovimientosInvalidos == integrantes.size()){
+                    throw new BatallonNoSePuedeMoverExcepcion();
+                }
+            }
+            i--;
+        }
+    }
+
+    public void desplazarBatallonHaciaAbajo() throws YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
+        int i = 0;
+        int cantidadMovimientosInvalidos = 0;
+        while (i < integrantes.size()) {
+            try {
+                integrantes.get(i).desplazarConBatallonHaciaAbajo();
+            }
+            catch (CasilleroOcupadoExcepcion | MovimientoInvalidoExcepcion e) {
+                cantidadMovimientosInvalidos ++;
+                if(cantidadMovimientosInvalidos == integrantes.size()){
+                    throw new BatallonNoSePuedeMoverExcepcion();
+                }
+            }
             i++;
         }
     }

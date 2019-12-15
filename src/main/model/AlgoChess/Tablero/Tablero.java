@@ -41,25 +41,25 @@ public class Tablero {
         administradorBatallones.actualizarBatallones();
     }
 
-    public void moverBatallonParaArriba(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void moverBatallonParaArriba(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadasSoldado);
         Soldado soldadoBatallon = (Soldado) diccionarioCasilleroUnidad.obtenerUnidadEnCasillero(casillero);
         soldadoBatallon.moverBatallonParaArriba();
     }
 
-    public void moverBatallonParaAbajo(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void moverBatallonParaAbajo(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadasSoldado);
         Soldado soldadoBatallon = (Soldado) diccionarioCasilleroUnidad.obtenerUnidadEnCasillero(casillero);
         soldadoBatallon.moverBatallonParaAbajo();
     }
 
-    public void moverBatallonParaIzquierda(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion {
+    public void moverBatallonParaIzquierda(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadasSoldado);
         Soldado soldadoBatallon = (Soldado) diccionarioCasilleroUnidad.obtenerUnidadEnCasillero(casillero);
         soldadoBatallon.moverBatallonParaIzquierda();
     }
 
-    public void moverBatallonParaDerecha(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion{
+    public void moverBatallonParaDerecha(int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonNoSePuedeMoverExcepcion, BatallonYaSeMovioExcepcion {
         Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadasSoldado);
         Soldado soldadoBatallon = (Soldado) diccionarioCasilleroUnidad.obtenerUnidadEnCasillero(casillero);
         soldadoBatallon.moverBatallonParaDerecha();
