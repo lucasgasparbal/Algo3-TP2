@@ -2,10 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import model.AlgoChess.Excepciones.CoordenadaFueraDeRangoExcepcion;
-import model.AlgoChess.Excepciones.MovimientoInvalidoExcepcion;
-import model.AlgoChess.Excepciones.NoHayUnidadEnCasilleroExcepcion;
-import model.AlgoChess.Excepciones.YaMovioExcepcion;
+import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Juego;
 import vista.OrganizadorDeBatallones;
 
@@ -30,6 +27,10 @@ public class HandlerBatallonMoverParaDerecha implements EventHandler<ActionEvent
             coordenadaFueraDeRangoExcepcion.printStackTrace();
         } catch (NoHayUnidadEnCasilleroExcepcion | MovimientoInvalidoExcepcion | YaMovioExcepcion noHayUnidadEnCasilleroExcepcion) {
             noHayUnidadEnCasilleroExcepcion.printStackTrace();
+        } catch (BatallonYaSeMovioExcepcion batallonYaSeMovioExcepcion) {
+            batallonYaSeMovioExcepcion.printStackTrace();
+        } catch (BatallonNoSePuedeMoverExcepcion batallonNoSePuedeMoverExcepcion) {
+            batallonNoSePuedeMoverExcepcion.printStackTrace();
         }
         organizadorDeBatallones.actualizarBatallones();
     }
