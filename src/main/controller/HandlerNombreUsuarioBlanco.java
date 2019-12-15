@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import model.AlgoChess.Juego;
+import vista.GeneradorDeEtiquetas;
 
 public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
 
@@ -15,10 +16,11 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
     Scene escena;
     Juego juego;
     TextField campoNombreNegro,campoNombreBlanco;
-    Label etiquetaPiezasBlancas,etiquetaPiezasNegras;
+    Label etiquetaPiezasBlancas,etiquetaPiezasNegras,etiquetaOroRestante;
     String directorio_resources;
+    GeneradorDeEtiquetas generadorDeEtiquetas;
 
-    public HandlerNombreUsuarioBlanco(StackPane layoutAUsar, Scene escenaAUsar, TextField campoNegro, TextField campoBlanco, Label etiquetaBlanca, Label etiquetaNegra, String directorio, Juego nuevoJuego) {
+    public HandlerNombreUsuarioBlanco(StackPane layoutAUsar, Scene escenaAUsar, TextField campoNegro, TextField campoBlanco, Label etiquetaBlanca, Label etiquetaNegra, String directorio, Juego nuevoJuego, Label label, GeneradorDeEtiquetas generador) {
         this.nuevoLayout = layoutAUsar;
         this.escena = escenaAUsar;
         this.campoNombreNegro=campoNegro;
@@ -27,6 +29,8 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
         this.etiquetaPiezasNegras=etiquetaNegra;
         this.directorio_resources = directorio;
         this.juego = nuevoJuego;
+        this.etiquetaOroRestante = label;
+        this.generadorDeEtiquetas=generador;
     }
 
     @Override
@@ -42,6 +46,7 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
         etiquetaPiezasBlancas.setFont((Font.loadFont(directorio_resources+"fonts/Adventurer.ttf",30)));
         etiquetaPiezasNegras.setStyle("-fx-font-weight: bold");
         etiquetaPiezasBlancas.setStyle ("-fx-font-weight: bold");
+        generadorDeEtiquetas.generarEtiquetaNegrita2(etiquetaOroRestante,juego.obtenerNombreJugadorEnTurno()+" - ORO: "+juego.oroRestante(),30,"#ffd700");
         escena.setRoot(nuevoLayout);
     }
 }

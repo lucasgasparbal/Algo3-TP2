@@ -29,10 +29,10 @@ public class HandlerCompraFichasNegras implements EventHandler<ActionEvent> {
 
     @Override
     public void handle (ActionEvent event) {
-        juego.nuevoTurno();
-        stackOroRestante.getChildren().remove(2);
+        juego.nuevoTurno(true);
+        stackOroRestante.getChildren().remove(3);
         stackOroRestante.getChildren().add(botonComenzarJuego);
-        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaOroRestante,"ORO: "+juego.oroRestante(),30);
+        generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaOroRestante,juego.obtenerNombreJugadorEnTurno() +" - ORO: "+juego.oroRestante(),30);
         piezasRestantes.getChildren().clear();
         Label soldadosComprados = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(),"0",30,"#00FF00");
         Label jinetesComprados = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(),"0",30,"#00FF00");

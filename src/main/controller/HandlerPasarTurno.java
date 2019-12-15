@@ -22,7 +22,7 @@ public class HandlerPasarTurno implements EventHandler<ActionEvent> {
 
     @Override
     public void handle (ActionEvent event) {
-        juego.nuevoTurno();
+        juego.nuevoTurno(true);
         Label etiquetaJugadorActual = new Label();
         generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaJugadorActual,"Turno de "+juego.obtenerNombreJugadorEnTurno(),30);
         if (juego.estaEnModoMovimiento()) {

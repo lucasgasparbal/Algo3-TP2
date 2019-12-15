@@ -7,17 +7,14 @@ import javafx.util.Duration;
 
 public class MensajeDeError {
 
-    public SequentialTransition generarAvisoParpadeante () {
-        Label label = new Label("Blinking");
-        label.setStyle("-fx-text-fill: red; -fx-padding: 10px;");
+    public SequentialTransition generarAvisoParpadeante (Label label) {
 
         Timeline blinker = createBlinker(label);
-        blinker.setOnFinished(event -> label.setText("Fading"));
         FadeTransition fader = createFader(label);
 
         SequentialTransition blinkThenFade = new SequentialTransition(label, blinker,fader);
 
-        return blinkThenFade;
+       return blinkThenFade;
     }
 
     private Timeline createBlinker(Node node) {
