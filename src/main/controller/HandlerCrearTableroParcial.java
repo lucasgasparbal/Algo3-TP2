@@ -29,7 +29,7 @@ public class HandlerCrearTableroParcial implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        juego.nuevoTurno();
+        juego.nuevoTurno(true);
         int[] cantidadFichas = new int[4];
         cantidadFichas[0] = juego.cantidadSoldadosEnBanquilla();
         cantidadFichas[1] = juego.cantidadJinetesEnBanquilla();

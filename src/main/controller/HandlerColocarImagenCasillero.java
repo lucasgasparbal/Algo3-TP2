@@ -1,6 +1,8 @@
 package controller;
 
+import javafx.animation.SequentialTransition;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -9,6 +11,8 @@ import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Juego;
 import vista.ImageViewPiezaEnJuego;
 
+import java.net.NoRouteToHostException;
+
 public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
 
     GridPane tablero;
@@ -16,13 +20,17 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
     int[] coordenadas = new int[2];
     Juego juego;
     Boolean segundaMitad;
+    Label etiquetaOro;
+    SequentialTransition secuenciaOro;
 
-    public HandlerColocarImagenCasillero(GridPane nuevoTablero,ImageViewPiezaEnJuego ultimaPiezaSeleccionada, int[] coordenadasAUsar, Juego nuevoJuego, Boolean esSegundaMitad) {
+    public HandlerColocarImagenCasillero(GridPane nuevoTablero, ImageViewPiezaEnJuego ultimaPiezaSeleccionada, int[] coordenadasAUsar, Juego nuevoJuego, Boolean esSegundaMitad, Label oro, SequentialTransition secuencia) {
         this.tablero = nuevoTablero;
         this.piezaSeleccionada = ultimaPiezaSeleccionada;
         this.coordenadas = coordenadasAUsar;
         this.juego = nuevoJuego;
         this.segundaMitad = esSegundaMitad;
+        this.etiquetaOro = oro;
+        this.secuenciaOro = secuencia;
     }
 
     @Override
@@ -33,59 +41,45 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
         if (segundaMitad) {
             coordenadas[1]=coordenadas[1]+10;
         }
-        casillero.getChildren().add(piezaACargar);
         if (piezaSeleccionada.soldado()) {
             try {
                 juego.inicializarSoldadoEnCoordenadas(coordenadas);
-            } catch (NoHaySoldadosEnBanquillaExcepcion noHaySoldadosEnBanquillaExcepcion) {
-                noHaySoldadosEnBanquillaExcepcion.printStackTrace();
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                casilleroOcupadoExcepcion.printStackTrace();
-            } catch (CasilleroEnemigoExcepcion casilleroEnemigoExcepcion) {
-                casilleroEnemigoExcepcion.printStackTrace();
-            } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                coordenadaFueraDeRangoExcepcion.printStackTrace();
-            }
+                etiquetaOro.setVisible(true);
+                secuenciaOro.play();
+                return;
+            } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | NoHaySoldadosEnBanquillaExcepcion excepcion) { }
         }
         if (piezaSeleccionada.curandero()) {
             try {
                 juego.inicializarCuranderoEnCoordenadas(coordenadas);
-            } catch (NoHayCuranderosEnBanquillaExcepcion noHayCuranderosEnBanquillaExcepcion) {
-                noHayCuranderosEnBanquillaExcepcion.printStackTrace();
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                casilleroOcupadoExcepcion.printStackTrace();
-            } catch (CasilleroEnemigoExcepcion casilleroEnemigoExcepcion) {
-                casilleroEnemigoExcepcion.printStackTrace();
-            } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                coordenadaFueraDeRangoExcepcion.printStackTrace();
-            }
+                etiquetaOro.setVisible(true);
+                secuenciaOro.play();
+                return;
+            } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | NoHayCuranderosEnBanquillaExcepcion excepcion) { }
         }
         if (piezaSeleccionada.catapulta()) {
             try {
                 juego.inicializarCatapultaEnCoordenadas(coordenadas);
-            } catch (NoHayCatapultasEnBanquillaExcepcion noHayCuranderosEnBanquillaExcepcion) {
-                noHayCuranderosEnBanquillaExcepcion.printStackTrace();
+            } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | NoHayCatapultasEnBanquillaExcepcion excepcion) {
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                casilleroOcupadoExcepcion.printStackTrace();
-            } catch (CasilleroEnemigoExcepcion casilleroEnemigoExcepcion) {
-                casilleroEnemigoExcepcion.printStackTrace();
-            } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                coordenadaFueraDeRangoExcepcion.printStackTrace();
+                etiquetaOro.setVisible(true);
+                secuenciaOro.play();
+                return;
             }
         }
         if (piezaSeleccionada.jinete()) {
             try {
                 juego.inicializarJineteEnCoordenadas(coordenadas);
-            } catch (NoHayJinetesEnBanquillaExcepcion noHayCuranderosEnBanquillaExcepcion) {
-                noHayCuranderosEnBanquillaExcepcion.printStackTrace();
+            } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | NoHayJinetesEnBanquillaExcepcion excepcion) {
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                casilleroOcupadoExcepcion.printStackTrace();
-            } catch (CasilleroEnemigoExcepcion casilleroEnemigoExcepcion) {
-                casilleroEnemigoExcepcion.printStackTrace();
-            } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                coordenadaFueraDeRangoExcepcion.printStackTrace();
+                etiquetaOro.setVisible(true);
+                secuenciaOro.play();
+                return;
             }
         }
+        casillero.getChildren().add(piezaACargar);
         piezaSeleccionada.limpiarPieza();
         piezaSeleccionada.borrarImagen();
     }

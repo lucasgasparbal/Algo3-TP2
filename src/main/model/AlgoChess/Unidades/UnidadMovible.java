@@ -37,9 +37,10 @@ public abstract class UnidadMovible extends Unidad {
 
     public void desplazarHaciaArriba() throws MovimientoInvalidoExcepcion, CasilleroOcupadoExcepcion, YaMovioExcepcion {
         if(movio){
+            System.out.println("NIGGERS");
             throw new YaMovioExcepcion();
         }
-            ubicacion = tablero.DesplazarUnidadHaciaArribaDesde(this,ubicacion);
+        ubicacion = tablero.DesplazarUnidadHaciaArribaDesde(this,ubicacion);
         movio = true;
     }
 

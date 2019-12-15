@@ -1,18 +1,21 @@
 package controller;
 
+import javafx.animation.SequentialTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Juego;
 import vista.GeneradorDeEtiquetas;
+import vista.MensajeDeError;
 import vista.OrganizadorDeBatallones;
 import vista.UltimaFichaSeleccionada;
 
@@ -28,8 +31,9 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
     int[]coordenadas;
     GridPane tablero;
     OrganizadorDeBatallones organizadorDeBatallones;
+    Group contenedorErrores;
 
-    public HandlerSeleccionarPieza (StackPane casillero, ImageView marcoRojo, UltimaFichaSeleccionada ultimaFicha, Label vida, GeneradorDeEtiquetas generador, Juego nuevoJuego, int[]coord, GridPane tableroActual, OrganizadorDeBatallones organizador) {
+    public HandlerSeleccionarPieza (StackPane casillero, ImageView marcoRojo, UltimaFichaSeleccionada ultimaFicha, Label vida, GeneradorDeEtiquetas generador, Juego nuevoJuego, int[]coord, GridPane tableroActual, OrganizadorDeBatallones organizador, Group grupo) {
         this.casilleroSeleccionado = casillero;
         this.marco = marcoRojo;
         this.ultimaFichaSeleccionada = ultimaFicha;
@@ -39,6 +43,16 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
         this.coordenadas=coord;
         this.tablero = tableroActual;
         this.organizadorDeBatallones = organizador;
+        this.contenedorErrores = grupo;
+    }
+
+    public void lanzarExcepcion (String textoDelError) {
+        Label errorAImprimir = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(), textoDelError,30,"#FF0000");
+        MensajeDeError mensajeDeError = new MensajeDeError();
+        SequentialTransition error = mensajeDeError.generarAvisoParpadeante(errorAImprimir);
+        contenedorErrores.getChildren().clear();
+        contenedorErrores.getChildren().add(errorAImprimir);
+        error.play();
     }
 
     public void handle (MouseEvent event) {
@@ -52,80 +66,137 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaAbajo(coordenadasPiezaSeleccionada);
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
-                            noHayUnidadEnCasilleroExcepcion.printStackTrace();
+                            lanzarExcepcion("No hay unidad en el casillero seleccionado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                            coordenadaFueraDeRangoExcepcion.printStackTrace();
+                            lanzarExcepcion("El casillero destino esta fuera de rango");
+                            return;
                         } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
-                            unidadActivaNoEsDeJugadorEnTurnoExcepcion.printStackTrace();
+                            lanzarExcepcion("La unidad no es del jugador actual");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                            casilleroOcupadoExcepcion.printStackTrace();
+                            lanzarExcepcion("El casillero destino esta ocupado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (MovimientoInvalidoExcepcion movimientoInvalidoExcepcion) {
-                            movimientoInvalidoExcepcion.printStackTrace();
+                            lanzarExcepcion("El movimiento es invalido");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CatapultaNoSePuedeMoverExcepcion catapultaNoSePuedeMoverExcepcion) {
-                            catapultaNoSePuedeMoverExcepcion.printStackTrace();
+                            lanzarExcepcion("La catapulta no se puede mover");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (YaMovioExcepcion yaMovioExcepcion) {
-                            yaMovioExcepcion.printStackTrace();
+                            lanzarExcepcion("La unidad ya se movio este turno");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         }
                     }
                     if (coordenadasPiezaSeleccionada[1] == coordenadas[1]-1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaArriba(coordenadasPiezaSeleccionada);
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
-                            noHayUnidadEnCasilleroExcepcion.printStackTrace();
-                        } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                            casilleroOcupadoExcepcion.printStackTrace();
-                        } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
-                            unidadActivaNoEsDeJugadorEnTurnoExcepcion.printStackTrace();
-                        } catch (MovimientoInvalidoExcepcion movimientoInvalidoExcepcion) {
-                            movimientoInvalidoExcepcion.printStackTrace();
+                            lanzarExcepcion("No hay unidad en el casillero seleccionado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                            coordenadaFueraDeRangoExcepcion.printStackTrace();
+                            lanzarExcepcion("El casillero destino esta fuera de rango");
+                            return;
+                        } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
+                            lanzarExcepcion("La unidad no es del jugador actual");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
+                        } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
+                            lanzarExcepcion("El casillero destino esta ocupado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
+                        } catch (MovimientoInvalidoExcepcion movimientoInvalidoExcepcion) {
+                            lanzarExcepcion("El movimiento es invalido");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CatapultaNoSePuedeMoverExcepcion catapultaNoSePuedeMoverExcepcion) {
-                            catapultaNoSePuedeMoverExcepcion.printStackTrace();
+                            lanzarExcepcion("La catapulta no se puede mover");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (YaMovioExcepcion yaMovioExcepcion) {
-                            yaMovioExcepcion.printStackTrace();
+                            lanzarExcepcion("La unidad ya se movio este turno");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         }
                     }
                 }
-                if (coordenadasPiezaSeleccionada[1] == coordenadas [1]) {
+                else if (coordenadasPiezaSeleccionada[1] == coordenadas [1]) {
                     if (coordenadasPiezaSeleccionada[0] == coordenadas [0]+1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaIzquierda(coordenadasPiezaSeleccionada);
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
-                            noHayUnidadEnCasilleroExcepcion.printStackTrace();
+                            lanzarExcepcion("No hay unidad en el casillero seleccionado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                            coordenadaFueraDeRangoExcepcion.printStackTrace();
+                            lanzarExcepcion("El casillero destino esta fuera de rango");
+                            return;
                         } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
-                            unidadActivaNoEsDeJugadorEnTurnoExcepcion.printStackTrace();
+                            lanzarExcepcion("La unidad no es del jugador actual");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                            casilleroOcupadoExcepcion.printStackTrace();
+                            lanzarExcepcion("El casillero destino esta ocupado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (MovimientoInvalidoExcepcion movimientoInvalidoExcepcion) {
-                            movimientoInvalidoExcepcion.printStackTrace();
+                            lanzarExcepcion("El movimiento es invalido");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CatapultaNoSePuedeMoverExcepcion catapultaNoSePuedeMoverExcepcion) {
-                            catapultaNoSePuedeMoverExcepcion.printStackTrace();
+                            lanzarExcepcion("La catapulta no se puede mover");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (YaMovioExcepcion yaMovioExcepcion) {
-                            yaMovioExcepcion.printStackTrace();
+                            lanzarExcepcion("La unidad ya se movio este turno");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         }
                     }
                     if (coordenadasPiezaSeleccionada[0] == coordenadas[0]-1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaDerecha(coordenadasPiezaSeleccionada);
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
-                            noHayUnidadEnCasilleroExcepcion.printStackTrace();
-                        } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
-                            casilleroOcupadoExcepcion.printStackTrace();
-                        } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
-                            unidadActivaNoEsDeJugadorEnTurnoExcepcion.printStackTrace();
-                        } catch (MovimientoInvalidoExcepcion movimientoInvalidoExcepcion) {
-                            movimientoInvalidoExcepcion.printStackTrace();
+                            lanzarExcepcion("No hay unidad en el casillero seleccionado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                            coordenadaFueraDeRangoExcepcion.printStackTrace();
+                            lanzarExcepcion("El casillero destino esta fuera de rango");
+                            return;
+                        } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
+                            lanzarExcepcion("La unidad no es del jugador actual");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
+                        } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
+                            lanzarExcepcion("El casillero destino esta ocupado");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
+                        } catch (MovimientoInvalidoExcepcion movimientoInvalidoExcepcion) {
+                            lanzarExcepcion("El movimiento es invalido");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (CatapultaNoSePuedeMoverExcepcion catapultaNoSePuedeMoverExcepcion) {
-                            catapultaNoSePuedeMoverExcepcion.printStackTrace();
+                            lanzarExcepcion("La catapulta no se puede mover");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         } catch (YaMovioExcepcion yaMovioExcepcion) {
-                            yaMovioExcepcion.printStackTrace();
+                            lanzarExcepcion("La unidad ya se movio este turno");
+                            ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                            return;
                         }
                     }
+                }
+                else {
+                    lanzarExcepcion("El casillero destino esta fuera de rango");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 }
                 casilleroSeleccionado.getChildren().add(ultimaFichaSeleccionada.obtenerImagenFicha());
                 organizadorDeBatallones.actualizarBatallones();
@@ -137,23 +208,38 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     if (juego.atacarPieza(ultimaFichaSeleccionada.obtenerCoordenadas(),coordenadas)) {
                         StackPane casilleroVictima = (StackPane) tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]);
                         casilleroVictima.getChildren().remove(1);
+                        if (juego.rivalPerdio()) {
+                            Scene secondScene = new Scene(new Group(), 400, 400);
+                            Stage ventanaVictoria = new Stage();
+                            ventanaVictoria.setTitle("FELICITACIONES");
+                            ventanaVictoria.setScene(secondScene);
+                            ventanaVictoria.show();
+                        }
                     };
                 } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
-                    noHayUnidadEnCasilleroExcepcion.printStackTrace();
+                    lanzarExcepcion("No hay unidad en el casillero seleccionado");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
-                    coordenadaFueraDeRangoExcepcion.printStackTrace();
+                    lanzarExcepcion("El ataque no se puede realizar");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (ObjetivoFueraDeRangoExcepcion objetivoFueraDeRangoExcepcion) {
-                    objetivoFueraDeRangoExcepcion.printStackTrace();
+                    lanzarExcepcion("El objetivo esta fuera de rango");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (ObjetivoNoEsEnemigoExcepcion objetivoNoEsEnemigoExcepcion) {
-                    objetivoNoEsEnemigoExcepcion.printStackTrace();
+                    lanzarExcepcion("El objetivo es una unidad aliada, no se puede atacar");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (ObjetivoEsEnemigoExcepcion objetivoEsEnemigoExcepcion) {
-                    objetivoEsEnemigoExcepcion.printStackTrace();
+                    lanzarExcepcion("El objetivo es una unidad enemiga, no se puede curar");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (NoSePudoCurarExcepcion noSePudoCurarExcepcion) {
-                    noSePudoCurarExcepcion.printStackTrace();
+                    lanzarExcepcion("La unidad ya tiene la vida al maximo, no se puede curar");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
-                    unidadActivaNoEsDeJugadorEnTurnoExcepcion.printStackTrace();
+                    lanzarExcepcion("La unidad no le pertenece al jugador actual");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 } catch (YaAtacoExcepcion yaAtacoExcepcion) {
-                    yaAtacoExcepcion.printStackTrace();
+                    lanzarExcepcion("La unidad ya ataco este turno");
+                    ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 }
                 ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 organizadorDeBatallones.actualizarBatallones();

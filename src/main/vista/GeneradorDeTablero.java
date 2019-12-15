@@ -2,7 +2,9 @@ package vista;
 
 import controller.HandlerColocarImagenCasillero;
 import controller.HandlerMouseEntrandoANodo;
+import javafx.animation.SequentialTransition;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,7 +18,7 @@ public class GeneradorDeTablero {
     int y = 0;
     int[] coordenadas = new int[2];
 
-    public GridPane generarTablero (String url_escaque_64, ImageViewPiezaEnJuego ultimaPiezaSeleccionada, Juego juego, Boolean segundaMitad) {
+    public GridPane generarTablero (String url_escaque_64, ImageViewPiezaEnJuego ultimaPiezaSeleccionada, Juego juego, Boolean segundaMitad, Label etiquetaOro, SequentialTransition secuencia) {
         x=0;
         GridPane nuevoTablero = new GridPane();
         while (x<20) {
@@ -28,7 +30,7 @@ public class GeneradorDeTablero {
                 nuevoTablero.add(casilleroNuevo,x,y);
                 int[] coordenadasCasillero = imagenDeCasillero.obtenerCoordenadas();
                 casilleroNuevo.setOnMouseEntered(new HandlerMouseEntrandoANodo(coordenadas, coordenadasCasillero[0], coordenadasCasillero[1]));
-                casilleroNuevo.setOnMouseClicked(new HandlerColocarImagenCasillero(nuevoTablero,ultimaPiezaSeleccionada,coordenadas,juego,segundaMitad));
+                casilleroNuevo.setOnMouseClicked(new HandlerColocarImagenCasillero(nuevoTablero,ultimaPiezaSeleccionada,coordenadas,juego,segundaMitad, etiquetaOro,secuencia));
                 y++;
             }
             x++;

@@ -71,12 +71,19 @@ public class Juego {
         return jugadorActual.getNombre();
     }
 
-    public void nuevoTurno(){
+    public void nuevoTurno(boolean resetearMovimientoAtaque){
         jugadorActual.terminarTurno();
         jugadorActual = organizadorOrdenJugadores.proximoJugador();
         jugadorActual.prepararTurno();
-        jugadorActual.resetearUnidades();
+        if (resetearMovimientoAtaque) {jugadorActual.resetearUnidades();}
     }
+
+    public boolean rivalPerdio() {
+        if (jugadorDos.estaEnTurno()) {
+            return (jugadorUno.perdio());
+        }
+        else return jugadorDos.perdio();
+}
 
     public int cantidadSoldadosEnBanquilla(){
         return jugadorActual.cantidadSoldadosEnBanquilla();
@@ -187,10 +194,10 @@ public class Juego {
 
     public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallones(){
         ArrayList<PaqueteCoordenadasBatallon> batallonesJugadorUno = tablero.obtenerPaqueteCoordenadasBatallonParaEquipo(jugadorActual.getEquipo());
-        nuevoTurno();
+        nuevoTurno(false);
         ArrayList<PaqueteCoordenadasBatallon> batallonesJugadorDos = tablero.obtenerPaqueteCoordenadasBatallonParaEquipo(jugadorActual.getEquipo());
         batallonesJugadorDos.addAll(batallonesJugadorUno);
-        nuevoTurno();
+        nuevoTurno(false);
         return (batallonesJugadorDos);
     }
 
