@@ -36,9 +36,7 @@ public class Tablero {
 
     public void inicializarSoldadoEnCasillero(Soldado soldado, int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, CasilleroOcupadoExcepcion {
 
-        Casillero casillero = matrizCasilleros.conseguirCasillero(coordenadas);
-        soldado.inicializarEnCasillero(casillero);
-        diccionarioCasilleroUnidad.enCasilleroPonerUnidad(casillero,soldado);
+        inicializarUnidadEnCasillero(soldado,coordenadas);
         administradorBatallones.agregarSoldado(soldado);
         administradorBatallones.actualizarBatallones();
     }
