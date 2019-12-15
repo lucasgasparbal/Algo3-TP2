@@ -45,4 +45,10 @@ public class ColeccionUnidades {
             unidad.sufrirDanio(danio);
         }
     }
+
+    public void prepararTurno(){
+        for(Unidad unidad: unidades){
+            unidad.prepararTurno();
+        }
+    }
 }

@@ -60,6 +60,7 @@ public class Jugador {
 
     public void prepararTurno(){
         estaEnTurno = true;
+        unidadesEnJuego.prepararTurno();
     }
 
     public void terminarTurno(){
