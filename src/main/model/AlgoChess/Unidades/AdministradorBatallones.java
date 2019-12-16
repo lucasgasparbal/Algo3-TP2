@@ -92,6 +92,7 @@ public class AdministradorBatallones {
         return listaAEntregar;
     }
 
+
     public void eliminarSoldado(int[] coordenadas) {
         Iterator iterador = soldados.iterator();
         Soldado soldado = null;

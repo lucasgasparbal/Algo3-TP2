@@ -73,12 +73,14 @@ public class AtaqueEnAreaTest {
         int vidaMaximaSoldadoA = soldadoA.getVida();
         int vidaMaximaSoldadoB = soldadoB.getVida();
         int vidaMaximaSoldadoC = soldadoC.getVida();
+        int vidaMaximaCatapulta = catapulta.getVida();
 
         ataqueEnArea.atacar(soldadoA,catapulta);
 
         Assert.assertEquals(soldadoA.getVida(),vidaMaximaSoldadoA-20);
         Assert.assertEquals(soldadoB.getVida(),vidaMaximaSoldadoB-20);
         Assert.assertEquals(soldadoC.getVida(),vidaMaximaSoldadoC-20);
+        Assert.assertEquals(vidaMaximaCatapulta,catapulta.getVida());
     }
 
     @Test

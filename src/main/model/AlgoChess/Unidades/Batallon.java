@@ -114,7 +114,7 @@ public class Batallon {
     }    
 
     public boolean esValido() {
-        if (!integrantes.get(0).tieneBatallon() || !integrantes.get(1).tieneBatallon() || !integrantes.get(2).tieneBatallon())  { return false;}
+		 if (!integrantes.get(0).tieneBatallon() || !integrantes.get(1).tieneBatallon() || !integrantes.get(2).tieneBatallon())  { return false;}
         int[] posicion1 = Arrays.copyOf(integrantes.get(0).getPosicion(), 2);
         int[] posicion2 = Arrays.copyOf(integrantes.get(1).getPosicion(), 2);
         int[] posicion3 = Arrays.copyOf(integrantes.get(2).getPosicion(), 2);
