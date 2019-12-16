@@ -229,6 +229,9 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
             if (juego.estaEnModoMovimiento()==false) {
                 try {
                     if (juego.atacarPieza(ultimaFichaSeleccionada.obtenerCoordenadas(),coordenadas)) {
+                        if (coordenadas[1]>9) {
+                            coordenadas[1] = coordenadas[1]-10;
+                        }
                         StackPane casilleroVictima = (StackPane) tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]);
                         casilleroVictima.getChildren().remove(1);
                         AudioClip audioMuerte = new AudioClip(directorioResources+"sonidos/muerte.wav");

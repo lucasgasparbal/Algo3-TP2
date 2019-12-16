@@ -250,12 +250,9 @@ public class Aplicacion extends Application {
         VBox vidaPieza = new VBox ();
         vidaPieza.setSpacing(100);
         Label vida = new Label();
-        Label ataques = new Label();
         generadorDeEtiquetas.generarEtiquetaNegrita(vida,"- Vida: ",40);
         vida.setTextFill(Color.web("#FFFFFF"));
-        generadorDeEtiquetas.generarEtiquetaNegrita(ataques,"- Ataques: ",40);
-        ataques.setTextFill(Color.web("#FFFFFF"));
-        vidaPieza.getChildren().addAll(vida,ataques);
+        vidaPieza.getChildren().addAll(vida);
         informacionPieza.getChildren().add(vidaPieza);
         informacionPieza.getChildren().add(terminarTurno);
         campoJuegoFinal.setRight(informacionPieza);
