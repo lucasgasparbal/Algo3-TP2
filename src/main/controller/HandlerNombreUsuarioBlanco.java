@@ -41,7 +41,7 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
         while (this.campoNombreNegro.getText().trim().equals("")) {
             return;
         }
-        mediaPlayer.setVolume(0.1);
+        mediaPlayer.setVolume(0.20);
         etiquetaPiezasBlancas.setText(campoNombreBlanco.getText()+", por favor distribuya sus piezas");
         etiquetaPiezasNegras.setText(campoNombreNegro.getText()+", por favor distribuya sus piezas");
         juego.nombrarUsuarioBlanco(campoNombreBlanco.getText());

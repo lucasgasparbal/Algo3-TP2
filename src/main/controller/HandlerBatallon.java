@@ -34,7 +34,7 @@ public class HandlerBatallon implements EventHandler<ContextMenuEvent> {
 
     @Override
     public void handle (ContextMenuEvent event) {
-        if (casilleroSeleccionado.getChildren().size() <3) {
+        if (casilleroSeleccionado.getChildren().size() <3 || !juego.estaEnModoMovimiento()) {
             return;
         }
         ContextMenu contextMenu = new ContextMenu();

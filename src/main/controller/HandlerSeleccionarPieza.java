@@ -104,7 +104,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                             return;
                         }
                     }
-                    if (coordenadasPiezaSeleccionada[1] == coordenadas[1]-1) {
+                    else if (coordenadasPiezaSeleccionada[1] == coordenadas[1]-1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaArriba(coordenadasPiezaSeleccionada);
                             audioMovimiento.play();
@@ -136,6 +136,11 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                             ultimaFichaSeleccionada.limpiarSeleccionFicha();
                             return;
                         }
+                    }
+                    else {
+                        lanzarExcepcion("El casillero destino esta fuera de rango");
+                        ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                        return;
                     }
                 }
                 else if (coordenadasPiezaSeleccionada[1] == coordenadas [1]) {
@@ -172,7 +177,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                             return;
                         }
                     }
-                    if (coordenadasPiezaSeleccionada[0] == coordenadas[0]-1) {
+                    else if (coordenadasPiezaSeleccionada[0] == coordenadas[0]-1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaDerecha(coordenadasPiezaSeleccionada);
                             audioMovimiento.play();
@@ -205,6 +210,11 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                             return;
                         }
                     }
+                    else {
+                        lanzarExcepcion("El casillero destino esta fuera de rango");
+                        ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                        return;
+                    }
                 }
                 else {
                     lanzarExcepcion("El casillero destino esta fuera de rango");
@@ -223,6 +233,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                         casilleroVictima.getChildren().remove(1);
                         AudioClip audioMuerte = new AudioClip(directorioResources+"sonidos/muerte.wav");
                         audioMuerte.play();
+                        organizadorDeBatallones.actualizarBatallones();
                         if (juego.rivalPerdio()) {
                             Label etiquetaVictoria = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(),juego.obtenerNombreJugadorEnTurno()+ ", BIEN HECHO", 40,"#ffd700");
                             pantallaVictoria.getChildren().add(etiquetaVictoria);
@@ -239,32 +250,39 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                 } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
                     lanzarExcepcion("No hay unidad en el casillero seleccionado");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (CoordenadaFueraDeRangoExcepcion coordenadaFueraDeRangoExcepcion) {
                     lanzarExcepcion("El ataque no se puede realizar");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (ObjetivoFueraDeRangoExcepcion objetivoFueraDeRangoExcepcion) {
                     lanzarExcepcion("El objetivo esta fuera de rango");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (ObjetivoNoEsEnemigoExcepcion objetivoNoEsEnemigoExcepcion) {
                     lanzarExcepcion("El objetivo es una unidad aliada, no se puede atacar");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (ObjetivoEsEnemigoExcepcion objetivoEsEnemigoExcepcion) {
                     lanzarExcepcion("El objetivo es una unidad enemiga, no se puede curar");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (NoSePudoCurarExcepcion noSePudoCurarExcepcion) {
                     lanzarExcepcion("La unidad ya tiene la vida al maximo, no se puede curar");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
                     lanzarExcepcion("La unidad no le pertenece al jugador actual");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 } catch (YaAtacoExcepcion yaAtacoExcepcion) {
                     lanzarExcepcion("La unidad ya ataco este turno");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
+                    return;
                 }
                 AudioClip audioAtaque = new AudioClip(directorioResources+"sonidos/ataque.wav");
                 audioAtaque.play();
                 ultimaFichaSeleccionada.limpiarSeleccionFicha();
-                organizadorDeBatallones.actualizarBatallones();
                 return;
             }
         };

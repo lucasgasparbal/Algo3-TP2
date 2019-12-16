@@ -240,9 +240,13 @@ public class Aplicacion extends Application {
         ImageView fondoDetallesPieza = new ImageView(directorio_resources+"menuDetallesUnidad.png");
         informacionPieza.getChildren().add(fondoDetallesPieza);
         Button terminarTurno = generadorDeBotones.nuevoBoton("TERMINAR TURNO");
+
+        UltimaFichaSeleccionada ultimaFichaSeleccionada = new UltimaFichaSeleccionada();
+
         terminarTurno.setMaxSize(200,100);
         terminarTurno.setStyle("-fx-border-color: #000000; -fx-background-color: #ff0000; -fx-border-width: 2px");
-        terminarTurno.setOnAction(new HandlerPasarTurno(juego,cajaMovimiento,cajaAtaque,generadorDeEtiquetas));
+        terminarTurno.setOnAction(new HandlerPasarTurno(juego,cajaMovimiento,cajaAtaque,generadorDeEtiquetas,ultimaFichaSeleccionada));
+
         VBox vidaPieza = new VBox ();
         vidaPieza.setSpacing(100);
         Label vida = new Label();
@@ -260,7 +264,7 @@ public class Aplicacion extends Application {
         informacionPieza.setMargin(terminarTurno,new Insets(630,100,0,0));
 
         // 5to Layout - Creacion tablero final //
-        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro,campoJuegoFinal,vida,generadorDeEtiquetas, juego,cajaAtaque,cajaMovimiento,directorio_resources));
+        botonFinalizarColocadoPiezasNegras.setOnAction(new HandlerCrearTableroFinal(scene,tableroBlanco,tableroNegro,campoJuegoFinal,vida,generadorDeEtiquetas, juego,cajaAtaque,cajaMovimiento,directorio_resources,ultimaFichaSeleccionada));
 
         // Botones //
 

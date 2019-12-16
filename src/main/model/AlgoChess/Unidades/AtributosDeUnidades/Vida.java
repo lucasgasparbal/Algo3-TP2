@@ -1,5 +1,7 @@
 package model.AlgoChess.Unidades.AtributosDeUnidades;
 
+import model.AlgoChess.Excepciones.NoSePudoCurarExcepcion;
+
 public class Vida {
 
     private int valorMaximo;
@@ -18,7 +20,10 @@ public class Vida {
         return valorActual<=0;
     }
 
-    public void recibiCuracion(int curacion) {
+    public void recibiCuracion(int curacion) throws NoSePudoCurarExcepcion {
+        if (valorActual==valorMaximo) {
+            throw new NoSePudoCurarExcepcion();
+        }
         valorActual += curacion;
 
         if(valorActual > valorMaximo){

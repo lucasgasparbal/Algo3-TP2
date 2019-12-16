@@ -136,7 +136,11 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidadAtacante.atacar(unidadObjetivo);
-
+        if (unidadObjetivo.murio()) {
+            tablero.eliminarFichaAdministradorBatallones(coordenadasObjetivo);
+            tablero.eliminarUnidadDeCasillero(coordenadasObjetivo);
+        }
+        tablero.actualizarBatallones();
         return unidadObjetivo.murio();
     }
     
@@ -161,7 +165,6 @@ public class Juego {
     }
 
     public void moverPiezaEnCoordenadaHaciaArriba(int[] coordenadas) throws NoHayUnidadEnCasilleroExcepcion, CoordenadaFueraDeRangoExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion, CatapultaNoSePuedeMoverExcepcion, YaMovioExcepcion {
-
         Unidad unidad = tablero.conseguirUnidad(coordenadas);
         if (!jugadorActual.esDuenioDe(unidad)){
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
