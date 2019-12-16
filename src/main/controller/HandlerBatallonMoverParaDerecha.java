@@ -40,6 +40,9 @@ public class HandlerBatallonMoverParaDerecha implements EventHandler<ActionEvent
         } catch (BatallonNoSePuedeMoverExcepcion batallonNoSePuedeMoverExcepcion) {
             lanzadorExcepciones.lanzarExcepcion("El batallon no se puede desplazar en la direccion indicada",contenedorErrores);
             return;
+        } catch (UnidadActivaNoEsDeJugadorEnTurnoExcepcion unidadActivaNoEsDeJugadorEnTurnoExcepcion) {
+            lanzadorExcepciones.lanzarExcepcion("El batallon no pertenece al jugador en turno",contenedorErrores);
+            return;
         }
         organizadorDeBatallones.moverBatallonParaDerecha(batallon);
         organizadorDeBatallones.actualizarBatallones();

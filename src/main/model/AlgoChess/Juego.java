@@ -3,6 +3,7 @@ package model.AlgoChess;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Tablero;
 import model.AlgoChess.Unidades.PaqueteCoordenadasBatallon;
+import model.AlgoChess.Unidades.Soldado;
 import model.AlgoChess.Unidades.Unidad;
 
 import java.util.ArrayList;
@@ -143,24 +144,41 @@ public class Juego {
         tablero.actualizarBatallones();
         return unidadObjetivo.murio();
     }
-    
-    public void moverBatallonParaArriba (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
-        tablero.moverBatallonParaArriba(coordenadasSoldado);
+
+
+    public void moverBatallonParaArriba (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion {
+        Soldado soldado = (Soldado) tablero.conseguirUnidad(coordenadasSoldado);
+        if (!jugadorActual.esDuenioDe(soldado)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        soldado.moverBatallonParaArriba();
         tablero.actualizarBatallones();
     }
 
-    public void moverBatallonParaAbajo (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
-        tablero.moverBatallonParaAbajo(coordenadasSoldado);
+    public void moverBatallonParaAbajo (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion {
+        Soldado soldado = (Soldado) tablero.conseguirUnidad(coordenadasSoldado);
+        if (!jugadorActual.esDuenioDe(soldado)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        soldado.moverBatallonParaAbajo();
         tablero.actualizarBatallones();
     }
 
-    public void moverBatallonParaIzquierda (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
-        tablero.moverBatallonParaIzquierda(coordenadasSoldado);
+    public void moverBatallonParaIzquierda (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion {
+        Soldado soldado = (Soldado) tablero.conseguirUnidad(coordenadasSoldado);
+        if (!jugadorActual.esDuenioDe(soldado)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        soldado.moverBatallonParaIzquierda();
         tablero.actualizarBatallones();
     }
 
-    public void moverBatallonParaDerecha (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion {
-        tablero.moverBatallonParaDerecha(coordenadasSoldado);
+    public void moverBatallonParaDerecha (int[] coordenadasSoldado) throws CoordenadaFueraDeRangoExcepcion, NoHayUnidadEnCasilleroExcepcion, MovimientoInvalidoExcepcion, YaMovioExcepcion, BatallonYaSeMovioExcepcion, BatallonNoSePuedeMoverExcepcion, UnidadActivaNoEsDeJugadorEnTurnoExcepcion {
+        Soldado soldado = (Soldado) tablero.conseguirUnidad(coordenadasSoldado);
+        if (!jugadorActual.esDuenioDe(soldado)){
+            throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
+        }
+        soldado.moverBatallonParaDerecha();
         tablero.actualizarBatallones();
     }
 

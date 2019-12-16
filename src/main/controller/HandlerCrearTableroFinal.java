@@ -45,6 +45,7 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
+        juego.decidirOrdenTurnos();
         AudioClip audioComienzo = new AudioClip(directorio_resources+"sonidos/comienzo.wav");
         audioComienzo.play();
         ImageView fondo_tablero = new ImageView (directorio_resources+"fondo_tablero.png");
