@@ -100,8 +100,8 @@ public class AtaqueEnAreaTest {
 
         int[] coordenadasA = {0,0};
         int[] coordenadasB = {9,10};
-        int[] coordenadasC = {8,7};
-        int[] coordenadasD = {7,6};
+        int[] coordenadasC = {8,9};
+        int[] coordenadasD = {7,8};
         tablero.inicializarUnidadEnCasillero(catapulta, coordenadasA);
         tablero.inicializarUnidadEnCasillero(soldadoA,coordenadasB);
         tablero.inicializarUnidadEnCasillero(curandero,coordenadasC);
@@ -113,9 +113,9 @@ public class AtaqueEnAreaTest {
 
         ataqueEnArea.atacar(soldadoA,catapulta);
 
-        Assert.assertEquals(soldadoA.getVida(),vidaMaximaSoldadoA-20);
-        Assert.assertEquals(curandero.getVida(),vidaMaximaCurandero-20);
-        Assert.assertEquals(jinete.getVida(),vidaMaximaJinete-20);
+        Assert.assertEquals(vidaMaximaSoldadoA-20,soldadoA.getVida());
+        Assert.assertEquals(vidaMaximaCurandero-20,curandero.getVida());
+        Assert.assertEquals(vidaMaximaJinete-20,jinete.getVida());
     }
 
     @Test

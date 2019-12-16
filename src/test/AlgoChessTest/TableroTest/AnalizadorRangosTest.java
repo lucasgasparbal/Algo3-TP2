@@ -1,6 +1,7 @@
 package AlgoChessTest.TableroTest;
 
 import model.AlgoChess.Tablero.AnalizadorRangos;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static junit.framework.TestCase.*;
@@ -147,5 +148,19 @@ public class AnalizadorRangosTest {
         AnalizadorRangos analizadorRangos = new AnalizadorRangos();
         boolean test = analizadorRangos.coordenadasEstanEnRangoLejano(0,0,0,0);
         assertFalse(test);
+    }
+
+    @Test
+    public void EstanEnRangoCercanoDevuelveFalseParaDosCoordenadasEnMismaColumnaPeroFilasLejanas(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+
+        Assert.assertFalse(analizadorRangos.coordenadasEstanEnRangoCercano(0,2,9,2));
+    }
+
+    @Test
+    public void EstanEnRangoCercanoDevuelveFalseParaDosCoordenadasUnaEnFilaAdyacenteALaOtraPeroEnDistintasColumnas(){
+        AnalizadorRangos analizadorRangos = new AnalizadorRangos();
+
+        Assert.assertFalse(analizadorRangos.coordenadasEstanEnRangoCercano(0,2,1,10));
     }
 }

@@ -24,9 +24,8 @@ public class AnalizadorRangos {
     public boolean coordenadasEstanEnRangoCercano(int xUno, int yUno, int xDos, int yDos){
         int restaAbsolutaCoordenadaX = Math.abs(xUno-xDos);
         int restaAbsolutaCoordenadaY = Math.abs(yUno-yDos);
-        boolean coordenadaXEnRango = numeroEnRango(restaAbsolutaCoordenadaX, RangoCercanoCotaMinima, RangoCercanoCotaMaxima);
-        boolean coordenadaYEnRango = numeroEnRango(restaAbsolutaCoordenadaY, RangoCercanoCotaMinima, RangoCercanoCotaMaxima);
-        return (coordenadaXEnRango  | coordenadaYEnRango);
+
+        return numeroEnRango(Math.max(restaAbsolutaCoordenadaX,restaAbsolutaCoordenadaY),RangoCercanoCotaMinima, RangoCercanoCotaMaxima);
     }
 
     //pre: xUno, yUno, xDos yDos son numeros enteros pertenecientes a dos duplas que representan puntos en un plano
@@ -35,9 +34,8 @@ public class AnalizadorRangos {
     public boolean coordenadasEstanEnRangoMediano(int xUno, int yUno, int xDos, int yDos){
         int restaAbsolutaCoordenadaX = Math.abs(xUno-xDos);
         int restaAbsolutaCoordenadaY = Math.abs(yUno-yDos);
-        boolean coordenadaXEnRango = numeroEnRango(restaAbsolutaCoordenadaX, RangoMedianoCotaMinima, RangoMedianoCotaMaxima);
-        boolean coordenadaYEnRango = numeroEnRango(restaAbsolutaCoordenadaY, RangoMedianoCotaMinima, RangoMedianoCotaMaxima);
-        return (coordenadaXEnRango  | coordenadaYEnRango);
+
+        return numeroEnRango(Math.max(restaAbsolutaCoordenadaX,restaAbsolutaCoordenadaY),RangoMedianoCotaMinima, RangoMedianoCotaMaxima);
     }
 
     //pre: xUno, yUno, xDos yDos son numeros enteros pertenecientes a dos duplas que representan puntos en un plano
@@ -45,16 +43,15 @@ public class AnalizadorRangos {
     public boolean coordenadasEstanEnRangoLejano(int xUno, int yUno, int xDos, int yDos){
         int restaAbsolutaCoordenadaX = Math.abs(xUno-xDos);
         int restaAbsolutaCoordenadaY = Math.abs(yUno-yDos);
-        boolean coordenadaXEnRango = numeroEnRango(restaAbsolutaCoordenadaX, RangoLejanoCotaMinima, RangoLejanoCotaMaxima);
-        boolean coordenadaYEnRango = numeroEnRango(restaAbsolutaCoordenadaY, RangoLejanoCotaMinima, RangoLejanoCotaMaxima);
-        return (coordenadaXEnRango  | coordenadaYEnRango);
+
+        return numeroEnRango(Math.max(restaAbsolutaCoordenadaX,restaAbsolutaCoordenadaY),RangoLejanoCotaMinima, RangoLejanoCotaMaxima);
     }
 
     public boolean coordenadasSonAdyacentes(int xUno, int yUno, int xDos, int yDos){
         int restaAbsolutaCoordenadaX = Math.abs(xUno-xDos);
         int restaAbsolutaCoordenadaY = Math.abs(yUno-yDos);
-        boolean coordenadaXEnRango = (restaAbsolutaCoordenadaX == DistanciaAdyacencia);
-        boolean coordenadaYEnRango = (restaAbsolutaCoordenadaY == DistanciaAdyacencia);
-        return (coordenadaXEnRango  | coordenadaYEnRango);
+
+
+        return Math.max(restaAbsolutaCoordenadaX,restaAbsolutaCoordenadaY) == DistanciaAdyacencia;
     }
 }
