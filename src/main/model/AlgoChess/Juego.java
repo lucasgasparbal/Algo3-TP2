@@ -8,12 +8,12 @@ import model.AlgoChess.Unidades.Unidad;
 import java.util.ArrayList;
 
 public class Juego {
-    Jugador jugadorUno;
-    Jugador jugadorDos;
-    Jugador jugadorActual;
-    Tablero tablero;
-    OrganizadorOrdenJugadores organizadorOrdenJugadores;
-    boolean modoMovimiento = false;
+    private Jugador jugadorUno;
+    private Jugador jugadorDos;
+    private Jugador jugadorActual;
+    private Tablero tablero;
+    private OrganizadorOrdenJugadores organizadorOrdenJugadores;
+    private boolean modoMovimiento = false;
 
 
     public Juego(){

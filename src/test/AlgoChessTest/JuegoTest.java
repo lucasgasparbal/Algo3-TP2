@@ -1,6 +1,7 @@
 package AlgoChessTest;
 
 import model.AlgoChess.*;
+import model.AlgoChess.Excepciones.NoAlcanzaOroExcepcion;
 import org.junit.Assert;
 import org.junit.Test;
 
