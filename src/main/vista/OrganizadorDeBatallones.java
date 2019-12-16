@@ -169,6 +169,7 @@ public class OrganizadorDeBatallones {
     }
 
     public void actualizarBatallones() {
+        eliminarBatallones();
         ArrayList<PaqueteCoordenadasBatallon> batallones = juego.obtenerPaqueteCoordenadasBatallones();
         crearBatallones(batallones);
     }

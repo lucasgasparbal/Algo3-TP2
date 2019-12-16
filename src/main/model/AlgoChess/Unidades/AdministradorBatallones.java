@@ -91,5 +91,23 @@ public class AdministradorBatallones {
 
         return listaAEntregar;
     }
+
+
+    public void eliminarSoldado(int[] coordenadas) {
+        Iterator iterador = soldados.iterator();
+        Soldado soldado = null;
+        boolean encontrado = false;
+        while (iterador.hasNext()) {
+            soldado = (Soldado) iterador.next();
+            if (Arrays.equals(soldado.getPosicion(), coordenadas)) {
+                encontrado = true;
+                break;
+            }
+        }
+        if (encontrado) {
+            soldado.quitarBatallon();
+            soldados.remove(soldado);
+        }
+    }
 }
 

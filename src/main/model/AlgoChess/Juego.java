@@ -136,7 +136,11 @@ public class Juego {
             throw new UnidadActivaNoEsDeJugadorEnTurnoExcepcion();
         }
         unidadAtacante.atacar(unidadObjetivo);
-
+        if (unidadObjetivo.murio()) {
+            tablero.eliminarFichaAdministradorBatallones(coordenadasObjetivo);
+            tablero.eliminarUnidadDeCasillero(coordenadasObjetivo);
+        }
+        tablero.actualizarBatallones();
         return unidadObjetivo.murio();
     }
     

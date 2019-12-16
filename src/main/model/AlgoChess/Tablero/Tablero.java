@@ -92,6 +92,10 @@ public class Tablero {
     public void prepararTurno(){
         administradorBatallones.actualizarBatallones();
     }
+    
+    public void eliminarUnidadDeCasillero (int[] coordenadas) throws CoordenadaFueraDeRangoExcepcion {
+        diccionarioCasilleroUnidad.removerUnidadDeCasillero(conseguirCasillero(coordenadas));
+    }
 
     public ArrayList<PaqueteCoordenadasBatallon> obtenerPaqueteCoordenadasBatallonParaEquipo(Equipo unEquipo){
         return administradorBatallones.obtenerPaqueteCoordenadasBatallonParaEquipo(unEquipo);
@@ -155,6 +159,10 @@ public class Tablero {
         }
 
         return casilleroNuevo;
+    }
+    
+    public void eliminarFichaAdministradorBatallones(int[]coordenadas) {
+        administradorBatallones.eliminarSoldado(coordenadas);
     }
 
     public ColeccionUnidades obtenerUnidadesConexasA(Unidad unidad) throws CoordenadaFueraDeRangoExcepcion {

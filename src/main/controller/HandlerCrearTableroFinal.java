@@ -27,8 +27,9 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
     Juego juego;
     HBox cajaAtaque,cajaMovimiento;
     String directorio_resources;
+    UltimaFichaSeleccionada ultimaFichaSeleccionada;
 
-    public HandlerCrearTableroFinal (Scene escenaAUsar, GridPane tableroBlanco, GridPane tableroNegro, BorderPane menuFinal, Label label, GeneradorDeEtiquetas generador, Juego nuevoJuego, HBox ataque, HBox mov, String directorio) {
+    public HandlerCrearTableroFinal (Scene escenaAUsar, GridPane tableroBlanco, GridPane tableroNegro, BorderPane menuFinal, Label label, GeneradorDeEtiquetas generador, Juego nuevoJuego, HBox ataque, HBox mov, String directorio, UltimaFichaSeleccionada ultimaFicha) {
         this.tablero1 = tableroBlanco;
         this.tablero2 = tableroNegro;
         this.escena = escenaAUsar;
@@ -39,6 +40,7 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
         this.cajaAtaque = ataque;
         this.cajaMovimiento = mov;
         this.directorio_resources = directorio;
+        this.ultimaFichaSeleccionada = ultimaFicha;
     }
 
     @Override
@@ -58,7 +60,6 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
         Group tableroFinalGrupo = new Group (tableroFinal);
         campoJuegoFinal.setCenter(tableroFinalGrupo);
         StackPane stackPane = new StackPane(fondo_tablero,campoJuegoFinal);
-        UltimaFichaSeleccionada ultimaFichaSeleccionada = new UltimaFichaSeleccionada();
         Label etiquetaJugadorActual = new Label();
         generadorDeEtiquetas.generarEtiquetaNegrita(etiquetaJugadorActual,"Turno de " +juego.obtenerNombreJugadorEnTurno(),30);
         cajaAtaque.getChildren().add(0,etiquetaJugadorActual);
