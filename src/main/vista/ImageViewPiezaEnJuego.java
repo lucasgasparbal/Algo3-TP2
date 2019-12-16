@@ -2,10 +2,13 @@ package vista;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 
-public class ImageViewPiezaEnJuego extends ImageView {
+public class ImageViewPiezaEnJuego {
 
     public Image ultimaImagen;
+    AudioClip audioColocada;
+    AudioClip audioError;
     boolean esSoldado = false;
     boolean esJinete = false;
     boolean esCurandero = false;
@@ -15,6 +18,11 @@ public class ImageViewPiezaEnJuego extends ImageView {
         clase1 = false;
         clase2 = false;
         clase3 = false;
+    }
+
+    public ImageViewPiezaEnJuego (String direccion) {
+        this.audioColocada = new AudioClip(direccion+"fichaColocada.wav");
+        this.audioError= new AudioClip(direccion+"error.wav");
     }
 
     public void esUnSoldado() {
@@ -76,4 +84,11 @@ public class ImageViewPiezaEnJuego extends ImageView {
         ultimaImagen=null;
     }
 
+    public AudioClip devolverAudio() {
+        return audioColocada;
+    }
+
+    public AudioClip devolverAudioError () {
+        return audioError;
+    }
 }

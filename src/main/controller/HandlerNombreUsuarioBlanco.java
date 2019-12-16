@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import model.AlgoChess.Juego;
 import vista.GeneradorDeEtiquetas;
@@ -19,8 +20,9 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
     Label etiquetaPiezasBlancas,etiquetaPiezasNegras,etiquetaOroRestante;
     String directorio_resources;
     GeneradorDeEtiquetas generadorDeEtiquetas;
+    MediaPlayer mediaPlayer;
 
-    public HandlerNombreUsuarioBlanco(StackPane layoutAUsar, Scene escenaAUsar, TextField campoNegro, TextField campoBlanco, Label etiquetaBlanca, Label etiquetaNegra, String directorio, Juego nuevoJuego, Label label, GeneradorDeEtiquetas generador) {
+    public HandlerNombreUsuarioBlanco(StackPane layoutAUsar, Scene escenaAUsar, TextField campoNegro, TextField campoBlanco, Label etiquetaBlanca, Label etiquetaNegra, String directorio, Juego nuevoJuego, Label label, GeneradorDeEtiquetas generador, MediaPlayer mplayer) {
         this.nuevoLayout = layoutAUsar;
         this.escena = escenaAUsar;
         this.campoNombreNegro=campoNegro;
@@ -31,6 +33,7 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
         this.juego = nuevoJuego;
         this.etiquetaOroRestante = label;
         this.generadorDeEtiquetas=generador;
+        this.mediaPlayer = mplayer;
     }
 
     @Override
@@ -38,6 +41,7 @@ public class HandlerNombreUsuarioBlanco implements EventHandler<ActionEvent> {
         while (this.campoNombreNegro.getText().trim().equals("")) {
             return;
         }
+        mediaPlayer.setVolume(0.1);
         etiquetaPiezasBlancas.setText(campoNombreBlanco.getText()+", por favor distribuya sus piezas");
         etiquetaPiezasNegras.setText(campoNombreNegro.getText()+", por favor distribuya sus piezas");
         juego.nombrarUsuarioBlanco(campoNombreBlanco.getText());

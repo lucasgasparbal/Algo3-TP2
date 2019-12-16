@@ -11,11 +11,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import model.AlgoChess.Juego;
+
+import java.io.File;
 
 public class Aplicacion extends Application {
 
@@ -32,6 +37,12 @@ public class Aplicacion extends Application {
         Juego juego = new Juego();
 
         String directorio_resources = "file:/home/facundo/IdeaProjects/TP2/src/resources/";
+
+        Media musicaFondo = new Media(directorio_resources+"sonidos/musicaDeFondo.wav");
+        MediaPlayer mplayer = new MediaPlayer( musicaFondo);
+        mplayer.setAutoPlay(true);
+        mplayer.play();
+        mplayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         GeneradorDeBotones generadorDeBotones = new GeneradorDeBotones(directorio_resources+"fonts/Adventurer.ttf");
 
@@ -105,13 +116,13 @@ public class Aplicacion extends Application {
         VBox cajaImagenesFichasCompradas = generadorCajaImagenesConFichasCompradas.generar(cantidadFichas);
 
         Button botonComprarSoldado = generadorDeBotones.nuevoBoton("Comprar Soldado");
-        botonComprarSoldado.setOnAction(new HandlerComprarSoldado(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError));
+        botonComprarSoldado.setOnAction(new HandlerComprarSoldado(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError,directorio_resources));
         Button botonComprarJinete = generadorDeBotones.nuevoBoton("Comprar Jinete");
-        botonComprarJinete.setOnAction(new HandlerComprarJinete(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError));
+        botonComprarJinete.setOnAction(new HandlerComprarJinete(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError,directorio_resources));
         Button botonComprarCatapulta = generadorDeBotones.nuevoBoton("Comprar Catapulta");
-        botonComprarCatapulta.setOnAction(new HandlerComprarCatapulta(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError));
+        botonComprarCatapulta.setOnAction(new HandlerComprarCatapulta(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError,directorio_resources));
         Button botonComprarCurandero = generadorDeBotones.nuevoBoton("Comprar Curandero");
-        botonComprarCurandero.setOnAction(new HandlerComprarCurandero(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError));
+        botonComprarCurandero.setOnAction(new HandlerComprarCurandero(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,noHayOroError,oroError,directorio_resources));
 
         HBox contenedorDeBotones = new HBox();
         contenedorDeBotones.setSpacing(275);
@@ -120,7 +131,7 @@ public class Aplicacion extends Application {
         Group grupoBotones = new Group(contenedorDeBotones);
 
         Button botonReset = generadorDeBotones.nuevoBoton("Vender todas las piezas");
-        botonReset.setOnAction(new HandlerVenderTodasLasPiezas(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes));
+        botonReset.setOnAction(new HandlerVenderTodasLasPiezas(juego,etiquetaOroRestante,generadorDeEtiquetas,etiquetasPiezasRestantes,directorio_resources));
 
         Button botonComprarFichasNegras = generadorDeBotones.nuevoBoton("Siguiente");
 
@@ -168,7 +179,7 @@ public class Aplicacion extends Application {
         colocadoPiezasBlancas.setPadding(new Insets(20));
         colocadoPiezasBlancas.setMaxHeight(100);
 
-        ImageViewPiezaEnJuego ultimaPiezaSeleccionada = new ImageViewPiezaEnJuego();
+        ImageViewPiezaEnJuego ultimaPiezaSeleccionada = new ImageViewPiezaEnJuego(directorio_resources+"sonidos/");
         GeneradorCajaFichasRestantes generadorCajaFichasBlancasRestantes = new GeneradorCajaFichasRestantes(directorio_resources+"fichasBlancas/",ultimaPiezaSeleccionada, generadorDeEtiquetas);
         StackPane cajaFichasBlancasRestantes = null;
 
@@ -255,7 +266,7 @@ public class Aplicacion extends Application {
 
         botonEnviar.setOnAction(new HandlerNombreUsuarioNegro(menuNombreJugador,contenedorPrincipal,botonEmpezar,generadorDeEtiquetas, textoJugadorBlanco,textoJugadorNegro));
 
-        botonEmpezar.setOnAction(new HandlerNombreUsuarioBlanco(stackPane1,scene,textoJugadorNegro,textoJugadorBlanco,distribuirPiezasBlancas,distribuirPiezasNegras,directorio_resources,juego,etiquetaOroRestante,generadorDeEtiquetas));
+        botonEmpezar.setOnAction(new HandlerNombreUsuarioBlanco(stackPane1,scene,textoJugadorNegro,textoJugadorBlanco,distribuirPiezasBlancas,distribuirPiezasNegras,directorio_resources,juego,etiquetaOroRestante,generadorDeEtiquetas,mplayer));
 
         botonComenzarJuego.setOnAction (new HandlerCrearTableroParcial(stackPane2,scene,juego,menuJugadorBlanco,generadorCajaFichasBlancasRestantes));
 

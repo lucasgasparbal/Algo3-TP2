@@ -11,6 +11,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.AlgoChess.Excepciones.*;
@@ -34,8 +35,9 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
     OrganizadorDeBatallones organizadorDeBatallones;
     Group contenedorErrores;
     StackPane pantallaVictoria;
+    String directorioResources;
 
-    public HandlerSeleccionarPieza (StackPane casillero, ImageView marcoRojo, UltimaFichaSeleccionada ultimaFicha, Label vida, GeneradorDeEtiquetas generador, Juego nuevoJuego, int[]coord, GridPane tableroActual, OrganizadorDeBatallones organizador, Group grupo, StackPane stackPane) {
+    public HandlerSeleccionarPieza (StackPane casillero, ImageView marcoRojo, UltimaFichaSeleccionada ultimaFicha, Label vida, GeneradorDeEtiquetas generador, Juego nuevoJuego, int[]coord, GridPane tableroActual, OrganizadorDeBatallones organizador, Group grupo, StackPane stackPane, String directorio) {
         this.casilleroSeleccionado = casillero;
         this.marco = marcoRojo;
         this.ultimaFichaSeleccionada = ultimaFicha;
@@ -47,19 +49,23 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
         this.organizadorDeBatallones = organizador;
         this.contenedorErrores = grupo;
         this.pantallaVictoria = stackPane;
+        this.directorioResources = directorio;
     }
 
     public void lanzarExcepcion (String textoDelError) {
+        AudioClip audioError = new AudioClip(directorioResources+"sonidos/error.wav");
         Label errorAImprimir = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(), textoDelError,30,"#FF0000");
         MensajeDeError mensajeDeError = new MensajeDeError();
         SequentialTransition error = mensajeDeError.generarAvisoParpadeante(errorAImprimir);
         contenedorErrores.getChildren().clear();
         contenedorErrores.getChildren().add(errorAImprimir);
         error.play();
+        audioError.play();
     }
 
     public void handle (MouseEvent event) {
         MouseButton botonApretado = event.getButton();
+        AudioClip audioMovimiento = new AudioClip(directorioResources+"sonidos/movimiento.wav");
         if (ultimaFichaSeleccionada.hayFichaSeleccionada()) {
             int[]coordenadasPiezaSeleccionada = ultimaFichaSeleccionada.obtenerCoordenadas();
             placeholder.getChildren().add(marco);
@@ -68,6 +74,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     if (coordenadasPiezaSeleccionada[1] == coordenadas [1]+1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaAbajo(coordenadasPiezaSeleccionada);
+                            audioMovimiento.play();
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
                             lanzarExcepcion("No hay unidad en el casillero seleccionado");
                             ultimaFichaSeleccionada.limpiarSeleccionFicha();
@@ -100,6 +107,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     if (coordenadasPiezaSeleccionada[1] == coordenadas[1]-1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaArriba(coordenadasPiezaSeleccionada);
+                            audioMovimiento.play();
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
                             lanzarExcepcion("No hay unidad en el casillero seleccionado");
                             ultimaFichaSeleccionada.limpiarSeleccionFicha();
@@ -134,6 +142,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     if (coordenadasPiezaSeleccionada[0] == coordenadas [0]+1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaIzquierda(coordenadasPiezaSeleccionada);
+                            audioMovimiento.play();
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
                             lanzarExcepcion("No hay unidad en el casillero seleccionado");
                             ultimaFichaSeleccionada.limpiarSeleccionFicha();
@@ -166,6 +175,7 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     if (coordenadasPiezaSeleccionada[0] == coordenadas[0]-1) {
                         try {
                             juego.moverPiezaEnCoordenadaHaciaDerecha(coordenadasPiezaSeleccionada);
+                            audioMovimiento.play();
                         } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
                             lanzarExcepcion("No hay unidad en el casillero seleccionado");
                             ultimaFichaSeleccionada.limpiarSeleccionFicha();
@@ -211,6 +221,8 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     if (juego.atacarPieza(ultimaFichaSeleccionada.obtenerCoordenadas(),coordenadas)) {
                         StackPane casilleroVictima = (StackPane) tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]);
                         casilleroVictima.getChildren().remove(1);
+                        AudioClip audioMuerte = new AudioClip(directorioResources+"sonidos/muerte.wav");
+                        audioMuerte.play();
                         if (juego.rivalPerdio()) {
                             Label etiquetaVictoria = generadorDeEtiquetas.generarEtiquetaNegrita2(new Label(),juego.obtenerNombreJugadorEnTurno()+ ", BIEN HECHO", 40,"#ffd700");
                             pantallaVictoria.getChildren().add(etiquetaVictoria);
@@ -220,6 +232,8 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                             ventanaVictoria.setTitle("FELICITACIONES");
                             ventanaVictoria.setScene(secondScene);
                             ventanaVictoria.show();
+                            AudioClip audioVictoria = new AudioClip(directorioResources+"sonidos/victoria.wav");
+                            audioVictoria.play();
                         }
                     };
                 } catch (NoHayUnidadEnCasilleroExcepcion noHayUnidadEnCasilleroExcepcion) {
@@ -247,6 +261,8 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
                     lanzarExcepcion("La unidad ya ataco este turno");
                     ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 }
+                AudioClip audioAtaque = new AudioClip(directorioResources+"sonidos/ataque.wav");
+                audioAtaque.play();
                 ultimaFichaSeleccionada.limpiarSeleccionFicha();
                 organizadorDeBatallones.actualizarBatallones();
                 return;

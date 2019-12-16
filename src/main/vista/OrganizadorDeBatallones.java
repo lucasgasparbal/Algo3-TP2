@@ -169,12 +169,12 @@ public class OrganizadorDeBatallones {
     }
 
     public void actualizarBatallones() {
-        eliminarBatallones();
         ArrayList<PaqueteCoordenadasBatallon> batallones = juego.obtenerPaqueteCoordenadasBatallones();
         crearBatallones(batallones);
     }
 
     public void moverBatallonParaDerecha(PaqueteCoordenadasBatallon batallon) {
+        eliminarBatallones();
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();
@@ -184,6 +184,7 @@ public class OrganizadorDeBatallones {
     }
 
     public void moverBatallonParaIzquierda(PaqueteCoordenadasBatallon batallon) {
+        eliminarBatallones();
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();
@@ -193,6 +194,7 @@ public class OrganizadorDeBatallones {
     }
 
     public void moverBatallonParaArriba(PaqueteCoordenadasBatallon batallon) {
+        eliminarBatallones();
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();
@@ -202,6 +204,7 @@ public class OrganizadorDeBatallones {
     }
 
     public void moverBatallonParaAbajo(PaqueteCoordenadasBatallon batallon) {
+        eliminarBatallones();
         int[] soldado1 = batallon.obtenerCoordenadasPrimerSoldado();
         int[] soldado2 = batallon.obtenerCoordenadasSegundoSoldado();
         int[] soldado3 = batallon.obtenerCoordenadasTercerSoldado();

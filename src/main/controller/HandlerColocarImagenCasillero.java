@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Juego;
 import vista.ImageViewPiezaEnJuego;
@@ -38,6 +39,8 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
         ImageView piezaACargar = new ImageView();
         piezaACargar.setImage(piezaSeleccionada.devolverUltimaImagen());
         StackPane casillero = (StackPane)(tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]));
+        AudioClip piezaColocada = piezaSeleccionada.devolverAudio();
+        AudioClip error = piezaSeleccionada.devolverAudioError();
         if (segundaMitad) {
             coordenadas[1]=coordenadas[1]+10;
         }
@@ -47,6 +50,7 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
                 etiquetaOro.setVisible(true);
                 secuenciaOro.play();
+                error.play();
                 return;
             } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | NoHaySoldadosEnBanquillaExcepcion excepcion) { }
         }
@@ -56,6 +60,7 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
                 etiquetaOro.setVisible(true);
                 secuenciaOro.play();
+                error.play();
                 return;
             } catch (CasilleroEnemigoExcepcion | CoordenadaFueraDeRangoExcepcion | NoHayCuranderosEnBanquillaExcepcion excepcion) { }
         }
@@ -66,6 +71,7 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
                 etiquetaOro.setVisible(true);
                 secuenciaOro.play();
+                error.play();
                 return;
             }
         }
@@ -76,9 +82,11 @@ public class HandlerColocarImagenCasillero implements EventHandler<MouseEvent> {
             } catch (CasilleroOcupadoExcepcion casilleroOcupadoExcepcion) {
                 etiquetaOro.setVisible(true);
                 secuenciaOro.play();
+                error.play();
                 return;
             }
         }
+        piezaColocada.play();
         casillero.getChildren().add(piezaACargar);
         piezaSeleccionada.limpiarPieza();
         piezaSeleccionada.borrarImagen();

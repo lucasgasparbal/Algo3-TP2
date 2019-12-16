@@ -25,7 +25,7 @@ public class Jinete extends UnidadMovible {
     }
 
     public void atacar (Unidad objetivo) throws CoordenadaFueraDeRangoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, YaAtacoExcepcion {
-       if(ataco){
+        if(ataco){
             throw new YaAtacoExcepcion();
         }
         if(!objetivo.esEnemigoDe(this)){

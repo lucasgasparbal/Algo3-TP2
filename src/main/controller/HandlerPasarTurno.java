@@ -12,6 +12,7 @@ public class HandlerPasarTurno implements EventHandler<ActionEvent> {
     Juego juego;
     HBox cajaMovimiento,cajaAtaque;
     GeneradorDeEtiquetas generadorDeEtiquetas;
+    String directorio_resources;
 
     public HandlerPasarTurno(Juego nuevoJuego, HBox movimiento, HBox ataque, GeneradorDeEtiquetas generador) {
         this.juego = nuevoJuego;

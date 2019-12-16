@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import model.AlgoChess.Juego;
 import vista.GeneradorDeEtiquetas;
 import vista.LanzadorExcepciones;
@@ -42,6 +43,8 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
+        AudioClip audioComienzo = new AudioClip(directorio_resources+"sonidos/comienzo.wav");
+        audioComienzo.play();
         ImageView fondo_tablero = new ImageView (directorio_resources+"fondo_tablero.png");
         VBox tableroFinal = new VBox(tablero1,tablero2);
         Label etiquetaErrores = generadorDeEtiquetas.generarEtiquetaNegrita(new Label(),"PLACEHOLDER",30);
@@ -49,7 +52,7 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
         ImageView fondoVictoria = new ImageView (directorio_resources+"fondoVictoria.png");
         StackPane pantallaVictoria = new StackPane (fondoVictoria);
         Group contenedorErrores = new Group (etiquetaErrores);
-        LanzadorExcepciones lanzadorExcepciones = new LanzadorExcepciones(generadorDeEtiquetas);
+        LanzadorExcepciones lanzadorExcepciones = new LanzadorExcepciones(generadorDeEtiquetas,directorio_resources+"sonidos/error.wav");
         campoJuegoFinal.setBottom(contenedorErrores);
         campoJuegoFinal.setAlignment(contenedorErrores, Pos. CENTER);
         Group tableroFinalGrupo = new Group (tableroFinal);
@@ -67,11 +70,11 @@ public class HandlerCrearTableroFinal implements EventHandler<ActionEvent> {
             while (y < 10) {
                 int[]coordenadas = {x,y};
                 StackPane casilleroSeleccionado1 = (StackPane)(tablero1.getChildren().get(x*10+y));
-                casilleroSeleccionado1.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado1,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego, coordenadas,tablero1,organizadorDeBatallones,contenedorErrores,pantallaVictoria));
+                casilleroSeleccionado1.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado1,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego, coordenadas,tablero1,organizadorDeBatallones,contenedorErrores,pantallaVictoria,directorio_resources));
                 casilleroSeleccionado1.setOnContextMenuRequested(new HandlerBatallon(juego,casilleroSeleccionado1,coordenadas,organizadorDeBatallones,contenedorErrores,lanzadorExcepciones));
                 StackPane casilleroSeleccionado2 = (StackPane)(tablero2.getChildren().get(x*10+y));
                 int[]coordenadas1 = {x,y+10};
-                casilleroSeleccionado2.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado2,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego,coordenadas1,tablero2,organizadorDeBatallones,contenedorErrores,pantallaVictoria));
+                casilleroSeleccionado2.setOnMouseClicked(new HandlerSeleccionarPieza(casilleroSeleccionado2,marcoRojo,ultimaFichaSeleccionada,vida,generadorDeEtiquetas,juego,coordenadas1,tablero2,organizadorDeBatallones,contenedorErrores,pantallaVictoria,directorio_resources));
                 casilleroSeleccionado2.setOnContextMenuRequested(new HandlerBatallon(juego,casilleroSeleccionado2,coordenadas1,organizadorDeBatallones,contenedorErrores,lanzadorExcepciones));
                 y++;
             }

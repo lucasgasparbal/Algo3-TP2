@@ -3,13 +3,15 @@ package vista;
 import javafx.animation.SequentialTransition;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import vista.GeneradorDeEtiquetas;
+import javafx.scene.media.AudioClip;
 
 public class LanzadorExcepciones {
 
     GeneradorDeEtiquetas generadorDeEtiquetas;
+    AudioClip audioError;
 
-    public LanzadorExcepciones (GeneradorDeEtiquetas generador) {
+    public LanzadorExcepciones (GeneradorDeEtiquetas generador, String directorio) {
+        this.audioError = new AudioClip(directorio);
         this.generadorDeEtiquetas = generador;
     }
 
@@ -19,6 +21,7 @@ public class LanzadorExcepciones {
         SequentialTransition error = mensajeDeError.generarAvisoParpadeante(errorAImprimir);
         contenedorErrores.getChildren().clear();
         contenedorErrores.getChildren().add(errorAImprimir);
+        audioError.play();
         error.play();
     }
 }
