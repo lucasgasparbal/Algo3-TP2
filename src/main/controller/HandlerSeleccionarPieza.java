@@ -21,6 +21,8 @@ import vista.MensajeDeError;
 import vista.OrganizadorDeBatallones;
 import vista.UltimaFichaSeleccionada;
 
+import java.util.Arrays;
+
 public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
 
     StackPane casilleroSeleccionado;
@@ -229,10 +231,12 @@ public class HandlerSeleccionarPieza implements EventHandler<MouseEvent> {
             if (juego.estaEnModoMovimiento()==false) {
                 try {
                     if (juego.atacarPieza(ultimaFichaSeleccionada.obtenerCoordenadas(),coordenadas)) {
+                        int[] posicionCorrecta= new int [2];
+                        posicionCorrecta = Arrays.copyOf(coordenadas, 2);
                         if (coordenadas[1]>9) {
-                            coordenadas[1] = coordenadas[1]-10;
+                            posicionCorrecta[1] = posicionCorrecta[1]-10;
                         }
-                        StackPane casilleroVictima = (StackPane) tablero.getChildren().get(coordenadas[0]*10+coordenadas[1]);
+                        StackPane casilleroVictima = (StackPane) tablero.getChildren().get(posicionCorrecta[0]*10+posicionCorrecta[1]);
                         casilleroVictima.getChildren().remove(1);
                         AudioClip audioMuerte = new AudioClip(directorioResources+"sonidos/muerte.wav");
                         audioMuerte.play();
