@@ -5,6 +5,7 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
+import model.AlgoChess.Tablero.DiccionarioCasilleroUnidad;
 import model.AlgoChess.Unidades.*;
 import org.junit.Test;
 import org.junit.Assert;
@@ -188,5 +189,24 @@ public class CatapultaTest {
         Catapulta catapulta = new Catapulta(equipo);
 
         catapulta.desplazarHaciaDerecha();
+    }
+
+    @Test (expected =  YaAtacoExcepcion.class)
+    public void catapultaAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, CasilleroOcupadoExcepcion {
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+
+        int[] coordenadasA = {1,1};
+        int[] coordenadasB = {19,19};
+
+        Catapulta catapultaAliada = new Catapulta(equipoUno);
+        Soldado soldadoEnemigo = new Soldado (equipoDos);
+
+        tablero.inicializarUnidadEnCasillero(catapultaAliada,coordenadasA);
+        tablero.inicializarUnidadEnCasillero(soldadoEnemigo,coordenadasB);
+
+        catapultaAliada.atacar(soldadoEnemigo);
+        catapultaAliada.atacar(soldadoEnemigo);
     }
 }

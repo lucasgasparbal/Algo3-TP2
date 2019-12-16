@@ -469,6 +469,25 @@ public class SoldadoTest {
         soldado.desplazarConBatallonHaciaDerecha();
     }
 
+    @Test (expected =  YaAtacoExcepcion.class)
+    public void soldadoAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+        boolean seLanzoExp = false;
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+
+        Soldado soldadoUno = new Soldado (equipoUnoMock);
+        Soldado soldadoDos = new Soldado (equipoDosMock);
+        soldadoUno.inicializarEnCasillero(casilleroMockUno);
+        soldadoDos.inicializarEnCasillero(casilleroMockDos);
+
+        soldadoUno.atacar(soldadoDos);
+        soldadoUno.atacar(soldadoDos);
+    }
 }
 
 

@@ -511,6 +511,30 @@ public class JineteTest {
         jinete.comprarConPuntos(1);
     }
 
+    @Test (expected =  YaAtacoExcepcion.class)
+    public void jineteAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+        Equipo equipoUnoMock = mock(Equipo.class);
+        Equipo equipoDosMock = mock(Equipo.class);
+        Tablero tablero = mock(Tablero.class);
+        Casillero casilleroMockUno = mock(Casillero.class);
+        Casillero casilleroMockDos = mock(Casillero.class);
+        when(casilleroMockUno.perteneceAEquipo(equipoUnoMock)).thenReturn(true);
+        when(casilleroMockDos.perteneceAEquipo(equipoDosMock)).thenReturn(true);
+        when(casilleroMockDos.estaEnRangoCercanoDe(casilleroMockUno)).thenReturn(true);
+
+        Jinete jineteUno = new Jinete (equipoUnoMock);
+        jineteUno.inicializarEnCasillero(casilleroMockUno);
+        jineteUno.setTablero(tablero);
+        Jinete jineteDos = new Jinete (equipoDosMock);
+        jineteDos.inicializarEnCasillero(casilleroMockDos);
+        jineteDos.setTablero(tablero);
+        when(jineteUno.esEnemigoDe(jineteDos)).thenReturn(true);
+        when(tablero.unidadTieneEnemigosCercanos(jineteUno)).thenReturn(true);
+        when(tablero.unidadTieneAliadosCercanos(jineteUno)).thenReturn(false);
+
+        jineteUno.atacar(jineteDos);
+        jineteUno.atacar(jineteDos);
+    }
 }
 
 

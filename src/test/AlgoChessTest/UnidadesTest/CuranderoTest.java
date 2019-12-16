@@ -383,4 +383,22 @@ public class CuranderoTest {
         curandero.comprarConPuntos(1);
     }
 
+     @Test (expected = YaAtacoExcepcion.class)
+     public void curanderoAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, NoSePudoCurarExcepcion, CasilleroOcupadoExcepcion {
+          Equipo equipoUno = new Equipo(1);
+          Equipo equipoDos = new Equipo(2);
+          Tablero tablero = new Tablero(equipoUno,equipoDos);
+
+          int[] coordenadasA = {1,1};
+          int[] coordenadasB = {2,2};
+
+          Curandero curanderoAliado = new Curandero(equipoUno);
+          Soldado soldadoAliado = new Soldado (equipoUno);
+
+          tablero.inicializarUnidadEnCasillero(curanderoAliado,coordenadasA);
+          tablero.inicializarUnidadEnCasillero(soldadoAliado,coordenadasB);
+
+          curanderoAliado.atacar(soldadoAliado);
+          curanderoAliado.atacar(soldadoAliado);
+     }
 }
