@@ -470,8 +470,7 @@ public class SoldadoTest {
     }
 
     @Test (expected =  YaAtacoExcepcion.class)
-    public void soldadoAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
-        boolean seLanzoExp = false;
+    public void soldadoIntentaAtacarDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
         Casillero casilleroMockUno = mock(Casillero.class);
@@ -487,6 +486,22 @@ public class SoldadoTest {
 
         soldadoUno.atacar(soldadoDos);
         soldadoUno.atacar(soldadoDos);
+    }
+
+    @Test (expected =  YaMovioExcepcion.class)
+    public void soldadoIntentaMoverseDosVecesSaltaExcepcion () throws YaMovioExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+
+        int[] coordenadasA = {1,1};
+
+        Soldado soldado = new Soldado(equipoUno);
+
+        tablero.inicializarUnidadEnCasillero(soldado,coordenadasA);
+
+     soldado.desplazarHaciaArriba();
+     soldado.desplazarHaciaArriba();
     }
 }
 

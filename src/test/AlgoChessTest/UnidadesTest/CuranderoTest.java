@@ -384,7 +384,7 @@ public class CuranderoTest {
     }
 
      @Test (expected = YaAtacoExcepcion.class)
-     public void curanderoAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, NoSePudoCurarExcepcion, CasilleroOcupadoExcepcion {
+     public void curanderoIntentaAtacarDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, NoSePudoCurarExcepcion, CasilleroOcupadoExcepcion {
           Equipo equipoUno = new Equipo(1);
           Equipo equipoDos = new Equipo(2);
           Tablero tablero = new Tablero(equipoUno,equipoDos);
@@ -401,4 +401,20 @@ public class CuranderoTest {
           curanderoAliado.atacar(soldadoAliado);
           curanderoAliado.atacar(soldadoAliado);
      }
+
+    @Test (expected =  YaMovioExcepcion.class)
+    public void curanderoIntentaMoverseDosVecesSaltaExcepcion () throws YaMovioExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+
+        int[] coordenadasA = {1,1};
+
+        Curandero curandero = new Curandero(equipoUno);
+
+        tablero.inicializarUnidadEnCasillero(curandero,coordenadasA);
+
+        curandero.desplazarHaciaArriba();
+        curandero.desplazarHaciaArriba();
+    }
 }

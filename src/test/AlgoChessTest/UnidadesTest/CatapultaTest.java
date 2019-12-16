@@ -5,7 +5,6 @@ import model.AlgoChess.Equipos.Equipo;
 import model.AlgoChess.Excepciones.*;
 import model.AlgoChess.Tablero.Casillero;
 import model.AlgoChess.Tablero.Tablero;
-import model.AlgoChess.Tablero.DiccionarioCasilleroUnidad;
 import model.AlgoChess.Unidades.*;
 import org.junit.Test;
 import org.junit.Assert;

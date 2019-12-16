@@ -512,7 +512,7 @@ public class JineteTest {
     }
 
     @Test (expected =  YaAtacoExcepcion.class)
-    public void jineteAtacaDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
+    public void jineteIntentaAtacarDosVecesSaltaExcepcion () throws CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion {
         Equipo equipoUnoMock = mock(Equipo.class);
         Equipo equipoDosMock = mock(Equipo.class);
         Tablero tablero = mock(Tablero.class);
@@ -534,6 +534,22 @@ public class JineteTest {
 
         jineteUno.atacar(jineteDos);
         jineteUno.atacar(jineteDos);
+    }
+
+    @Test (expected =  YaMovioExcepcion.class)
+    public void jineteIntentaMoverseDosVecesSaltaExcepcion () throws YaMovioExcepcion, CoordenadaFueraDeRangoExcepcion, CasilleroEnemigoExcepcion, YaAtacoExcepcion, ObjetivoNoEsEnemigoExcepcion, ObjetivoFueraDeRangoExcepcion, CasilleroOcupadoExcepcion, MovimientoInvalidoExcepcion {
+        Equipo equipoUno = new Equipo(1);
+        Equipo equipoDos = new Equipo(2);
+        Tablero tablero = new Tablero(equipoUno,equipoDos);
+
+        int[] coordenadasA = {1,1};
+
+        Jinete jinete = new Jinete(equipoUno);
+
+        tablero.inicializarUnidadEnCasillero(jinete,coordenadasA);
+
+        jinete.desplazarHaciaArriba();
+        jinete.desplazarHaciaArriba();
     }
 }
 
